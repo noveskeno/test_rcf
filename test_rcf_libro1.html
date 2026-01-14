@@ -28,7 +28,6 @@ button.danger{background:var(--bad)}
   <h1>Test RCF Libro 1 – Interactivo</h1>
   <div>Preguntas detectadas: <strong id="nq"></strong> <span class="badge" id="integridad"></span></div>
   <div class="toolbar">
-    <button id="shuffle">🔀 Barajar</button>
     <button id="check">✅ Corregir</button>
     <button class="secondary" id="showKey">🗝️ Mostrar/Ocultar soluciones</button>
     <button class="danger" id="reset">↺ Reiniciar</button>
@@ -44,14 +43,11 @@ const EXPECTED = 25;
 const app = document.getElementById('app');
 const nq = document.getElementById('nq');
 const integridad = document.getElementById('integridad');
-function shuffleInPlace(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}}
 function render(){app.innerHTML='';nq.textContent = DATA.length;integridad.textContent = (DATA.length===EXPECTED? 'OK' : `Esperadas ${EXPECTED}`);DATA.forEach((q,idx)=>{const box=document.createElement('div');box.className='q';const h=document.createElement('h3');h.textContent = `${idx+1}) ${q.enunciado}`;box.appendChild(h);const opts=document.createElement('div');opts.className='opts';const loc=q.opciones.map(o=>({...o}));if(q._shuffle){shuffleInPlace(loc)}loc.forEach((o)=>{const lab=document.createElement('label');const input=document.createElement('input');input.type='radio';input.name=`q${idx}`;input.value=o.clave;const span=document.createElement('span');span.textContent = `${o.clave}) ${o.texto}`;lab.appendChild(input);lab.appendChild(span);if(q._showKey && q.correcta && o.clave===q.correcta){lab.classList.add('correct')}opts.appendChild(lab)});box.appendChild(opts);const meta=document.createElement('div');meta.className='meta';meta.innerHTML = `Respuesta correcta: <strong>${q.correcta||'—'}</strong>`;if(!q._showKey) meta.style.display='none';box.appendChild(meta);app.appendChild(box);})}
 function correct(){let ok=0,total=0;const boxes=app.querySelectorAll('.q');boxes.forEach((box,qi)=>{const q=DATA[qi];total++;const labels=box.querySelectorAll('label');labels.forEach(l=>l.classList.remove('correct','incorrect'));const sel=box.querySelector('input[type=radio]:checked');labels.forEach(l=>{const v=l.querySelector('input').value;if(v===q.correcta){l.classList.add('correct')}});if(sel && sel.value===q.correcta){ok++}else if(sel){sel.parentElement.classList.add('incorrect')}});alert(`Puntuación: ${ok} / ${total}`)}
-const btnShuffle=document.getElementById('shuffle');
 const btnCheck=document.getElementById('check');
 const btnKey=document.getElementById('showKey');
 const btnReset=document.getElementById('reset');
-btnShuffle.onclick=()=>{ DATA.forEach(q=>{q._shuffle=!q._shuffle}); render(); };
 btnKey.onclick=()=>{ DATA.forEach(q=>{q._showKey=!q._showKey}); render(); };
 btnCheck.onclick=correct;
 btnReset.onclick=()=>{ document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false); DATA.forEach(q=>{q._showKey=false; q._shuffle=false}); render(); };

@@ -115,25 +115,24 @@ function render(){
     const optsDiv=document.createElement('div');
     optsDiv.className='opts';
 
-    // Copiamos opciones y barajamos
     let opciones = q.opciones.map(o=>({...o}));
     if(q._shuffle) shuffleInPlace(opciones);
 
-    // Letras para mostrar (a, b, c, d)
     const letras = ['a','b','c','d'];
     opciones.forEach((o,i)=>{
       const lab=document.createElement('label');
       const input=document.createElement('input');
       input.type='radio';
       input.name=`q${idx}`;
-      input.value=o.clave; // Mantiene la clave original
+      input.checked = false;
+      input.value = i; // usamos el índice para identificar
       const span=document.createElement('span');
       span.textContent = `${letras[i]}) ${o.texto}`;
       lab.appendChild(input);
       lab.appendChild(span);
 
-      // Mostrar correcta si _showKey
-      if(q._showKey && o.clave===q.correcta) lab.classList.add('correct');
+      // marcar correcta si _showKey
+      if(q._showKey && o.correcta) lab.classList.add('correct');
 
       optsDiv.appendChild(lab);
     });
@@ -142,14 +141,15 @@ function render(){
 
     const meta=document.createElement('div');
     meta.className='meta';
-    meta.innerHTML = `Respuesta correcta: <strong>${q.correcta||'—'}</strong>`;
+    const correctaIdx = q.opciones.findIndex(opt => opt.correcta);
+    meta.innerHTML = `Respuesta correcta: <strong>${letras[correctaIdx]})</strong>`;
     if(!q._showKey) meta.style.display='none';
     box.appendChild(meta);
 
     app.appendChild(box);
   });
 }
-
+  
 function correct(){
   let ok=0,total=0;
   const boxes=app.querySelectorAll('.q');

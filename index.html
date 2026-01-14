@@ -1,3 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Menú de Tests RCF</title>
+<style>
+body { font-family: system-ui, sans-serif; background: #f7f9fc; margin:0; padding:2rem; }
+main { max-width:600px; margin:2rem auto; background:#fff; border-radius:.75rem; box-shadow:0 6px 20px rgba(0,0,0,.06); padding:1rem; text-align:center;}
+button { margin:1rem; padding:.8rem 1.2rem; border:none; border-radius:.5rem; background:#0b5fff; color:white; cursor:pointer; font-size:1rem; }
+button:hover { background:#094ecf; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Selecciona un Test</h1>
+  <button onclick="startTest('test_rcf_libro1.html')">Test RCF Libro 1</button>
+  <button onclick="startTest('test_rcf_libro2.html')">Test RCF Libro 2</button>
+  <button onclick="startTest('test_rcf_libro3.html')">Test RCF Libro 3</button>
+</main>
+
 <script>
-  window.location.href = "test_rcf_libro1.html";
+function startTest(file) {
+  window.location.href = file;
+}
 </script>
+</body>
+</html>

@@ -1626,3 +1626,201 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
   "256": {q: "¿Quién deberá garantizar las condiciones de la composición del tren y de su cargamento en caso de transporte excepcional?", a: "B", opts: [
     {l: "A", t: "AI."},
     {l: "B", t: "EF."},
+    {l: "C", t: "AESF ."},
+    {l: "D", t: "Las respuestas a) y b) son correctas."}
+  ]},
+  "257": {q: "¿Qué documento regula los transportes excepcionales?", a: "B", opts: [
+    {l: "A", t: "Consigna C N.º 44/16."},
+    {l: "B", t: "NAR N.º 4/17."},
+    {l: "C", t: "RCF ."},
+    {l: "D", t: "RID."}
+  ]},
+};
+
+let respuestasVisibles = false;
+  let currentPart = 1;
+  const LS_PREFIX = 'rcf-libro1-part-';
+
+  // Load state from localStorage
+  function loadState(part) {
+    try {
+      return JSON.parse(localStorage.getItem(LS_PREFIX + part)) || {};
+    } catch(e) {
+      return {};
+    }
+  }
+
+  // Save state to localStorage
+  function saveState(part, state) {
+    localStorage.setItem(LS_PREFIX + part, JSON.stringify(state));
+  }
+
+  // Switch between parts
+  function switchPart(part) {
+    currentPart = part;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab_' + part).classList.add('active');
+    generarTest();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // Generate test for current part
+  function generarTest() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    
+    const partData = testData[currentPart];
+    const state = loadState(currentPart);
+    
+    Object.keys(partData).forEach(qid => {
+      const q = partData[qid];
+      const card = document.createElement('div');
+      card.className = 'card question';
+      card.dataset.qid = qid;
+      
+      let opcionesHTML = '';
+      q.opts.forEach(opt => {
+        const checked = state[qid] === opt.l ? 'checked' : '';
+        opcionesHTML += `
+          <label class="option">
+            <input type="radio" name="q${qid}" value="${opt.l}" ${checked} onchange="updateProgress()" />
+            <div><b>${opt.l})</b> ${opt.t}</div>
+          </label>
+        `;
+      });
+
+      card.innerHTML = `
+        <span class="q-number">Pregunta ${qid}</span>
+        <div class="q-title">${q.q}</div>
+        <div class="options">${opcionesHTML}</div>
+        <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+        <div class="feedback"></div>
+      `;
+      
+      container.appendChild(card);
+    });
+    
+    updateProgress();
+  }
+
+  // Update progress bar
+  function updateProgress() {
+    const partData = testData[currentPart];
+    const total = Object.keys(partData).length;
+    const answered = document.querySelectorAll('input[type=radio]:checked').length;
+    const percentage = (answered / total) * 100;
+    document.getElementById('progressBar').style.width = percentage + '%';
+    
+    // Save current answers
+    const state = {};
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const selected = card.querySelector('input[type=radio]:checked');
+      if (selected) {
+        state[qid] = selected.value;
+      }
+    });
+    saveState(currentPart, state);
+  }
+
+  // Grade the test
+  window.calificar = function() {
+    const partData = testData[currentPart];
+    let correctas = 0;
+    let incorrectas = 0;
+    let sinResponder = 0;
+    const total = Object.keys(partData).length;
+    
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = partData[qid].a;
+      const seleccionada = card.querySelector('input[type=radio]:checked');
+      
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+      
+      if (seleccionada) {
+        const letra = seleccionada.value;
+        if (letra === correcta) {
+          correctas++;
+          seleccionada.closest('.option').classList.add('correct');
+          card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+          card.querySelector('.feedback').style.color = 'var(--ok)';
+        } else {
+          incorrectas++;
+          seleccionada.closest('.option').classList.add('incorrect');
+          card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+          card.querySelector('.feedback').style.color = 'var(--bad)';
+          const corr = card.querySelector(`input[value="${correcta}"]`);
+          if (corr) corr.closest('.option').classList.add('correct');
+        }
+      } else {
+        sinResponder++;
+        card.querySelector('.feedback').textContent = '⚠ Sin responder';
+        card.querySelector('.feedback').style.color = 'var(--warning)';
+      }
+    });
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const aprobado = porcentaje >= 50;
+    
+    document.getElementById('score').textContent = `${correctas} / ${total} (${porcentaje}%)`;
+    document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+    
+    document.getElementById('scoreDetails').innerHTML = `
+      ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+    `;
+    
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  // Reset the test
+  window.reiniciar = function() {
+    if (!confirm('¿Reiniciar respuestas de esta parte?')) return;
+    
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+    document.getElementById('score').textContent = '—';
+    document.getElementById('score').removeAttribute('style');
+    document.getElementById('scoreDetails').textContent = '';
+    document.getElementById('progressBar').style.width = '0%';
+    saveState(currentPart, {});
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  // Toggle answer visibility
+  window.toggleRespuestas = function(btn) {
+    respuestasVisibles = !respuestasVisibles;
+    document.body.classList.toggle('show-answers', respuestasVisibles);
+    btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+    
+    if (respuestasVisibles) {
+      const partData = testData[currentPart];
+      document.querySelectorAll('.question').forEach(card => {
+        const qid = card.dataset.qid;
+        const correcta = partData[qid].a;
+        card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      });
+    } else {
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+    }
+  };
+
+  // Initialize tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      switchPart(parseInt(tab.dataset.part));
+    });
+  });
+
+  // Initialize on load
+  window.addEventListener('load', () => {
+    document.getElementById('tab_1').classList.add('active');
+    generarTest();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tests ET - Menú Principal</title>
+<style>
+:root{
+  --bg-dark:#0a0e14;
+  --bg-card:#151a23;
+  --bg-card-hover:#1a2030;
+  --accent:#5bc0be;
+  --accent-hover:#4aa9a7;
+  --text:#e5e7eb;
+  --text-dim:#9ca3af;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 10px 40px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:linear-gradient(135deg,var(--bg-dark) 0%,#0f1419 50%,#0a0e14 100%);
+  color:var(--text);
+  font-family:Segoe UI,system-ui,-apple-system,Arial,sans-serif;
+  min-height:100vh;
+  padding-bottom:60px;
+  overflow-x:hidden;
+}
+#particles-bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+  opacity:.4;
+}
+#top{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(17,24,39,.95);
+  backdrop-filter:blur(12px);
+  padding:20px 12px;
+  text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  border-bottom:1px solid var(--border);
+  animation:slideDown 0.4s ease-out;
+}
+@keyframes slideDown{
+  from{transform:translateY(-100%);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+#top .title{
+  background:linear-gradient(135deg,#1f2937,#374151);
+  color:var(--text);
+  border:2px solid rgba(91,192,190,.2);
+  border-radius:999px;
+  padding:14px 28px;
+  font-weight:800;
+  font-size:1.3rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  cursor:default;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  transition:all 0.3s ease;
+}
+#top .title:hover{
+  transform:scale(1.02);
+  box-shadow:0 6px 20px rgba(91,192,190,.2);
+}
+.subtitle{
+  margin-top:10px;
+  font-size:14px;
+  color:var(--text-dim);
+  opacity:.8;
+}
+.container{
+  max-width:760px;
+  margin:0 auto;
+  padding:24px 12px;
+  position:relative;
+  z-index:1;
+}
+.stats-bar{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:24px;
+  display:flex;
+  justify-content:space-around;
+  gap:12px;
+  box-shadow:var(--shadow);
+  animation:fadeIn 0.5s ease-out 0.2s both;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.stat{
+  text-align:center;
+  flex:1;
+}
+.stat-number{
+  font-size:2rem;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--accent),#4dd0ce);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-label{
+  font-size:12px;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-top:4px;
+}
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  margin:16px 0;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:all 0.3s ease;
+  animation:fadeIn 0.5s ease-out both;
+}
+.card:nth-child(1){animation-delay:0.3s}
+.card:nth-child(2){animation-delay:0.4s}
+.card:nth-child(3){animation-delay:0.5s}
+.card:nth-child(4){animation-delay:0.6s}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 45px rgba(0,0,0,.5);
+  border-color:rgba(91,192,190,.2);
+}
+.accordion-btn{
+  width:100%;
+  background:linear-gradient(135deg,#1f2937,#273244);
+  color:var(--text);
+  border:none;
+  padding:18px 20px;
+  font-size:1.1rem;
+  font-weight:800;
+  text-align:left;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.accordion-btn::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(91,192,190,.1),transparent);
+  transition:left 0.5s ease;
+}
+.accordion-btn:hover::before{
+  left:100%;
+}
+.accordion-btn:hover{
+  background:linear-gradient(135deg,#273244,#2a3448);
+  color:var(--accent);
+}
+.accordion-btn::after{
+  content:'▼';
+  margin-left:auto;
+  font-size:14px;
+  transition:transform 0.3s ease;
+  opacity:.6;
+}
+.accordion-btn.active::after{
+  transform:rotate(180deg);
+}
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease,padding 0.4s ease;
+  padding:0 12px;
+}
+.accordion-content.open{
+  max-height:1000px;
+  padding:12px;
+}
+.test-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  margin:8px 0;
+  padding:14px 16px;
+  background:rgba(31,36,45,.6);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+  text-align:left;
+  transition:all 0.25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.test-btn::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(91,192,190,.15),transparent);
+  transition:left 0.4s ease;
+}
+.test-btn:hover::before{
+  left:100%;
+}
+.test-btn:hover{
+  background:var(--bg-card-hover);
+  border-color:rgba(91,192,190,.4);
+  transform:translateX(8px);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.test-btn:active{
+  transform:translateX(8px) scale(0.98);
+}
+.test-icon{
+  font-size:20px;
+  opacity:.8;
+}
+.footer{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--text-dim);
+  font-size:13px;
+  opacity:.6;
+}
+.footer-links{
+  margin-top:12px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.footer-link{
+  color:var(--accent);
+  text-decoration:none;
+  transition:opacity 0.2s;
+}
+.footer-link:hover{
+  opacity:.7;
+  text-decoration:underline;
+}
+@media (max-width: 640px){
+  #top .title{
+    font-size:1rem;
+    padding:12px 20px;
+  }
+  .stats-bar{
+    flex-direction:column;
+  }
+  .accordion-btn{
+    font-size:1rem;
+    padding:16px;
+  }
+}
+/* Efecto de partículas de fondo */
+.particle{
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(91,192,190,.3),transparent);
+  animation:float 20s infinite;
+}
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-30px) scale(1.1)}
+  66%{transform:translate(-20px,20px) scale(0.9)}
+}
+</style>
+</head>
+<body>
+<div id="particles-bg"></div>
+
+<div id="top">
+  <div class="title">
+    <span>📚</span>
+    <span>MENÚ DE TESTS ET</span>
+  </div>
+  <div class="subtitle">Sistema de evaluación interactivo</div>
+</div>
+
+<div class="container">
+  <!-- Barra de estadísticas -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-number" id="total-tests">-</div>
+      <div class="stat-label">Tests</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="total-categories">-</div>
+      <div class="stat-label">Categorías</div>
+    </div>
+  </div>
+
+  <!-- RCF 1 -->
+  <div class="card">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>📘</span>
+      <span>RCF – Libro 1</span>
+    </button>
+    <div class="accordion-content">
+      <button class="test-btn" onclick="openTest('test_rcf_libro1_4partes_NOSHUFFLE.html')">
+        <span class="test-icon">📋</span>
+        <span>RCF Libro 1 – Completo</span>
+      </button>
+      <button class="test-btn" onclick="openTest('rcf1_test_01.html')">
+        <span class="test-icon">📝</span>
+        <span>RCF 1 – Test 01 (25 preguntas)</span>
+      </button>
+      <button class="test-btn" onclick="openTest('rcf1_test_02.html')">
+        <span class="test-icon">📝</span>
+        <span>RCF 1 – Test 02</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- RCF 2 -->
+  <div class="card">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>📕</span>
+      <span>RCF – Libro 2</span>
+    </button>
+    <div class="accordion-content">
+      <button class="test-btn" onclick="openTest('test_rcf_libro2_4partes_NOSHUFFLE.html')">
+        <span class="test-icon">📋</span>
+        <span>Test RCF Libro 2 – Completo</span>
+      </button>
+      <button class="test-btn" onclick="openTest('rcf2_test_01.html')">
+        <span class="test-icon">📝</span>
+        <span>RCF 2 – Test 01</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- VARIOS -->
+  <div class="card">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>📗</span>
+      <span>RCF – Varios</span>
+    </button>
+    <div class="accordion-content">
+      <button class="test-btn" onclick="openTest('rcf_test_varios_PRUEBA.html')">
+        <span class="test-icon">🔀</span>
+        <span>Test RCF Varios</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PSC -->
+  <div class="card">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🚧</span>
+      <span>PSC (Prevención y Seguridad)</span>
+    </button>
+    <div class="accordion-content">
+      <button class="test-btn" onclick="openTest('TEST3_PSC_interactivo_1_34_SINGLE.html')">
+        <span class="test-icon">⚠️</span>
+        <span>PSC – 34 Preguntas</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div>🧠 Una idea brillante de <strong style="color:var(--accent)">Lucas Vázquez</strong></div>
+  <div style="margin-top:8px;font-size:12px;opacity:.7">
+    Hecho bonito por <strong style="color:var(--accent)">Andrea</strong> con la ayuda de Claude (que es mejor que Copilot 😏)
+  </div>
+</div>
+
+<script>
+// Enhanced accordion system
+function toggle(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen = content.classList.contains('open');
+  
+  // Close all accordions
+  document.querySelectorAll('.accordion-content').forEach(c => {
+    c.classList.remove('open');
+  });
+  document.querySelectorAll('.accordion-btn').forEach(b => {
+    b.classList.remove('active');
+  });
+  
+  // Open selected if it was closed
+  if (!isOpen) {
+    content.classList.add('open');
+    btn.classList.add('active');
+  }
+}
+
+// Navigate to test with fade animation
+function openTest(file) {
+  // Exit animation
+  document.body.style.opacity = '0';
+  document.body.style.transform = 'scale(0.95)';
+  document.body.style.transition = 'all 0.3s ease';
+  
+  setTimeout(() => {
+    window.location.href = file;
+  }, 300);
+}
+
+// Generate background particles
+function createParticles() {
+  const container = document.getElementById('particles-bg');
+  const particleCount = 15;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 60 + 20;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+    
+    container.appendChild(particle);
+  }
+}
+
+// 🎉 EASTER EGG: Secret motivational messages
+function showEasterEgg() {
+  const messages = [
+    "💪 ¡Creado con amor para aprobar el ET!",
+    "☕ Desarrollado con café y código",
+    "🚂 Un test ferroviario para gobernarlos a todos",
+    "🎯 Keep calm y estudia RCF",
+    "⚡ Powered by trains & determination",
+    "🤖 Lucas + Copilot = Equipo imparable",
+    "📚 Estudia duro, aprueba más duro"
+  ];
+  
+  const msg = messages[Math.floor(Math.random() * messages.length)];
+  
+  // Create temporary modal
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:linear-gradient(135deg,#1f2937,#374151);
+    color:#e5e7eb;
+    padding:30px 40px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
+    border:2px solid rgba(91,192,190,.3);
+    z-index:1000;
+    text-align:center;
+    font-size:18px;
+    font-weight:700;
+    animation:popIn 0.4s ease-out forwards;
+  `;
+  modal.textContent = msg;
+  document.body.appendChild(modal);
+  
+  // Add animation styles
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes popIn {
+      to { transform:translate(-50%,-50%) scale(1) }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  setTimeout(() => {
+    modal.style.animation = 'popIn 0.3s ease-out reverse forwards';
+    setTimeout(() => modal.remove(), 300);
+  }, 2500);
+}
+
+// Auto-count tests and categories
+function countTests() {
+  const testCount = document.querySelectorAll('.test-btn').length;
+  const categoryCount = document.querySelectorAll('.card').length;
+  
+  document.getElementById('total-tests').textContent = testCount;
+  document.getElementById('total-categories').textContent = categoryCount;
+}
+
+// Initialize on page load
+window.addEventListener('load', () => {
+  createParticles();
+  countTests();
+  
+  // Fade in animation
+  document.body.style.opacity = '1';
+  document.body.style.transition = 'opacity 0.5s ease';
+});
+
+// Title click easter egg (5 clicks trigger)
+let clickCount = 0;
+document.querySelector('#top .title').addEventListener('click', () => {
+  clickCount++;
+  if (clickCount === 5) {
+    showEasterEgg();
+    clickCount = 0;
+  }
+});
+</script>
+</body>
+</html>

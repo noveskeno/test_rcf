@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TEST RCF – Interactivo (sin barajar)</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text)}
+.header{padding:24px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08)}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.q-title{font-weight:600;margin-bottom:12px}
+.options{display:grid;grid-template-columns:1fr;gap:10px}
+.option{background:#121a34;border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:10px;display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.option input{margin-top:3px}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.08);margin-left:8px;font-size:12px}
+.answer-key{display:none;margin-top:8px;opacity:.9}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.95));padding:12px 0;margin-top:24px}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:12px 18px;border-radius:10px;cursor:pointer}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+.score{font-weight:700}
+.feedback{margin-top:8px;font-size:14px}
+.correct{border-color:rgba(33,193,122,.6) !important}
+.incorrect{border-color:rgba(255,93,115,.75) !important}
+.footer{opacity:.8;font-size:12px;text-align:center;padding:16px}
+@media (min-width: 720px){.options{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>TEST RCF · Interactivo</h1>
+    <div class="badge">Formato fijo (sin barajar opciones)</div>
+  </div>
+  <div class="container">
+    <div class="card question" data-qid="1">
+  <div class="q-title">1. El responsable técnico deberá garantizar la calidad y la consistencia de los trabajos realizados cuando estos sean concertados por:</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q1" value="A" />
+  <div><b>A.</b> Piloto de Seguridad habilitado para concertar trabajos (PSH)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q1" value="B" />
+  <div><b>B.</b> Piloto de Seguridad (PS)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q1" value="C" />
+  <div><b>C.</b> Piloto de Seguridad habilitado para concertar trabajos y, en su caso, también por un Encargado de Trabajos.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q1" value="D" />
+  <div><b>D.</b> Encargado de trabajos (ET)</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="2">
+  <div class="q-title">2. ¿Quién impartirá las instrucciones a los Maquinistas para el apartado de los trenes en las estaciones?</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q2" value="A" />
+  <div><b>A.</b> El RC del PM</div>
+</label>
+<label class="option">
+  <input type="radio" name="q2" value="B" />
+  <div><b>B.</b> El ET</div>
+</label>
+<label class="option">
+  <input type="radio" name="q2" value="C" />
+  <div><b>C.</b> El ET o el RC de la estación</div>
+</label>
+<label class="option">
+  <input type="radio" name="q2" value="D" />
+  <div><b>D.</b> El ET o el PSH</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="3">
+  <div class="q-title">3. Los PS y Responsables Técnicos transmitirán la finalización de los trabajos y las condiciones en las que se entrega la vía y las instalaciones afectadas al ET o PSH. La comunicación se hará …. NAR 9/18</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q3" value="A" />
+  <div><b>A.</b> Por telefonema</div>
+</label>
+<label class="option">
+  <input type="radio" name="q3" value="B" />
+  <div><b>B.</b> Verbalmente</div>
+</label>
+<label class="option">
+  <input type="radio" name="q3" value="C" />
+  <div><b>C.</b> Por radiotelefonía</div>
+</label>
+<label class="option">
+  <input type="radio" name="q3" value="D" />
+  <div><b>D.</b> De manera Escrita</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="4">
+  <div class="q-title">4. La identificación de los trenes y/o material auxiliar de trabajos se hará por:</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q4" value="A" />
+  <div><b>A.</b> El ET o PSH</div>
+</label>
+<label class="option">
+  <input type="radio" name="q4" value="B" />
+  <div><b>B.</b> Por las áreas responsables de creación de trenes</div>
+</label>
+<label class="option">
+  <input type="radio" name="q4" value="C" />
+  <div><b>C.</b> El ET</div>
+</label>
+<label class="option">
+  <input type="radio" name="q4" value="D" />
+  <div><b>D.</b> Por las áreas responsables de creación de trenes, y cuando no sea posible será el ET quién asignará un código inequívoco a cada tren.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="5">
+  <div class="q-title">5. ¿Cuál de las respuestas no es un requisito que deben cumplir los vehículos a la hora de formar un tren?</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q5" value="A" />
+  <div><b>A.</b> Características de frenado</div>
+</label>
+<label class="option">
+  <input type="radio" name="q5" value="B" />
+  <div><b>B.</b> Velocidad máxima</div>
+</label>
+<label class="option">
+  <input type="radio" name="q5" value="C" />
+  <div><b>C.</b> Inscripción en el gálibo</div>
+</label>
+<label class="option">
+  <input type="radio" name="q5" value="D" />
+  <div><b>D.</b> Estado de mantenimiento</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="6">
+  <div class="q-title">6. ADIF debe disponer de un Sistema de Gestión de Seguridad en la circulación porque así se determina en: Libro Doc. Complementaria ET: Introducción al SGSC</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q6" value="A" />
+  <div><b>A.</b> Directiva 2016/798</div>
+</label>
+<label class="option">
+  <input type="radio" name="q6" value="B" />
+  <div><b>B.</b> Directiva 2004/49</div>
+</label>
+<label class="option">
+  <input type="radio" name="q6" value="C" />
+  <div><b>C.</b> Reglamento 2016/2338</div>
+</label>
+<label class="option">
+  <input type="radio" name="q6" value="D" />
+  <div><b>D.</b> Directiva 2016/796</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="7">
+  <div class="q-title">7. ¿Cuál es la corriente eléctrica suministrada a los vehículos ferroviarios en las líneas por ADIF? (Libro ET de infraestructura; Pág. 113)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q7" value="A" />
+  <div><b>A.</b> 3.000 Vcc</div>
+</label>
+<label class="option">
+  <input type="radio" name="q7" value="B" />
+  <div><b>B.</b> 1.500 y 3.000 Vcc y 25.000 Vca</div>
+</label>
+<label class="option">
+  <input type="radio" name="q7" value="C" />
+  <div><b>C.</b> 25.000 Vca</div>
+</label>
+<label class="option">
+  <input type="radio" name="q7" value="D" />
+  <div><b>D.</b> 1.500 y 25.000 Vca</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="8">
+  <div class="q-title">8. En caso de encontrarse señales distintas en un mismo lugar ¿Cuál sería la actuación por parte del Maquinista? (RCF Art 2.1.1.3)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q8" value="A" />
+  <div><b>A.</b> Se cumplimentarán todas ellas.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q8" value="B" />
+  <div><b>B.</b> Ponerse en comunicación con el RC que las tenga a su cargo y solicitar instrucciones.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q8" value="C" />
+  <div><b>C.</b> Realizar detención inmediata y poner en contacto con el RC de la Banda de Regulación del PM.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q8" value="D" />
+  <div><b>D.</b> En caso de ordenes contradictorias o incompatibles entre sí: se cumplirá la más restrictiva.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="9">
+  <div class="q-title">9. ¿Cuál de las siguientes afirmaciones sobre el Sistema de la Seguridad en la Circulación (SGSC) es incorrecta? (Libro Doc. Complementaria ET: Introducción al SGSC)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q9" value="A" />
+  <div><b>A.</b> Es la organización y redacción de las medidas establecidas por un AI (ADIF) para garantizar la gestión en condiciones de seguridad de todas sus operaciones.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q9" value="B" />
+  <div><b>B.</b> Basado en recomendaciones técnicas de AESF sobre el modelo del sistema ferroviario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q9" value="C" />
+  <div><b>C.</b> Están en constante actualización y crecimiento.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q9" value="D" />
+  <div><b>D.</b> Son requisito imprescindible para la obtención de la Autorización de Seguridad.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="10">
+  <div class="q-title">10. Control, Mando y Señalización (CMS): (RCF Art 1.1.13; Pt 10)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q10" value="A" />
+  <div><b>A.</b> Subsistema ferroviario definido por las especificaciones técnicas de la AESF, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados a transitar por la red.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q10" value="B" />
+  <div><b>B.</b> Subsistema ferroviario definido por la Directiva Europea de Interoperabilidad Ferroviaria, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados a transitar por la red.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q10" value="C" />
+  <div><b>C.</b> Subsistema ferroviario definido por la Directiva Europea de Interoperabilidad Ferroviaria, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes permitidos a transitar en la RFIG.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q10" value="D" />
+  <div><b>D.</b> Subsistema ferroviario definido por el SGS de los AI y EF, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados transitar por la red.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="11">
+  <div class="q-title">11. Las señales fijas (luminosas) que no estén en servicio y que no sea posible desmontar, se mantendrán apagadas, con sus focos tapados y con su cabeza girada y tapada de forma efectiva, para que no den indicaciones hacia la vía. ¿Es suficiente para considerarla fuera de servicio? (RCF Art 2.1.1.6)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q11" value="A" />
+  <div><b>A.</b> Si</div>
+</label>
+<label class="option">
+  <input type="radio" name="q11" value="B" />
+  <div><b>B.</b> Si, y cuando no sea posible taparlos se pondrán dos listones rectangulares en forma de aspa pintados de blanco.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q11" value="C" />
+  <div><b>C.</b> No, ya que además es necesario el correspondiente Aviso.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q11" value="D" />
+  <div><b>D.</b> No, delante de la señal tiene que tener dos listones rectangulares pintados de blanco.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="12">
+  <div class="q-title">12. ¿En qué casos se instalarán cartelones ‘Silbar Obreros’ (Art 2.1.3.13-A) en la vía o vías contiguas cuando se tiene establecida el ILT? (RCF Art 3.3.2.4; Pt 4)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q12" value="A" />
+  <div><b>A.</b> Siempre que se trabaje en zona de peligro.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q12" value="B" />
+  <div><b>B.</b> Cuando se compatibilice la circulación por la vía o vías contiguas y se trabaje en Zona de Riesgo.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q12" value="C" />
+  <div><b>C.</b> Una vez concedida la autorización por el RC, no hace falta instalarlos.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q12" value="D" />
+  <div><b>D.</b> Con circulaciones compatibles con los trabajos que pudieran resultar afectadas por éstos, y en ambos sentidos de circulación.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="13">
+  <div class="q-title">13. ¿Qué requiere el bloqueo en un tramo de vía entre dos estaciones colaterales abiertas? (RCF Art 4.1.1.1; Pt 1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q13" value="A" />
+  <div><b>A.</b> Establecer una relación de dependencias entre ambas, que permita expedir circulaciones de una a otra en condiciones seguras.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q13" value="B" />
+  <div><b>B.</b> Establecer una relación de dependencias entre ambas, que permita expedir circulaciones de trenes en condiciones seguras.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q13" value="C" />
+  <div><b>C.</b> Establecer una relación de dependencias total, que permita expedir circulaciones de una a otra en condiciones seguras.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q13" value="D" />
+  <div><b>D.</b> Establecer una relación de acuerdos bilaterales, que permita expedir circulaciones de una a otra en condiciones seguras.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="14">
+  <div class="q-title">14. ¿Dónde se debe proceder a notificar una LTV que no suponga un CSV y que no se encuentre señalizada?</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q14" value="A" />
+  <div><b>A.</b> Al no ser un CSV se puede notificar en la última estación</div>
+</label>
+<label class="option">
+  <input type="radio" name="q14" value="B" />
+  <div><b>B.</b> Donde se pueda asegurar la detección del tren.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q14" value="C" />
+  <div><b>C.</b> En la estación colateral anterior al trayecto afectado.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q14" value="D" />
+  <div><b>D.</b> En la estación más cercana posible al trayecto afectado donde el tren tenga parada.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="15">
+  <div class="q-title">15. En que casos se podrá establecer un Pasos a Nivel provisional. (RCF Art 5.1.6.2; Pt 1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q15" value="A" />
+  <div><b>A.</b> Únicamente con carácter provisional por causas justificadas y por el tiempo estrictamente necesario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q15" value="B" />
+  <div><b>B.</b> Únicamente con carácter excepcional por causas justificadas y por el tiempo estrictamente necesario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q15" value="C" />
+  <div><b>C.</b> Únicamente con carácter provisional por causas estrictamente justificadas y por el tiempo necesario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q15" value="D" />
+  <div><b>D.</b> Únicamente con carácter excepcional por causas justificadas por el tiempo indispensable.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="16">
+  <div class="q-title">16. ¿En qué documento reglamentario, elaborado por el AI, se recogen las velocidades máximas de velocidad? (Libro Doc. Comp. ET: Introducción al SGSC)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q16" value="A" />
+  <div><b>A.</b> Consigna</div>
+</label>
+<label class="option">
+  <input type="radio" name="q16" value="B" />
+  <div><b>B.</b> Aviso</div>
+</label>
+<label class="option">
+  <input type="radio" name="q16" value="C" />
+  <div><b>C.</b> Horario de los trenes</div>
+</label>
+<label class="option">
+  <input type="radio" name="q16" value="D" />
+  <div><b>D.</b> Libro del Maquinista</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="17">
+  <div class="q-title">17. Señale la respuesta correcta, respecto a las obligaciones del Maquinista en un EVB: (RCF Art 3.3.3.4; Pt 7)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q17" value="A" />
+  <div><b>A.</b> Respetará las ordenes de las señales, incluyendo las señales intermedias en líneas de BA y las de los PCA en líneas de BSL y BCA que las considerará inexistentes.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q17" value="B" />
+  <div><b>B.</b> Se atendrá a las instrucciones del ET sobre los rebases de las señales diferentes de las intermedias.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q17" value="C" />
+  <div><b>C.</b> Para realizar pruebas con vehículos dotados de equipo de señalización en cabina, conectará el mismo, salvo indicación en contra en la correspondiente Consigna de pruebas.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q17" value="D" />
+  <div><b>D.</b> Se atendrá a las instrucciones del Encargado de trabajos o de pruebas sobre las operaciones a realizar, paradas, movimientos de avance o retroceso y condiciones de circulación en la EVB.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="18">
+  <div class="q-title">18. ¿Cuál de los siguientes vehículos no se denomina Maquinaria de vía según definición? (RCF Art 1.1.1.3; Pt 29)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q18" value="A" />
+  <div><b>A.</b> Dresina de electrificación</div>
+</label>
+<label class="option">
+  <input type="radio" name="q18" value="B" />
+  <div><b>B.</b> Bateadora-estabilizadora</div>
+</label>
+<label class="option">
+  <input type="radio" name="q18" value="C" />
+  <div><b>C.</b> Desguarnecedora</div>
+</label>
+<label class="option">
+  <input type="radio" name="q18" value="D" />
+  <div><b>D.</b> Quitanieves rotativa</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="19">
+  <div class="q-title">19. En un viaducto de una línea con BAD, se están realizando trabajos en vía I, que no afecta al gálibo ni a la electrificación de la vía II. ¿Qué velocidad máxima se notificará al Maquinista se circula en vía II? (RCF Art 3.3.1.1; Pt 3)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q19" value="A" />
+  <div><b>A.</b> 160 km/h o en caso necesario, se podrá establecer una velocidad menor.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q19" value="B" />
+  <div><b>B.</b> Al tratarse de trabajos en un viaducto no se permite circulación por la vía contigua, aunque éstas no afecten a su gálibo o electrificación.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q19" value="C" />
+  <div><b>C.</b> 160 km/h siempre que la zona de trabajos cuente con un ET o PS.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q19" value="D" />
+  <div><b>D.</b> 120 km/h. En caso necesario, se podrá establecer una velocidad menor.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="20">
+  <div class="q-title">20. ¿Qué se entiende por Capacidad? (Libro Doc. Comp. ET.; Legislación Ferroviaria; Pág. 25)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q20" value="A" />
+  <div><b>A.</b> Número de franjas disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la tipología del tráfico.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q20" value="B" />
+  <div><b>B.</b> Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la tipología del tráfico.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q20" value="C" />
+  <div><b>C.</b> Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la orografía del terreno.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q20" value="D" />
+  <div><b>D.</b> Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la circulación.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="21">
+  <div class="q-title">21. Para que una estación en ML pueda abrir una señal de salida hacia una estación en MC es necesaria la autorización previa por parte del: (RCF Art 4.1.3.1; Pt 2; a)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q21" value="A" />
+  <div><b>A.</b> RC de la Banda de Regulación del PM</div>
+</label>
+<label class="option">
+  <input type="radio" name="q21" value="B" />
+  <div><b>B.</b> RC de la estación colateral abierta</div>
+</label>
+<label class="option">
+  <input type="radio" name="q21" value="C" />
+  <div><b>C.</b> RC del CTC</div>
+</label>
+<label class="option">
+  <input type="radio" name="q21" value="D" />
+  <div><b>D.</b> No hace falta autorización previa</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="22">
+  <div class="q-title">22. ¿Qué significa el acrónimo mt? (RCF Art 1.1.1.4; Pt 51)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q22" value="A" />
+  <div><b>A.</b> Marche el tren</div>
+</label>
+<label class="option">
+  <input type="radio" name="q22" value="B" />
+  <div><b>B.</b> Movimiento de tren</div>
+</label>
+<label class="option">
+  <input type="radio" name="q22" value="C" />
+  <div><b>C.</b> Masa total</div>
+</label>
+<label class="option">
+  <input type="radio" name="q22" value="D" />
+  <div><b>D.</b> Ninguna es correcta</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="23">
+  <div class="q-title">23. ¿Qué información transmite el siguiente cartelón? (RCF Art 2.1.3.13-S)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q23" value="A" />
+  <div><b>A.</b> El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q23" value="B" />
+  <div><b>B.</b> El punto donde empieza el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q23" value="C" />
+  <div><b>C.</b> El punto donde empieza el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 6 m)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q23" value="D" />
+  <div><b>D.</b> El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 6 m)</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="24">
+  <div class="q-title">24. En relación con el bloqueo, ¿Cómo deberá ser la relación de dependencia entre las dos estaciones colaterales abiertas en vías con un único sentido de circulación, sin señales intermedias? (RCF Art 4.1.1.1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q24" value="A" />
+  <div><b>A.</b> La relación de dependencia entre estaciones será total.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q24" value="B" />
+  <div><b>B.</b> La relación de dependencia entre estaciones estará diseñada por el tipo de Bloqueo que utilizan.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q24" value="C" />
+  <div><b>C.</b> La relación de dependencia entre estaciones será la indicada por el RC de la Banda de Regulación del PM o del CTC.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q24" value="D" />
+  <div><b>D.</b> La relación de dependencia entre estaciones será la establecida por los RC de dichas estaciones.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="25">
+  <div class="q-title">25. Piquete de entrevías… (RCF Art 2.1.3.8)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q25" value="A" />
+  <div><b>A.</b> Indica el punto hasta donde es compatible la circulación simultanea por ambas vías, sin que se produzcan interferencias entre ellas.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q25" value="B" />
+  <div><b>B.</b> Indica el punto donde es compatible la circulación simultanea por vías contiguas, sin que se produzcan interferencias entre ellas.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q25" value="C" />
+  <div><b>C.</b> Indica el punto hasta donde es compatible la circulación simultanea por las vías, sin que se produzcan interferencias entre ellas.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q25" value="D" />
+  <div><b>D.</b> Indica el punto hasta donde es compatible la circulación simultanea por ambas vías, sin que interfiera los gálibos entre ellas.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="26">
+  <div class="q-title">26. El Material rodante auxiliar … (RCF Art 3.3.1.1; Pt 9)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q26" value="A" />
+  <div><b>A.</b> Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo del bloqueo nominal y no degradado de las líneas por las que circule.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q26" value="B" />
+  <div><b>B.</b> Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo de éste o degradado de las líneas por las que circule.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q26" value="C" />
+  <div><b>C.</b> Salvo en la EVB donde realice sus trabajos, se desplazará siempre en bloqueo nominal y degradado de las líneas por las que circule.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q26" value="D" />
+  <div><b>D.</b> Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo del bloqueo nominal o degradado de las líneas por las que circule.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="27">
+  <div class="q-title">27. ¿Cuál de estas señales son ambas interiores? (RCF Art 1.5.1.1; Pt 3)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q27" value="A" />
+  <div><b>A.</b> Retroceso y protección</div>
+</label>
+<label class="option">
+  <input type="radio" name="q27" value="B" />
+  <div><b>B.</b> Liberación y maniobra</div>
+</label>
+<label class="option">
+  <input type="radio" name="q27" value="C" />
+  <div><b>C.</b> Intermedia y liberación</div>
+</label>
+<label class="option">
+  <input type="radio" name="q27" value="D" />
+  <div><b>D.</b> Retroceso y maniobra</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="28">
+  <div class="q-title">28. En el escenario definido en el punto 8 del Art 3.3.2.2 (Sistema de ILT), el RC que reciba la solicitud por parte del ET o PSH, la primera actuación previa a la concesión del ILT será…. (RCF 3.3.2.3; Pt 4)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q28" value="A" />
+  <div><b>A.</b> Comprobar la liberación efectiva del cantón por los medios a su disposición.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q28" value="B" />
+  <div><b>B.</b> Cursará a su colateral el telefonema L3.3 incluyendo el texto ‘Pasó por el km a las ‘.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q28" value="C" />
+  <div><b>C.</b> Concederá el sistema de trabajos al PSH o ET, ya que así lo recoge en el acta de trabajos.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q28" value="D" />
+  <div><b>D.</b> Esperará hasta que el último vehículo del tren deje liberado el cantón donde se solicitan los trabajos.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="29">
+  <div class="q-title">29. ¿Qué indica la siguiente señal? (RCF Art 2.1.3.11; Pt 4)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q29" value="A" />
+  <div><b>A.</b> El fin de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q29" value="B" />
+  <div><b>B.</b> El anuncio de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q29" value="C" />
+  <div><b>C.</b> La proximidad de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q29" value="D" />
+  <div><b>D.</b> Ninguna es correcta.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="30">
+  <div class="q-title">30. ¿Cuál de las siguientes respuestas no constituye una instalación de seguridad? (RCF 5.1.1.1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q30" value="A" />
+  <div><b>A.</b> Dispositivos embarcados, por ejemplo, Vigilancia (hombre muerto).</div>
+</label>
+<label class="option">
+  <input type="radio" name="q30" value="B" />
+  <div><b>B.</b> BAD, BCA y BSL.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q30" value="C" />
+  <div><b>C.</b> Todas son instalaciones de seguridad</div>
+</label>
+<label class="option">
+  <input type="radio" name="q30" value="D" />
+  <div><b>D.</b> Detectores de viento lateral</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="31">
+  <div class="q-title">31. De las siguientes opciones, señale la siguiente respuesta sobre la inmovilización del material rodante: (RCF 3.5.2.5; Pt 2; b)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q31" value="A" />
+  <div><b>A.</b> En los cortes de material separados de la locomotora, únicamente será necesario hacer unos de los frenos de estacionamiento o de los calces cuando el tiempo de estacionamiento sea superior a 120 minutos.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q31" value="B" />
+  <div><b>B.</b> Cuando se realice cortes de material en las estaciones, la EF garantizará que el corte queda inmovilizado con calces antideriva en las ruedas externas, independientemente del tiempo que el corte de material se quede inmovilizado.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q31" value="C" />
+  <div><b>C.</b> Los cortes de material separados de la locomotora quedarán inmovilizados con los frenos de estacionamiento y/o mediante calces.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q31" value="D" />
+  <div><b>D.</b> En los vehículos motores o de características singulares inmovilizados en una estación, en su caso la colocación de calces, se realizará en las ruedas en las que resulte más eficaz.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="32">
+  <div class="q-title">32. ¿Qué indica el siguiente cartelón? (RCF 2.1.3.13 - F)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q32" value="A" />
+  <div><b>A.</b> El comienzo de un grupo de PN protegidos por una señal.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q32" value="B" />
+  <div><b>B.</b> El último de un grupo de PN protegidos por una señal.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q32" value="C" />
+  <div><b>C.</b> El último circuito de PN protegidos por una señal.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q32" value="D" />
+  <div><b>D.</b> El comienzo de un grupo de PN protegidos por barreras o semibarreras.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="33">
+  <div class="q-title">33. ¿A quién consulta el personal una duda de aplicación de las normas de circulación?</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q33" value="A" />
+  <div><b>A.</b> Al personal de formación</div>
+</label>
+<label class="option">
+  <input type="radio" name="q33" value="B" />
+  <div><b>B.</b> Al PM</div>
+</label>
+<label class="option">
+  <input type="radio" name="q33" value="C" />
+  <div><b>C.</b> A su responsable o mando inmediato</div>
+</label>
+<label class="option">
+  <input type="radio" name="q33" value="D" />
+  <div><b>D.</b> A cualquier agente habilitado</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="34">
+  <div class="q-title">34. ¿Cuáles son las competencias vinculadas a la habilitación de Encargado de trabajos? (Libro Doc. Comp.: Legislación Ferroviaria; Pág. 35)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q34" value="A" />
+  <div><b>A.</b> Realiza las funciones correspondientes a actuaciones en entrega de vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q34" value="B" />
+  <div><b>B.</b> Realiza las funciones correspondientes a actuaciones en zona de peligro según se establece en la normativa ferroviaria en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que tenga en la infraestructura ferroviaria o en sus proximidades.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q34" value="C" />
+  <div><b>C.</b> Realiza las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria o en sus proximidades.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q34" value="D" />
+  <div><b>D.</b> Realiza las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria actual en materia de circulación, controlar y dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria o en sus proximidades.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="35">
+  <div class="q-title">35. Estaciones telemandadas. (RCF Art 4.1.2.5)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q35" value="A" />
+  <div><b>A.</b> Son estaciones que no tiene un RC presente, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda, mediante el MC.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q35" value="B" />
+  <div><b>B.</b> Son estaciones carentes de RC presente en la misma, cuyas instalaciones son gobernadas a distancia desde el CTC, mediante el MC.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q35" value="C" />
+  <div><b>C.</b> Son estaciones sin un RC presente, cuyas instalaciones son gobernadas a distancia desde otra estación, o incorporarse un personal para controlarlas con MC.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q35" value="D" />
+  <div><b>D.</b> Son estaciones carentes de RC presente en la misma, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda o desde el CTC, mediante el MC.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="36">
+  <div class="q-title">36. ¿Cuál de estas opciones, corresponde con la protección normal de puntos interceptados? (RCF 3.6.1.4; Pt 2)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q36" value="A" />
+  <div><b>A.</b> Consiste en la colocación de señales portátiles de parada a 1.500 m del punto de peligro y en sus proximidades.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q36" value="B" />
+  <div><b>B.</b> Presentando desde la vía las señales portátiles de parada al tren o trenes que se aproximen, a la distancia de 1.500 m.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q36" value="C" />
+  <div><b>C.</b> Consiste en la colocación de señales portátiles de parada en el eje de la vía a 1.500 m del punto de peligro.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q36" value="D" />
+  <div><b>D.</b> Presentando con una persona las señales portátiles de parada al tren o trenes que se aproximen, a la distancia de 1.500 m.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="37">
+  <div class="q-title">37. En función del tipo de información facilitada al usuario, los sistemas de protección de un PN pueden ser: (Libro Doc. Comp.: Pasos a Nivel; Pág. 7)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q37" value="A" />
+  <div><b>A.</b> Pasivos (Clase P) y Activos (Clase 1, 2, 3 y 4)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q37" value="B" />
+  <div><b>B.</b> Pasivos (Clase A) y Activos (Clase con barreras y semibarreras automáticas)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q37" value="C" />
+  <div><b>C.</b> Pasivos (Clase N) y Activos (Clase A, B, C y D)</div>
+</label>
+<label class="option">
+  <input type="radio" name="q37" value="D" />
+  <div><b>D.</b> Pasivos (Clase P) y Activos (Clase A1, A2, A3 y A4)</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="38">
+  <div class="q-title">38. Funcionalmente las eurobalizas pueden ser: (Libro ET de Infraestructura; Pág. 182)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q38" value="A" />
+  <div><b>A.</b> Fijas, que transmiten los telegramas que tienen almacenado en la memoria. Y con telegramas variables.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q38" value="B" />
+  <div><b>B.</b> Fijas, que transmiten un único telegrama que tiene almacenado en la memoria. Y con telegramas variables.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q38" value="C" />
+  <div><b>C.</b> Fijas, que transmiten solo el telegrama que tiene recibe del codificador. Y con telegramas conmutables.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q38" value="D" />
+  <div><b>D.</b> Fijas, que transmiten un único telegrama que tiene almacenado en su placa memoria. Y con telegramas diferentes.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="39">
+  <div class="q-title">39. Un tren circula por una estación con marcha de maniobra, hasta la salida. ¿Hasta cuando deberá circular el Maquinista con marcha de maniobra? (RCF Art 2.1.2.9; Pt 1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q39" value="A" />
+  <div><b>A.</b> La marcha de maniobra se mantendrá hasta rebasar las agujas de salida.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q39" value="B" />
+  <div><b>B.</b> La marcha de maniobra la mantendrá hasta la señal de salida.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q39" value="C" />
+  <div><b>C.</b> La marcha de maniobra se mantendrá hasta rebasar la señal de retroceso.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q39" value="D" />
+  <div><b>D.</b> La marcha de maniobra la mantendrá hasta la siguiente aguja que observe.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="40">
+  <div class="q-title">40. ¿Qué simboliza el siguiente gráfico y que información transmite? (RCF Art 2.1.2.10)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q40" value="A" />
+  <div><b>A.</b> Color azul, LZB y ERTMS para alta velocidad.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q40" value="B" />
+  <div><b>B.</b> Color blanco, Movimiento autorizado.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q40" value="C" />
+  <div><b>C.</b> Color blanco, Rebase autorizado.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q40" value="D" />
+  <div><b>D.</b> Color azul, si es a destellos, Parada Selectiva.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="41">
+  <div class="q-title">41. El transporte de estas mercancías por ferrocarril se rige por el RID en vigor, sin perjuicio de los reglamentos nacionales y de la UE vigente. (RCF Art 1.5.1.22)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q41" value="A" />
+  <div><b>A.</b> Mercancía de alto riesgo.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q41" value="B" />
+  <div><b>B.</b> Mercancías de gases y líquidos corrosivos.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q41" value="C" />
+  <div><b>C.</b> Mercancías Peligrosas.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q41" value="D" />
+  <div><b>D.</b> Mercancía excepcional.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="42">
+  <div class="q-title">42. Trabajos en las instalaciones de seguridad. Cuando el RC requiera realizar un itinerario para una circulación de un tren, en las instalaciones afectadas por los trabajados, solicitará la posición y comprobación de todos los elementos de la instalación al ET. ¿Esta solicitud por parte del RC y la responsabilidad de las medidas adoptadas del ET, como se realizará? (RCF Art 3.3.5.3; Pt 1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q42" value="A" />
+  <div><b>A.</b> Mediante el correspondiente telefonema por ambas partes.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q42" value="B" />
+  <div><b>B.</b> Mediante la comunicación verbal por parte del RC y el telefonema por parte del ET.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q42" value="C" />
+  <div><b>C.</b> Mediante el correspondiente telefonema por parte del RC y la comprobación visual del ET.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q42" value="D" />
+  <div><b>D.</b> Mediante el telefonema por ambas partes, aunque también ser permite que sea verbal.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="43">
+  <div class="q-title">43. Bloqueos Automáticos. (RCF Art 4.2.1.1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q43" value="A" />
+  <div><b>A.</b> La relación entre estaciones queda garantizada por la propia naturaleza de las instalaciones de seguridad.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q43" value="B" />
+  <div><b>B.</b> La relación de dependencias entre estaciones queda garantizada por las distintas instalaciones existentes.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q43" value="C" />
+  <div><b>C.</b> La relación entre estaciones queda garantizada por los diferentes tipos de tecnologías de la instalación.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q43" value="D" />
+  <div><b>D.</b> La relación de dependencias entre estaciones queda garantizada por la propia naturaleza de la instalación.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="44">
+  <div class="q-title">44. Debido a que la catenaria no es infinita, al ser compensada se le corta físicamente. Un tipo de seccionamiento es de cantón: (Libro ET de Infraestructura; Pág. 123)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q44" value="A" />
+  <div><b>A.</b> Cuya longitud máxima estará en 1.000 m. En el caso de cantones de compensación aproximados a 650 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q44" value="B" />
+  <div><b>B.</b> Cuya longitud estará en torno a 1.200 m. En el caso de cantones de compensación igual o menor a 640 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q44" value="C" />
+  <div><b>C.</b> Cuya longitud máxima será de 1.100 m. En el caso de cantones de compensación iguales a 620 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q44" value="D" />
+  <div><b>D.</b> Cuya longitud máxima estará en 1.200 m. En el caso de cantones de compensación menores a 640 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="45">
+  <div class="q-title">45. ¿Dónde se instalarán las pantallas de proximidad? (RCF Art 2.1.3.6; Pt 1 y 7)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q45" value="A" />
+  <div><b>A.</b> Se instalarán delante de las señales avanzadas, a las distancias indicadas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando no sea visible a la distancia de 300 m.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q45" value="B" />
+  <div><b>B.</b> Se instalarán delante de las señales avanzadas, a las distancias nombradas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal del PN, cuando no sea visible a la distancia de 200 m.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q45" value="C" />
+  <div><b>C.</b> Se instalarán delante de las señales avanzadas, a las distancias indicadas (200m, 200m y 150m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando sea visible a la distancia de 300 m.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q45" value="D" />
+  <div><b>D.</b> Se instalarán delante de las señales entrada, a las distancias indicadas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando no sea visible a la distancia de 200 m.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="46">
+  <div class="q-title">46. El sistema Tren-Tierra es constituido por: (Libro ET de Infraestructura; Pág. 245)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q46" value="A" />
+  <div><b>A.</b> Red Móvil y Red fija.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q46" value="B" />
+  <div><b>B.</b> Red portátil y Red Central</div>
+</label>
+<label class="option">
+  <input type="radio" name="q46" value="C" />
+  <div><b>C.</b> Red Móvil y Red de Mando</div>
+</label>
+<label class="option">
+  <input type="radio" name="q46" value="D" />
+  <div><b>D.</b> Red Principal y Red Secundaria</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>A</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="47">
+  <div class="q-title">47. En los trayectos con declividad superior a 10 mm/m, ¿Dónde se sitúa el vehículo motor? (RCF Art 3.3.6.1)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q47" value="A" />
+  <div><b>A.</b> Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno estacionamiento en toda su composición.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q47" value="B" />
+  <div><b>B.</b> Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno automático en toda la composición.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q47" value="C" />
+  <div><b>C.</b> Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno automático en todos los vehículos remolcados.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q47" value="D" />
+  <div><b>D.</b> Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno por aire comprimido en toda la longitud que lo compone.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>B</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="48">
+  <div class="q-title">48. Cuando un PN automático o enclavado quede sin tensión, tenga rotas las semibarreras o apagadas las señales destellantes a la carretera, el RC de la Banda de regulación o del CTC dispondrá …. (RCF Art 5.2.6.2)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q48" value="A" />
+  <div><b>A.</b> El envío al PN de personal cualificado, con objeto de hacerse cargo de la avería.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q48" value="B" />
+  <div><b>B.</b> El envío al PN de personal autorizado, con objeto de hacerse cargo del mismo.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q48" value="C" />
+  <div><b>C.</b> El envío al PN de personal de habilitado, con objeto de hacerse cargo del mismo.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q48" value="D" />
+  <div><b>D.</b> El envío al PN de personal como PS o ET, con el objeto de reparar el mismo.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="49">
+  <div class="q-title">49. Declaración de la Red: (Libro Doc. Comp.; Conceptos Ferroviarios; Pág. 17)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q49" value="A" />
+  <div><b>A.</b> Se publica anualmente de forma genérica para Convencional (incluyendo RAM) y de manera excepcional una para Alta Velocidad (AV).</div>
+</label>
+<label class="option">
+  <input type="radio" name="q49" value="B" />
+  <div><b>B.</b> Se publica anualmente de forma genérica para Convencional, otra para RAM y otra específica para Alta Velocidad (AV).</div>
+</label>
+<label class="option">
+  <input type="radio" name="q49" value="C" />
+  <div><b>C.</b> Se publica anualmente de forma genérica para Red Convencional y RFIG y de manera específica una DR para Alta Velocidad (AV).</div>
+</label>
+<label class="option">
+  <input type="radio" name="q49" value="D" />
+  <div><b>D.</b> Se publica anualmente de forma genérica para Convencional y RAM y de manera específica una DR para Alta Velocidad (AV).</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>D</b></div>
+  <div class="feedback"></div>
+</div><div class="card question" data-qid="50">
+  <div class="q-title">50. Consignas CTO. (Libro Doc. Comp.; Introducción al SGSC)</div>
+  <div class="options">
+    <label class="option">
+  <input type="radio" name="q50" value="A" />
+  <div><b>A.</b> Consignas tipo C; de carácter Temporales Territoriales.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q50" value="B" />
+  <div><b>B.</b> Consignas tipo C; de carácter Tráfico Territoriales.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q50" value="C" />
+  <div><b>C.</b> Consignas tipo C; de carácter Transitorias Territoriales.</div>
+</label>
+<label class="option">
+  <input type="radio" name="q50" value="D" />
+  <div><b>D.</b> Consignas tipo C; de carácter Territoriales Temporales.</div>
+</label>
+  </div>
+  <div class="answer-key">Respuesta: <b>C</b></div>
+  <div class="feedback"></div>
+</div>
+    <div class="actions">
+      <div class="bar">
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div>
+          <button onclick="grade()">Calificar</button>
+          <button class="secondary" onclick="resetQuiz()">Reiniciar</button>
+          <button class="secondary" onclick="toggleAnswers(this)">Mostrar respuestas</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generado automáticamente · Modo offline · Respuestas según la hoja oficial incluida en el PDF</div>
+  </div>
+<script>
+const ANSWERS = {"1": "C", "2": "B", "3": "B", "4": "D", "5": "C", "6": "A", "7": "B", "8": "D", "9": "B", "10": "B", "11": "A", "12": "D", "13": "A", "14": "D", "15": "B", "16": "C", "17": "D", "18": "A", "19": "D", "20": "B", "21": "C", "22": "C", "23": "B", "24": "A", "25": "A", "26": "D", "27": "D", "28": "B", "29": "A", "30": "C", "31": "D", "32": "B", "33": "C", "34": "C", "35": "D", "36": "A", "37": "D", "38": "B", "39": "A", "40": "B", "41": "C", "42": "A", "43": "D", "44": "D", "45": "A", "46": "A", "47": "B", "48": "C", "49": "D", "50": "C"}; // map q->letter
+
+let answersVisible = false;
+
+function grade(){
+  let total = 0, right = 0;
+  document.querySelectorAll('.question').forEach(q =>{
+    total++;
+    const qid = q.dataset.qid;
+    const chosen = q.querySelector('input[type=radio]:checked');
+    const correct = ANSWERS[qid];
+    q.querySelectorAll('.option').forEach(o=>o.classList.remove('correct','incorrect'));
+    if(chosen){
+      const letter = chosen.value;
+      if(letter === correct){
+        right++;
+        chosen.closest('.option').classList.add('correct');
+        q.querySelector('.feedback').textContent = '✔ Correcta';
+        q.querySelector('.feedback').style.color = '#21c17a';
+      } else {
+        chosen.closest('.option').classList.add('incorrect');
+        q.querySelector('.feedback').innerHTML = '✖ Incorrecta · Correcta: <b>'+correct+'</b>';
+        q.querySelector('.feedback').style.color = '#ff8ba1';
+        const corr = q.querySelector('input[value="'+correct+'"]');
+        if(corr) corr.closest('.option').classList.add('correct');
+      }
+    } else {
+      q.querySelector('.feedback').textContent = 'Sin respuesta';
+      q.querySelector('.feedback').style.color = '#ffc107';
+    }
+  });
+  const pct = Math.round((right/total)*100);
+  document.getElementById('score').textContent = `${right} / ${total} (${pct}%)`;
+}
+
+function resetQuiz(){
+  document.querySelectorAll('input[type=radio]').forEach(r=> r.checked=false);
+  document.querySelectorAll('.option').forEach(o=>o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f=>{f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+}
+
+function toggleAnswers(btn){
+  answersVisible = !answersVisible;
+  document.body.classList.toggle('show-answers', answersVisible);
+  btn.textContent = answersVisible ? 'Ocultar respuestas' : 'Mostrar respuestas';
+  // Marcar visualmente la opción correcta cuando están visibles (sin afectar respuestas del usuario)
+  document.querySelectorAll('.question').forEach(q =>{
+    const correct = ANSWERS[q.dataset.qid];
+    q.querySelectorAll('.option').forEach(o=>o.classList.remove('correct'));
+    if(answersVisible){
+      const corr = q.querySelector('input[value="'+correct+'"]');
+      if(corr) corr.closest('.option').classList.add('correct');
+    }
+  });
+}
+</script>
+</body>
+</html>

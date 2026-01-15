@@ -1,43 +1,119 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Test RCF Libro 1 – Interactivo</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Test Interactivo - Configurable</title>
 <style>
-:root{--c1:#0b5fff;--bad:#c2272d;--bg:#f7f9fc}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;background:var(--bg);margin:0;padding:2rem}
-header,footer{max-width:1000px;margin:0 auto 1rem}
-main{max-width:1000px;margin:0 auto;background:#fff;border-radius:.75rem;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:1rem}
-.question{border:1px solid #e6e8ee;border-radius:.6rem;padding:1rem;margin:1rem 0}
-.options{display:grid;gap:.35rem}
-label{display:flex;gap:.5rem;align-items:flex-start;padding:.45rem .6rem;border-radius:.5rem;border:1px solid #eaecef}
-input[type=radio]{margin-top:.2rem}
-.correct{background:#eaf7ef;border-color:#bfe5c9}
-.incorrect{background:#fde9eb;border-color:#f6c5cc}
-.meta{font-size:.9rem;color:#667085;display:none}
-button{background:var(--c1);color:#fff;border:0;padding:.6rem .9rem;border-radius:.5rem;cursor:pointer;margin-right:.4rem}
-button.secondary{background:#e8eefc;color:#163368}
-button.danger{background:var(--bad)}
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text)}
+.header{padding:24px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08)}
+.header h1{margin-bottom:8px}
+.back-btn{
+  display:inline-block;margin-bottom:12px;padding:8px 16px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;color:var(--text);text-decoration:none;
+  font-size:14px;transition:all .2s;
+}
+.back-btn:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
+.container{max-width:1000px;margin:0 auto;padding:24px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.q-title{font-weight:600;margin-bottom:12px}
+.options{display:grid;grid-template-columns:1fr;gap:10px}
+.option{background:#121a34;border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:10px;display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.option input{margin-top:3px}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.08);margin-left:8px;font-size:12px}
+.answer-key{display:none;margin-top:8px;opacity:.9}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.95));padding:12px 0;margin-top:24px}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:12px 18px;border-radius:10px;cursor:pointer}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+.score{font-weight:700}
+.feedback{margin-top:8px;font-size:14px}
+.correct{border-color:rgba(33,193,122,.6) !important}
+.incorrect{border-color:rgba(255,93,115,.75) !important}
+.footer{opacity:.8;font-size:12px;text-align:center;padding:16px}
+.config-section{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin:16px 0}
+.config-section h3{margin-bottom:16px;color:var(--accent)}
+textarea{width:100%;min-height:300px;background:#121a34;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:12px;color:var(--text);font-family:monospace;font-size:13px;resize:vertical}
+.btn-group{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.info-box{background:rgba(91,192,190,.1);border:1px solid rgba(91,192,190,.3);border-radius:8px;padding:12px;margin-top:12px;font-size:13px;line-height:1.6}
+.error-box{background:rgba(255,93,115,.1);border:1px solid rgba(255,93,115,.3);border-radius:8px;padding:12px;margin-top:12px;color:#ff8ba1}
+@media (min-width: 720px){.options{grid-template-columns:1fr 1fr}}
 </style>
 </head>
-
 <body>
-
-<header>
-  <h1>Test RCF Libro 1 – Interactivo</h1>
-  <div class="toolbar">
-    <button id="check">✅ Corregir</button>
-    <button class="secondary" id="toggleKey">🗝️ Mostrar/Ocultar soluciones</button>
-    <button class="danger" id="reset">↺ Reiniciar</button>
+  <div class="header">
+    <a href="index.html" class="back-btn">← Volver al inicio</a>
+    <h1 id="mainTitle">Test Interactivo · Configurable</h1>
+    <div class="badge">Pega el HTML de las preguntas</div>
   </div>
-</header>
-
-<main>
-
+  
+  <div class="container">
+    <!-- Configuration section -->
+    <div class="config-section" id="configSection">
+      <h3>📝 Configuración del Test</h3>
+      <p style="margin-bottom:12px;opacity:.9">Pega aquí el HTML con las preguntas en el formato que ya tienes:</p>
+      
+      <textarea id="htmlInput" placeholder='Ejemplo:
 <!-- PREGUNTA 1 -->
+<div class="question" data-qid="1" data-answer="D">
+  <h3>1) ¿Cuál es el objeto del Reglamento?</h3>
+  <div class="options">
+    <label><input type="radio" name="q1" value="A"> A) Opción A...</label>
+    <label><input type="radio" name="q1" value="B"> B) Opción B...</label>
+    <label><input type="radio" name="q1" value="C"> C) Opción C...</label>
+    <label><input type="radio" name="q1" value="D"> D) Opción D...</label>
+  </div>
+  <div class="meta">Respuesta correcta: <strong>D</strong></div>
+</div>'></textarea>
+
+      <div class="btn-group">
+        <button onclick="cargarTest()">Cargar Test</button>
+        <button class="secondary" onclick="cargarEjemplo()">Cargar Ejemplo</button>
+        <button class="secondary" onclick="limpiarHTML()">Limpiar</button>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Instrucciones:</strong><br>
+        • Solo pega el HTML de las preguntas (los bloques &lt;div class="question"&gt;)<br>
+        • El sistema detecta automáticamente las respuestas correctas del atributo <code>data-answer</code><br>
+        • No necesitas editar nada, solo copiar y pegar<br>
+        • Puedes poner el título del test al principio con un comentario: <code>&lt;!-- TITULO: Mi Test --&gt;</code>
+      </div>
+
+      <div id="errorBox" class="error-box" style="display:none"></div>
+    </div>
+
+    <!-- Questions container (generated dynamically) -->
+    <div id="questionsContainer"></div>
+
+    <!-- Test actions -->
+    <div class="actions" id="actionsBar" style="display:none">
+      <div class="bar">
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div>
+          <button onclick="calificar()">Calificar</button>
+          <button class="secondary" onclick="reiniciar()">Reiniciar</button>
+          <button class="secondary" onclick="toggleRespuestas(this)">Mostrar respuestas</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" id="footerInfo" style="display:none">
+      Test generado automáticamente · Sistema configurable
+    </div>
+  </div>
+
+<script>
+let respuestas = {};
+let respuestasVisibles = false;
+
+function cargarEjemplo() {
+  const ejemplo = `<!-- QUESTION 1 -->
 <div class="question" data-qid="1" data-answer="D">
   <h3>1) ¿Cuál es el objeto del Reglamento?</h3>
   <div class="options">
@@ -49,7 +125,7 @@ button.danger{background:var(--bad)}
   <div class="meta">Respuesta correcta: <strong>D</strong></div>
 </div>
 
-<!-- PREGUNTA 2 -->
+<!-- QUESTION 2 -->
 <div class="question" data-qid="2" data-answer="B">
   <h3>2) ¿Cuál es el objetivo del RCF?</h3>
   <div class="options">
@@ -61,7 +137,7 @@ button.danger{background:var(--bad)}
   <div class="meta">Respuesta correcta: <strong>B</strong></div>
 </div>
 
-<!-- PREGUNTA 3 -->
+<!-- QUESTION 3 -->
 <div class="question" data-qid="3" data-answer="A">
   <h3>3) ¿De quién es la responsabilidad de la explotación segura del sistema ferroviario?</h3>
   <div class="options">
@@ -71,321 +147,153 @@ button.danger{background:var(--bad)}
     <label><input type="radio" name="q3" value="D"> D) Corresponde al responsable de circulación.</label>
   </div>
   <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
+</div>`;
+  document.getElementById('htmlInput').value = ejemplo;
+}
 
-<!-- PREGUNTA 4 -->
-<div class="question" data-qid="4" data-answer="A">
-  <h3>4) ¿Quién tiene que establecer las reglas internas, conforme con la normativa vigente?</h3>
-  <div class="options">
-    <label><input type="radio" name="q4" value="A"> A) AI y EF.</label>
-    <label><input type="radio" name="q4" value="B"> B) EF y AESF.</label>
-    <label><input type="radio" name="q4" value="C"> C) AESF y AI.</label>
-    <label><input type="radio" name="q4" value="D"> D) AESF.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
+function limpiarHTML() {
+  document.getElementById('htmlInput').value = '';
+  document.getElementById('errorBox').style.display = 'none';
+}
 
-<!-- PREGUNTA 5 -->
-<div class="question" data-qid="5" data-answer="C">
-  <h3>5) El Reglamento es conforme con lo prescrito:</h3>
-  <div class="options">
-    <label><input type="radio" name="q5" value="A"> A) En las ETI, LSF.</label>
-    <label><input type="radio" name="q5" value="B"> B) En las normas de desarrollo.</label>
-    <label><input type="radio" name="q5" value="C"> C) En las ETI, LSF y sus normas de desarrollo.</label>
-    <label><input type="radio" name="q5" value="D"> D) En la LSF y sus normas de desarrollo.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
+function cargarTest() {
+  const input = document.getElementById('htmlInput').value.trim();
+  const errorBox = document.getElementById('errorBox');
+  
+  if (!input) {
+    errorBox.textContent = '❌ Por favor, pega el HTML de las preguntas';
+    errorBox.style.display = 'block';
+    return;
+  }
 
-<!-- PREGUNTA 6 -->
-<div class="question" data-qid="6" data-answer="C">
-  <h3>6) ¿Cuál es el ámbito territorial de aplicación de este Reglamento?</h3>
-  <div class="options">
-    <label><input type="radio" name="q6" value="A"> A) Convencional.</label>
-    <label><input type="radio" name="q6" value="B"> B) Alta velocidad.</label>
-    <label><input type="radio" name="q6" value="C"> C) Red Ferroviaria de Interés General.</label>
-    <label><input type="radio" name="q6" value="D"> D) Convencional y Alta velocidad.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
+  try {
+    // Crear un contenedor temporal para parsear el HTML
+    const temp = document.createElement('div');
+    temp.innerHTML = input;
+    
+    const preguntas = temp.querySelectorAll('.question');
+    
+    if (preguntas.length === 0) {
+      throw new Error('No se encontraron preguntas en el HTML. Asegúrate de que tienen la clase "question"');
+    }
 
-<!-- PREGUNTA 7 -->
-<div class="question" data-qid="7" data-answer="D">
-  <h3>7) ¿Cuál es el ámbito subjetivo de aplicación de este Reglamento?</h3>
-  <div class="options">
-    <label><input type="radio" name="q7" value="A"> A) Todo el personal de las EF y los AI.</label>
-    <label><input type="radio" name="q7" value="B"> B) Parte del personal de las EF y los AI y de otras empresas...</label>
-    <label><input type="radio" name="q7" value="C"> C) Todo el personal de las EF, de los AI y de otras empresas, que interviene directamente...</label>
-    <label><input type="radio" name="q7" value="D"> D) Todo el personal de las EF, de los AI y de otras empresas, que interviene, directa o indirectamente, en los procesos de circulación de trenes y maniobras.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>D</strong></div>
-</div>
+    // Search for custom title in comments
+    const tituloMatch = input.match(/<!--\s*TITULO:\s*(.+?)\s*-->/i);
+    if (tituloMatch) {
+      document.getElementById('mainTitle').textContent = tituloMatch[1].trim();
+    }
 
-<!-- PREGUNTA 8 -->
-<div class="question" data-qid="8" data-answer="A">
-  <h3>8) ¿Cuál es el ámbito técnico de aplicación de este Reglamento?</h3>
-  <div class="options">
-    <label><input type="radio" name="q8" value="A"> A) Todas las actividades relevantes... desde la puesta a disposición por parte de la EF, hasta destino.</label>
-    <label><input type="radio" name="q8" value="B"> B) ...por parte de la AI...</label>
-    <label><input type="radio" name="q8" value="C"> C) Todas las actividades relevantes desde alguna interfaz...</label>
-    <label><input type="radio" name="q8" value="D"> D) ...entre las EF y PM, desde la puesta a disposición del tren por parte de la AI...</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
+    respuestas = {};
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
 
-<!-- PREGUNTA 9 -->
-<div class="question" data-qid="9" data-answer="D">
-  <h3>9) ¿Qué es un Apeadero?</h3>
-  <div class="options">
-    <label><input type="radio" name="q9" value="A"> A) Instalación de vías para la carga y descarga... con agujas en plena vía.</label>
-    <label><input type="radio" name="q9" value="B"> B) Instalación de vías para la carga y descarga en plena vía.</label>
-    <label><input type="radio" name="q9" value="C"> C) Infraestructura ferroviaria para la bajada de viajeros.</label>
-    <label><input type="radio" name="q9" value="D"> D) Infraestructura ferroviaria para la subida y bajada de viajeros.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>D</strong></div>
-</div>
+    preguntas.forEach(pregunta => {
+      const qid = pregunta.dataset.qid;
+      const respuestaCorrecta = pregunta.dataset.answer;
+      respuestas[qid] = respuestaCorrecta;
 
-<!-- PREGUNTA 10 -->
-<div class="question" data-qid="10" data-answer="B">
-  <h3>10) ¿Qué es un Automotor?</h3>
-  <div class="options">
-    <label><input type="radio" name="q10" value="A"> A) Tren formado por dos o más vehículos...</label>
-    <label><input type="radio" name="q10" value="B"> B) Tren formado por uno o más vehículos ferroviarios que no precisa de locomotora para su tracción ya que dispone de motor propio.</label>
-    <label><input type="radio" name="q10" value="C"> C) Tren formado por dos o más locomotoras.</label>
-    <label><input type="radio" name="q10" value="D"> D) Compuesto exclusivamente por una o varias locomotoras no remolcadas.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>B</strong></div>
-</div>
+      const card = document.createElement('div');
+      card.className = 'card question';
+      card.dataset.qid = qid;
 
-<!-- PREGUNTA 11 -->
-<div class="question" data-qid="11" data-answer="C">
-  <h3>11) ¿Qué se entiende por banda de regulación?</h3>
-  <div class="options">
-    <label><input type="radio" name="q11" value="A"> A) Es un trayecto que comprende varias estaciones.</label>
-    <label><input type="radio" name="q11" value="B"> B) Es un tramo regulado por un responsable de circulación.</label>
-    <label><input type="radio" name="q11" value="C"> C) Tramo de línea, línea o conjunto de líneas a cargo de un mismo Responsable de circulación de un PM.</label>
-    <label><input type="radio" name="q11" value="D"> D) Tramo de línea, línea o conjunto de trayectos a cargo de un mismo Responsable de circulación de un PM.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
+      const titulo = pregunta.querySelector('h3').textContent;
+      const opciones = pregunta.querySelectorAll('.options label');
 
-<!-- PREGUNTA 12 -->
-<div class="question" data-qid="12" data-answer="A">
-  <h3>12) ¿Qué es una bifurcación?</h3>
-  <div class="options">
-    <label><input type="radio" name="q12" value="A"> A) Punto de una línea, donde comienza otra o confluyen varias.</label>
-    <label><input type="radio" name="q12" value="B"> B) Punto de varias líneas, donde comienza otra o confluyen dos o más.</label>
-    <label><input type="radio" name="q12" value="C"> C) Punto de una línea, donde termina otra o confluyen varias.</label>
-    <label><input type="radio" name="q12" value="D"> D) Varias líneas a partir de un punto.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
+      let opcionesHTML = '';
+      opciones.forEach(opt => {
+        const input = opt.querySelector('input');
+        const letra = input.value;
+        const texto = opt.textContent.trim();
+        opcionesHTML += `
+          <label class="option">
+            <input type="radio" name="q${qid}" value="${letra}" />
+            <div>${texto}</div>
+          </label>
+        `;
+      });
 
-<!-- PREGUNTA 13 -->
-<div class="question" data-qid="13" data-answer="A">
-  <h3>13) ¿Qué se entiende por bloqueo?</h3>
-  <div class="options">
-    <label><input type="radio" name="q13" value="A"> A) Sistema o proceso cuyo objetivo es garantizar separación suficiente... y evitar cruces en sentido contrario en la misma vía.</label>
-    <label><input type="radio" name="q13" value="B"> B) Proceso... separación... y que no circule un tren por la vía contigua en sentido contrario.</label>
-    <label><input type="radio" name="q13" value="C"> C) Sistema o proceso cuyo objetivo es evitar el alcance y choque de trenes.</label>
-    <label><input type="radio" name="q13" value="D"> D) Sistema o proceso cuyo objetivo es evitar que dos trenes en vía doble se expidan simultáneamente.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
+      card.innerHTML = `
+        <div class="q-title">${titulo}</div>
+        <div class="options">${opcionesHTML}</div>
+        <div class="answer-key">Respuesta: <b>${respuestaCorrecta}</b></div>
+        <div class="feedback"></div>
+      `;
 
-<!-- PREGUNTA 14 -->
-<div class="question" data-qid="14" data-answer="A">
-  <h3>14) ¿Qué se entiende por cambiador de ancho?</h3>
-  <div class="options">
-    <label><input type="radio" name="q14" value="A"> A) Instalación ferroviaria que facilita el cambio del ancho de la rodadura, a los trenes cuya tecnología lo permite.</label>
-    <label><input type="radio" name="q14" value="B"> B) ...a los trenes y automotores cuya tecnología lo permite.</label>
-    <label><input type="radio" name="q14" value="C"> C) Instalación... que facilita el cambio del ancho de los trenes y automotores...</label>
-    <label><input type="radio" name="q14" value="D"> D) Instalación... que facilita el cambio del ancho de los trenes, con la rodadura...</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
-
-<!-- PREGUNTA 15 -->
-<div class="question" data-qid="15" data-answer="B">
-  <h3>15) ¿Qué se entiende por cantón de bloqueo?</h3>
-  <div class="options">
-    <label><input type="radio" name="q15" value="A"> A) Parte de la vía en la que normalmente solo puede haber un tren.</label>
-    <label><input type="radio" name="q15" value="B"> B) Tramo de vía en el que, en condiciones normales de circulación, no puede haber más de un tren de forma simultánea.</label>
-    <label><input type="radio" name="q15" value="C"> C) Tramo de vía en el que, en condiciones anormales...</label>
-    <label><input type="radio" name="q15" value="D"> D) Tramo de vía en el que... puede haber más de un tren... en el mismo sentido.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>B</strong></div>
-</div>
-
-<!-- PREGUNTA 16 -->
-<div class="question" data-qid="16" data-answer="C">
-  <h3>16) ¿Qué se entiende por coches?</h3>
-  <div class="options">
-    <label><input type="radio" name="q16" value="A"> A) Son aquellos que sólo pueden variar su composición mediante operaciones en taller.</label>
-    <label><input type="radio" name="q16" value="B"> B) Vehículo diseñado para viajeros transportando mercancías.</label>
-    <label><input type="radio" name="q16" value="C"> C) Vehículos ferroviarios sin tracción propia habilitados para el transporte de viajeros, así como los vehículos complementarios para su servicio.</label>
-    <label><input type="radio" name="q16" value="D"> D) Vehículos sin tracción propia para viajeros y mercancías.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
-
-<!-- PREGUNTA 17 -->
-<div class="question" data-qid="17" data-answer="C">
-  <h3>17) ¿Qué es una composición indeformable?</h3>
-  <div class="options">
-    <label><input type="radio" name="q17" value="A"> A) La que no se puede deformar de ninguna manera técnica.</label>
-    <label><input type="radio" name="q17" value="B"> B) La que no se puede deformar pero sí en talleres.</label>
-    <label><input type="radio" name="q17" value="C"> C) Aquella que sólo puede variar su composición mediante operaciones realizadas en un taller o centro de mantenimiento.</label>
-    <label><input type="radio" name="q17" value="D"> D) Aquella que sólo puede variar su composición mediante operaciones realizadas en un taller.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
-
-<!-- PREGUNTA 18 -->
-<div class="question" data-qid="18" data-answer="B">
-  <h3>18) ¿Qué se entiende por derivación particular?</h3>
-  <div class="options">
-    <label><input type="radio" name="q18" value="A"> A) Infraestructura ferroviaria conectada a la RFIG.</label>
-    <label><input type="radio" name="q18" value="B"> B) Infraestructura ferroviaria ajena a la RFIG pero conectada con ésta.</label>
-    <label><input type="radio" name="q18" value="C"> C) Infraestructura para carga y descarga de vagones.</label>
-    <label><input type="radio" name="q18" value="D"> D) Sistema que permite establecer itinerarios seguros ajenos al RFIG.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>B</strong></div>
-</div>
-
-<!-- PREGUNTA 19 -->
-<div class="question" data-qid="19" data-answer="A">
-  <h3>19) ¿Qué es la documentación de seguridad?</h3>
-  <div class="options">
-    <label><input type="radio" name="q19" value="A"> A) Conjunto de documentos reglamentarios definidos en el capítulo 2 del libro 1.</label>
-    <label><input type="radio" name="q19" value="B"> B) Conjunto de documentos reglamentarios definidos en el libro 2 del capítulo 1.</label>
-    <label><input type="radio" name="q19" value="C"> C) Documentos reglamentarios para la circulación en la RFIG.</label>
-    <label><input type="radio" name="q19" value="D"> D) Documentos reglamentarios de la EF y AI.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
-
-<!-- PREGUNTA 20 -->
-<div class="question" data-qid="20" data-answer="B">
-  <h3>20) ¿Qué se entiende por EF?</h3>
-  <div class="options">
-    <label><input type="radio" name="q20" value="A"> A) Es la entidad que expide trenes de mercancías y viajeros.</label>
-    <label><input type="radio" name="q20" value="B"> B) La titular de una licencia... cuya actividad principal consista en prestar servicios de transporte de mercancías o viajeros por ferrocarril, debiendo aportar en todo caso la tracción.</label>
-    <label><input type="radio" name="q20" value="C"> C) La titular de una licencia... para mercancías... debiendo aportar en todo caso la tracción.</label>
-    <label><input type="radio" name="q20" value="D"> D) La titular de una licencia... para mercancías o viajeros por ferrocarril.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>B</strong></div>
-</div>
-
-<!-- PREGUNTA 21 -->
-<div class="question" data-qid="21" data-answer="A">
-  <h3>21) ¿Qué se entiende por enclavamiento?</h3>
-  <div class="options">
-    <label><input type="radio" name="q21" value="A"> A) Sistema que permite establecer itinerarios seguros... en el ámbito de estaciones... relacionando aparatos de vía, semibarreras de PN y órdenes de señales.</label>
-    <label><input type="radio" name="q21" value="B"> B) ... pero en plena vía.</label>
-    <label><input type="radio" name="q21" value="C"> C) ... pero solo en estaciones.</label>
-    <label><input type="radio" name="q21" value="D"> D) ... tanto en plena vía como en estaciones.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>A</strong></div>
-</div>
-
-<!-- PREGUNTA 22 -->
-<div class="question" data-qid="22" data-answer="D">
-  <h3>22) ¿Qué es la ETI?</h3>
-  <div class="options">
-    <label><input type="radio" name="q22" value="A"> A) Especialista en trabajos de inspección.</label>
-    <label><input type="radio" name="q22" value="B"> B) Especificaciones técnicas internacionales.</label>
-    <label><input type="radio" name="q22" value="C"> C) Especificaciones técnicas interoperables de ámbito nacional.</label>
-    <label><input type="radio" name="q22" value="D"> D) Especificación técnica de interoperabilidad.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>D</strong></div>
-</div>
-
-<!-- PREGUNTA 23 -->
-<div class="question" data-qid="23" data-answer="D">
-  <h3>23) ¿Qué se entiende por estación?</h3>
-  <div class="options">
-    <label><input type="radio" name="q23" value="A"> A) Dependencia utilizada para la subida y bajada de viajeros.</label>
-    <label><input type="radio" name="q23" value="B"> B) Dependencia utilizada para funciones de circulación de trenes y maniobras.</label>
-    <label><input type="radio" name="q23" value="C"> C) Instalación de agujas en plena vía.</label>
-    <label><input type="radio" name="q23" value="D"> D) Infraestructura ferroviaria consistente en una instalación de vías y sus aparatos asociados, protegida por señales, y que tiene por objeto coordinar los procesos de la circulación.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>D</strong></div>
-</div>
-
-<!-- PREGUNTA 24 -->
-<div class="question" data-qid="24" data-answer="C">
-  <h3>24) ¿Qué se considera estación a efectos de este reglamento?</h3>
-  <div class="options">
-    <label><input type="radio" name="q24" value="A"> A) Los PB, PBA, PAET y las bifurcaciones cuando afluyan como mínimo 3 líneas.</label>
-    <label><input type="radio" name="q24" value="B"> B) Los PB, PBA, PCA, PAET.</label>
-    <label><input type="radio" name="q24" value="C"> C) Los PB, PCA, PBA, PAET y bifurcaciones.</label>
-    <label><input type="radio" name="q24" value="D"> D) Las bifurcaciones cuando confluyan 3 líneas y los PCA, PB con agujas, junto con los PAET y PBA.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
-
-<!-- PREGUNTA 25 -->
-<div class="question" data-qid="25" data-answer="C">
-  <h3>25) ¿Qué se entiende por estación telemandada?</h3>
-  <div class="options">
-    <label><input type="radio" name="q25" value="A"> A) Es aquella cuyo control y accionamiento de sus instalaciones se realiza a distancia, pero desde su inmediata.</label>
-    <label><input type="radio" name="q25" value="B"> B) Es aquella cuyo control y accionamiento de sus instalaciones se realiza a distancia, pero desde su colateral.</label>
-    <label><input type="radio" name="q25" value="C"> C) Es aquella cuyo control y accionamiento de sus instalaciones se realiza a distancia.</label>
-    <label><input type="radio" name="q25" value="D"> D) Es aquella cuyo control y accionamiento de sus instalaciones se realiza a distancia, cuando sea ámbito CTC.</label>
-  </div>
-  <div class="meta">Respuesta correcta: <strong>C</strong></div>
-</div>
-
-</main>
-
-<footer>
-  <small>RCF Libro 1 – 25 preguntas</small>
-</footer>
-
-<script>
-const questions = document.querySelectorAll('.question');
-const btnCheck = document.getElementById('check');
-const btnToggle = document.getElementById('toggleKey');
-const btnReset = document.getElementById('reset');
-
-btnCheck.onclick = () => {
-  let ok = 0;
-  questions.forEach(q => {
-    const answer = q.dataset.answer;
-    const labels = q.querySelectorAll('label');
-    labels.forEach(l => l.classList.remove('correct','incorrect'));
-
-    const checked = q.querySelector('input[type=radio]:checked');
-    labels.forEach(l => {
-      if (l.querySelector('input').value === answer) {
-        l.classList.add('correct');
-      }
+      container.appendChild(card);
     });
 
-    if (checked) {
-      if (checked.value === answer) {
-        ok++;
+    errorBox.style.display = 'none';
+    document.getElementById('configSection').style.display = 'none';
+    document.getElementById('actionsBar').style.display = 'block';
+    document.getElementById('footerInfo').style.display = 'block';
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    
+  } catch (e) {
+    errorBox.textContent = '❌ Error al procesar el HTML: ' + e.message;
+    errorBox.style.display = 'block';
+  }
+}
+
+function calificar() {
+  let total = 0, correctas = 0;
+  
+  document.querySelectorAll('.question').forEach(card => {
+    total++;
+    const qid = card.dataset.qid;
+    const seleccionada = card.querySelector('input[type=radio]:checked');
+    const correcta = respuestas[qid];
+    
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    
+    if (seleccionada) {
+      const letra = seleccionada.value;
+      if (letra === correcta) {
+        correctas++;
+        seleccionada.closest('.option').classList.add('correct');
+        card.querySelector('.feedback').textContent = '✔ Correcta';
+        card.querySelector('.feedback').style.color = '#21c17a';
       } else {
-        checked.parentElement.classList.add('incorrect');
+        seleccionada.closest('.option').classList.add('incorrect');
+        card.querySelector('.feedback').innerHTML = '✖ Incorrecta · Correcta: <b>' + correcta + '</b>';
+        card.querySelector('.feedback').style.color = '#ff8ba1';
+        const corr = card.querySelector('input[value="' + correcta + '"]');
+        if (corr) corr.closest('.option').classList.add('correct');
       }
+    } else {
+      card.querySelector('.feedback').textContent = 'Sin respuesta';
+      card.querySelector('.feedback').style.color = '#ffc107';
     }
   });
-  alert(`Puntuación: ${ok} / ${questions.length}`);
-};
+  
+  const porcentaje = Math.round((correctas/total)*100);
+  document.getElementById('score').textContent = `${correctas} / ${total} (${porcentaje}%)`;
+}
 
-btnToggle.onclick = () => {
-  document.querySelectorAll('.meta').forEach(m => {
-    m.style.display = m.style.display === 'none' ? 'block' : 'none';
-  });
-};
+function reiniciar() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+}
 
-btnReset.onclick = () => {
-  document.querySelectorAll('input[type=radio]').forEach(i => i.checked = false);
-  document.querySelectorAll('label').forEach(l => l.classList.remove('correct','incorrect'));
-  document.querySelectorAll('.meta').forEach(m => m.style.display = 'none');
-};
+function toggleRespuestas(btn) {
+  respuestasVisibles = !respuestasVisibles;
+  document.body.classList.toggle('show-answers', respuestasVisibles);
+  btn.textContent = respuestasVisibles ? 'Ocultar respuestas' : 'Mostrar respuestas';
+  
+  if (respuestasVisibles) {
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = respuestas[qid];
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+      const corr = card.querySelector('input[value="' + correcta + '"]');
+      if (corr) corr.closest('.option').classList.add('correct');
+    });
+  } else {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+  }
+}
 </script>
-
 </body>
 </html>
+}

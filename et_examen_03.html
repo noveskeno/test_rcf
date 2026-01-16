@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EXAMEN - PILOTO DE SEGURIDAD 02</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
+.header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
+.header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:10px 8px 100px}
+.progress-bar{background:rgba(255,255,255,.1);height:3px;border-radius:999px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3a9d9a);width:0%;transition:width .3s ease}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.q-title{font-weight:600;margin-bottom:10px;line-height:1.4;font-size:14px}
+.q-number{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:6px;display:block}
+.options{display:grid;grid-template-columns:1fr;gap:6px}
+.option{background:#121a34;border:2px solid rgba(255,255,255,.08);padding:8px;border-radius:8px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:all .2s;font-size:13px;line-height:1.3}
+.option:active{background:#1a2341;border-color:rgba(91,192,190,.3)}
+.option input{margin-top:2px;cursor:pointer;flex-shrink:0}
+.option div{flex:1}
+.answer-key{display:none;margin-top:8px;padding:8px;background:rgba(91,192,190,.1);border-radius:6px;font-size:12px}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.feedback{margin-top:6px;font-size:12px;font-weight:600;padding:6px;border-radius:4px}
+.correct{border-color:rgba(33,193,122,.6)!important;background:rgba(33,193,122,.05)!important}
+.incorrect{border-color:rgba(255,93,115,.75)!important;background:rgba(255,93,115,.05)!important}
+.actions{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.99));padding:10px 8px;padding-bottom:calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);z-index:99}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;touch-action:manipulation}
+button:active{background:var(--accent);opacity:.9;transform:scale(.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+button.secondary:active{background:rgba(255,255,255,.05)}
+.score{font-weight:700;font-size:1rem}
+.score-details{font-size:11px;color:var(--text);opacity:.8;margin-top:2px}
+.footer{opacity:.8;font-size:11px;text-align:center;padding:15px;color:rgba(255,255,255,.5)}
+@media (min-width: 720px){
+  .options{grid-template-columns:1fr 1fr}
+  body{font-size:15px}
+  .card{padding:20px;margin:16px 0;border-radius:16px}
+  .q-title{font-size:15px;margin-bottom:12px}
+  .option{padding:12px;gap:10px;font-size:14px}
+  .header{padding:20px 16px}
+  .header h1{font-size:1.5rem;margin-bottom:8px}
+  .container{padding:20px 16px 120px}
+  button{padding:12px 18px;font-size:14px}
+}
+@media (max-width: 640px){
+  .actions .bar{flex-direction:column;gap:6px}
+  .score{text-align:center;width:100%;font-size:0.95rem}
+  .actions{padding:8px 6px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  button{width:100%;padding:11px 12px}
+}
+.scroll-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;touch-action:manipulation}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:active{transform:scale(.95)}
+@media (max-width:640px){
+  .scroll-top{width:36px;height:36px;bottom:16px;right:16px;font-size:18px}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>EXAMEN - PILOTO DE SEGURIDAD 02</h1>
+    <div class="badge">42 preguntas</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+  
+  <div class="container" id="questionsContainer">
+    <!-- Questions will be generated here -->
+  </div>
+
+  <div class="actions">
+    <div class="bar">
+      <div>
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div class="score-details" id="scoreDetails"></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="calificar()">📊 Calificar</button>
+        <button class="secondary" onclick="reiniciar()">🔄 Reiniciar</button>
+        <button class="secondary" onclick="toggleRespuestas(this)">👁️ Ver respuestas</button>
+      </div>
+    </div>
+  </div>
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+  
+<script>
+// Test data with questions and answers
+// Test Piloto de Seguridad - semana 1 y 2
+const testData = {
+  "1": {
+    "q": "Trabajando en una estación, en vías carentes de circuitos de vía o cuando los trabajos no resulten compatibles con el uso de útiles de cortocircuito, el Encargado de trabajos, una vez autorizado para realizarlos, y antes de su inicio",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "instalará señales portátiles de parada en el eje de la vía y por ambos lados, incluso cuando sea posible orientar las agujas en la posición adecuada."},
+      {"l": "B", "t": "instalará señales portátiles de parada en el eje de la vía, incluso cuando sea posible orientar las agujas en la posición adecuada."},
+      {"l": "C", "t": "instalará señales portátiles de parada en el eje de la vía y por ambos lados, incluso cuando no sea posible orientar las agujas en la posición adecuada."},
+      {"l": "D", "t": "instalará señales portátiles de parada en el eje de la vía, incluso cuando no sea posible orientar las agujas en la posición adecuada."}
+    ]},
+  "2": {
+    "q": "¿En qué líneas no está permitido que los trenes de mercancías lleven por cola las placas reflectante color blanco y rojo?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "En las líneas operadas de forma nominal con bloqueo telefónico o bloqueo eléctrico manual."},
+      {"l": "B", "t": "En las líneas operadas de forma nominal con bloqueo telefónico."},
+      {"l": "C", "t": "En las líneas operadas de forma nominal con bloqueo telefónico y en las operadas con bloqueo telefónico supletorio."},
+      {"l": "D", "t": "En las líneas operadas con bloqueo eléctrico manual."}
+    ]},
+  "3": {
+    "q": "Según la NAR 5/17 de cargamento. ¿Cuál de las siguientes cargas se considera carga a granel?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Vagón cisterna"},
+      {"l": "B", "t": "Carriles"},
+      {"l": "C", "t": "Sacos de cemento."},
+      {"l": "D", "t": "Gravas"}
+    ]},
+  "4": {
+    "q": "Estamos trabajando en una vía de una estación que además está dentro de un túnel. ¿Cuál será la velocidad de las circulaciones en la otra vía?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "120 Km/h, pero en caso necesario se puede establecer una velocidad inferior."},
+      {"l": "B", "t": "120 Km/h, pero en caso necesario se puede establecer una velocidad superior."},
+      {"l": "C", "t": "120 Km/h."}
+    ]},
+  "5": {
+    "q": "Consignas. Para que no son emitidas dentro del ámbito especificado en este Reglamento:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Regular las condiciones de aplicación del RCF en casos específicos y en ámbitos concretos de la infraestructura."},
+      {"l": "B", "t": "Regular la utilización de instalaciones de seguridad concretas por modificaciones permanentes de las mismas."},
+      {"l": "C", "t": "Garantizar la continuidad de la circulación en casos de perturbación prolongada en el funcionamiento normal de la infraestructura."},
+      {"l": "D", "t": "Regular aspectos específicos sobre gestión de la seguridad en la circulación."}
+    ]},
+  "6": {
+    "q": "Funciones del Encargado de Trabajos, en materia de seguridad en la circulación y conforme a la normativa ferroviaria vigente, en relación a los trabajos:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Ejerce el mando sobre todo el personal que intervenga en los mismos, dando las instrucciones necesarias para la correcta coordinación, ejecución y vigilancia de los trabajos en la infraestructura ferroviaria o en sus proximidades."},
+      {"l": "B", "t": "Ejerce el mando sobre todo el personal que intervenga en los mismos, coordinando los trabajos en la infraestructura ferroviaria o en sus proximidades."},
+      {"l": "C", "t": "Da las instrucciones necesarias, para la correcta coordinación, ejecución y vigilancia de los trabajos en la infraestructura ferroviaria o en sus proximidades."},
+      {"l": "D", "t": "Coordina a todo el personal que intervenga en los mismos, dando las instrucciones necesarias, para la correcta, ejecución y vigilancia de los trabajos en la infraestructura ferroviaria."}
+    ]},
+  "7": {
+    "q": "Los pasos a nivel por obras ¿de quién necesitan la autorización expresamente y quien se encarga de regularlo y por qué documento?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "La autorización de la DGF y regulados por un aviso del AI."},
+      {"l": "B", "t": "La autorización del AI y regulados por consigna de la DGF."},
+      {"l": "C", "t": "La autorización de la AI y regulados por un aviso del DGF."},
+      {"l": "D", "t": "La autorización del AI y regulados por consigna de la AI."}
+    ]},
+  "8": {
+    "q": "¿Cómo procederá el maquinista que encuentre una señal avanzada en indicación de parada, que tiene en el mástil la letra 'P'?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Efectuará parada sin rebasarla, después de la parada, y si nada se opone, el Maquinista avanzará con marcha a la vista, sin exceder la velocidad de 40 km/h, hasta llegar a la señal siguiente, cualquiera que sea su indicación."},
+      {"l": "B", "t": "Se denomina parada y si la señal mantiene esta misma indicación transcurridos tres minutos desde la parada, el Maquinista, si nada se opone, avanzará con marcha a la vista, sin exceder la velocidad de 40 km/h, hasta llegar a la siguiente señal fija fundamental (no considerándose a estos efectos las SPN),y se atendrá a lo que esta ordena cualquiera que sea su indicación. Tendrá muy en cuenta que antes de llegar a esta última señal se puede encontrar un tren, en cuyo caso se detendrá a unos 50 metros de esta Si a continuación de ésta, existieran agujas, no se excederá la velocidad de 30 km/h al paso por ellas."},
+      {"l": "C", "t": "Efectuará parada sin rebasarla, después de la parada, y si nada se opone, el Maquinista avanzará con marcha a la vista, sin exceder la velocidad de 40 km/h, hasta llegar a la señal siguiente, cualquiera que sea su indicación. Si a continuación de esta, existieran agujas, no se excederá la velocidad de 30 km/h al paso por ellas."},
+      {"l": "D", "t": "Se denomina parada y si la señal mantiene esta misma indicación transcurridos tres minutos desde la parada, el Maquinista, si nada se opone, avanzará con marcha a la vista, sin exceder la velocidad de 40 km/h, hasta llegar a la siguiente señal fija fundamental (no considerándose a estos efectos las SPN),y se atendrá a lo que esta ordena cualquiera que sea su indicación. Tendrá muy en cuenta que antes de llegar a esta última señal se puede encontrar un tren, en cuyo caso se detendrá a unos 500 metros de esta Si a continuación de ésta, existieran agujas, no se excederá la velocidad de 30 km/h al paso por ellas."}
+    ]},
+  "9": {
+    "q": "Quien podrá colaborarán con el Encargado de trabajos en el apartado de los trenes de trabajos y la maquinaria auxiliar que opere en la EVB, confirmándole su apartado cuando se lo solicite:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "El Responsable de circulación de la estación."},
+      {"l": "B", "t": "El Responsable de Circulación de la Banda de Regulación del Puesto de Mando."},
+      {"l": "C", "t": "El Responsable de circulación de la estación o de un CTC"},
+      {"l": "D", "t": "El Piloto de Seguridad."}
+    ]},
+  "10": {
+    "q": "Cable guarda:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Cable conductor aéreo utilizado para establecer la conexión eléctrica de las subestaciones con la catenaria."},
+      {"l": "B", "t": "Cables conductores verticales de longitud variable utilizados para suspender el hilo o hilos de contacto del cable sustentador."},
+      {"l": "C", "t": "Conductor eléctrico de una catenaria a través del cual se produce el contacto con el pantógrafo y por tanto la captación de energía."},
+      {"l": "D", "t": "Cable conductor utilizado para conectar todos los postes a tierra con el fin de proteger a las personas y a las instalaciones en caso de fallo del aislamiento entre los postes y la catenaria."}
+    ]},
+  "11": {
+    "q": "Documento que se actualiza anualmente y donde se encuentran los Mapas que incluyen informaciones relativas a identificación y situación de las principales estaciones y nudos ferroviarios de la Red gestionada por Adif:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Reglamento de Circulación Ferroviaria."},
+      {"l": "B", "t": "Ley de ordenación de los transportes terrestres."},
+      {"l": "C", "t": "Reglamento del Sector ferroviario."},
+      {"l": "D", "t": "Declaración sobre la Red."}
+    ]},
+  "12": {
+    "q": "¿Qué información nos da cada parte del Panel Naranja? [Imagen de panel naranja con números 33 y 1088]",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "El número de identificación del peligro debe figurar en la parte inferior y el número de identificación de la materia en la parte superior"},
+      {"l": "B", "t": "El número de identificación del peligro debe figurar en la parte superior y el número de identificación de la clase en la parte inferior"},
+      {"l": "C", "t": "El número de identificación de clase de peligro debe figurar en la parte superior y el número de identificación de la materia en la parte inferior."},
+      {"l": "D", "t": "El número de identificación del peligro debe figurar en la parte superior y el número de identificación de la materia en la parte inferior"}
+    ]},
+  "13": {
+    "q": "Agrupan los trabajos de establecimiento, modificación o supresión de instalaciones de seguridad y los grandes trabajos de conservación.",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Trabajos de 1ª categoría. Estarán siempre regulados por una Consigna del AI"},
+      {"l": "B", "t": "Trabajos de 2ª categoría. Estarán siempre regulados por una Consigna del PM"},
+      {"l": "C", "t": "Trabajos de 1ª categoría. Estarán siempre regulados por una Consigna del PM"},
+      {"l": "D", "t": "Trabajos de 1ª o 2ª categoría. Estarán siempre regulados por una Consigna del AI"}
+    ]},
+  "14": {
+    "q": "¿A qué materias peligrosas pertenece la etiqueta con el numero 8?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Materias comburentes."},
+      {"l": "B", "t": "Materias corrosivas."},
+      {"l": "C", "t": "Gases no inflamables no tóxicos."},
+      {"l": "D", "t": "Materias que al contacto con el agua desprenden gases inflamable"}
+    ]},
+  "15": {
+    "q": "¿Cómo se denominan y qué ordenan estas señales? [Imagen de señal con X verde sobre fondo blanco]",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Paso a nivel protegido y ordena circular normalmente por el PN o grupo de PN, si nada se opone e informar de estas circunstancias por radiotelefonía al Responsable de Circulación del PM o en ausencia de radiotelefonía al Responsable de Circulación de la primera estación donde efectúe parada."},
+      {"l": "B", "t": "Paso a nivel protegido en ámbito R.A.M. y ordena circular normalmente por el PN o grupo de PN, si nada se opone e informar de estas circunstancias por radiotelefonía al Responsable de Circulación del PM o en ausencia de radiotelefonía al Responsable de Circulación de la primera estación donde efectúe parada."},
+      {"l": "C", "t": "Paso a nivel protegido y ordena circular normalmente por el PN o grupo de PN, si nada se opone e informar de estas circunstancias por radiotelefonía al Responsable de Circulación del PM o en ausencia de radiotelefonía al Responsable de Circulación de la primera estación que encuentre abierta."},
+      {"l": "D", "t": "Paso a nivel protegido en ámbito R.A.M y ordena circular normalmente por el PN o grupo de PN, si nada se opone."}
+    ]},
+  "16": {
+    "q": "Cuál de las siguientes actividades no son de Regulación Específica:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Aquellas actividades sujetas a una Instrucción Específica de Trabajo, a realizar exclusivamente con herramientas manuales, que invadan o puedan invadir (aún siendo de manera puntual) las zona de peligro y que, por su naturaleza, no afecten al funcionamiento normal de la vía, la electrificación y las instalaciones de seguridad, puedan desarrollarse de forma segura sin circulaciones (sin simultaneidad con circulaciones ferroviarias) por cumplir los requisitos mínimos."},
+      {"l": "B", "t": "Aquellas actividades sujetas a una Instrucción Específica de Trabajo, a realizar exclusivamente con herramientas manuales, que invadan o puedan invadir (aún siendo de manera puntual) las zona de riesgo y que, por su naturaleza, no afecten al funcionamiento normal de la vía, la electrificación y las instalaciones de seguridad, puedan desarrollarse de forma segura sin circulaciones (sin simultaneidad con circulaciones ferroviarias) por cumplir los requisitos mínimos."},
+      {"l": "C", "t": "Aquellas actividades sujetas a una Instrucción Específica de Trabajo, a realizar exclusivamente con herramientas manuales, que invadan o puedan invadir (aún siendo de manera puntual) las zona de Seguridad y que, por su naturaleza, no afecten al funcionamiento normal de la vía, la electrificación y las instalaciones de seguridad, puedan desarrollarse de forma segura sin circulaciones (sin simultaneidad con circulaciones ferroviarias) por cumplir los requisitos mínimos."},
+      {"l": "D", "t": "Aquellas actividades sujetas a una Instrucción Específica de Trabajo, a realizar exclusivamente con herramientas manuales, que invadan o puedan invadir (aún siendo de manera puntual) las zona de peligro o la de riesgo, y que, por su naturaleza, no afecten al funcionamiento normal de la vía, la electrificación y las instalaciones de seguridad, puedan desarrollarse de forma segura sin circulaciones (sin simultaneidad con circulaciones ferroviarias) por cumplir los requisitos mínimos."}
+    ]},
+  "17": {
+    "q": "¿Qué sistemas de ejecución de trabajos en la vía se emplean?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Interrupción de la liberación por tiempo y Interrupción de la circulación por tiempo."},
+      {"l": "B", "t": "Interrupción en la circulación, es la más utilizada por tener que establecer la EVB."},
+      {"l": "C", "t": "Bloqueo por Ocupación y Entrega de vía Bloqueada."},
+      {"l": "D", "t": "Interrupción de la circulación y liberación por tiempo."}
+    ]},
+  "18": {
+    "q": "Detención inmediata",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad, en una estación."},
+      {"l": "B", "t": "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad."},
+      {"l": "C", "t": "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de emergencia"},
+      {"l": "D", "t": "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de estacionamiento."}
+    ]},
+  "19": {
+    "q": "Las señales según su función se clasifican, en:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Fundamentales, Indicadoras y de limitación de velocidad."},
+      {"l": "B", "t": "Fundamentales, Portátiles y de los trenes."},
+      {"l": "C", "t": "Avanzada, Entrada y Salida."},
+      {"l": "D", "t": "Fijas, Portátiles y de los Trenes."}
+    ]},
+  "20": {
+    "q": "Cuando las necesidades de los trabajos obliguen a rebasar reiteradamente una señal avanzada no dotada de letra 'P', ¿quién lo autorizara y cuantas veces?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación podrá autorizar al Maquinista su rebase tantas veces como lo considere necesario el Encargado de Trabajos durante la EVB."},
+      {"l": "B", "t": "El Responsable de Circulación podrá autorizar al Maquinista su rebase tantas veces como lo considere necesario el Encargado de Trabajos durante el ILT."},
+      {"l": "C", "t": "El Responsable de Circulación podrá autorizar al Maquinista su rebase tantas veces como lo considere necesario él durante la EVB."},
+      {"l": "D", "t": "El Responsable de Circulación podrá autorizar al Maquinista su rebase tantas veces como lo considere necesario el Encargado de Trabajos o el Piloto de seguridad habilitado para concertar trabajos durante la EVB o el ILT."}
+    ]},
+  "21": {
+    "q": "En que bloqueo se define cantón como la parte de la vía o de cada una de las vías, comprendida entre dos estaciones colaterales abiertas:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "En BT y BSL"},
+      {"l": "B", "t": "EN BT y BLA"},
+      {"l": "C", "t": "BT y BEM."},
+      {"l": "D", "t": "BT y BA"}
+    ]},
+  "22": {
+    "q": "¿A quién deberá consultar sus dudas el personal cuando tome a su cargo el servicio?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Al Responsable de Circulación que concedió los trabajos."},
+      {"l": "B", "t": "Al Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "C", "t": "Al Encargado de los trabajos."},
+      {"l": "D", "t": "Al personal saliente."}
+    ]},
+  "23": {
+    "q": "¿A que estará obligado el personal que reciba una modificación de su documentación de seguridad a titulo personal?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Acusar recibo y acreditará conocimiento de su contenido conforme a lo establecido en el SGS de su empresa."},
+      {"l": "B", "t": "Acreditar conocimiento de su contenido conforme a lo establecido en el SGS de su empresa."},
+      {"l": "C", "t": "Acusar recibo de la misma."},
+      {"l": "D", "t": "Acusar recibo de la misma y archivarla correctamente."}
+    ]},
+  "24": {
+    "q": "Cuando en ILT en un mismo trayecto se realicen trabajos de naturaleza diferente o situados en puntos alejados:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Todos ellos se considerarán independientes y dispondrán de un Encargado de Trabajos o de un Piloto de seguridad habilitado para concertar trabajos en cada uno."},
+      {"l": "B", "t": "Todos ellos se considerarán un solo trabajo y dispondrán de un Encargado de Trabajos o de un Piloto de seguridad habilitado para concertar trabajos en cada uno."},
+      {"l": "C", "t": "Todos ellos se considerarán independientes y dispondrán de un Encargado de Trabajos y de un Piloto de seguridad habilitado para concertar trabajos en cada uno."},
+      {"l": "D", "t": "Esta situación no se contempla en el RCF."}
+    ]},
+  "25": {
+    "q": "¿Qué se considera un PN Automático?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Un PN automático es el situado en plena vía y cuya protección se activa mediante el establecimiento de los itinerarios que le afecten, y se desactiva con la progresiva disolución del itinerario al avance del tren."},
+      {"l": "B", "t": "Un PN automático es el situado en entre las señales de entrada de dos estaciones colaterales y cuya protección es activada automáticamente al aproximarse el tren al mismo."},
+      {"l": "C", "t": "Un PN automático es el situado en plena vía y cuya protección es activada automáticamente al aproximarse el tren al mismo."},
+      {"l": "D", "t": "Un PN automático es el situado en entre las señales de salida de dos estaciones colaterales y cuya protección es activada automáticamente al aproximarse el tren al mismo."}
+    ]},
+  "26": {
+    "q": "En los trabajos no programados (por averías, accidentes, etc.), quien definirá el sistema de trabajo para realizarlos.",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El Administrador de Infraestructuras"},
+      {"l": "B", "t": "El Encargado de trabajos o Piloto de seguridad habilitado para concertar trabajos."},
+      {"l": "C", "t": "El Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "D", "t": "El Encargado de trabajos"}
+    ]},
+  "27": {
+    "q": "En un tramo de vía entre dos estaciones colaterales abiertas, se requiere establecer una relación de dependencia entre ambas, que permita expedir circulaciones de una a otra en condiciones seguras. La relación puede establecerse a través de acuerdos bilaterales o de instalaciones diseñadas al efecto. ¿Hablamos?:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Bloqueo."},
+      {"l": "B", "t": "Enclavamiento."},
+      {"l": "C", "t": "Control de Tráfico Centralizado."},
+      {"l": "D", "t": "Puesto de Mando"}
+    ]},
+  "28": {
+    "q": "Como protegerá el Encargado de Trabajos o Piloto de seguridad habilitado para concertar trabajos, los trabajos en Intervalo de Liberación por Tiempo.3.3.2.4.",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "En trayectos dotados de circuitos de vía y siempre que los trabajos sean compatibles con el uso de útiles de cortocircuito, el Encargado de trabajos o Piloto de seguridad habilitado para concertar trabajos, colocará la barra o útil de cortocircuito. A continuación, deberá verificar la ocupación artificial efectiva del circuito de vía mediante la confirmación del Responsable de Circulación, cuando no sea posible, por observación directa de que la señal que protege el cantón ocupado está en indicación de parada."},
+      {"l": "B", "t": "En trayectos carentes de circuitos de vía o cuando los trabajos no resulten compatibles con el uso de útiles de cortocircuito, el Encargado de trabajos o Piloto de seguridad habilitado para concertar trabajos, una vez autorizado para realizarlos, y antes de su inicio, instalará señales portátiles de parada a una distancia mínima de 500 metros del tajo, por ambas cabeceras del tajo en caso de vías banalizadas."},
+      {"l": "C", "t": "Asimismo, previamente al inicio de los trabajos se instalarán cartelones de 'Silbar Obreros' en la vía o vías contiguas con circulación compatible con los trabajos que pudieran resultar afectadas por éstos, y en ambos sentidos de circulación. Además, para la protección y vigilancia de los trabajos, se seguirán los procedimientos específicos recogidos en el SGS del AI."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "29": {
+    "q": "Salvo en la EVB donde realice sus trabajos, el Material Rodante Auxiliar se desplazará:3.3.1.1.",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Al amparo del bloqueo nominal de las líneas por las que circule."},
+      {"l": "B", "t": "Siempre al amparo del bloqueo nominal o degradado de las líneas por las que circule."},
+      {"l": "C", "t": "Siempre al amparo del bloqueo telefónico."},
+      {"l": "D", "t": "Siempre al amparo del bloqueo nominal o degradado de las líneas por las que circule."}
+    ]},
+  "30": {
+    "q": "Cuál de las siguientes respuestas no se corresponde con los útiles de servicio de los Tajos de Trabajos:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Linternas, dotadas de luces de color blanco y rojo"},
+      {"l": "B", "t": "Banderines rojos"},
+      {"l": "C", "t": "Calces antideriva"},
+      {"l": "D", "t": "Cartelones 'Silbar'"}
+    ]},
+  "31": {
+    "q": "La EVB se aplica a los trabajos que se realicen en el trayecto comprendido:3.3.3.2.",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Entre dos estaciones abiertas. En líneas sin CTC las estaciones intermedias deberán permanecer cerradas, y las extremas abiertas durante toda la aplicación de la EVB. En líneas con CTC, su Responsable de Circulación no podrá modificar itinerarios en las estaciones intermedias afectadas por la EVB"},
+      {"l": "B", "t": "Entre dos estaciones abiertas contiguas. En líneas sin CTC las estaciones intermedias deberán permanecer cerradas, y las extremas abiertas durante toda la aplicación de la EVB. En líneas con CTC, su Responsable de Circulación no podrá modificar itinerarios en las estaciones intermedias afectadas por la EVB"},
+      {"l": "C", "t": "Entre dos estaciones abiertas. En líneas con CTC las estaciones intermedias deberán permanecer cerradas, y las extremas abiertas durante toda la aplicación de la EVB. En líneas sin CTC, su Responsable de Circulación no podrá modificar itinerarios en las estaciones intermedias afectadas por la EVB"},
+      {"l": "D", "t": "Entre dos estaciones abiertas que determina el Responsable de Circulación de la Banda de Regulación del PM, quién fijará el tiempo de ocupación de la vía."}
+    ]},
+  "32": {
+    "q": "¿A qué se denomina Protección de emergencia? 3.6.1.4.",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Es la protección utilizada de forma inmediata por el personal que detecte un punto interceptado, su objetivo es lograr que cualquier circulación que se dirija hacia el punto interceptado se detenga antes de llegar al mismo."},
+      {"l": "B", "t": "Es la protección utilizada de forma que no pueda escaparse material ferroviario con el freno de estacionamiento"},
+      {"l": "C", "t": "Es la protección utilizada en los pasos a nivel, en el caso de que al paso de los trenes no actuase el sistema de barreras o semibarreras automáticas"},
+      {"l": "D", "t": "Es la protección que realiza el maquinista mediante el foco de gran intensidad, apagándolo al cruzarse con algún otro tren, para no deslumbrarse entre ellos"}
+    ]},
+  "33": {
+    "q": "¿Qué se entiende por zona de peligro para los trabajos? Art. 1.1.1.3",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Espacio alrededor de la vía en el que una persona, material o equipo pueden ser arrollados por un vehículo ferroviario, o ser puestos en peligro por la corriente de aire que genera su circulación."},
+      {"l": "B", "t": "Espacio alrededor de la vía en el que una persona, puede ser arrollada por un vehículo ferroviario, o ser puestos en peligro por la corriente de aire que genera su circulación."},
+      {"l": "C", "t": "Espacio alrededor de la vía en el que una persona o material pueden ser arrollados por un vehículo ferroviario, o ser puestos en peligro por la corriente de aire que genera su circulación."},
+      {"l": "D", "t": "Espacio alrededor del conductor eléctrico dentro del cual un trabajador (con o sin herramienta) o una máquina de trabajos podría sufrir un arco eléctrico o un contacto directo con el elemento en tensión"}
+    ]},
+  "34": {
+    "q": "Si recibieras una orden que compromete la seguridad de la circulación. ¿Cómo actuarías?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La cumpliría por ser una orden de un superior."},
+      {"l": "B", "t": "Lo haría saber a quién me diera la orden, que está comprometiendo la seguridad y adoptaría las medidas que considerase seguras, hasta recibir nuevas instrucciones."},
+      {"l": "C", "t": "Exigiría un documento de quien me diera la orden, para poder justificarme en caso de accidente."},
+      {"l": "D", "t": "Lo consultaría al PM para que refrendase dicha orden."}
+    ]},
+  "35": {
+    "q": "El PM nos ordena que realicemos la protección normal por encontrarse la vía interceptada. ¿Cómo lo haríamos?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Colocaríamos señales portátiles de parada a 1.500m del punto de peligro y en sus proximidades. Cuando la señal portátil de parada no sea presentada por personal, ésta se emplazará en el eje de la vía."},
+      {"l": "B", "t": "Colocaríamos señales portátiles de parada a 500m del punto de peligro, en sus proximidades o utilizando dispositivos de cortocircuito, según el caso. Cuando la señal portátil de parada no sea presentada por personal, ésta se emplazará en el eje de la vía."},
+      {"l": "C", "t": "Colocaríamos señales de parada a mano a 1500m del punto de peligro y colocaríamos señales de parada a mano en las proximidades del punto de peligro"},
+      {"l": "D", "t": "Colocaríamos señales portátiles de parada a 1.500m del punto de peligro, en sus proximidades o utilizando dispositivos de cortocircuito, según el caso. Cuando la señal portátil de parada no sea presentada por personal, ésta se emplazará en el eje de la vía."}
+    ]},
+  "36": {
+    "q": "¿Qué deberá hacer el personal saliente a su relevo?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Entregar a su relevo la documentación, registros informáticos, útiles de servicio y, toda la información necesaria relacionada con la seguridad, para que éste último pueda desarrollar plenamente su función desde el mismo momento de su incorporación."},
+      {"l": "B", "t": "Entregar a su relevo la documentación, impresos, registros informáticos y toda la información necesaria relacionada con la seguridad, para que éste último pueda desarrollar plenamente su función desde el mismo momento de su incorporación."},
+      {"l": "C", "t": "Entregar a su relevo la documentación reglamentaria, impresos, registros informáticos, útiles de servicio."},
+      {"l": "D", "t": "Entregar a su relevo la documentación reglamentaria, impresos, registros informáticos, útiles de servicio y, toda la información necesaria relacionada con la seguridad, para que éste último pueda desarrollar plenamente su función desde el mismo momento de su incorporación."}
+    ]},
+  "37": {
+    "q": "Los Responsables de Circulación de las estaciones afectadas por los trabajos en Intervalo de Liberación por Tiempo y carentes de señal de salida:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Asegurarán la parada de los trenes en las agujas de entrada antes de autorizar su acceso a la estación"},
+      {"l": "B", "t": "Asegurarán la parada de los trenes en las agujas de salida antes de autorizar su acceso a la estación"},
+      {"l": "C", "t": "Asegurarán la parada de los trenes en la señal de salida antes de autorizar su acceso a la estación."},
+      {"l": "D", "t": "Asegurarán la parada de los trenes en la señal de entrada antes de autorizar su acceso a la estación"}
+    ]},
+  "38": {
+    "q": "¿Quién garantiza los trabajos que se realizan en intervalo de liberación por tiempos?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "El Administrador de Infraestructuras"},
+      {"l": "B", "t": "El EncargadodetrabajosPilotodese guridadhabilitadoparaconcertartrabajos."},
+      {"l": "C", "t": "El Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "D", "t": "Los Responsables de Circulación de las estaciones colaterales abiertas o el del CTC."}
+    ]},
+  "39": {
+    "q": "¿Cuál es el fin de un puesto de bloqueo?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Regular la circulación de los trenes mediante su apartado y estacionamiento."},
+      {"l": "B", "t": "Permitir la banalización de trenes en vías banalizadas."},
+      {"l": "C", "t": "Dividir el cantonamiento de un trayecto entre dos estaciones colaterales."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "40": {
+    "q": "¿Cómo se denomina y qué ordena la siguiente señal? [Imagen de señal con círculos rojo y azul, etiqueta 'C' y texto 'Señal RF/C']",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Se denomina parada restringida y para trenes que no circulen con ERTMS, ordena parar ante la señal sin rebasarla."},
+      {"l": "B", "t": "Se denomina parada facultativa y para trenes que no circulen con ERTMS, ordena parar ante la señal sin rebasarla."},
+      {"l": "C", "t": "Se denomina parada selectiva y para trenes que no circulen con ERTMS, ordena parar ante la señal sin rebasarla."},
+      {"l": "D", "t": "Se denomina parada permisiva y para trenes que no circulen con ERTMS, orden"}
+    ]},
+  "41": {
+    "q": "Si en una estación, el Maquinista rebasa el piquete de salida sin talonar agujas:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Retrocederá inmediatamente el tren hasta dejar libre el piquete, haciendo la señal de alarma y lo comunicará, lo antes posible, al Responsable de Circulación."},
+      {"l": "B", "t": "Retrocederá inmediatamente el tren hasta dejar libre el piquete, haciendo la señal de atención y lo comunicará, lo antes posible, al Responsable de Circulación."},
+      {"l": "C", "t": "Retrocederá inmediatamente el tren hasta dejar libre el piquete, haciendo la señal de atención especial y lo comunicará, lo antes posible, al Responsable de Circulación."},
+      {"l": "D", "t": "No necesita hacer nada, solo lo comunicara al Responsable de Circulación."}
+    ]},
+  "42": {
+    "q": "¿Cómo se define el cantón de bloqueo en BEM?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Parte de la vía comprendida entre dos estaciones colaterales."},
+      {"l": "B", "t": "Es la parte de vía comprendida entre dos estaciones colaterales por la que se efectúa la circulación en ambos sentidos y al amparo de este bloqueo."},
+      {"l": "C", "t": "Parte de vía comprendida entre dos señales consecutivas de bloqueo."},
+      {"l": "D", "t": "Tramo de vía comprendido entre señales que puedan presentar la indicación de parada"}
+    ]}
+};
+
+
+  let respuestasVisibles = false;
+let totalPreguntas = Object.keys(testData).length;
+
+// Generate all questions on page load
+function generarTest() {
+  const container = document.getElementById('questionsContainer');
+  
+  Object.keys(testData).forEach(qid => {
+    const q = testData[qid];
+    const card = document.createElement('div');
+    card.className = 'card question';
+    card.dataset.qid = qid;
+    
+    let opcionesHTML = '';
+    q.opts.forEach(opt => {
+      opcionesHTML += `
+        <label class="option">
+          <input type="radio" name="q${qid}" value="${opt.l}" onchange="updateProgress()" />
+          <div><b>${opt.l})</b> ${opt.t}</div>
+        </label>
+      `;
+    });
+
+    card.innerHTML = `
+      <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
+      <div class="q-title">${q.q}</div>
+      <div class="options">${opcionesHTML}</div>
+      <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+      <div class="feedback"></div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+// Update progress bar
+function updateProgress() {
+  const respondidas = document.querySelectorAll('input[type=radio]:checked').length;
+  const porcentaje = (respondidas / totalPreguntas) * 100;
+  document.getElementById('progressBar').style.width = porcentaje + '%';
+}
+
+// Grade the test
+function calificar() {
+  let correctas = 0;
+  let incorrectas = 0;
+  let sinResponder = 0;
+  
+  document.querySelectorAll('.question').forEach(card => {
+    const qid = card.dataset.qid;
+    const correcta = testData[qid].a;
+    const seleccionada = card.querySelector('input[type=radio]:checked');
+    
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    
+    if (seleccionada) {
+      const letra = seleccionada.value;
+      if (letra === correcta) {
+        correctas++;
+        seleccionada.closest('.option').classList.add('correct');
+        card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+        card.querySelector('.feedback').style.color = 'var(--ok)';
+      } else {
+        incorrectas++;
+        seleccionada.closest('.option').classList.add('incorrect');
+        card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+        card.querySelector('.feedback').style.color = 'var(--bad)';
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      }
+    } else {
+      sinResponder++;
+      card.querySelector('.feedback').textContent = '⚠ Sin responder';
+      card.querySelector('.feedback').style.color = 'var(--warning)';
+    }
+  });
+  
+  const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+  const aprobado = porcentaje >= 50;
+  
+  document.getElementById('score').textContent = `${correctas} / ${totalPreguntas} (${porcentaje}%)`;
+  document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+  
+  document.getElementById('scoreDetails').innerHTML = `
+    ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+  `;
+  
+  // Scroll to top to see results
+ // window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Reset the test
+function reiniciar() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+  document.getElementById('score').removeAttribute('style');
+  document.getElementById('scoreDetails').textContent = '';
+  document.getElementById('progressBar').style.width = '0%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Toggle answer visibility
+function toggleRespuestas(btn) {
+  respuestasVisibles = !respuestasVisibles;
+  document.body.classList.toggle('show-answers', respuestasVisibles);
+  btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+  
+  if (respuestasVisibles) {
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = testData[qid].a;
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+      const corr = card.querySelector(`input[value="${correcta}"]`);
+      if (corr) corr.closest('.option').classList.add('correct');
+    });
+  } else {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+  }
+}
+
+// Initialize test on page load
+window.addEventListener('load', () => {
+  generarTest();
+});
+// Scroll to top button functionality
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top on click
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>
+</body>
+</html>

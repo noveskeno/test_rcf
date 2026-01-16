@@ -1680,7 +1680,7 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab_' + part).classList.add('active');
     generarTest();
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    // window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   // Generate test for current part
@@ -1798,7 +1798,7 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
       ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
     `;
     
-    window.scrollTo({top: 0, behavior: 'smooth'});
+   // window.scrollTo({top: 0, behavior: 'smooth'});
   };
 
   // Reset the test

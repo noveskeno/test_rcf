@@ -1733,24 +1733,17 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
     });
   }
   
-  // Update progress bar
+    // Update progress bar
   function updateProgress() {
-    const container = document.getElementById('questionsContainer');
     const partData = testData[currentPart];
     const total = Object.keys(partData).length;
-
-    // Count only the checked radios inside the current part container
-    const answered = container.querySelectorAll('input[type=radio]:checked').length;
-
-    // Calculate the percentage of answered questions
+    const answered = document.querySelectorAll('input[type=radio]:checked').length;
     const percentage = (answered / total) * 100;
-
-    // Update the progress bar width
     document.getElementById('progressBar').style.width = percentage + '%';
     
-    // Save current answers in localStorage
+    // Save current answers
     const state = {};
-    container.querySelectorAll('.question').forEach(card => {
+    document.querySelectorAll('.question').forEach(card => {
       const qid = card.dataset.qid;
       const selected = card.querySelector('input[type=radio]:checked');
       if (selected) {
@@ -1758,6 +1751,7 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
       }
     });
     saveState(currentPart, state);
+  }
 
   // Grade the test
   window.calificar = function() {

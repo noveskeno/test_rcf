@@ -503,13 +503,21 @@ function generarTest() {
       `;
     });
 
-    card.innerHTML = `
-      <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
-      <div class="q-title">${q.q}</div>
-      <div class="options">${opcionesHTML}</div>
-      <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
-      <div class="feedback"></div>
-    `;
+const imagenHTML = q.img
+  ? `<div style="margin:10px 0;text-align:center">
+       <img src="${q.img}" alt="Imagen pregunta ${qid}"
+            style="max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.15)">
+     </div>`
+  : '';
+
+card.innerHTML = `
+  <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
+  <div class="q-title">${q.q}</div>
+  ${imagenHTML}
+  <div class="options">${opcionesHTML}</div>
+  <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+  <div class="feedback"></div>
+`;
     
     container.appendChild(card);
   });

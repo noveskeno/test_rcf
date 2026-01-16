@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EXAMEN - PILOTO DE SEGURIDAD 01</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
+.header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
+.header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:10px 8px 100px}
+.progress-bar{background:rgba(255,255,255,.1);height:3px;border-radius:999px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3a9d9a);width:0%;transition:width .3s ease}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.q-title{font-weight:600;margin-bottom:10px;line-height:1.4;font-size:14px}
+.q-number{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:6px;display:block}
+.options{display:grid;grid-template-columns:1fr;gap:6px}
+.option{background:#121a34;border:2px solid rgba(255,255,255,.08);padding:8px;border-radius:8px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:all .2s;font-size:13px;line-height:1.3}
+.option:active{background:#1a2341;border-color:rgba(91,192,190,.3)}
+.option input{margin-top:2px;cursor:pointer;flex-shrink:0}
+.option div{flex:1}
+.answer-key{display:none;margin-top:8px;padding:8px;background:rgba(91,192,190,.1);border-radius:6px;font-size:12px}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.feedback{margin-top:6px;font-size:12px;font-weight:600;padding:6px;border-radius:4px}
+.correct{border-color:rgba(33,193,122,.6)!important;background:rgba(33,193,122,.05)!important}
+.incorrect{border-color:rgba(255,93,115,.75)!important;background:rgba(255,93,115,.05)!important}
+.actions{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.99));padding:10px 8px;padding-bottom:calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);z-index:99}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;touch-action:manipulation}
+button:active{background:var(--accent);opacity:.9;transform:scale(.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+button.secondary:active{background:rgba(255,255,255,.05)}
+.score{font-weight:700;font-size:1rem}
+.score-details{font-size:11px;color:var(--text);opacity:.8;margin-top:2px}
+.footer{opacity:.8;font-size:11px;text-align:center;padding:15px;color:rgba(255,255,255,.5)}
+@media (min-width: 720px){
+  .options{grid-template-columns:1fr 1fr}
+  body{font-size:15px}
+  .card{padding:20px;margin:16px 0;border-radius:16px}
+  .q-title{font-size:15px;margin-bottom:12px}
+  .option{padding:12px;gap:10px;font-size:14px}
+  .header{padding:20px 16px}
+  .header h1{font-size:1.5rem;margin-bottom:8px}
+  .container{padding:20px 16px 120px}
+  button{padding:12px 18px;font-size:14px}
+}
+@media (max-width: 640px){
+  .actions .bar{flex-direction:column;gap:6px}
+  .score{text-align:center;width:100%;font-size:0.95rem}
+  .actions{padding:8px 6px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  button{width:100%;padding:11px 12px}
+}
+.scroll-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;touch-action:manipulation}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:active{transform:scale(.95)}
+@media (max-width:640px){
+  .scroll-top{width:36px;height:36px;bottom:16px;right:16px;font-size:18px}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>EXAMEN - PILOTO DE SEGURIDAD 01</h1>
+    <div class="badge">40 preguntas</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+  
+  <div class="container" id="questionsContainer">
+    <!-- Questions will be generated here -->
+  </div>
+
+  <div class="actions">
+    <div class="bar">
+      <div>
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div class="score-details" id="scoreDetails"></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="calificar()">📊 Calificar</button>
+        <button class="secondary" onclick="reiniciar()">🔄 Reiniciar</button>
+        <button class="secondary" onclick="toggleRespuestas(this)">👁️ Ver respuestas</button>
+      </div>
+    </div>
+  </div>
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+  
+<script>
+// Test data with questions and answers
+// Test Piloto de Seguridad - semana 1 y 2
+const testData = {
+  "1": {
+    "q": "¿Qué es una bifurcación?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Punto de una línea, donde comienza otra o confluyen varias"},
+      {"l": "B", "t": "Punto de varias líneas, donde comienza otra o confluyen dos o más"},
+      {"l": "C", "t": "Punto donde termina las línea o confluyen varias"},
+      {"l": "D", "t": "Varias líneas a partir de un punto"}
+    ]},
+  "2": {
+    "q": "¿Qué se entiende por banda de regulación?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Es un trayecto que comprende varias estaciones"},
+      {"l": "B", "t": "Es un tramo regulado por un responsable de circulación"},
+      {"l": "C", "t": "Tramo de línea, línea o conjunto de líneas a cargo de un mismo Responsable de circulación de un PM"},
+      {"l": "D", "t": "Tramo de línea, línea o conjunto de trayectos a cargo de un mismo Responsable de circulación de un PM"}
+    ]},
+  "3": {
+    "q": "¿Qué se considera estación a efectos de este reglamento?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Los PB, PBA, PAET y las bifurcaciones cuando afluyan como mínimo 3 líneas"},
+      {"l": "B", "t": "Los PB, PBA, PCA, PAET"},
+      {"l": "C", "t": "Los PB, PCA, PBA, PAET y bifurcaciones"},
+      {"l": "D", "t": "Las bifurcaciones cuando afluyan 3 líneas y los PCA, PB con agujas, junto con los PAET y PBA"}
+    ]},
+  "4": {
+    "q": "¿Qué se entiende por trayecto?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Parte de vía comprendida entre dos señales de entrada"},
+      {"l": "B", "t": "Parte de vía o de vías comprendida entre dos estaciones colaterales"},
+      {"l": "C", "t": "Tramo de una línea comprendida entre las señales de entrada de dos estaciones"},
+      {"l": "D", "t": "Tramo de una línea comprendida entre las señales de entrada de dos estaciones. Cuando el término se utiliza en forma genérica se refiere al tramo comprendido entre dos estaciones colaterales"}
+    ]},
+  "5": {
+    "q": "El freno automático apretado al máximo no perderá su eficacia hasta transcurridos como mínimo...",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "130 minutos desde su aplicación"},
+      {"l": "B", "t": "120 minutos desde su aplicación"},
+      {"l": "C", "t": "100 minutos desde su aplicación"},
+      {"l": "D", "t": "90 minutos desde su aplicación"}
+    ]},
+  "6": {
+    "q": "Cual de las siguientes respuestas no se corresponde con los útiles de servicio de los Tajos de Trabajos:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Linternas, dotadas de luces de color blanco y rojo"},
+      {"l": "B", "t": "Banderines rojos"},
+      {"l": "C", "t": "Cartelones 'Silbar'"},
+      {"l": "D", "t": "Calces antideriva"}
+    ]},
+  "7": {
+    "q": "En un puente ¿Cómo se llama el elemento señalado con la flecha verde?",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_02.7.png",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Pila"},
+      {"l": "B", "t": "Tablero"},
+      {"l": "C", "t": "Estribo"},
+      {"l": "D", "t": "Vano"}
+    ]},
+  "8": {
+    "q": "¿Qué son las señales portátiles?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Las que llevan los trenes en cabeza y cola"},
+      {"l": "B", "t": "Las que puede utilizar o hacer el personal ferroviario en cualquier momento o lugar"},
+      {"l": "C", "t": "Las que lleva el personal de Infraestructura"},
+      {"l": "D", "t": "Las que llevan los Encargados de Trabajos y los Pilotos de Seguridad"}
+    ]},
+  "9": {
+    "q": "¿A que se denominan estaciones de servicio intermitente?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Son aquellas que no intervienen permanentemente en el bloqueo. Durante el período en que intervienen, se consideran CTC y si no intervienen, se consideran sin CTC"},
+      {"l": "B", "t": "Son aquellas que no intervienen permanentemente en el bloqueo. Durante el período en que intervienen, se consideran abiertas y durante el período en que no intervienen, se consideran cerradas"},
+      {"l": "C", "t": "Son aquellas que intervienen permanentemente en el bloqueo. Durante el período en que intervienen, se consideran abiertas y durante el período en que no intervienen, se consideran cerradas"},
+      {"l": "D", "t": "Son aquellas que no intervienen permanentemente en el bloqueo. Durante el período en que intervienen, se consideran cerradas y durante el período en que no intervienen, se consideran abiertas"}
+    ]},
+  "10": {
+    "q": "¿Cómo se denominan las agujas según su situación?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "De entrada y salida"},
+      {"l": "B", "t": "De entrada"},
+      {"l": "C", "t": "De salida"},
+      {"l": "D", "t": "De entrada, salida y plena vía"}
+    ]},
+  "11": {
+    "q": "Partes del carril",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Cabeza, alma y base"},
+      {"l": "B", "t": "Cabeza, alma y patín"},
+      {"l": "C", "t": "Pivote, cuerpo y patín"},
+      {"l": "D", "t": "Cabeza, cuerpo y patín"}
+    ]},
+  "12": {
+    "q": "¿Qué documento describe las características, el funcionamiento y la operación de toda clase de instalaciones de seguridad?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Consignas"},
+      {"l": "B", "t": "Avisos"},
+      {"l": "C", "t": "Horario de trenes"},
+      {"l": "D", "t": "Libro de itinerario del maquinista"}
+    ]},
+  "13": {
+    "q": "¿Qué son las vías de circulación?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Son las utilizadas en las estaciones para la entrada, salida o paso de los trenes"},
+      {"l": "B", "t": "Son las utilizadas en las estaciones para la entrada, salida. El resto de vías, si las hubiera, se denominan vías de servicio"},
+      {"l": "C", "t": "Son las utilizadas en las estaciones para la entrada, salida o paso de los trenes. El resto de vías, si las hubiera, se denominan vías de circulación"},
+      {"l": "D", "t": "Son las utilizadas en las estaciones para la entrada, salida o paso de los trenes. El resto de vías, si las hubiera, se denominan vías muertas"}
+    ]},
+  "14": {
+    "q": "¿Qué se muestra en el gráfico siguiente?",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_02.14.png",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Carriles de unión"},
+      {"l": "B", "t": "Desvío"},
+      {"l": "C", "t": "Cruzamiento"},
+      {"l": "D", "t": "Cambio"}
+    ]},
+  "15": {
+    "q": "¿Qué se entiende por zona de peligro para los trabajos?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Espacio alrededor de la vía en el que una persona, material o equipo pueden ser arrollados por un vehículo ferroviario, o ser puestos en peligro por la corriente de aire que genera su circulación"},
+      {"l": "B", "t": "Espacio alrededor de la vía en el que una persona puede ser arrollada por un vehículo ferroviario, o ser puesta en peligro por la corriente de aire que genera su circulación"},
+      {"l": "C", "t": "Espacio alrededor de la vía en el que una persona o material pueden ser arrollados por un vehículo ferroviario, o ser puestos en peligro por la corriente de aire que genera su circulación"},
+      {"l": "D", "t": "Espacio alrededor del conductor eléctrico dentro del cual un trabajador (con o sin herramienta) o una máquina de trabajos podría sufrir un arco eléctrico o un contacto directo con el elemento en tensión"}
+    ]},
+  "16": {
+    "q": "Las señales fijas, se dividen:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Fundamentales, indicadoras"},
+      {"l": "B", "t": "Indicadoras, de velocidad máxima"},
+      {"l": "C", "t": "De velocidad máxima, de velocidad temporal de velocidad máxima"},
+      {"l": "D", "t": "Fundamentales, indicadoras, de velocidad máxima y de limitación temporal de velocidad máxima"}
+    ]},
+  "17": {
+    "q": "¿Qué señales regulan la circulación de trenes y maniobras?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Las indicadoras y fundamentales"},
+      {"l": "B", "t": "Las fundamentales"},
+      {"l": "C", "t": "Las fundamentales y de limitación de velocidad"},
+      {"l": "D", "t": "Ninguna de las respuestas anteriores es correcta"}
+    ]},
+  "18": {
+    "q": "¿Qué señales complementan las señales fijas fundamentales?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Las fundamentales"},
+      {"l": "B", "t": "Las fundamentales y de limitación de velocidad"},
+      {"l": "C", "t": "Ninguna de las respuestas anteriores es correcta"},
+      {"l": "D", "t": "Las indicadoras"}
+    ]},
+  "19": {
+    "q": "¿Cuál de las siguientes obligaciones es exclusiva del Piloto de Seguridad?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Realizar sus funciones de vigilancia y protección conforme a la normativa ferroviaria vigente"},
+      {"l": "B", "t": "Dar prioridad a las funciones relacionadas con la seguridad en la circulación de los trenes, frente a cualquier otra actividad"},
+      {"l": "C", "t": "Garantizar una vez finalizados los trabajos y antes de devolver al Responsable de Circulación de la estación o del CTC el trayecto de vía bloqueado, que se ha retirado el personal, equipos y herramientas de la vía, que se han apartado los trenes intervinientes, se han retirado los elementos de protección y que la vía queda libre de vehículos y obstáculos y apta para la circulación normal o con las restricciones que procedan"},
+      {"l": "D", "t": "Todas las respuestas son obligaciones exclusivas del Encargado de Trabajos"}
+    ]},
+  "20": {
+    "q": "¿Cuál es la definición de Señales de los trenes?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Las que estos llevan en cabeza"},
+      {"l": "B", "t": "Las que estos llevan en cola"},
+      {"l": "C", "t": "Las que llevan en cabeza y las traseras"},
+      {"l": "D", "t": "Ninguna respuesta es correcta"}
+    ]},
+  "21": {
+    "q": "De los tres casos siguientes, el del centro...",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_02.21.png",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "es un desvío"},
+      {"l": "B", "t": "es una bretelle"},
+      {"l": "C", "t": "es un cambio"},
+      {"l": "D", "t": "es un escape"}
+    ]},
+  "22": {
+    "q": "¿Dónde se instala la señal de preavanzada?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La situada delante de la señal avanzada en líneas con BA en las que se circule a velocidades superiores a 160 km/h"},
+      {"l": "B", "t": "La situada delante de la señal avanzada en líneas con BLA en las que se circule a velocidades superiores a 160 km/h"},
+      {"l": "C", "t": "La situada delante de la señal avanzada en líneas con BSL en las que se circule a velocidades superiores a 160 km/h"},
+      {"l": "D", "t": "La situada delante de la señal avanzada en líneas con BA, BLA y BSL en las que se circule a velocidades superiores a 160 km/h"}
+    ]},
+  "23": {
+    "q": "¿Dónde se sitúa la señal de retroceso?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La situada entre la señal de entrada y la señal de salida"},
+      {"l": "B", "t": "La situada entre la señal de entrada y las agujas situadas a continuación. En vía doble no banalizada, la situada en la contravía"},
+      {"l": "C", "t": "La situada entre la señal de salida y las agujas situadas a continuación. En vía doble no banalizada, la situada en la contravía"},
+      {"l": "D", "t": "La situada en el interior de una estación para permitir movimientos interiores de la estación"}
+    ]},
+  "24": {
+    "q": "¿Dónde se encuentra la señal de protección?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Entre la señal de entrada y la señal de salida"},
+      {"l": "B", "t": "Entre la señal de entrada y las agujas de salida"},
+      {"l": "C", "t": "Entre la señal de entrada y las agujas situadas a continuación"},
+      {"l": "D", "t": "Situada delante de una aguja en plena vía para protegerla"}
+    ]},
+  "25": {
+    "q": "En el caso de que el personal de Infraestructura se percate que no dispone de algún útil de servicio ¿qué deberá hacer?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Comunicarlo a su responsable inmediato quién determinará la forma de proceder"},
+      {"l": "B", "t": "Comunicarlo a su responsable inmediato quién determinará la forma de proceder de acuerdo con el Encargado de Trabajos"},
+      {"l": "C", "t": "Comunicarlo a su responsable inmediato quién determinará la forma de proceder de acuerdo con el PM"},
+      {"l": "D", "t": "Se suspenderá el trabajo"}
+    ]},
+  "26": {
+    "q": "¿Qué nos impone la marcha de maniobras?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Impone al maquinista la obligación de avanzar con la precaución que requiera el caso, regulando la velocidad de acuerdo con la longitud de vía que visualiza por delante del puesto de conducción, de forma que pueda detener el tren ante cualquier obstáculo o señal de parada. Cuando se prescriba, se indicará el motivo y, si se conoce, la naturaleza del obstáculo, o el tipo de reconocimiento a realizar"},
+      {"l": "B", "t": "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 30 km/h si la locomotora va tirando del tren, o de 20 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada"},
+      {"l": "C", "t": "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 40 km/h si la locomotora va tirando del tren, o de 20 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada"},
+      {"l": "D", "t": "Impone al maquinista la obligación de avanzar con precaución, sin exceder la velocidad de que él considere oportuna, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada"}
+    ]},
+  "27": {
+    "q": "Detención accidental",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad, en cualquier lugar"},
+      {"l": "B", "t": "Es la que efectúa el Maquinista por propia iniciativa en plena vía, por anormalidad"},
+      {"l": "C", "t": "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de emergencia"},
+      {"l": "D", "t": "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de estacionamiento"}
+    ]},
+  "28": {
+    "q": "Qué es la BTV:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "La que se encuentra interceptada por trabajos"},
+      {"l": "B", "t": "La que se encuentra cerrada al servicio por trabajos"},
+      {"l": "C", "t": "La que se utiliza como vía única durante los trabajos circulando en los dos sentidos"},
+      {"l": "D", "t": "La que se utiliza como una vía única independiente en las líneas de vía doble denominada también circulación a contravía"}
+    ]},
+  "29": {
+    "q": "¿Cuándo se considera que el cantón está libre de trenes?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "No está establecida la EVB y además el último tren lo ha liberado totalmente"},
+      {"l": "B", "t": "El último tren lo ha liberado totalmente"},
+      {"l": "C", "t": "No está establecido ningún bloqueo y además el último tren lo ha liberado totalmente"},
+      {"l": "D", "t": "No está establecido ningún bloqueo"}
+    ]},
+  "30": {
+    "q": "Los trenes cuando circulen al amparo de la entrega de vía bloqueada se identificarán con su número de circulación, de acuerdo con el Horario de los trenes. En el caso de que esto no sea posible aplicar, ¿quién y como se han de identificarse?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Los identificará el Responsable de Circulación con un código inequívoco (T1, T2, T3, etc.)"},
+      {"l": "B", "t": "Se identificarán por su Maquinista respectivo con un código inequívoco (T1, T2, T3, etc.)"},
+      {"l": "C", "t": "Los identificará el Encargado de Trabajos con un código inequívoco (T1, T2, T3, etc.)"},
+      {"l": "D", "t": "No es necesario identificarlos a criterio del Encargado de Trabajos"}
+    ]},
+  "31": {
+    "q": "Cual es la tasa máxima permitida de alcohol en sangre:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "0.1 gramos/litro"},
+      {"l": "B", "t": "0.05 miligramos/litro"},
+      {"l": "C", "t": "0.1 miligramos/litro"},
+      {"l": "D", "t": "0.05 gramos/litro"}
+    ]},
+  "32": {
+    "q": "Cual es la tasa máxima permitida de alcohol en aire espirado:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "0.1 gramos/litro"},
+      {"l": "B", "t": "0.05 miligramos/litro"},
+      {"l": "C", "t": "0.1 miligramos/litro"},
+      {"l": "D", "t": "0.05 gramos/litro"}
+    ]},
+  "33": {
+    "q": "Si al personal ferroviario, en el cumplimiento de las normas de circulación, le surgen dudas de aplicación, ¿a quién deben consultarlas?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Al PM"},
+      {"l": "B", "t": "Al Responsable de Circulación"},
+      {"l": "C", "t": "Al responsable inmediato"},
+      {"l": "D", "t": "Al Jefe de Obra"}
+    ]},
+  "34": {
+    "q": "¿Cuándo sea necesario resolver con urgencia casos no previstos en las normas de circulación y relacionados con la seguridad, ¿quién dará con carácter provisional, las instrucciones pertinentes?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación"},
+      {"l": "B", "t": "El PM"},
+      {"l": "C", "t": "EL mando inmediato"},
+      {"l": "D", "t": "Todas las respuestas son correctas"}
+    ]},
+  "35": {
+    "q": "¿Dónde encontramos un PN automático?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "en plena vía"},
+      {"l": "B", "t": "en una estación"},
+      {"l": "C", "t": "en poblado"},
+      {"l": "D", "t": "en alta velocidad"}
+    ]},
+  "36": {
+    "q": "¿Qué señal puede hacer también funciones de señal de protección?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Avanzada"},
+      {"l": "B", "t": "Retroceso"},
+      {"l": "C", "t": "Intermedia"},
+      {"l": "D", "t": "Salida"}
+    ]},
+  "37": {
+    "q": "Mercancías Peligrosas. En un panel naranja, ¿a qué nos hace referencia el número de la parte inferior?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "al nº de identificación del peligro"},
+      {"l": "B", "t": "al nº de identificación de la materia"},
+      {"l": "C", "t": "la respuesta b) es correcta y además, puede ir precedido de una X"},
+      {"l": "D", "t": "la respuesta a) es correcta y además, puede ir precedido de una X"}
+    ]},
+  "38": {
+    "q": "El elemento que señala la flecha [Imagen mostrando un pantógrafo de tren con flecha roja señalando un elemento]",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "ménsula"},
+      {"l": "B", "t": "péndola"},
+      {"l": "C", "t": "pantógrafo"},
+      {"l": "D", "t": "atirantado"}
+    ]},
+  "39": {
+    "q": "Una señal de salida puede hacer funciones:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "de señal avanzada o de entrada de la estación siguiente"},
+      {"l": "B", "t": "de señal avanzada de la estación siguiente"},
+      {"l": "C", "t": "de señal de entrada de la estación siguiente"},
+      {"l": "D", "t": "de señal preavanzada o de entrada de la estación siguiente"}
+    ]},
+  "40": {
+    "q": "¿Qué se entiende por tren directo?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El que tiene parada en una dependencia exclusivamente para la subida y bajada de viajeros"},
+      {"l": "B", "t": "En referencia a una estación, el que no efectúa parada en ella"},
+      {"l": "C", "t": "En que va de una estación a otra determinada sin parar en las intermedias"},
+      {"l": "D", "t": "En referencia a una estación, el que efectúa parada en ella"}
+    ]}
+};
+
+
+  let respuestasVisibles = false;
+let totalPreguntas = Object.keys(testData).length;
+
+// Generate all questions on page load
+function generarTest() {
+  const container = document.getElementById('questionsContainer');
+  
+  Object.keys(testData).forEach(qid => {
+    const q = testData[qid];
+    const card = document.createElement('div');
+    card.className = 'card question';
+    card.dataset.qid = qid;
+    
+    let opcionesHTML = '';
+    q.opts.forEach(opt => {
+      opcionesHTML += `
+        <label class="option">
+          <input type="radio" name="q${qid}" value="${opt.l}" onchange="updateProgress()" />
+          <div><b>${opt.l})</b> ${opt.t}</div>
+        </label>
+      `;
+    });
+
+    card.innerHTML = `
+      <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
+      <div class="q-title">${q.q}</div>
+      <div class="options">${opcionesHTML}</div>
+      <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+      <div class="feedback"></div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+// Update progress bar
+function updateProgress() {
+  const respondidas = document.querySelectorAll('input[type=radio]:checked').length;
+  const porcentaje = (respondidas / totalPreguntas) * 100;
+  document.getElementById('progressBar').style.width = porcentaje + '%';
+}
+
+// Grade the test
+function calificar() {
+  let correctas = 0;
+  let incorrectas = 0;
+  let sinResponder = 0;
+  
+  document.querySelectorAll('.question').forEach(card => {
+    const qid = card.dataset.qid;
+    const correcta = testData[qid].a;
+    const seleccionada = card.querySelector('input[type=radio]:checked');
+    
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    
+    if (seleccionada) {
+      const letra = seleccionada.value;
+      if (letra === correcta) {
+        correctas++;
+        seleccionada.closest('.option').classList.add('correct');
+        card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+        card.querySelector('.feedback').style.color = 'var(--ok)';
+      } else {
+        incorrectas++;
+        seleccionada.closest('.option').classList.add('incorrect');
+        card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+        card.querySelector('.feedback').style.color = 'var(--bad)';
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      }
+    } else {
+      sinResponder++;
+      card.querySelector('.feedback').textContent = '⚠ Sin responder';
+      card.querySelector('.feedback').style.color = 'var(--warning)';
+    }
+  });
+  
+  const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+  const aprobado = porcentaje >= 50;
+  
+  document.getElementById('score').textContent = `${correctas} / ${totalPreguntas} (${porcentaje}%)`;
+  document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+  
+  document.getElementById('scoreDetails').innerHTML = `
+    ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+  `;
+  
+  // Scroll to top to see results
+ // window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Reset the test
+function reiniciar() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+  document.getElementById('score').removeAttribute('style');
+  document.getElementById('scoreDetails').textContent = '';
+  document.getElementById('progressBar').style.width = '0%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Toggle answer visibility
+function toggleRespuestas(btn) {
+  respuestasVisibles = !respuestasVisibles;
+  document.body.classList.toggle('show-answers', respuestasVisibles);
+  btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+  
+  if (respuestasVisibles) {
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = testData[qid].a;
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+      const corr = card.querySelector(`input[value="${correcta}"]`);
+      if (corr) corr.closest('.option').classList.add('correct');
+    });
+  } else {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+  }
+}
+
+// Initialize test on page load
+window.addEventListener('load', () => {
+  generarTest();
+});
+// Scroll to top button functionality
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top on click
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>
+</body>
+</html>

@@ -86,6 +86,7 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
   </div>
 
 <script>
+(function () {
   // Test data organized by parts (1-4)
   const testData = {
     "1": {
@@ -817,837 +818,838 @@ button.secondary:hover{background:rgba(255,255,255,.05)}
         {l: "C", t: "La vía."},
         {l: "D", t: "Todas son correctas."}
       ]},
-        "122": {q: "Según su función, las señales se clasifican en:", a: "C", opts: [
-    {l: "A", t: "Fundamentales, indicadoras y de velocidad máxima y de limitación temporal de velocidad máxima."},
-    {l: "B", t: "Fundamentales, portátiles y de los trenes."},
-    {l: "C", t: "Fijas, portátiles y de los trenes."},
-    {l: "D", t: "Preavanzada, avanzada, entrada, salida, interior, protección, intermedia, de liberación y de Paso a Nivel."}
-  ]},
-  "123": {q: "¿Cuáles son las señales fijas?", a: "B", opts: [
-    {l: "A", t: "Las que, de un modo permanente, están instaladas en puntos determinados de la vía."},
-    {l: "B", t: "Las que, de un modo permanente, están instaladas en puntos determinados de la vía o de las estaciones."},
-    {l: "C", t: "Las que, de un modo permanente o temporal, están instaladas en puntos determinados de la vía."},
-    {l: "D", t: "Las que, de un modo permanente o temporal, están instaladas en puntos determinados de la vía o de las estaciones."}
-  ]},
-  "124": {q: "¿Qué tipos de señales fijas hay?", a: "C", opts: [
-    {l: "A", t: "Fundamentales, indicadoras y de velocidad máxima."},
-    {l: "B", t: "Preavanzada, avanzada, entrada, salida, interior, protección, intermedia, de liberación y de Paso a Nivel."},
-    {l: "C", t: "Fundamentales, indicadoras, de velocidad máxima y de limitación temporal de velocidad máxima."},
-    {l: "D", t: "Fundamentales, portátiles y de los trenes."}
-  ]},
-  "125": {q: "¿Qué señales regulan la circulación de trenes y maniobras?", a: "B", opts: [
-    {l: "A", t: "Las señales fijas."},
-    {l: "B", t: "Las señales fundamentales."},
-    {l: "C", t: "Las señales fundamentales y de velocidad máxima."},
-    {l: "D", t: "Las señales de velocidad máxima y de limitación temporal de velocidad máxima."}
-  ]},
-  "126": {q: "¿Qué señales complementan las órdenes de las señales fundamentales?", a: "B", opts: [
-    {l: "A", t: "Las señales fijas."},
-    {l: "B", t: "Las señales indicadoras."},
-    {l: "C", t: "Las señales indicadoras y de velocidad máxima."},
-    {l: "D", t: "Las señales de velocidad máxima y de limitación temporal de velocidad máxima."}
-  ]},
-  "127": {q: "¿Cuáles son las señales portátiles?", a: "B", opts: [
-    {l: "A", t: "Las que llevan los trenes en cabeza y cola."},
-    {l: "B", t: "Las que puede utilizar o hacer el personal ferroviario en cualquier momento o lugar."},
-    {l: "C", t: "Las que, de un modo permanente o temporal, están instaladas en puntos determinados de la vía."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "128": {q: "¿Cuáles son las señales de los trenes?", a: "C", opts: [
-    {l: "A", t: "Las que puede utilizar o hacer el personal ferroviario en cualquier momento o lugar."},
-    {l: "B", t: "Las que estos llevan para que el Maquinista haga uso de ellas si es necesario."},
-    {l: "C", t: "Las que estos llevan en cabeza y cola."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]}
-},
-"3": {
-  "129": {q: "¿Dónde se encuentra instalada la señal preavanzada?", a: "D", opts: [
-    {l: "A", t: "Delante de la señal avanzada en todas las líneas con BA."},
-    {l: "B", t: "Delante de la señal avanzada en líneas con BA en las que se circule a velocidades superiores a 160 km/h."},
-    {l: "C", t: "Delante de la señal avanzada en todas las líneas con BLA."},
-    {l: "D", t: "Delante de la señal avanzada en líneas con BLA en las que se circule a velocidades superiores a 160 km/h."}
-  ]},
-  "130": {q: "¿Dónde se encuentra instalada la señal avanzada?", a: "B", opts: [
-    {l: "A", t: "Delante de una señal de entrada."},
-    {l: "B", t: "Delante de una señal de entrada o, en su defecto, de una estación."},
-    {l: "C", t: "Delante de la señal de entrada en líneas con BLA en las que se circule a velocidades superiores a 160 km/h."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "131": {q: "¿Dónde se instala la señal de entrada?", a: "C", opts: [
-    {l: "A", t: "Delante de una estación."},
-    {l: "B", t: "Delante de todas las agujas de una estación."},
-    {l: "C", t: "Delante de una estación, bifurcación, PAET, PBA, PB o PCA."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "132": {q: "¿Dónde se encuentra la señal de retroceso?", a: "C", opts: [
-    {l: "A", t: "Entre la señal de entrada y la señal de salida."},
-    {l: "B", t: "Entre la señal de entrada y las agujas de salida."},
-    {l: "C", t: "Entre la señal de entrada y las agujas situadas a continuación."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "133": {q: "¿Dónde se sitúa la señal de protección?", a: "D", opts: [
-    {l: "A", t: "Entre la señal de entrada y la señal de salida."},
-    {l: "B", t: "Entre la señal de entrada y las agujas situadas a continuación."},
-    {l: "C", t: "Delante de una aguja en una estación para protegerla."},
-    {l: "D", t: "Delante de una aguja en plena vía para protegerla."}
-  ]},
-  "134": {q: "¿Cómo se denominan las agujas según su situación?", a: "B", opts: [
-    {l: "A", t: "De entrada, de salida y de protección."},
-    {l: "B", t: "De entrada, de salida y de plena vía."},
-    {l: "C", t: "De estación, de plena vía y de derivación particular."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "135": {q: "¿Qué son las instalaciones de seguridad?", a: "C", opts: [
-    {l: "A", t: "Son componentes, equipos y sistemas instalados a bordo de los vehículos con el fin de aumentar la seguridad de la circulación."},
-    {l: "B", t: "Son componentes, equipos y sistemas instalados en tierra con el fin de aumentar la seguridad de la circulación."},
-    {l: "C", t: "Son componentes, equipos y sistemas instalados en tierra y a bordo de los vehículos con el fin de aumentar la seguridad de la circulación."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "136": {q: "¿Se consideran instalaciones de seguridad los sistemas de comunicación a través de los que se transmiten las órdenes de las señales?", a: "C", opts: [
-    {l: "A", t: "No."},
-    {l: "B", t: "Sí, cuando se trata de líneas dotadas con ETCS."},
-    {l: "C", t: "Sí, en cualquier caso."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "137": {q: "¿Qué impone la marcha a la vista?", a: "A", opts: [
-    {l: "A", t: "Impone al Maquinista la obligación de avanzar con la precaución que requiera el caso, regulando la velocidad de acuerdo con la longitud de vía que visualiza por delante del puesto de conducción, de forma que pueda detener el tren ante cualquier obstáculo o señal de parada."},
-    {l: "B", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 20 km/h si la locomotora va tirando del tren, o de 30 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
-    {l: "C", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 30 km/h si la locomotora va tirando del tren, o de 20 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "138": {q: "¿Qué información se dará al Maquinista cuando se prescriba marcha a la vista?", a: "D", opts: [
-    {l: "A", t: "Ninguna."},
-    {l: "B", t: "La longitud del tramo a recorrer en estas condiciones de marcha."},
-    {l: "C", t: "El tipo de reconocimiento a realizar."},
-    {l: "D", t: "El motivo y, si se conoce, la naturaleza del obstáculo o el tipo de reconocimiento a realizar."}
-  ]},
-  "139": {q: "¿Qué impone la marcha de maniobras?", a: "C", opts: [
-    {l: "A", t: "Impone al Maquinista la obligación de avanzar con la precaución que requiera el caso, regulando la velocidad de acuerdo con la longitud de vía que visualiza por delante del puesto de conducción, de forma que pueda detener el tren ante cualquier obstáculo o señal de parada."},
-    {l: "B", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 20 km/h si la locomotora va tirando del tren, o de 30 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
-    {l: "C", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 30 km/h si la locomotora va tirando del tren, o de 20 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "140": {q: "¿Cómo se identifican los trenes?", a: "C", opts: [
-    {l: "A", t: "Mediante códigos alfanuméricos de forma única e inequívoca para cada línea ferroviaria."},
-    {l: "B", t: "Mediante códigos alfanuméricos de forma única e inequívoca para cada sentido de circulación."},
-    {l: "C", t: "Mediante códigos numéricos de forma única e inequívoca para cada sentido de circulación."},
-    {l: "D", t: "Mediante códigos numéricos de forma única e inequívoca para cada línea ferroviaria."}
-  ]},
-  "141": {q: "¿Qué implica la paridad de los trenes?", a: "D", opts: [
-    {l: "A", t: "La paridad de los trenes va asociada a la paridad definida en cada línea."},
-    {l: "B", t: "Los trenes pares circularan siempre en un sentido y los impares en el contrario."},
-    {l: "C", t: "Los trenes pares e impares circularán en ambos sentidos indistintamente."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "142": {q: "¿Quién asigna el código de identificación de cada tren?", a: "A", opts: [
-    {l: "A", t: "AI."},
-    {l: "B", t: "EF."},
-    {l: "C", t: "AESF."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "143": {q: "La parada de un tren:", a: "B", opts: [
-    {l: "A", t: "Puede estar prescrita en la marcha del tren o realizarse de forma eventual por iniciativa del Responsable de Circulación."},
-    {l: "B", t: "Puede estar prescrita en la marcha del tren o realizarse de forma eventual por iniciativa del Responsable de Circulación o por la orden de las señales."},
-    {l: "C", t: "Puede ser accidental o inmediata."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "144": {q: "Una parada notificada al Maquinista después de la salida del tren de su estación de origen:", a: "B", opts: [
-    {l: "A", t: "Después de la salida del tren de la estación de origen no pueden notificarse más paradas que las prescritas en su Libro de Itinerarios."},
-    {l: "B", t: "Tendrá la consideración de prescrita desde el momento de su notificación."},
-    {l: "C", t: "Tendrá la consideración de inmediata desde el momento de su notificación."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "145": {q: "Según su duración o periodicidad, una parada prescrita puede ser:", a: "A", opts: [
-    {l: "A", t: "Momentánea u ocasional."},
-    {l: "B", t: "Comercial, restringida o técnica."},
-    {l: "C", t: "Accidental o inmediata."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "146": {q: "Según su función, una parada prescrita puede ser:", a: "B", opts: [
-    {l: "A", t: "Momentánea u ocasional."},
-    {l: "B", t: "Comercial, restringida o técnica."},
-    {l: "C", t: "Accidental o inmediata."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "147": {q: "¿Cuándo una parada es momentánea?", a: "A", opts: [
-    {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
-    {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
-    {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
-    {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
-  ]},
-  "148": {q: "¿Cuándo una parada es ocasional?", a: "C", opts: [
-    {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
-    {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
-    {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
-    {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
-  ]},
-  "149": {q: "¿Cuándo una parada es comercial?", a: "B", opts: [
-    {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
-    {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
-    {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
-    {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
-  ]},
-  "150": {q: "¿Cuándo una parada es restringida?", a: "D", opts: [
-    {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
-    {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
-    {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "151": {q: "¿Cuándo una parada es técnica?", a: "D", opts: [
-    {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
-    {l: "B", t: "La que tiene por objeto la subida y bajada de viajeros."},
-    {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
-    {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
-  ]},
-  "152": {q: "La detención de un tren puede ser:", a: "C", opts: [
-    {l: "A", t: "Momentánea u ocasional."},
-    {l: "B", t: "Comercial, restringida o técnica."},
-    {l: "C", t: "Accidental o inmediata."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "153": {q: "¿Qué se considera detención accidental?", a: "A", opts: [
-    {l: "A", t: "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad, en cualquier lugar."},
-    {l: "B", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de servicio."},
-    {l: "C", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de emergencia."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "154": {q: "¿Qué se considera detención inmediata?", a: "C", opts: [
-    {l: "A", t: "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad, en cualquier lugar."},
-    {l: "B", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de servicio."},
-    {l: "C", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de emergencia."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "155": {q: "¿Cómo se denomina el conjunto de indicaciones que deben darse al Maquinista para que un tren pueda salir o pasar por una estación?", a: "D", opts: [
-    {l: "A", t: "Señal de paso, si el tren es directo en relación con la estación."},
-    {l: "B", t: "Señal de marche el tren, si el tren tiene parada en la estación."},
-    {l: "C", t: "Señal de operaciones terminadas."},
-    {l: "D", t: "Orden de marcha."}
-  ]},
-  "156": {q: "¿Qué es la orden de marcha?", a: "B", opts: [
-    {l: "A", t: "Siempre será la orden de la señal de salida, cuando exista y no haya que considerarla inexistente."},
-    {l: "B", t: "El conjunto de indicaciones que se deben dar al Maquinista para que un tren pueda salir o pasar por una estación."},
-    {l: "C", t: "El conjunto de indicaciones que se deben dar al Maquinista para que pueda salir de una estación."},
-    {l: "D", t: "El conjunto de indicaciones que se deben dar al Maquinista para que un tren pueda salir o pasar por un apeadero."}
-  ]},
-  "157": {q: "Generalizando, ¿cómo se da la orden de marcha?", a: "D", opts: [
-    {l: "A", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente. Para ello, basta que no ordene parada o, en caso contrario, que se autorice su rebase por el Responsable de Circulación o el PM si procede."},
-    {l: "B", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente, siempre que no ordene parada."},
-    {l: "C", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente. Para ello, basta que no ordene parada o, en caso contrario, que se autorice su rebase por el PM si procede."},
-    {l: "D", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente. Para ello, basta que no ordene parada o, en caso contrario, que se autorice su rebase por el Responsable de Circulación si procede."}
-  ]},
-  "158": {q: "¿Cómo se dará la orden de marcha a un tren parado que se dirige hacia un trayecto con BT?", a: "C", opts: [
-    {l: "A", t: "Con la señal de salida."},
-    {l: "B", t: "Con la señal de salida y la señal de paso."},
-    {l: "C", t: "Con la señal de salida y la señal de marche el tren."},
-    {l: "D", t: "Con la señal de marche el tren."}
-  ]},
-  "159": {q: "¿Cómo se dará la orden de marcha a un tren directo que se dirige hacia un trayecto con BT?", a: "B", opts: [
-    {l: "A", t: "Con la señal de salida."},
-    {l: "B", t: "Con la señal de salida y la señal de paso."},
-    {l: "C", t: "Con la señal de salida y la señal de marche el tren."},
-    {l: "D", t: "Con la señal de marche el tren."}
-  ]},
-  "160": {q: "¿Cómo se dará la orden de marcha a un tren parado que se dirige hacia un trayecto con BTV?", a: "D", opts: [
-    {l: "A", t: "En sentido normal, según el bloqueo nominal de la línea."},
-    {l: "B", t: "A contravía, con la señal de marche el tren."},
-    {l: "C", t: "A contravía, con la señal de paso."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "161": {q: "¿Cómo se dará la orden de marcha a un tren directo que se dirige hacia un trayecto con BTV?", a: "D", opts: [
-    {l: "A", t: "En sentido normal, según el bloqueo nominal de la línea."},
-    {l: "B", t: "A contravía, con la señal de paso."},
-    {l: "C", t: "A contravía, con la señal de marche el tren."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "162": {q: "¿Cómo se dará la orden de marcha a un tren parado en BA y BLA?", a: "C", opts: [
-    {l: "A", t: "En BA con la señal de salida y BLA con la señal de salida y la señal de marche el tren."},
-    {l: "B", t: "Igual en BA y en BLA: con la señal de salida y la señal de marche el tren."},
-    {l: "C", t: "Igual en BA y en BLA: con la señal de salida."},
-    {l: "D", t: "Con cualquier valor de la Velocidad Límite superior a 0."}
-  ]},
-  "163": {q: "¿Cómo se da la orden de marcha en BCA?", a: "D", opts: [
-    {l: "A", t: "Con la señal de salida y la señal de marche el tren o señal de paso, según proceda."},
-    {l: "B", t: "Con la señal de salida y la señal de marche el tren."},
-    {l: "C", t: "Con la señal de salida."},
-    {l: "D", t: "Con cualquier valor de la Velocidad Límite superior a 0."}
-  ]},
-  "164": {q: "¿En qué caso queda invalidada la orden de marcha?", a: "D", opts: [
-    {l: "A", t: "En el caso de que un tren parado no pueda salir inmediatamente después de haber recibido la orden de marcha."},
-    {l: "B", t: "En el caso de que un tren directo se detenga por un cambio intempestivo de la indicación de la señal de salida."},
-    {l: "C", t: "En el caso de que un tren directo quede detenido en plena vía."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "165": {q: "¿En qué caso NO queda invalidada la orden de marcha?", a: "A", opts: [
-    {l: "A", t: "En el caso de que un tren directo quede detenido en plena vía."},
-    {l: "B", t: "En el caso de que un tren directo quede detenido en una estación."},
-    {l: "C", t: "En el caso de que un tren parado no pueda salir inmediatamente después de haber recibido la orden de marcha."},
-    {l: "D", t: "En el caso de que un tren directo se detenga por un cambio intempestivo de la indicación de la señal de salida."}
-  ]},
-  "166": {q: "¿Cómo se procederá cuando un tren quede detenido por un cambio intempestivo de la señal de salida?", a: "A", opts: [
-    {l: "A", t: "Si ha rebasado la señal de salida o el piquete de la vía por la que circula, se notificará al Maquinista la reanudación de la marcha, cuando proceda, o se ordenará el retroceso a una vía de la estación."},
-    {l: "B", t: "Si no ha rebasado la señal de salida, se notificará al Maquinista la reanudación de la marcha, cuando proceda, o se ordenará el retroceso a una vía de la estación."},
-    {l: "C", t: "El Maquinista reanudará la marcha cuando la indicación de la señal de salida lo permita."},
-    {l: "D", t: "Si no ha salido de la estación, se dará nuevamente al Maquinista la orden de marcha, si procede."}
-  ]},
-  "167": {q: "¿Qué se entiende por velocidad máxima?", a: "C", opts: [
-    {l: "A", t: "Es la que el tren no debe exceder en ningún momento cuando se circula con LZB."},
-    {l: "B", t: "Es la que el tren no debe exceder en ningún momento cuando se circula con ERTMS en FS."},
-    {l: "C", t: "Es la que el tren no debe exceder en ningún momento, independientemente del tipo de conducción utilizado."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "168": {q: "¿Qué es una limitación temporal de velocidad máxima?", a: "A", opts: [
-    {l: "A", t: "Una reducción temporal de la velocidad máxima por cualquier causa."},
-    {l: "B", t: "Una reducción permanente o temporal de la velocidad máxima por cualquier causa."},
-    {l: "C", t: "La velocidad de control que impone el sistema de protección del tren cuando se aproxima a una señal que ordena parada."},
-    {l: "D", t: "La velocidad de control que impone el sistema de protección del tren cuando se aproxima a una señal de limitación temporal de velocidad máxima."}
-  ]},
-  "169": {q: "Cuando a un tren le afecten en un punto varias limitaciones de velocidad, el Maquinista cumplirá:", a: "C", opts: [
-    {l: "A", t: "La primera limitación que se encontró."},
-    {l: "B", t: "La última limitación que se encontró."},
-    {l: "C", t: "La limitación más restrictiva."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "170": {q: "¿Cómo se clasifica un tren a efectos de composición, velocidad, régimen y frenado?", a: "C", opts: [
-    {l: "A", t: "Mediante un código formado por un número."},
-    {l: "B", t: "Mediante un código formado por una letra mayúscula."},
-    {l: "C", t: "Mediante un código formado por un número y una letra mayúscula."},
-    {l: "D", t: "Mediante un código formado por un número y una letra minúscula."}
-  ]},
-  "171": {q: "El número de un tipo de tren representa:", a: "C", opts: [
-    {l: "A", t: "La cantidad de vagones que puede remolcar."},
-    {l: "B", t: "La velocidad máxima en km/h a la que puede circular en las condiciones más desfavorables."},
-    {l: "C", t: "La velocidad máxima en km/h a la que puede circular en las condiciones más favorables."},
-    {l: "D", t: "La velocidad media en km/h a la que puede circular por la línea."}
-  ]},
-  "172": {q: "Los tipos de tren se expresan en números:", a: "C", opts: [
-    {l: "A", t: "Pares e impares."},
-    {l: "B", t: "Múltiplos de 5."},
-    {l: "C", t: "Múltiplos de 10."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "173": {q: "La letra de un tipo de tren lo caracteriza en función de:", a: "C", opts: [
-    {l: "A", t: "Las aceleraciones centrífugas máximas no compensadas que admite en las rampas."},
-    {l: "B", t: "Las aceleraciones centrífugas máximas no compensadas que admite en las rectas."},
-    {l: "C", t: "Las aceleraciones centrífugas máximas no compensadas que admite en las curvas."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "174": {q: "Cuando el tren esté representado por un solo número, ¿qué tipo de tren es?", a: "B", opts: [
-    {l: "A", t: "Tipo normal, es el que admite mayores velocidades en curvas."},
-    {l: "B", t: "Tipo normal, es el que admite menores velocidades en curvas."},
-    {l: "C", t: "No existe ese tipo de tren, siempre lleva una letra mayúscula acompañando el número."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "175": {q: "Con relación a los tipos de tren:", a: "A", opts: [
-    {l: "A", t: "El material móvil de un tipo superior puede circular en los trenes de tipo inferior."},
-    {l: "B", t: "El material móvil de un tipo inferior puede circular en los trenes de tipo superior."},
-    {l: "C", t: "Todo el material móvil de un tren tiene que ser del mismo tipo."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "176": {q: "¿Cuál es el sentido de la circulación en vía doble?", a: "B", opts: [
-    {l: "A", t: "Los trenes impares circulan en un sentido por la vía par y los trenes pares en sentido contrario por la vía impar, salvo situaciones anormales por circulación a contravía, por BTV u otras causas."},
-    {l: "B", t: "Los trenes pares circulan en un sentido por la vía par y los trenes impares en sentido contrario por la vía impar, salvo situaciones anormales por circulación a contravía, por BTV u otras causas."},
-    {l: "C", t: "Los trenes circulan en ambos sentidos, por cada una de las vías independientemente de su paridad."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "177": {q: "En vía doble banalizada, ¿por qué vía puede circular un tren impar?", a: "B", opts: [
-    {l: "A", t: "Por la vía de la derecha en el sentido de la circulación."},
-    {l: "B", t: "Por ambas vías, independientemente de su paridad."},
-    {l: "C", t: "Por la vía impar."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "178": {q: "¿Cuándo se entiende que un tren circula a contravía?", a: "A", opts: [
-    {l: "A", t: "Cuando es par y circula por la vía impar en vía doble."},
-    {l: "B", t: "Cuando es par y circula por la vía impar en vía doble banalizada."},
-    {l: "C", t: "Cuando es par y circula por la vía par en sentido decreciente del kilometraje."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "179": {q: "¿Cuál es el objeto del bloqueo?", a: "A", opts: [
-    {l: "A", t: "Garantizar la seguridad de la circulación de los trenes por la misma vía, manteniendo entre los mismos la separación necesaria."},
-    {l: "B", t: "Garantizar la seguridad de la circulación de los trenes y maniobras por la misma vía, manteniendo entre los mismos la separación necesaria."},
-    {l: "C", t: "Garantizar la seguridad de la circulación de los trenes y maniobras por la línea, manteniendo entre los mismos la separación necesaria."},
-    {l: "D", t: "Garantizar la seguridad de la circulación de los trenes en plena vía, manteniendo entre los mismos la separación necesaria."}
-  ]},
-  "180": {q: "¿Cuáles son bloqueos supletorios?", a: "A", opts: [
-    {l: "A", t: "BT."},
-    {l: "B", t: "BT y BTV."},
-    {l: "C", t: "BT, BSL y BTV."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "181": {q: "¿Cómo se define un cantón en BT?", a: "A", opts: [
-    {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
-    {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
-    {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "182": {q: "¿Cómo se define un cantón en BLA?", a: "A", opts: [
-    {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
-    {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
-    {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "183": {q: "¿Cómo se define un cantón en BA?", a: "A", opts: [
-    {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
-    {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
-    {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "184": {q: "¿Cómo se define un cantón en BSL?", a: "C", opts: [
-    {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
-    {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
-    {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "185": {q: "¿Cómo se define un cantón en BCA?", a: "D", opts: [
-    {l: "A", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
-    {l: "B", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
-    {l: "C", t: "Como la parte de cada una de las vías comprendida entre pantallas de LZB o ERTMS."},
-    {l: "D", t: "Como la parte de cada una de las vías comprendida entre pantallas de LZB o ERTMS N2 o señales que puedan presentar la indicación de parada."}
-  ]},
-  "186": {q: "¿Cómo se define un cantón en BTV?", a: "D", opts: [
-    {l: "A", t: "En sentido normal, será el definido para el sistema de bloqueo nominal de la línea."},
-    {l: "B", t: "A contravía, como la parte de la vía comprendida entre dos estaciones colaterales que intervengan en el bloqueo."},
-    {l: "C", t: "Como la parte de la vía comprendida entre dos estaciones colaterales abiertas."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "187": {q: "Un cantón está libre de trenes cuando:", a: "C", opts: [
-    {l: "A", t: "Esté establecida la EVB."},
-    {l: "B", t: "El último tren lo ha liberado totalmente."},
-    {l: "C", t: "Cuando no esté establecida la EVB y además el último tren lo haya liberado totalmente."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "188": {q: "¿Cómo se asegura el bloqueo en BT?", a: "A", opts: [
-    {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
-    {l: "B", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de la radiotelefonía."},
-    {l: "C", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
-    {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
-  ]},
-  "189": {q: "¿Cómo se asegura el bloqueo en BLA?", a: "B", opts: [
-    {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
-    {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
-    {l: "C", t: "Por medio de señales que protegen las estaciones y por el sentido de circulación de los trenes."},
-    {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
-  ]},
-  "190": {q: "¿Cómo se asegura el bloqueo en BA?", a: "B", opts: [
-    {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
-    {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
-    {l: "C", t: "Por medio de señales que protegen las estaciones y por el sentido de circulación de los trenes."},
-    {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
-  ]},
-  "191": {q: "¿Cómo se asegura el bloqueo en BSL?", a: "B", opts: [
-    {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
-    {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
-    {l: "C", t: "Por medio de señales que protegen las estaciones y por el sentido de circulación de los trenes."},
-    {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
-  ]},
-  "192": {q: "¿Cómo se asegura el bloqueo en BCA?", a: "D", opts: [
-    {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
-    {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
-    {l: "C", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, por medio de las señales que protegen los cantones."},
-    {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
-  ]}
-},
-"4": {
-  "193": {q: "¿Qué tipos de conducción existen?", a: "B", opts: [
-    {l: "A", t: "Métrica, convencional y alta velocidad."},
-    {l: "B", t: "Manual, asistida y automática."},
-    {l: "C", t: "Manual, asistida y electrónica."},
-    {l: "D", t: "Alta velocidad y convencional."}
-  ]},
-  "194": {q: "¿Cuáles son las estaciones de servicio intermitente?", a: "A", opts: [
-    {l: "A", t: "Aquellas que no intervienen permanentemente en el bloqueo. Durante el periodo en que intervienen se consideran abiertas y durante el periodo en que no intervienen se consideran cerradas."},
-    {l: "B", t: "Aquellas que intervienen permanentemente en el bloqueo."},
-    {l: "C", t: "Aquellas que no intervienen permanentemente en el bloqueo. Durante el periodo en que intervienen se consideran cerradas y durante el periodo en que no intervienen se consideran abiertas."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "195": {q: "Por las instalaciones de seguridad y comunicaciones de las que están dotadas, las estaciones de servicio intermitente se clasifican en:", a: "B", opts: [
-    {l: "A", t: "Intermitentes A y C."},
-    {l: "B", t: "Intermitentes AC y NC."},
-    {l: "C", t: "Intermitentes A y N."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "196": {q: "¿Cuáles son las estaciones intermitentes AC?", a: "B", opts: [
-    {l: "A", t: "Aquellas que no intervienen permanentemente en el bloqueo."},
-    {l: "B", t: "Las que permiten la circulación de trenes mientras están cerradas."},
-    {l: "C", t: "Las que no permiten la circulación de trenes mientras están cerradas."},
-    {l: "D", t: "Las que permiten la realización de trabajos mientras están cerradas."}
-  ]},
-  "197": {q: "¿Cuáles son las estaciones intermitentes NC?", a: "C", opts: [
-    {l: "A", t: "Aquellas que no intervienen permanentemente en el bloqueo."},
-    {l: "B", t: "Las que permiten la circulación de trenes mientras están cerradas."},
-    {l: "C", t: "Las que no permiten la circulación de trenes mientras están cerradas."},
-    {l: "D", t: "Las que permiten la realización de trabajos mientras están cerradas."}
-  ]},
-  "198": {q: "Para que una estación intermitente pueda ser AC es requisito indispensable:", a: "B", opts: [
-    {l: "A", t: "Que intervenga en el bloqueo permanentemente."},
-    {l: "B", t: "Que las señales permitan el paso en ambos sentidos en vía única y en el sentido normal en vía doble, que las agujas estén encerrojadas y que exista comunicación directa entre las dos estaciones colaterales abiertas."},
-    {l: "C", t: "Que las señales no permitan el paso en ningún sentido en vía única ni en el sentido normal en vía doble, que las agujas estén encerrojadas y que no exista comunicación directa entre las dos estaciones colaterales abiertas."},
-    {l: "D", t: "Que las señales permitan el paso en ambos sentidos en vía única y en el sentido normal en vía doble, que las agujas estén encerrojadas y que exista comunicación directa entre las dos estaciones siguientes."}
-  ]},
-  "199": {q: "¿Quién da a conocer la clase de estación (AC y NC) y los periodos de cierre, en su caso?", a: "A", opts: [
-    {l: "A", t: "AI."},
-    {l: "B", t: "EF."},
-    {l: "C", t: "AESF."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "200": {q: "¿Qué elemento proporciona al Maquinista información del estado de las estaciones AC y NC?", a: "C", opts: [
-    {l: "A", t: "La presencia o ausencia del cartelón EA/EC."},
-    {l: "B", t: "La presencia o ausencia de los cartelones luminosos AC/NC."},
-    {l: "C", t: "La presencia de cartelones luminosos EA/EC y la presencia o ausencia del cartelón C."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "201": {q: "¿Qué sistemas de ejecución de trabajos en la vía se emplean?", a: "B", opts: [
-    {l: "A", t: "Sistema de interrupción de la circulación por tiempo y sistema de liberación."},
-    {l: "B", t: "Sistema de interrupción de la circulación y sistema de liberación por tiempo."},
-    {l: "C", t: "Sistema de interrupción en la circulación, sistema de liberación por tiempo y entrega de vía bloqueada."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "202": {q: "¿En qué consiste el sistema de interrupción de la circulación para la ejecución de trabajos en la vía?", a: "A", opts: [
-    {l: "A", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la vía o vías afectadas."},
-    {l: "B", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la línea afectada."},
-    {l: "C", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Responsable de Circulación."},
-    {l: "D", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Encargado de los Trabajos."}
-  ]},
-  "203": {q: "¿En qué consiste el sistema de liberación por tiempo para la ejecución de trabajos en la vía?", a: "C", opts: [
-    {l: "A", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la vía o vías afectadas."},
-    {l: "B", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la línea afectada."},
-    {l: "C", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Responsable de Circulación."},
-    {l: "D", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Encargado de los Trabajos."}
-  ]},
-  "204": {q: "En el sistema de ejecución de trabajos en la vía de interrupción de la circulación, dicha interrupción puede producirse por:", a: "B", opts: [
-    {l: "A", t: "Intervalo prescrito, intervalo eventual o anormalidad."},
-    {l: "B", t: "Intervalo horario, intervalo programado o anormalidad."},
-    {l: "C", t: "Intervalo de vía, intervalo de trabajos o anormalidad."},
-    {l: "D", t: "Intervalo horario, intervalo de liberación por tiempo o anormalidad."}
-  ]},
-  "205": {q: "¿Cómo se determina el intervalo horario del sistema de ejecución de trabajos de interrupción de la circulación?", a: "A", opts: [
-    {l: "A", t: "Por el Horario de los trenes. En vía doble y en vía doble banalizada se establecen, normalmente, dos intervalos distintos, uno para cada vía."},
-    {l: "B", t: "Por el Horario de los trenes. En vía doble y en vía doble banalizada se establece, normalmente, un intervalo para ambas vías."},
-    {l: "C", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Consigna al efecto."},
-    {l: "D", t: "De forma accidental por existir un peligro para la circulación."}
-  ]},
-  "206": {q: "¿Cómo se determina el intervalo programado del sistema de ejecución de trabajos de interrupción de la circulación?", a: "B", opts: [
-    {l: "A", t: "Por el Horario de los trenes. En vía doble y en vía doble banalizada se establecen, normalmente, dos intervalos distintos, uno para cada vía."},
-    {l: "B", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Consigna al efecto."},
-    {l: "C", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Aviso al efecto."},
-    {l: "D", t: "De forma accidental por existir un peligro para la circulación."}
-  ]},
-  "207": {q: "¿Cómo se determina la interrupción de la circulación para la ejecución de trabajos en la vía cuando se presenta una anormalidad?", a: "C", opts: [
-    {l: "A", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Consigna al efecto."},
-    {l: "B", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Aviso al efecto."},
-    {l: "C", t: "De forma accidental por existir un peligro para la circulación."},
-    {l: "D", t: "De forma inmediata por existir un peligro para la circulación."}
-  ]},
-  "208": {q: "¿Cómo se protegen los trabajos realizados mediante el sistema de liberación por tiempo?", a: "C", opts: [
-    {l: "A", t: "Por el tiempo concedido por el Encargado de los Trabajos para su realización y por la protección normal del tajo en la vía afectada durante su ejecución."},
-    {l: "B", t: "Por el tiempo concedido por el Encargado de los Trabajos para su realización y por la protección de emergencia del tajo en la vía afectada durante su ejecución."},
-    {l: "C", t: "Por el tiempo concedido por el Responsable de Circulación para su realización y por la protección normal del tajo en la vía afectada durante su ejecución."},
-    {l: "D", t: "Por el tiempo concedido por el Responsable de Circulación para su realización y por la protección de emergencia del tajo en la vía afectada durante su ejecución."}
-  ]},
-  "209": {q: "¿Quién tiene que realizar la comunicación de tren dispuesto para circular?", a: "B", opts: [
-    {l: "A", t: "El AI."},
-    {l: "B", t: "La EF."},
-    {l: "C", t: "El Maquinista."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "210": {q: "¿A quién se le comunica que el tren está dispuesto para circular?", a: "A", opts: [
-    {l: "A", t: "AI."},
-    {l: "B", t: "EF."},
-    {l: "C", t: "AESF."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "211": {q: "¿Qué datos tiene que poner a disposición del AI la EF antes de la salida del tren?", a: "D", opts: [
-    {l: "A", t: "Identificación del tren e identidad de la empresa ferroviaria."},
-    {l: "B", t: "Datos sobre la composición del tren y vehículos afectados, en su caso, por cualquier tipo de restricción a la explotación."},
-    {l: "C", t: "Información sobre los cargamentos y, en especial, sobre las mercancías peligrosas."},
-    {l: "D", t: "Todas son correctas."}
-  ]},
-  "212": {q: "¿Qué entidad debe definir el procedimiento para materializar la comunicación de tren dispuesto para circular?", a: "C", opts: [
-    {l: "A", t: "EF."},
-    {l: "B", t: "AI."},
-    {l: "C", t: "AI y EF."},
-    {l: "D", t: "Ninguna respuesta es correcta."}
-  ]},
-  "213": {q: "¿Qué trenes deberán llevar un sistema de freno automático en circulación?", a: "B", opts: [
-    {l: "A", t: "Todos los trenes, salvo los autopropulsados."},
-    {l: "B", t: "Todos los trenes deberán llevar un sistema de freno automático por aire comprimido, salvo los autopropulsados cuyas características del freno automático quedarán definidas en sus Manuales de Conducción."},
-    {l: "C", t: "Todos los trenes deberán llevar un sistema de freno automático por aire comprimido, salvo los autopropulsados cuyas características del freno automático quedarán definidas en sus Manuales de Circulación."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "214": {q: "El freno automático por aire comprimido debe estar disponible:", a: "C", opts: [
-    {l: "A", t: "En los vehículos de cabeza y cola, incluidas las locomotoras."},
-    {l: "B", t: "En los vehículos de cabeza y cola, no incluidas las locomotoras."},
-    {l: "C", t: "En todos los vehículos de la composición."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "215": {q: "¿Qué vehículos deben llevar el freno automático siempre útil y en servicio?", a: "C", opts: [
-    {l: "A", t: "Los vehículos de cabeza y cola, incluidas las locomotoras."},
-    {l: "B", t: "Los vehículos de cabeza y cola, incluidas las locomotoras. En automotores y trenes Talgo remolcados, no será imprescindible que el último vehículo tenga el freno útil, aunque sí debe asegurarse su continuidad."},
-    {l: "C", t: "Los vehículos de cabeza y cola, incluidas las locomotoras. En automotores y trenes Talgo remolcados, no será imprescindible que el último vehículo tenga el freno en servicio, aunque sí debe asegurarse su continuidad."},
-    {l: "D", t: "En todos los vehículos de la composición."}
-  ]},
-  "216": {q: "¿De qué depende la capacidad de frenado necesaria para que un tren pueda circular?", a: "B", opts: [
-    {l: "A", t: "De la velocidad máxima de la línea y las líneas por las que vaya a circular."},
-    {l: "B", t: "De su velocidad máxima y de las líneas por las que vaya a circular."},
-    {l: "C", t: "De su velocidad máxima y de la carga máxima que vaya a transportar."},
-    {l: "D", t: "De su carga máxima y de las líneas por las que vaya a circular."}
-  ]},
-  "217": {q: "¿Cómo se determina la capacidad de frenado de un tren convencional?", a: "A", opts: [
-    {l: "A", t: "Por el porcentaje de frenado."},
-    {l: "B", t: "Por el cambiador de régimen y el cambiador de potencia."},
-    {l: "C", t: "Por lo establecido en su Manual de Conducción."},
-    {l: "D", t: "Por lo establecido en el Manual de Circulación."}
-  ]},
-  "218": {q: "¿Cómo se determina la capacidad de frenado de un automotor?", a: "C", opts: [
-    {l: "A", t: "Por el porcentaje de frenado."},
-    {l: "B", t: "Por el cambiador de régimen y el cambiador de potencia."},
-    {l: "C", t: "Por lo establecido en su Manual de Conducción."},
-    {l: "D", t: "Por lo establecido en el Manual de Circulación."}
-  ]},
-  "219": {q: "El freno automático apretado al máximo no perderá su eficacia hasta transcurridos:", a: "C", opts: [
-    {l: "A", t: "Como mínimo 60 minutos desde su aplicación."},
-    {l: "B", t: "Cómo mínimo 90 minutos desde su aplicación."},
-    {l: "C", t: "Como mínimo 120 minutos desde su aplicación."},
-    {l: "D", t: "Como máximo 120 minutos desde su aplicación."}
-  ]},
-  "220": {q: "¿Para qué se utiliza el freno de estacionamiento?", a: "B", opts: [
-    {l: "A", t: "Para asegurar la inmovilidad del tren en caso de pérdida de eficacia del freno dinámico."},
-    {l: "B", t: "Para asegurar la inmovilidad del tren en caso de pérdida de eficacia del freno automático."},
-    {l: "C", t: "Para asegurar la movilidad del tren en caso de pérdida de eficacia del freno automático."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "221": {q: "Un tren quedará inmovilizado mediante los frenos de estacionamiento cuando:", a: "D", opts: [
-    {l: "A", t: "Se separe la locomotora de la composición."},
-    {l: "B", t: "No sea posible asegurar su inmovilidad mediante el freno automático."},
-    {l: "C", t: "Quede un corte de material fraccionado en plena vía."},
-    {l: "D", t: "Todas son correctas."}
-  ]},
-  "222": {q: "Un tren quedará inmovilizado mediante los frenos de estacionamiento cuando:", a: "A", opts: [
-    {l: "A", t: "Se separe la locomotora de la composición."},
-    {l: "B", t: "No sea posible asegurar su inmovilidad mediante el freno de dinámico."},
-    {l: "C", t: "Quede un corte de material fraccionado en una estación."},
-    {l: "D", t: "Todas son correctas."}
-  ]},
-  "223": {q: "¿Cuándo un tren no quedará inmovilizado mediante los frenos de estacionamiento?", a: "C", opts: [
-    {l: "A", t: "Se separe la locomotora de la composición."},
-    {l: "B", t: "No sea posible asegurar su inmovilidad mediante el freno automático."},
-    {l: "C", t: "Quede un corte de material fraccionado en una estación."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "224": {q: "Los AI definirán la longitud máxima de los trenes, la velocidad máxima de circulación y los porcentajes mínimos de frenado para:", a: "C", opts: [
-    {l: "A", t: "Cada tren."},
-    {l: "B", t: "Cada línea."},
-    {l: "C", t: "Cada línea o tramo de línea."},
-    {l: "D", t: "Cada EF."}
-  ]},
-  "225": {q: "¿Qué parámetros deberá definir el AI para cada línea o tramo de línea en función de sus características?", a: "A", opts: [
-    {l: "A", t: "Longitud máxima de los trenes, velocidad máxima de circulación y porcentajes mínimos de frenado para cada tipo de régimen."},
-    {l: "B", t: "Longitud mínima de los trenes, velocidad mínima de circulación y porcentajes máximos de frenado para cada tipo de régimen."},
-    {l: "C", t: "Longitud máxima de los trenes, velocidad mínima de circulación y porcentajes mínimos de frenado para cada tipo de tren."},
-    {l: "D", t: "Longitud máxima de los trenes, velocidad máxima de circulación y porcentajes mínimos de frenado para cada tipo de tren."}
-  ]},
-  "226": {q: "Los trenes de mercancías podrán estar formados por:", a: "A", opts: [
-    {l: "A", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
-    {l: "B", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Circulación."},
-    {l: "C", t: "Coches, furgones, vagones para el transporte de automóviles de los viajeros y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
-    {l: "D", t: "Coches y furgones."}
-  ]},
-  "227": {q: "Los trenes convencionales de viajeros podrán estar formados por:", a: "C", opts: [
-    {l: "A", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
-    {l: "B", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Circulación."},
-    {l: "C", t: "Coches, furgones, vagones para el transporte de automóviles de los viajeros y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
-    {l: "D", t: "Coches y furgones."}
-  ]},
-  "228": {q: "¿Cuál será la masa máxima remolcada y longitud máxima total de un tren de mercancías de composición general?", a: "B", opts: [
-    {l: "A", t: "1.500 t y 400 m."},
-    {l: "B", t: "1.200 t y 750 m."},
-    {l: "C", t: "Sin máximo de carga máxima y hasta 550 m."},
-    {l: "D", t: "Sin máximo de carga máxima y hasta 750 m."}
-  ]},
-  "229": {q: "¿Cuál será la masa máxima remolcada y longitud máxima total de un tren de mercancías de composición homogénea?", a: "D", opts: [
-    {l: "A", t: "1.500 t y 400 m."},
-    {l: "B", t: "1.200 t y 750 m."},
-    {l: "C", t: "Sin máximo de carga máxima y hasta 550 m."},
-    {l: "D", t: "Sin máximo de carga máxima y hasta 750 m."}
-  ]},
-  "230": {q: "¿Cuál será la masa máxima remolcada y longitud máxima total de un tren de mercancías de composición de contenedores?", a: "C", opts: [
-    {l: "A", t: "1.500 t y 400 m."},
-    {l: "B", t: "1.200 t y 750 m."},
-    {l: "C", t: "Sin máximo de carga máxima y hasta 550 m."},
-    {l: "D", t: "Sin máximo de carga máxima y hasta 750 m."}
-  ]},
-  "231": {q: "¿Cuál será la velocidad máxima de un tren de mercancías de composición general en régimen P que no circule con freno electroneumático?", a: "B", opts: [
-    {l: "A", t: "100 km/h."},
-    {l: "B", t: "120 km/h."},
-    {l: "C", t: "La velocidad máxima de la línea."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "232": {q: "¿Cuál será la velocidad máxima de un tren de mercancías de composición general en régimen G que no circule con freno electroneumático?", a: "A", opts: [
-    {l: "A", t: "100 km/h."},
-    {l: "B", t: "120 km/h."},
-    {l: "C", t: "La velocidad máxima de la línea."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "233": {q: "¿Qué se consideran vagones homogéneos?", a: "A", opts: [
-    {l: "A", t: "Son aquellos cuyas diferencias en la longitud entre topes, en la distancia entre pivotes y en sus pesos lineales sean inferiores al 10%."},
-    {l: "B", t: "Son aquellos cuyas diferencias en la longitud entre topes, en la distancia entre pivotes y en sus pesos lineales sean inferiores al 20%."},
-    {l: "C", t: "Son aquellos cuyas diferencias en la longitud entre topes y en la distancia entre pivotes sean inferiores al 10%."},
-    {l: "D", t: "Los que pertenecen al mismo fabricante."}
-  ]},
-  "234": {q: "¿Un tren convencional de viajeros puede circular en régimen G?", a: "D", opts: [
-    {l: "A", t: "Sí, con una composición de hasta 22 vehículos y a una velocidad máxima de 120 km/h en la red convencional."},
-    {l: "B", t: "Sí, con una composición de hasta 20 vehículos y a una velocidad máxima de 120 km/h en la red convencional."},
-    {l: "C", t: "Sí, con una composición de hasta 20 vehículos y a una velocidad máxima de 100 km/h en la red convencional."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "235": {q: "¿De cuántos vehículos podrá ser la composición de un tren convencional de viajeros?", a: "C", opts: [
-    {l: "A", t: "Hasta 22 coches."},
-    {l: "B", t: "Hasta 20 coches."},
-    {l: "C", t: "Hasta 20 coches en red de ancho ibérico y hasta 22 en la red de ancho métrico."},
-    {l: "D", t: "Hasta 22 coches en red de ancho ibérico y hasta 20 en la red de ancho métrico."}
-  ]},
-  "236": {q: "¿Cuál será la velocidad máxima de un tren convencional de viajeros en régimen P?", a: "D", opts: [
-    {l: "A", t: "100 km/h."},
-    {l: "B", t: "120 km/h."},
-    {l: "C", t: "70 km/h en red de ancho ibérico y 220 km/h en la red de ancho métrico."},
-    {l: "D", t: "70 km/h en la red de ancho métrico y 220 km/h en la red de ancho ibérico."}
-  ]},
-  "237": {q: "¿Cuál será la velocidad máxima de un tren convencional de viajeros en régimen R?", a: "D", opts: [
-    {l: "A", t: "100 km/h."},
-    {l: "B", t: "120 km/h."},
-    {l: "C", t: "70 km/h en red de ancho ibérico y 220 km/h en la red de ancho métrico."},
-    {l: "D", t: "70 km/h en la red de ancho métrico y 220 km/h en la red de ancho ibérico."}
-  ]},
-  "238": {q: "La EF o el AI deberán llevar a cabo las pruebas del funcionamiento del freno:", a: "C", opts: [
-    {l: "A", t: "Antes de expedir un tren desde la estación o dependencia de origen."},
-    {l: "B", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se realice una parada prescrita."},
-    {l: "C", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se modifique su composición."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "239": {q: "¿Cómo se realizarán las pruebas de frenado?", a: "A", opts: [
-    {l: "A", t: "Para los trenes autopropulsados las pruebas se realizarán conforme a lo establecido en sus Manuales de Conducción y para los trenes convencionales se realizarán conforme a lo indicado en el RCF."},
-    {l: "B", t: "Para los trenes autopropulsados las pruebas se realizarán conforme a lo establecido en sus Manuales de Circulación y para los trenes convencionales se realizarán conforme a lo indicado en el RCF."},
-    {l: "C", t: "Para los trenes autopropulsados las pruebas se realizarán conforme a lo indicado en el RCF y para los trenes convencionales se realizarán conforme a lo establecido en sus Manuales de Conducción."},
-    {l: "D", t: "Las pruebas se realizarán conforme a lo establecido en los Manuales de Conducción de los vehículos."}
-  ]},
-  "240": {q: "¿Qué tipos de pruebas de freno se podrán realizar a los trenes convencionales?", a: "B", opts: [
-    {l: "A", t: "Completa y parcial."},
-    {l: "B", t: "Completa, parcial, de continuidad y de verificación de acoplamiento."},
-    {l: "C", t: "Completa, parcial, de continuidad, de verificación de acoplamiento y de supresión."},
-    {l: "D", t: "Automática, complementaria y de auxilio."}
-  ]},
-  "241": {q: "¿Cuándo se realizará la prueba completa de frenado?", a: "B", opts: [
-    {l: "A", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se modifique su composición."},
-    {l: "B", t: "Antes de la salida del tren de la estación o dependencia de origen de la composición."},
-    {l: "C", t: "Después de la salida del tren de la estación o dependencia de origen de la composición."},
-    {l: "D", t: "Después del cambio de posición de las palancas de los cambiadores de potencia o el aislamiento del freno de algún vehículo remolcado."}
-  ]},
-  "242": {q: "¿Qué asegura con la prueba completa de frenado?", a: "B", opts: [
-    {l: "A", t: "La estanqueidad y continuidad de la TDP en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
-    {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
-    {l: "C", t: "La continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
-    {l: "D", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar del freno en servicio del último vehículo de la composición."}
-  ]},
-  "243": {q: "¿Cuándo se realizará la prueba parcial de frenado?", a: "C", opts: [
-    {l: "A", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se modifique su composición."},
-    {l: "B", t: "Antes de la salida del tren de la estación o dependencia de origen de la composición."},
-    {l: "C", t: "Antes de la salida del tren de la estación o dependencia en la que se agreguen vehículos a la composición."},
-    {l: "D", t: "Antes de la salida del tren de la estación o dependencia en la que se segreguen vehículos a la composición."}
-  ]},
-  "244": {q: "¿Qué asegura la prueba parcial de frenado?", a: "B", opts: [
-    {l: "A", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
-    {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de cada vehículo que se agregue a la composición."},
-    {l: "C", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de cada vehículo que se segregue de la composición."},
-    {l: "D", t: "La continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de cada vehículo que se agregue a la composición."}
-  ]},
-  "245": {q: "¿Cuándo se realizará la prueba de continuidad de frenado?", a: "D", opts: [
-    {l: "A", t: "Cuando se agregue una locomotora de tracción por cola."},
-    {l: "B", t: "Cuando se segreguen uno o varios vehículos de la composición y tras interrumpirse la continuidad de la TFA, aunque no se haya segregado ningún vehículo."},
-    {l: "C", t: "Cuando se unan dos ramas, sin modificar sus composiciones."},
-    {l: "D", t: "Todas son correctas."}
-  ]},
-  "246": {q: "¿Qué asegura la prueba de continuidad de frenado?", a: "C", opts: [
-    {l: "A", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje de todos los vehículos de la composición."},
-    {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje de cada vehículo que se agregue a la composición."},
-    {l: "C", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje del último vehículo remolcado."},
-    {l: "D", t: "La continuidad de la TFA en toda la composición y el apriete y afloje del primer vehículo remolcado."}
-  ]},
-  "247": {q: "¿Cuándo se realizará la prueba de verificación de acoplamiento de frenado?", a: "D", opts: [
-    {l: "A", t: "Cuando se cambie la locomotora de cabeza por una nueva o por una procedente de cola."},
-    {l: "B", t: "Cuando se agregue o segregue una locomotora en cabeza, en caso de tracción múltiple o mando múltiple."},
-    {l: "C", t: "Cuando se segreguen uno o varios de los vehículos situados tras la o las locomotoras de cabeza."},
-    {l: "D", t: "Todas son correctas."}
-  ]},
-  "248": {q: "¿Qué asegura la prueba de verificación de acoplamiento de frenado?", a: "D", opts: [
-    {l: "A", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje de cada vehículo que se agregue a la composición."},
-    {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje del último vehículo remolcado."},
-    {l: "C", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje del primer vehículo remolcado."},
-    {l: "D", t: "La continuidad de la TFA en toda la composición y el apriete y afloje del primer vehículo remolcado."}
-  ]},
-  "249": {q: "¿Cuándo no hace falta realizar las pruebas de frenado?", a: "D", opts: [
-    {l: "A", t: "Segregación de uno o varios vehículos de cola del tren."},
-    {l: "B", t: "Cambio de posición de las palancas de los cambiadores de potencia en todos o parte de los vehículos remolcados y aislamiento del freno de algún vehículo remolcado mediante accionamiento de la llave correspondiente."},
-    {l: "C", t: "Reposición de un aparato de alarma."},
-    {l: "D", t: "Todas son correctas."}
-  ]},
-  "250": {q: "¿Es necesario realizar prueba de freno a un automotor en caso de inversión de marcha o de cambio de coche motor?", a: "C", opts: [
-    {l: "A", t: "Sí, después de cada servicio."},
-    {l: "B", t: "Sí, pero solo en el caso de que se haya variado su composición."},
-    {l: "C", t: "No."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "251": {q: "¿Qué documento rige el transporte de mercancías peligrosas por ferrocarril?", a: "D", opts: [
-    {l: "A", t: "Consigna C N.º 44/16."},
-    {l: "B", t: "NAR N.º 4/17."},
-    {l: "C", t: "RCF."},
-    {l: "D", t: "RID."}
-  ]},
-  "252": {q: "¿Quién incluirá en su SGS los procedimientos necesarios para que se cumpla la normativa del RID?", a: "D", opts: [
-    {l: "A", t: "AI."},
-    {l: "B", t: "EF."},
-    {l: "C", t: "AESF, AI y EF."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "253": {q: "¿Cuándo se considera que un transporte es excepcional?", a: "C", opts: [
-    {l: "A", t: "Cuando, debido a sus dimensiones, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."},
-    {l: "B", t: "Cuando, debido a su peso, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."},
-    {l: "C", t: "Cuando, debido a sus dimensiones, peso o acondicionamiento, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."},
-    {l: "D", t: "Cuando, debido a que transporta mercancías peligrosas, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."}
-  ]},
-  "254": {q: "¿A quién comunicará la EF los condicionantes que deban ser tenidos en cuenta para realizar un transporte excepcional?", a: "B", opts: [
-    {l: "A", t: "AESF."},
-    {l: "B", t: "AI."},
-    {l: "C", t: "A nadie, está contemplado en la adjudicación de capacidad."},
-    {l: "D", t: "Ninguna es correcta."}
-  ]},
-  "255": {q: "¿Quién autoriza la circulación de un transporte excepcional?", a: "B", opts: [
-    {l: "A", t: "AESF."},
-    {l: "B", t: "AI."},
-    {l: "C", t: "EF."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "256": {q: "¿Quién deberá garantizar las condiciones de la composición del tren y de su cargamento en caso de transporte excepcional?", a: "B", opts: [
-    {l: "A", t: "AI."},
-    {l: "B", t: "EF."},
-    {l: "C", t: "AESF ."},
-    {l: "D", t: "Las respuestas a) y b) son correctas."}
-  ]},
-  "257": {q: "¿Qué documento regula los transportes excepcionales?", a: "B", opts: [
-    {l: "A", t: "Consigna C N.º 44/16."},
-    {l: "B", t: "NAR N.º 4/17."},
-    {l: "C", t: "RCF ."},
-    {l: "D", t: "RID."}
-  ]}
+      "122": {q: "Según su función, las señales se clasifican en:", a: "C", opts: [
+        {l: "A", t: "Fundamentales, indicadoras y de velocidad máxima y de limitación temporal de velocidad máxima."},
+        {l: "B", t: "Fundamentales, portátiles y de los trenes."},
+        {l: "C", t: "Fijas, portátiles y de los trenes."},
+        {l: "D", t: "Preavanzada, avanzada, entrada, salida, interior, protección, intermedia, de liberación y de Paso a Nivel."}
+      ]},
+      "123": {q: "¿Cuáles son las señales fijas?", a: "B", opts: [
+        {l: "A", t: "Las que, de un modo permanente, están instaladas en puntos determinados de la vía."},
+        {l: "B", t: "Las que, de un modo permanente, están instaladas en puntos determinados de la vía o de las estaciones."},
+        {l: "C", t: "Las que, de un modo permanente o temporal, están instaladas en puntos determinados de la vía."},
+        {l: "D", t: "Las que, de un modo permanente o temporal, están instaladas en puntos determinados de la vía o de las estaciones."}
+      ]},
+      "124": {q: "¿Qué tipos de señales fijas hay?", a: "C", opts: [
+        {l: "A", t: "Fundamentales, indicadoras y de velocidad máxima."},
+        {l: "B", t: "Preavanzada, avanzada, entrada, salida, interior, protección, intermedia, de liberación y de Paso a Nivel."},
+        {l: "C", t: "Fundamentales, indicadoras, de velocidad máxima y de limitación temporal de velocidad máxima."},
+        {l: "D", t: "Fundamentales, portátiles y de los trenes."}
+      ]},
+      "125": {q: "¿Qué señales regulan la circulación de trenes y maniobras?", a: "B", opts: [
+        {l: "A", t: "Las señales fijas."},
+        {l: "B", t: "Las señales fundamentales."},
+        {l: "C", t: "Las señales fundamentales y de velocidad máxima."},
+        {l: "D", t: "Las señales de velocidad máxima y de limitación temporal de velocidad máxima."}
+      ]},
+      "126": {q: "¿Qué señales complementan las órdenes de las señales fundamentales?", a: "B", opts: [
+        {l: "A", t: "Las señales fijas."},
+        {l: "B", t: "Las señales indicadoras."},
+        {l: "C", t: "Las señales indicadoras y de velocidad máxima."},
+        {l: "D", t: "Las señales de velocidad máxima y de limitación temporal de velocidad máxima."}
+      ]},
+      "127": {q: "¿Cuáles son las señales portátiles?", a: "B", opts: [
+        {l: "A", t: "Las que llevan los trenes en cabeza y cola."},
+        {l: "B", t: "Las que puede utilizar o hacer el personal ferroviario en cualquier momento o lugar."},
+        {l: "C", t: "Las que, de un modo permanente o temporal, están instaladas en puntos determinados de la vía."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "128": {q: "¿Cuáles son las señales de los trenes?", a: "C", opts: [
+        {l: "A", t: "Las que puede utilizar o hacer el personal ferroviario en cualquier momento o lugar."},
+        {l: "B", t: "Las que estos llevan para que el Maquinista haga uso de ellas si es necesario."},
+        {l: "C", t: "Las que estos llevan en cabeza y cola."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]}
+    },
+    "3": {
+      "129": {q: "¿Dónde se encuentra instalada la señal preavanzada?", a: "D", opts: [
+        {l: "A", t: "Delante de la señal avanzada en todas las líneas con BA."},
+        {l: "B", t: "Delante de la señal avanzada en líneas con BA en las que se circule a velocidades superiores a 160 km/h."},
+        {l: "C", t: "Delante de la señal avanzada en todas las líneas con BLA."},
+        {l: "D", t: "Delante de la señal avanzada en líneas con BLA en las que se circule a velocidades superiores a 160 km/h."}
+      ]},
+      "130": {q: "¿Dónde se encuentra instalada la señal avanzada?", a: "B", opts: [
+        {l: "A", t: "Delante de una señal de entrada."},
+        {l: "B", t: "Delante de una señal de entrada o, en su defecto, de una estación."},
+        {l: "C", t: "Delante de la señal de entrada en líneas con BLA en las que se circule a velocidades superiores a 160 km/h."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "131": {q: "¿Dónde se instala la señal de entrada?", a: "C", opts: [
+        {l: "A", t: "Delante de una estación."},
+        {l: "B", t: "Delante de todas las agujas de una estación."},
+        {l: "C", t: "Delante de una estación, bifurcación, PAET, PBA, PB o PCA."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "132": {q: "¿Dónde se encuentra la señal de retroceso?", a: "C", opts: [
+        {l: "A", t: "Entre la señal de entrada y la señal de salida."},
+        {l: "B", t: "Entre la señal de entrada y las agujas de salida."},
+        {l: "C", t: "Entre la señal de entrada y las agujas situadas a continuación."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "133": {q: "¿Dónde se sitúa la señal de protección?", a: "D", opts: [
+        {l: "A", t: "Entre la señal de entrada y la señal de salida."},
+        {l: "B", t: "Entre la señal de entrada y las agujas situadas a continuación."},
+        {l: "C", t: "Delante de una aguja en una estación para protegerla."},
+        {l: "D", t: "Delante de una aguja en plena vía para protegerla."}
+      ]},
+      "134": {q: "¿Cómo se denominan las agujas según su situación?", a: "B", opts: [
+        {l: "A", t: "De entrada, de salida y de protección."},
+        {l: "B", t: "De entrada, de salida y de plena vía."},
+        {l: "C", t: "De estación, de plena vía y de derivación particular."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "135": {q: "¿Qué son las instalaciones de seguridad?", a: "C", opts: [
+        {l: "A", t: "Son componentes, equipos y sistemas instalados a bordo de los vehículos con el fin de aumentar la seguridad de la circulación."},
+        {l: "B", t: "Son componentes, equipos y sistemas instalados en tierra con el fin de aumentar la seguridad de la circulación."},
+        {l: "C", t: "Son componentes, equipos y sistemas instalados en tierra y a bordo de los vehículos con el fin de aumentar la seguridad de la circulación."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "136": {q: "¿Se consideran instalaciones de seguridad los sistemas de comunicación a través de los que se transmiten las órdenes de las señales?", a: "C", opts: [
+        {l: "A", t: "No."},
+        {l: "B", t: "Sí, cuando se trata de líneas dotadas con ETCS."},
+        {l: "C", t: "Sí, en cualquier caso."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "137": {q: "¿Qué impone la marcha a la vista?", a: "A", opts: [
+        {l: "A", t: "Impone al Maquinista la obligación de avanzar con la precaución que requiera el caso, regulando la velocidad de acuerdo con la longitud de vía que visualiza por delante del puesto de conducción, de forma que pueda detener el tren ante cualquier obstáculo o señal de parada."},
+        {l: "B", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 20 km/h si la locomotora va tirando del tren, o de 30 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
+        {l: "C", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 30 km/h si la locomotora va tirando del tren, o de 20 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "138": {q: "¿Qué información se dará al Maquinista cuando se prescriba marcha a la vista?", a: "D", opts: [
+        {l: "A", t: "Ninguna."},
+        {l: "B", t: "La longitud del tramo a recorrer en estas condiciones de marcha."},
+        {l: "C", t: "El tipo de reconocimiento a realizar."},
+        {l: "D", t: "El motivo y, si se conoce, la naturaleza del obstáculo o el tipo de reconocimiento a realizar."}
+      ]},
+      "139": {q: "¿Qué impone la marcha de maniobras?", a: "C", opts: [
+        {l: "A", t: "Impone al Maquinista la obligación de avanzar con la precaución que requiera el caso, regulando la velocidad de acuerdo con la longitud de vía que visualiza por delante del puesto de conducción, de forma que pueda detener el tren ante cualquier obstáculo o señal de parada."},
+        {l: "B", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 20 km/h si la locomotora va tirando del tren, o de 30 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
+        {l: "C", t: "Impone al maquinista la obligación de avanzar con prudencia, sin exceder la velocidad de 30 km/h si la locomotora va tirando del tren, o de 20 km/h si va empujándolo, de forma que pueda detener el tren ante cualquier obstáculo visible desde el puesto de conducción o ante una señal de parada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "140": {q: "¿Cómo se identifican los trenes?", a: "C", opts: [
+        {l: "A", t: "Mediante códigos alfanuméricos de forma única e inequívoca para cada línea ferroviaria."},
+        {l: "B", t: "Mediante códigos alfanuméricos de forma única e inequívoca para cada sentido de circulación."},
+        {l: "C", t: "Mediante códigos numéricos de forma única e inequívoca para cada sentido de circulación."},
+        {l: "D", t: "Mediante códigos numéricos de forma única e inequívoca para cada línea ferroviaria."}
+      ]},
+      "141": {q: "¿Qué implica la paridad de los trenes?", a: "D", opts: [
+        {l: "A", t: "La paridad de los trenes va asociada a la paridad definida en cada línea."},
+        {l: "B", t: "Los trenes pares circularan siempre en un sentido y los impares en el contrario."},
+        {l: "C", t: "Los trenes pares e impares circularán en ambos sentidos indistintamente."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "142": {q: "¿Quién asigna el código de identificación de cada tren?", a: "A", opts: [
+        {l: "A", t: "AI."},
+        {l: "B", t: "EF."},
+        {l: "C", t: "AESF."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "143": {q: "La parada de un tren:", a: "B", opts: [
+        {l: "A", t: "Puede estar prescrita en la marcha del tren o realizarse de forma eventual por iniciativa del Responsable de Circulación."},
+        {l: "B", t: "Puede estar prescrita en la marcha del tren o realizarse de forma eventual por iniciativa del Responsable de Circulación o por la orden de las señales."},
+        {l: "C", t: "Puede ser accidental o inmediata."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "144": {q: "Una parada notificada al Maquinista después de la salida del tren de su estación de origen:", a: "B", opts: [
+        {l: "A", t: "Después de la salida del tren de la estación de origen no pueden notificarse más paradas que las prescritas en su Libro de Itinerarios."},
+        {l: "B", t: "Tendrá la consideración de prescrita desde el momento de su notificación."},
+        {l: "C", t: "Tendrá la consideración de inmediata desde el momento de su notificación."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "145": {q: "Según su duración o periodicidad, una parada prescrita puede ser:", a: "A", opts: [
+        {l: "A", t: "Momentánea u ocasional."},
+        {l: "B", t: "Comercial, restringida o técnica."},
+        {l: "C", t: "Accidental o inmediata."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "146": {q: "Según su función, una parada prescrita puede ser:", a: "B", opts: [
+        {l: "A", t: "Momentánea u ocasional."},
+        {l: "B", t: "Comercial, restringida o técnica."},
+        {l: "C", t: "Accidental o inmediata."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "147": {q: "¿Cuándo una parada es momentánea?", a: "A", opts: [
+        {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
+        {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
+        {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
+        {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
+      ]},
+      "148": {q: "¿Cuándo una parada es ocasional?", a: "C", opts: [
+        {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
+        {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
+        {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
+        {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
+      ]},
+      "149": {q: "¿Cuándo una parada es comercial?", a: "B", opts: [
+        {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
+        {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
+        {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
+        {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
+      ]},
+      "150": {q: "¿Cuándo una parada es restringida?", a: "D", opts: [
+        {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
+        {l: "B", t: "Cuando tiene por objeto la subida y bajada de viajeros."},
+        {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "151": {q: "¿Cuándo una parada es técnica?", a: "D", opts: [
+        {l: "A", t: "Cuando el tren se detiene el tiempo indispensable para realizar operaciones."},
+        {l: "B", t: "La que tiene por objeto la subida y bajada de viajeros."},
+        {l: "C", t: "Cuando se efectúa únicamente los días o períodos de tiempo indicados en la marcha."},
+        {l: "D", t: "Cuando el tren se detiene por cruce o adelantamiento de trenes u otra causa de índole estrictamente técnica."}
+      ]},
+      "152": {q: "La detención de un tren puede ser:", a: "C", opts: [
+        {l: "A", t: "Momentánea u ocasional."},
+        {l: "B", t: "Comercial, restringida o técnica."},
+        {l: "C", t: "Accidental o inmediata."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "153": {q: "¿Qué se considera detención accidental?", a: "A", opts: [
+        {l: "A", t: "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad, en cualquier lugar."},
+        {l: "B", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de servicio."},
+        {l: "C", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de emergencia."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "154": {q: "¿Qué se considera detención inmediata?", a: "C", opts: [
+        {l: "A", t: "Es la que efectúa el Maquinista por propia iniciativa en plena vía o, por anormalidad, en cualquier lugar."},
+        {l: "B", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de servicio."},
+        {l: "C", t: "Es la que realiza el Maquinista para tratar de evitar un peligro inminente, mediante la aplicación del freno de emergencia."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "155": {q: "¿Cómo se denomina el conjunto de indicaciones que deben darse al Maquinista para que un tren pueda salir o pasar por una estación?", a: "D", opts: [
+        {l: "A", t: "Señal de paso, si el tren es directo en relación con la estación."},
+        {l: "B", t: "Señal de marche el tren, si el tren tiene parada en la estación."},
+        {l: "C", t: "Señal de operaciones terminadas."},
+        {l: "D", t: "Orden de marcha."}
+      ]},
+      "156": {q: "¿Qué es la orden de marcha?", a: "B", opts: [
+        {l: "A", t: "Siempre será la orden de la señal de salida, cuando exista y no haya que considerarla inexistente."},
+        {l: "B", t: "El conjunto de indicaciones que se deben dar al Maquinista para que un tren pueda salir o pasar por una estación."},
+        {l: "C", t: "El conjunto de indicaciones que se deben dar al Maquinista para que pueda salir de una estación."},
+        {l: "D", t: "El conjunto de indicaciones que se deben dar al Maquinista para que un tren pueda salir o pasar por un apeadero."}
+      ]},
+      "157": {q: "Generalizando, ¿cómo se da la orden de marcha?", a: "D", opts: [
+        {l: "A", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente. Para ello, basta que no ordene parada o, en caso contrario, que se autorice su rebase por el Responsable de Circulación o el PM si procede."},
+        {l: "B", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente, siempre que no ordene parada."},
+        {l: "C", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente. Para ello, basta que no ordene parada o, en caso contrario, que se autorice su rebase por el PM si procede."},
+        {l: "D", t: "Con la orden de la señal de salida, si existe y no hay que considerarla inexistente. Para ello, basta que no ordene parada o, en caso contrario, que se autorice su rebase por el Responsable de Circulación si procede."}
+      ]},
+      "158": {q: "¿Cómo se dará la orden de marcha a un tren parado que se dirige hacia un trayecto con BT?", a: "C", opts: [
+        {l: "A", t: "Con la señal de salida."},
+        {l: "B", t: "Con la señal de salida y la señal de paso."},
+        {l: "C", t: "Con la señal de salida y la señal de marche el tren."},
+        {l: "D", t: "Con la señal de marche el tren."}
+      ]},
+      "159": {q: "¿Cómo se dará la orden de marcha a un tren directo que se dirige hacia un trayecto con BT?", a: "B", opts: [
+        {l: "A", t: "Con la señal de salida."},
+        {l: "B", t: "Con la señal de salida y la señal de paso."},
+        {l: "C", t: "Con la señal de salida y la señal de marche el tren."},
+        {l: "D", t: "Con la señal de marche el tren."}
+      ]},
+      "160": {q: "¿Cómo se dará la orden de marcha a un tren parado que se dirige hacia un trayecto con BTV?", a: "D", opts: [
+        {l: "A", t: "En sentido normal, según el bloqueo nominal de la línea."},
+        {l: "B", t: "A contravía, con la señal de marche el tren."},
+        {l: "C", t: "A contravía, con la señal de paso."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "161": {q: "¿Cómo se dará la orden de marcha a un tren directo que se dirige hacia un trayecto con BTV?", a: "D", opts: [
+        {l: "A", t: "En sentido normal, según el bloqueo nominal de la línea."},
+        {l: "B", t: "A contravía, con la señal de paso."},
+        {l: "C", t: "A contravía, con la señal de marche el tren."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "162": {q: "¿Cómo se dará la orden de marcha a un tren parado en BA y BLA?", a: "C", opts: [
+        {l: "A", t: "En BA con la señal de salida y BLA con la señal de salida y la señal de marche el tren."},
+        {l: "B", t: "Igual en BA y en BLA: con la señal de salida y la señal de marche el tren."},
+        {l: "C", t: "Igual en BA y en BLA: con la señal de salida."},
+        {l: "D", t: "Con cualquier valor de la Velocidad Límite superior a 0."}
+      ]},
+      "163": {q: "¿Cómo se da la orden de marcha en BCA?", a: "D", opts: [
+        {l: "A", t: "Con la señal de salida y la señal de marche el tren o señal de paso, según proceda."},
+        {l: "B", t: "Con la señal de salida y la señal de marche el tren."},
+        {l: "C", t: "Con la señal de salida."},
+        {l: "D", t: "Con cualquier valor de la Velocidad Límite superior a 0."}
+      ]},
+      "164": {q: "¿En qué caso queda invalidada la orden de marcha?", a: "D", opts: [
+        {l: "A", t: "En el caso de que un tren parado no pueda salir inmediatamente después de haber recibido la orden de marcha."},
+        {l: "B", t: "En el caso de que un tren directo se detenga por un cambio intempestivo de la indicación de la señal de salida."},
+        {l: "C", t: "En el caso de que un tren directo quede detenido en plena vía."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "165": {q: "¿En qué caso NO queda invalidada la orden de marcha?", a: "A", opts: [
+        {l: "A", t: "En el caso de que un tren directo quede detenido en plena vía."},
+        {l: "B", t: "En el caso de que un tren directo quede detenido en una estación."},
+        {l: "C", t: "En el caso de que un tren parado no pueda salir inmediatamente después de haber recibido la orden de marcha."},
+        {l: "D", t: "En el caso de que un tren directo se detenga por un cambio intempestivo de la indicación de la señal de salida."}
+      ]},
+      "166": {q: "¿Cómo se procederá cuando un tren quede detenido por un cambio intempestivo de la señal de salida?", a: "A", opts: [
+        {l: "A", t: "Si ha rebasado la señal de salida o el piquete de la vía por la que circula, se notificará al Maquinista la reanudación de la marcha, cuando proceda, o se ordenará el retroceso a una vía de la estación."},
+        {l: "B", t: "Si no ha rebasado la señal de salida, se notificará al Maquinista la reanudación de la marcha, cuando proceda, o se ordenará el retroceso a una vía de la estación."},
+        {l: "C", t: "El Maquinista reanudará la marcha cuando la indicación de la señal de salida lo permita."},
+        {l: "D", t: "Si no ha salido de la estación, se dará nuevamente al Maquinista la orden de marcha, si procede."}
+      ]},
+      "167": {q: "¿Qué se entiende por velocidad máxima?", a: "C", opts: [
+        {l: "A", t: "Es la que el tren no debe exceder en ningún momento cuando se circula con LZB."},
+        {l: "B", t: "Es la que el tren no debe exceder en ningún momento cuando se circula con ERTMS en FS."},
+        {l: "C", t: "Es la que el tren no debe exceder en ningún momento, independientemente del tipo de conducción utilizado."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "168": {q: "¿Qué es una limitación temporal de velocidad máxima?", a: "A", opts: [
+        {l: "A", t: "Una reducción temporal de la velocidad máxima por cualquier causa."},
+        {l: "B", t: "Una reducción permanente o temporal de la velocidad máxima por cualquier causa."},
+        {l: "C", t: "La velocidad de control que impone el sistema de protección del tren cuando se aproxima a una señal que ordena parada."},
+        {l: "D", t: "La velocidad de control que impone el sistema de protección del tren cuando se aproxima a una señal de limitación temporal de velocidad máxima."}
+      ]},
+      "169": {q: "Cuando a un tren le afecten en un punto varias limitaciones de velocidad, el Maquinista cumplirá:", a: "C", opts: [
+        {l: "A", t: "La primera limitación que se encontró."},
+        {l: "B", t: "La última limitación que se encontró."},
+        {l: "C", t: "La limitación más restrictiva."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "170": {q: "¿Cómo se clasifica un tren a efectos de composición, velocidad, régimen y frenado?", a: "C", opts: [
+        {l: "A", t: "Mediante un código formado por un número."},
+        {l: "B", t: "Mediante un código formado por una letra mayúscula."},
+        {l: "C", t: "Mediante un código formado por un número y una letra mayúscula."},
+        {l: "D", t: "Mediante un código formado por un número y una letra minúscula."}
+      ]},
+      "171": {q: "El número de un tipo de tren representa:", a: "C", opts: [
+        {l: "A", t: "La cantidad de vagones que puede remolcar."},
+        {l: "B", t: "La velocidad máxima en km/h a la que puede circular en las condiciones más desfavorables."},
+        {l: "C", t: "La velocidad máxima en km/h a la que puede circular en las condiciones más favorables."},
+        {l: "D", t: "La velocidad media en km/h a la que puede circular por la línea."}
+      ]},
+      "172": {q: "Los tipos de tren se expresan en números:", a: "C", opts: [
+        {l: "A", t: "Pares e impares."},
+        {l: "B", t: "Múltiplos de 5."},
+        {l: "C", t: "Múltiplos de 10."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "173": {q: "La letra de un tipo de tren lo caracteriza en función de:", a: "C", opts: [
+        {l: "A", t: "Las aceleraciones centrífugas máximas no compensadas que admite en las rampas."},
+        {l: "B", t: "Las aceleraciones centrífugas máximas no compensadas que admite en las rectas."},
+        {l: "C", t: "Las aceleraciones centrífugas máximas no compensadas que admite en las curvas."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "174": {q: "Cuando el tren esté representado por un solo número, ¿qué tipo de tren es?", a: "B", opts: [
+        {l: "A", t: "Tipo normal, es el que admite mayores velocidades en curvas."},
+        {l: "B", t: "Tipo normal, es el que admite menores velocidades en curvas."},
+        {l: "C", t: "No existe ese tipo de tren, siempre lleva una letra mayúscula acompañando el número."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "175": {q: "Con relación a los tipos de tren:", a: "A", opts: [
+        {l: "A", t: "El material móvil de un tipo superior puede circular en los trenes de tipo inferior."},
+        {l: "B", t: "El material móvil de un tipo inferior puede circular en los trenes de tipo superior."},
+        {l: "C", t: "Todo el material móvil de un tren tiene que ser del mismo tipo."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "176": {q: "¿Cuál es el sentido de la circulación en vía doble?", a: "B", opts: [
+        {l: "A", t: "Los trenes impares circulan en un sentido por la vía par y los trenes pares en sentido contrario por la vía impar, salvo situaciones anormales por circulación a contravía, por BTV u otras causas."},
+        {l: "B", t: "Los trenes pares circulan en un sentido por la vía par y los trenes impares en sentido contrario por la vía impar, salvo situaciones anormales por circulación a contravía, por BTV u otras causas."},
+        {l: "C", t: "Los trenes circulan en ambos sentidos, por cada una de las vías independientemente de su paridad."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "177": {q: "En vía doble banalizada, ¿por qué vía puede circular un tren impar?", a: "B", opts: [
+        {l: "A", t: "Por la vía de la derecha en el sentido de la circulación."},
+        {l: "B", t: "Por ambas vías, independientemente de su paridad."},
+        {l: "C", t: "Por la vía impar."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "178": {q: "¿Cuándo se entiende que un tren circula a contravía?", a: "A", opts: [
+        {l: "A", t: "Cuando es par y circula por la vía impar en vía doble."},
+        {l: "B", t: "Cuando es par y circula por la vía impar en vía doble banalizada."},
+        {l: "C", t: "Cuando es par y circula por la vía par en sentido decreciente del kilometraje."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "179": {q: "¿Cuál es el objeto del bloqueo?", a: "A", opts: [
+        {l: "A", t: "Garantizar la seguridad de la circulación de los trenes por la misma vía, manteniendo entre los mismos la separación necesaria."},
+        {l: "B", t: "Garantizar la seguridad de la circulación de los trenes y maniobras por la misma vía, manteniendo entre los mismos la separación necesaria."},
+        {l: "C", t: "Garantizar la seguridad de la circulación de los trenes y maniobras por la línea, manteniendo entre los mismos la separación necesaria."},
+        {l: "D", t: "Garantizar la seguridad de la circulación de los trenes en plena vía, manteniendo entre los mismos la separación necesaria."}
+      ]},
+      "180": {q: "¿Cuáles son bloqueos supletorios?", a: "A", opts: [
+        {l: "A", t: "BT."},
+        {l: "B", t: "BT y BTV."},
+        {l: "C", t: "BT, BSL y BTV."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "181": {q: "¿Cómo se define un cantón en BT?", a: "A", opts: [
+        {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
+        {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
+        {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "182": {q: "¿Cómo se define un cantón en BLA?", a: "A", opts: [
+        {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
+        {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
+        {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "183": {q: "¿Cómo se define un cantón en BA?", a: "A", opts: [
+        {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
+        {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
+        {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "184": {q: "¿Cómo se define un cantón en BSL?", a: "C", opts: [
+        {l: "A", t: "Como la parte de la vía o de cada una de las vías comprendida entre dos estaciones colaterales abiertas."},
+        {l: "B", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
+        {l: "C", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "185": {q: "¿Cómo se define un cantón en BCA?", a: "D", opts: [
+        {l: "A", t: "Como la parte de la vía comprendida entre dos señales consecutivas de bloqueo."},
+        {l: "B", t: "Como el tramo de vía comprendido entre señales que pueden presentar la indicación de parada."},
+        {l: "C", t: "Como la parte de cada una de las vías comprendida entre pantallas de LZB o ERTMS."},
+        {l: "D", t: "Como la parte de cada una de las vías comprendida entre pantallas de LZB o ERTMS N2 o señales que puedan presentar la indicación de parada."}
+      ]},
+      "186": {q: "¿Cómo se define un cantón en BTV?", a: "D", opts: [
+        {l: "A", t: "En sentido normal, será el definido para el sistema de bloqueo nominal de la línea."},
+        {l: "B", t: "A contravía, como la parte de la vía comprendida entre dos estaciones colaterales que intervengan en el bloqueo."},
+        {l: "C", t: "Como la parte de la vía comprendida entre dos estaciones colaterales abiertas."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "187": {q: "Un cantón está libre de trenes cuando:", a: "C", opts: [
+        {l: "A", t: "Esté establecida la EVB."},
+        {l: "B", t: "El último tren lo ha liberado totalmente."},
+        {l: "C", t: "Cuando no esté establecida la EVB y además el último tren lo haya liberado totalmente."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "188": {q: "¿Cómo se asegura el bloqueo en BT?", a: "A", opts: [
+        {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
+        {l: "B", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de la radiotelefonía."},
+        {l: "C", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
+        {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
+      ]},
+      "189": {q: "¿Cómo se asegura el bloqueo en BLA?", a: "B", opts: [
+        {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
+        {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
+        {l: "C", t: "Por medio de señales que protegen las estaciones y por el sentido de circulación de los trenes."},
+        {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
+      ]},
+      "190": {q: "¿Cómo se asegura el bloqueo en BA?", a: "B", opts: [
+        {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
+        {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
+        {l: "C", t: "Por medio de señales que protegen las estaciones y por el sentido de circulación de los trenes."},
+        {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
+      ]},
+      "191": {q: "¿Cómo se asegura el bloqueo en BSL?", a: "B", opts: [
+        {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
+        {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
+        {l: "C", t: "Por medio de señales que protegen las estaciones y por el sentido de circulación de los trenes."},
+        {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
+      ]},
+      "192": {q: "¿Cómo se asegura el bloqueo en BCA?", a: "D", opts: [
+        {l: "A", t: "Con la petición, concesión de la vía y el aviso de llegada de los trenes, por medio de telefonemas."},
+        {l: "B", t: "Por medio de señales que protegen los cantones y por el sentido de circulación de los trenes."},
+        {l: "C", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, por medio de las señales que protegen los cantones."},
+        {l: "D", t: "Respetando las velocidades ordenadas en cada momento al Maquinista, mediante la señalización en cabina."}
+      ]}
+    },
+    "4": {
+      "193": {q: "¿Qué tipos de conducción existen?", a: "B", opts: [
+        {l: "A", t: "Métrica, convencional y alta velocidad."},
+        {l: "B", t: "Manual, asistida y automática."},
+        {l: "C", t: "Manual, asistida y electrónica."},
+        {l: "D", t: "Alta velocidad y convencional."}
+      ]},
+      "194": {q: "¿Cuáles son las estaciones de servicio intermitente?", a: "A", opts: [
+        {l: "A", t: "Aquellas que no intervienen permanentemente en el bloqueo. Durante el periodo en que intervienen se consideran abiertas y durante el periodo en que no intervienen se consideran cerradas."},
+        {l: "B", t: "Aquellas que intervienen permanentemente en el bloqueo."},
+        {l: "C", t: "Aquellas que no intervienen permanentemente en el bloqueo. Durante el periodo en que intervienen se consideran cerradas y durante el periodo en que no intervienen se consideran abiertas."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "195": {q: "Por las instalaciones de seguridad y comunicaciones de las que están dotadas, las estaciones de servicio intermitente se clasifican en:", a: "B", opts: [
+        {l: "A", t: "Intermitentes A y C."},
+        {l: "B", t: "Intermitentes AC y NC."},
+        {l: "C", t: "Intermitentes A y N."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "196": {q: "¿Cuáles son las estaciones intermitentes AC?", a: "B", opts: [
+        {l: "A", t: "Aquellas que no intervienen permanentemente en el bloqueo."},
+        {l: "B", t: "Las que permiten la circulación de trenes mientras están cerradas."},
+        {l: "C", t: "Las que no permiten la circulación de trenes mientras están cerradas."},
+        {l: "D", t: "Las que permiten la realización de trabajos mientras están cerradas."}
+      ]},
+      "197": {q: "¿Cuáles son las estaciones intermitentes NC?", a: "C", opts: [
+        {l: "A", t: "Aquellas que no intervienen permanentemente en el bloqueo."},
+        {l: "B", t: "Las que permiten la circulación de trenes mientras están cerradas."},
+        {l: "C", t: "Las que no permiten la circulación de trenes mientras están cerradas."},
+        {l: "D", t: "Las que permiten la realización de trabajos mientras están cerradas."}
+      ]},
+      "198": {q: "Para que una estación intermitente pueda ser AC es requisito indispensable:", a: "B", opts: [
+        {l: "A", t: "Que intervenga en el bloqueo permanentemente."},
+        {l: "B", t: "Que las señales permitan el paso en ambos sentidos en vía única y en el sentido normal en vía doble, que las agujas estén encerrojadas y que exista comunicación directa entre las dos estaciones colaterales abiertas."},
+        {l: "C", t: "Que las señales no permitan el paso en ningún sentido en vía única ni en el sentido normal en vía doble, que las agujas estén encerrojadas y que no exista comunicación directa entre las dos estaciones colaterales abiertas."},
+        {l: "D", t: "Que las señales permitan el paso en ambos sentidos en vía única y en el sentido normal en vía doble, que las agujas estén encerrojadas y que exista comunicación directa entre las dos estaciones siguientes."}
+      ]},
+      "199": {q: "¿Quién da a conocer la clase de estación (AC y NC) y los periodos de cierre, en su caso?", a: "A", opts: [
+        {l: "A", t: "AI."},
+        {l: "B", t: "EF."},
+        {l: "C", t: "AESF."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "200": {q: "¿Qué elemento proporciona al Maquinista información del estado de las estaciones AC y NC?", a: "C", opts: [
+        {l: "A", t: "La presencia o ausencia del cartelón EA/EC."},
+        {l: "B", t: "La presencia o ausencia de los cartelones luminosos AC/NC."},
+        {l: "C", t: "La presencia de cartelones luminosos EA/EC y la presencia o ausencia del cartelón C."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "201": {q: "¿Qué sistemas de ejecución de trabajos en la vía se emplean?", a: "B", opts: [
+        {l: "A", t: "Sistema de interrupción de la circulación por tiempo y sistema de liberación."},
+        {l: "B", t: "Sistema de interrupción de la circulación y sistema de liberación por tiempo."},
+        {l: "C", t: "Sistema de interrupción en la circulación, sistema de liberación por tiempo y entrega de vía bloqueada."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "202": {q: "¿En qué consiste el sistema de interrupción de la circulación para la ejecución de trabajos en la vía?", a: "A", opts: [
+        {l: "A", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la vía o vías afectadas."},
+        {l: "B", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la línea afectada."},
+        {l: "C", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Responsable de Circulación."},
+        {l: "D", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Encargado de los Trabajos."}
+      ]},
+      "203": {q: "¿En qué consiste el sistema de liberación por tiempo para la ejecución de trabajos en la vía?", a: "C", opts: [
+        {l: "A", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la vía o vías afectadas."},
+        {l: "B", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos se suspende la circulación por la línea afectada."},
+        {l: "C", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Responsable de Circulación."},
+        {l: "D", t: "Sistema de ejecución de trabajos en la vía en el que para realizar los trabajos no es necesario interrumpir la circulación por el trayecto y vía afectados, aprovechando un intervalo libre de trenes, que garantiza el Encargado de los Trabajos."}
+      ]},
+      "204": {q: "En el sistema de ejecución de trabajos en la vía de interrupción de la circulación, dicha interrupción puede producirse por:", a: "B", opts: [
+        {l: "A", t: "Intervalo prescrito, intervalo eventual o anormalidad."},
+        {l: "B", t: "Intervalo horario, intervalo programado o anormalidad."},
+        {l: "C", t: "Intervalo de vía, intervalo de trabajos o anormalidad."},
+        {l: "D", t: "Intervalo horario, intervalo de liberación por tiempo o anormalidad."}
+      ]},
+      "205": {q: "¿Cómo se determina el intervalo horario del sistema de ejecución de trabajos de interrupción de la circulación?", a: "A", opts: [
+        {l: "A", t: "Por el Horario de los trenes. En vía doble y en vía doble banalizada se establecen, normalmente, dos intervalos distintos, uno para cada vía."},
+        {l: "B", t: "Por el Horario de los trenes. En vía doble y en vía doble banalizada se establece, normalmente, un intervalo para ambas vías."},
+        {l: "C", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Consigna al efecto."},
+        {l: "D", t: "De forma accidental por existir un peligro para la circulación."}
+      ]},
+      "206": {q: "¿Cómo se determina el intervalo programado del sistema de ejecución de trabajos de interrupción de la circulación?", a: "B", opts: [
+        {l: "A", t: "Por el Horario de los trenes. En vía doble y en vía doble banalizada se establecen, normalmente, dos intervalos distintos, uno para cada vía."},
+        {l: "B", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Consigna al efecto."},
+        {l: "C", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Aviso al efecto."},
+        {l: "D", t: "De forma accidental por existir un peligro para la circulación."}
+      ]},
+      "207": {q: "¿Cómo se determina la interrupción de la circulación para la ejecución de trabajos en la vía cuando se presenta una anormalidad?", a: "C", opts: [
+        {l: "A", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Consigna al efecto."},
+        {l: "B", t: "Por un programa de trabajos. Si revisten importancia, se regula, además, mediante Aviso al efecto."},
+        {l: "C", t: "De forma accidental por existir un peligro para la circulación."},
+        {l: "D", t: "De forma inmediata por existir un peligro para la circulación."}
+      ]},
+      "208": {q: "¿Cómo se protegen los trabajos realizados mediante el sistema de liberación por tiempo?", a: "C", opts: [
+        {l: "A", t: "Por el tiempo concedido por el Encargado de los Trabajos para su realización y por la protección normal del tajo en la vía afectada durante su ejecución."},
+        {l: "B", t: "Por el tiempo concedido por el Encargado de los Trabajos para su realización y por la protección de emergencia del tajo en la vía afectada durante su ejecución."},
+        {l: "C", t: "Por el tiempo concedido por el Responsable de Circulación para su realización y por la protección normal del tajo en la vía afectada durante su ejecución."},
+        {l: "D", t: "Por el tiempo concedido por el Responsable de Circulación para su realización y por la protección de emergencia del tajo en la vía afectada durante su ejecución."}
+      ]},
+      "209": {q: "¿Quién tiene que realizar la comunicación de tren dispuesto para circular?", a: "B", opts: [
+        {l: "A", t: "El AI."},
+        {l: "B", t: "La EF."},
+        {l: "C", t: "El Maquinista."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "210": {q: "¿A quién se le comunica que el tren está dispuesto para circular?", a: "A", opts: [
+        {l: "A", t: "AI."},
+        {l: "B", t: "EF."},
+        {l: "C", t: "AESF."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "211": {q: "¿Qué datos tiene que poner a disposición del AI la EF antes de la salida del tren?", a: "D", opts: [
+        {l: "A", t: "Identificación del tren e identidad de la empresa ferroviaria."},
+        {l: "B", t: "Datos sobre la composición del tren y vehículos afectados, en su caso, por cualquier tipo de restricción a la explotación."},
+        {l: "C", t: "Información sobre los cargamentos y, en especial, sobre las mercancías peligrosas."},
+        {l: "D", t: "Todas son correctas."}
+      ]},
+      "212": {q: "¿Qué entidad debe definir el procedimiento para materializar la comunicación de tren dispuesto para circular?", a: "C", opts: [
+        {l: "A", t: "EF."},
+        {l: "B", t: "AI."},
+        {l: "C", t: "AI y EF."},
+        {l: "D", t: "Ninguna respuesta es correcta."}
+      ]},
+      "213": {q: "¿Qué trenes deberán llevar un sistema de freno automático en circulación?", a: "B", opts: [
+        {l: "A", t: "Todos los trenes, salvo los autopropulsados."},
+        {l: "B", t: "Todos los trenes deberán llevar un sistema de freno automático por aire comprimido, salvo los autopropulsados cuyas características del freno automático quedarán definidas en sus Manuales de Conducción."},
+        {l: "C", t: "Todos los trenes deberán llevar un sistema de freno automático por aire comprimido, salvo los autopropulsados cuyas características del freno automático quedarán definidas en sus Manuales de Circulación."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "214": {q: "El freno automático por aire comprimido debe estar disponible:", a: "C", opts: [
+        {l: "A", t: "En los vehículos de cabeza y cola, incluidas las locomotoras."},
+        {l: "B", t: "En los vehículos de cabeza y cola, no incluidas las locomotoras."},
+        {l: "C", t: "En todos los vehículos de la composición."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "215": {q: "¿Qué vehículos deben llevar el freno automático siempre útil y en servicio?", a: "C", opts: [
+        {l: "A", t: "Los vehículos de cabeza y cola, incluidas las locomotoras."},
+        {l: "B", t: "Los vehículos de cabeza y cola, incluidas las locomotoras. En automotores y trenes Talgo remolcados, no será imprescindible que el último vehículo tenga el freno útil, aunque sí debe asegurarse su continuidad."},
+        {l: "C", t: "Los vehículos de cabeza y cola, incluidas las locomotoras. En automotores y trenes Talgo remolcados, no será imprescindible que el último vehículo tenga el freno en servicio, aunque sí debe asegurarse su continuidad."},
+        {l: "D", t: "En todos los vehículos de la composición."}
+      ]},
+      "216": {q: "¿De qué depende la capacidad de frenado necesaria para que un tren pueda circular?", a: "B", opts: [
+        {l: "A", t: "De la velocidad máxima de la línea y las líneas por las que vaya a circular."},
+        {l: "B", t: "De su velocidad máxima y de las líneas por las que vaya a circular."},
+        {l: "C", t: "De su velocidad máxima y de la carga máxima que vaya a transportar."},
+        {l: "D", t: "De su carga máxima y de las líneas por las que vaya a circular."}
+      ]},
+      "217": {q: "¿Cómo se determina la capacidad de frenado de un tren convencional?", a: "A", opts: [
+        {l: "A", t: "Por el porcentaje de frenado."},
+        {l: "B", t: "Por el cambiador de régimen y el cambiador de potencia."},
+        {l: "C", t: "Por lo establecido en su Manual de Conducción."},
+        {l: "D", t: "Por lo establecido en el Manual de Circulación."}
+      ]},
+      "218": {q: "¿Cómo se determina la capacidad de frenado de un automotor?", a: "C", opts: [
+        {l: "A", t: "Por el porcentaje de frenado."},
+        {l: "B", t: "Por el cambiador de régimen y el cambiador de potencia."},
+        {l: "C", t: "Por lo establecido en su Manual de Conducción."},
+        {l: "D", t: "Por lo establecido en el Manual de Circulación."}
+      ]},
+      "219": {q: "El freno automático apretado al máximo no perderá su eficacia hasta transcurridos:", a: "C", opts: [
+        {l: "A", t: "Como mínimo 60 minutos desde su aplicación."},
+        {l: "B", t: "Cómo mínimo 90 minutos desde su aplicación."},
+        {l: "C", t: "Como mínimo 120 minutos desde su aplicación."},
+        {l: "D", t: "Como máximo 120 minutos desde su aplicación."}
+      ]},
+      "220": {q: "¿Para qué se utiliza el freno de estacionamiento?", a: "B", opts: [
+        {l: "A", t: "Para asegurar la inmovilidad del tren en caso de pérdida de eficacia del freno dinámico."},
+        {l: "B", t: "Para asegurar la inmovilidad del tren en caso de pérdida de eficacia del freno automático."},
+        {l: "C", t: "Para asegurar la movilidad del tren en caso de pérdida de eficacia del freno automático."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "221": {q: "Un tren quedará inmovilizado mediante los frenos de estacionamiento cuando:", a: "D", opts: [
+        {l: "A", t: "Se separe la locomotora de la composición."},
+        {l: "B", t: "No sea posible asegurar su inmovilidad mediante el freno automático."},
+        {l: "C", t: "Quede un corte de material fraccionado en plena vía."},
+        {l: "D", t: "Todas son correctas."}
+      ]},
+      "222": {q: "Un tren quedará inmovilizado mediante los frenos de estacionamiento cuando:", a: "A", opts: [
+        {l: "A", t: "Se separe la locomotora de la composición."},
+        {l: "B", t: "No sea posible asegurar su inmovilidad mediante el freno de dinámico."},
+        {l: "C", t: "Quede un corte de material fraccionado en una estación."},
+        {l: "D", t: "Todas son correctas."}
+      ]},
+      "223": {q: "¿Cuándo un tren no quedará inmovilizado mediante los frenos de estacionamiento?", a: "C", opts: [
+        {l: "A", t: "Se separe la locomotora de la composición."},
+        {l: "B", t: "No sea posible asegurar su inmovilidad mediante el freno automático."},
+        {l: "C", t: "Quede un corte de material fraccionado en una estación."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "224": {q: "Los AI definirán la longitud máxima de los trenes, la velocidad máxima de circulación y los porcentajes mínimos de frenado para:", a: "C", opts: [
+        {l: "A", t: "Cada tren."},
+        {l: "B", t: "Cada línea."},
+        {l: "C", t: "Cada línea o tramo de línea."},
+        {l: "D", t: "Cada EF."}
+      ]},
+      "225": {q: "¿Qué parámetros deberá definir el AI para cada línea o tramo de línea en función de sus características?", a: "A", opts: [
+        {l: "A", t: "Longitud máxima de los trenes, velocidad máxima de circulación y porcentajes mínimos de frenado para cada tipo de régimen."},
+        {l: "B", t: "Longitud mínima de los trenes, velocidad mínima de circulación y porcentajes máximos de frenado para cada tipo de régimen."},
+        {l: "C", t: "Longitud máxima de los trenes, velocidad mínima de circulación y porcentajes mínimos de frenado para cada tipo de tren."},
+        {l: "D", t: "Longitud máxima de los trenes, velocidad máxima de circulación y porcentajes mínimos de frenado para cada tipo de tren."}
+      ]},
+      "226": {q: "Los trenes de mercancías podrán estar formados por:", a: "A", opts: [
+        {l: "A", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
+        {l: "B", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Circulación."},
+        {l: "C", t: "Coches, furgones, vagones para el transporte de automóviles de los viajeros y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
+        {l: "D", t: "Coches y furgones."}
+      ]},
+      "227": {q: "Los trenes convencionales de viajeros podrán estar formados por:", a: "C", opts: [
+        {l: "A", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
+        {l: "B", t: "Vagones, coches, furgones y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Circulación."},
+        {l: "C", t: "Coches, furgones, vagones para el transporte de automóviles de los viajeros y locomotoras remolcadas en las condiciones indicadas en sus Manuales de Conducción."},
+        {l: "D", t: "Coches y furgones."}
+      ]},
+      "228": {q: "¿Cuál será la masa máxima remolcada y longitud máxima total de un tren de mercancías de composición general?", a: "B", opts: [
+        {l: "A", t: "1.500 t y 400 m."},
+        {l: "B", t: "1.200 t y 750 m."},
+        {l: "C", t: "Sin máximo de carga máxima y hasta 550 m."},
+        {l: "D", t: "Sin máximo de carga máxima y hasta 750 m."}
+      ]},
+      "229": {q: "¿Cuál será la masa máxima remolcada y longitud máxima total de un tren de mercancías de composición homogénea?", a: "D", opts: [
+        {l: "A", t: "1.500 t y 400 m."},
+        {l: "B", t: "1.200 t y 750 m."},
+        {l: "C", t: "Sin máximo de carga máxima y hasta 550 m."},
+        {l: "D", t: "Sin máximo de carga máxima y hasta 750 m."}
+      ]},
+      "230": {q: "¿Cuál será la masa máxima remolcada y longitud máxima total de un tren de mercancías de composición de contenedores?", a: "C", opts: [
+        {l: "A", t: "1.500 t y 400 m."},
+        {l: "B", t: "1.200 t y 750 m."},
+        {l: "C", t: "Sin máximo de carga máxima y hasta 550 m."},
+        {l: "D", t: "Sin máximo de carga máxima y hasta 750 m."}
+      ]},
+      "231": {q: "¿Cuál será la velocidad máxima de un tren de mercancías de composición general en régimen P que no circule con freno electroneumático?", a: "B", opts: [
+        {l: "A", t: "100 km/h."},
+        {l: "B", t: "120 km/h."},
+        {l: "C", t: "La velocidad máxima de la línea."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "232": {q: "¿Cuál será la velocidad máxima de un tren de mercancías de composición general en régimen G que no circule con freno electroneumático?", a: "A", opts: [
+        {l: "A", t: "100 km/h."},
+        {l: "B", t: "120 km/h."},
+        {l: "C", t: "La velocidad máxima de la línea."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "233": {q: "¿Qué se consideran vagones homogéneos?", a: "A", opts: [
+        {l: "A", t: "Son aquellos cuyas diferencias en la longitud entre topes, en la distancia entre pivotes y en sus pesos lineales sean inferiores al 10%."},
+        {l: "B", t: "Son aquellos cuyas diferencias en la longitud entre topes, en la distancia entre pivotes y en sus pesos lineales sean inferiores al 20%."},
+        {l: "C", t: "Son aquellos cuyas diferencias en la longitud entre topes y en la distancia entre pivotes sean inferiores al 10%."},
+        {l: "D", t: "Los que pertenecen al mismo fabricante."}
+      ]},
+      "234": {q: "¿Un tren convencional de viajeros puede circular en régimen G?", a: "D", opts: [
+        {l: "A", t: "Sí, con una composición de hasta 22 vehículos y a una velocidad máxima de 120 km/h en la red convencional."},
+        {l: "B", t: "Sí, con una composición de hasta 20 vehículos y a una velocidad máxima de 120 km/h en la red convencional."},
+        {l: "C", t: "Sí, con una composición de hasta 20 vehículos y a una velocidad máxima de 100 km/h en la red convencional."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "235": {q: "¿De cuántos vehículos podrá ser la composición de un tren convencional de viajeros?", a: "C", opts: [
+        {l: "A", t: "Hasta 22 coches."},
+        {l: "B", t: "Hasta 20 coches."},
+        {l: "C", t: "Hasta 20 coches en red de ancho ibérico y hasta 22 en la red de ancho métrico."},
+        {l: "D", t: "Hasta 22 coches en red de ancho ibérico y hasta 20 en la red de ancho métrico."}
+      ]},
+      "236": {q: "¿Cuál será la velocidad máxima de un tren convencional de viajeros en régimen P?", a: "D", opts: [
+        {l: "A", t: "100 km/h."},
+        {l: "B", t: "120 km/h."},
+        {l: "C", t: "70 km/h en red de ancho ibérico y 220 km/h en la red de ancho métrico."},
+        {l: "D", t: "70 km/h en la red de ancho métrico y 220 km/h en la red de ancho ibérico."}
+      ]},
+      "237": {q: "¿Cuál será la velocidad máxima de un tren convencional de viajeros en régimen R?", a: "D", opts: [
+        {l: "A", t: "100 km/h."},
+        {l: "B", t: "120 km/h."},
+        {l: "C", t: "70 km/h en red de ancho ibérico y 220 km/h en la red de ancho métrico."},
+        {l: "D", t: "70 km/h en la red de ancho métrico y 220 km/h en la red de ancho ibérico."}
+      ]},
+      "238": {q: "La EF o el AI deberán llevar a cabo las pruebas del funcionamiento del freno:", a: "C", opts: [
+        {l: "A", t: "Antes de expedir un tren desde la estación o dependencia de origen."},
+        {l: "B", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se realice una parada prescrita."},
+        {l: "C", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se modifique su composición."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "239": {q: "¿Cómo se realizarán las pruebas de frenado?", a: "A", opts: [
+        {l: "A", t: "Para los trenes autopropulsados las pruebas se realizarán conforme a lo establecido en sus Manuales de Conducción y para los trenes convencionales se realizarán conforme a lo indicado en el RCF."},
+        {l: "B", t: "Para los trenes autopropulsados las pruebas se realizarán conforme a lo establecido en sus Manuales de Circulación y para los trenes convencionales se realizarán conforme a lo indicado en el RCF."},
+        {l: "C", t: "Para los trenes autopropulsados las pruebas se realizarán conforme a lo indicado en el RCF y para los trenes convencionales se realizarán conforme a lo establecido en sus Manuales de Conducción."},
+        {l: "D", t: "Las pruebas se realizarán conforme a lo establecido en los Manuales de Conducción de los vehículos."}
+      ]},
+      "240": {q: "¿Qué tipos de pruebas de freno se podrán realizar a los trenes convencionales?", a: "B", opts: [
+        {l: "A", t: "Completa y parcial."},
+        {l: "B", t: "Completa, parcial, de continuidad y de verificación de acoplamiento."},
+        {l: "C", t: "Completa, parcial, de continuidad, de verificación de acoplamiento y de supresión."},
+        {l: "D", t: "Automática, complementaria y de auxilio."}
+      ]},
+      "241": {q: "¿Cuándo se realizará la prueba completa de frenado?", a: "B", opts: [
+        {l: "A", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se modifique su composición."},
+        {l: "B", t: "Antes de la salida del tren de la estación o dependencia de origen de la composición."},
+        {l: "C", t: "Después de la salida del tren de la estación o dependencia de origen de la composición."},
+        {l: "D", t: "Después del cambio de posición de las palancas de los cambiadores de potencia o el aislamiento del freno de algún vehículo remolcado."}
+      ]},
+      "242": {q: "¿Qué asegura con la prueba completa de frenado?", a: "B", opts: [
+        {l: "A", t: "La estanqueidad y continuidad de la TDP en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
+        {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
+        {l: "C", t: "La continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
+        {l: "D", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar del freno en servicio del último vehículo de la composición."}
+      ]},
+      "243": {q: "¿Cuándo se realizará la prueba parcial de frenado?", a: "C", opts: [
+        {l: "A", t: "Antes de expedir un tren desde la estación o dependencia de origen o desde una intermedia donde se modifique su composición."},
+        {l: "B", t: "Antes de la salida del tren de la estación o dependencia de origen de la composición."},
+        {l: "C", t: "Antes de la salida del tren de la estación o dependencia en la que se agreguen vehículos a la composición."},
+        {l: "D", t: "Antes de la salida del tren de la estación o dependencia en la que se segreguen vehículos a la composición."}
+      ]},
+      "244": {q: "¿Qué asegura la prueba parcial de frenado?", a: "B", opts: [
+        {l: "A", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de todos los frenos en servicio de los vehículos remolcados de la composición."},
+        {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de cada vehículo que se agregue a la composición."},
+        {l: "C", t: "La estanqueidad y continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de cada vehículo que se segregue de la composición."},
+        {l: "D", t: "La continuidad de la TFA en toda la composición y el buen funcionamiento al apretar y aflojar de cada vehículo que se agregue a la composición."}
+      ]},
+      "245": {q: "¿Cuándo se realizará la prueba de continuidad de frenado?", a: "D", opts: [
+        {l: "A", t: "Cuando se agregue una locomotora de tracción por cola."},
+        {l: "B", t: "Cuando se segreguen uno o varios vehículos de la composición y tras interrumpirse la continuidad de la TFA, aunque no se haya segregado ningún vehículo."},
+        {l: "C", t: "Cuando se unan dos ramas, sin modificar sus composiciones."},
+        {l: "D", t: "Todas son correctas."}
+      ]},
+      "246": {q: "¿Qué asegura la prueba de continuidad de frenado?", a: "C", opts: [
+        {l: "A", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje de todos los vehículos de la composición."},
+        {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje de cada vehículo que se agregue a la composición."},
+        {l: "C", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje del último vehículo remolcado."},
+        {l: "D", t: "La continuidad de la TFA en toda la composición y el apriete y afloje del primer vehículo remolcado."}
+      ]},
+      "247": {q: "¿Cuándo se realizará la prueba de verificación de acoplamiento de frenado?", a: "D", opts: [
+        {l: "A", t: "Cuando se cambie la locomotora de cabeza por una nueva o por una procedente de cola."},
+        {l: "B", t: "Cuando se agregue o segregue una locomotora en cabeza, en caso de tracción múltiple o mando múltiple."},
+        {l: "C", t: "Cuando se segreguen uno o varios de los vehículos situados tras la o las locomotoras de cabeza."},
+        {l: "D", t: "Todas son correctas."}
+      ]},
+      "248": {q: "¿Qué asegura la prueba de verificación de acoplamiento de frenado?", a: "D", opts: [
+        {l: "A", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje de cada vehículo que se agregue a la composición."},
+        {l: "B", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje del último vehículo remolcado."},
+        {l: "C", t: "La estanqueidad y continuidad de la TFA en toda la composición y el apriete y afloje del primer vehículo remolcado."},
+        {l: "D", t: "La continuidad de la TFA en toda la composición y el apriete y afloje del primer vehículo remolcado."}
+      ]},
+      "249": {q: "¿Cuándo no hace falta realizar las pruebas de frenado?", a: "D", opts: [
+        {l: "A", t: "Segregación de uno o varios vehículos de cola del tren."},
+        {l: "B", t: "Cambio de posición de las palancas de los cambiadores de potencia en todos o parte de los vehículos remolcados y aislamiento del freno de algún vehículo remolcado mediante accionamiento de la llave correspondiente."},
+        {l: "C", t: "Reposición de un aparato de alarma."},
+        {l: "D", t: "Todas son correctas."}
+      ]},
+      "250": {q: "¿Es necesario realizar prueba de freno a un automotor en caso de inversión de marcha o de cambio de coche motor?", a: "C", opts: [
+        {l: "A", t: "Sí, después de cada servicio."},
+        {l: "B", t: "Sí, pero solo en el caso de que se haya variado su composición."},
+        {l: "C", t: "No."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "251": {q: "¿Qué documento rige el transporte de mercancías peligrosas por ferrocarril?", a: "D", opts: [
+        {l: "A", t: "Consigna C N.º 44/16."},
+        {l: "B", t: "NAR N.º 4/17."},
+        {l: "C", t: "RCF."},
+        {l: "D", t: "RID."}
+      ]},
+      "252": {q: "¿Quién incluirá en su SGS los procedimientos necesarios para que se cumpla la normativa del RID?", a: "D", opts: [
+        {l: "A", t: "AI."},
+        {l: "B", t: "EF."},
+        {l: "C", t: "AESF, AI y EF."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "253": {q: "¿Cuándo se considera que un transporte es excepcional?", a: "C", opts: [
+        {l: "A", t: "Cuando, debido a sus dimensiones, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."},
+        {l: "B", t: "Cuando, debido a su peso, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."},
+        {l: "C", t: "Cuando, debido a sus dimensiones, peso o acondicionamiento, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."},
+        {l: "D", t: "Cuando, debido a que transporta mercancías peligrosas, debe realizarse con unas condiciones de transporte y unas prescripciones de circulación especiales."}
+      ]},
+      "254": {q: "¿A quién comunicará la EF los condicionantes que deban ser tenidos en cuenta para realizar un transporte excepcional?", a: "B", opts: [
+        {l: "A", t: "AESF."},
+        {l: "B", t: "AI."},
+        {l: "C", t: "A nadie, está contemplado en la adjudicación de capacidad."},
+        {l: "D", t: "Ninguna es correcta."}
+      ]},
+      "255": {q: "¿Quién autoriza la circulación de un transporte excepcional?", a: "B", opts: [
+        {l: "A", t: "AESF."},
+        {l: "B", t: "AI."},
+        {l: "C", t: "EF."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "256": {q: "¿Quién deberá garantizar las condiciones de la composición del tren y de su cargamento en caso de transporte excepcional?", a: "B", opts: [
+        {l: "A", t: "AI."},
+        {l: "B", t: "EF."},
+        {l: "C", t: "AESF ."},
+        {l: "D", t: "Las respuestas a) y b) son correctas."}
+      ]},
+      "257": {q: "¿Qué documento regula los transportes excepcionales?", a: "B", opts: [
+        {l: "A", t: "Consigna C N.º 44/16."},
+        {l: "B", t: "NAR N.º 4/17."},
+        {l: "C", t: "RCF ."},
+        {l: "D", t: "RID."}
+      ]}
+    }
 };
 
-let respuestasVisibles = false;
   let currentPart = 1;
+  let respuestasVisibles = false;
   const LS_PREFIX = 'rcf-libro1-part-';
 
   // Load state from localStorage
   function loadState(part) {
     try {
       return JSON.parse(localStorage.getItem(LS_PREFIX + part)) || {};
-    } catch(e) {
+    } catch {
       return {};
     }
   }
@@ -1672,6 +1674,8 @@ let respuestasVisibles = false;
     container.innerHTML = '';
     
     const partData = testData[currentPart];
+    if (!partData) return;
+    
     const state = loadState(currentPart);
     
     Object.keys(partData).forEach(qid => {
@@ -1701,10 +1705,18 @@ let respuestasVisibles = false;
       
       container.appendChild(card);
     });
-    
+
+    bindRadios();
     updateProgress();
   }
+  
 
+  function bindRadios() {
+    document.querySelectorAll('input[type=radio]').forEach(radio => {
+      radio.addEventListener('change', updateProgress);
+    });
+  }
+  
   // Update progress bar
   function updateProgress() {
     const partData = testData[currentPart];
@@ -1725,6 +1737,9 @@ let respuestasVisibles = false;
     saveState(currentPart, state);
   }
 
+  window.calificar = function () {
+    const partData = testData[currentPart];
+    let ok = 0;
   // Grade the test
   window.calificar = function() {
     const partData = testData[currentPart];

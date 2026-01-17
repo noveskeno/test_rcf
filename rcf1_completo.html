@@ -10,8 +10,8 @@
 body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
 .header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
 .header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
-.back-btn{position:absolute;left:10px;top:14px;width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
-.back-btn:active{background:rgba(255,255,255,.15);transform:scale(.95)}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
 .badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;justify-content:center}
 .tab{border:1px solid rgba(255,255,255,.15);border-radius:50%;width:32px;height:32px;padding:0;background:rgba(255,255,255,.08);cursor:pointer;color:var(--text);transition:all .2s;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}

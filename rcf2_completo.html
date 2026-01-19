@@ -1538,6 +1538,10 @@ button.secondary:active{background:rgba(255,255,255,.05)}
     ]},
   }
  };
+
+    const totalPreguntasGlobal = Object.values(testData).reduce((acc, part) => {
+  return acc + Object.keys(part).length;
+}, 0);
   
   let currentPart = 1;
   let respuestasVisibles = false;
@@ -1592,6 +1596,8 @@ button.secondary:active{background:rgba(255,255,255,.05)}
           </label>
         `;
       });
+
+      <span class="q-number">Pregunta ${qid} de ${totalPreguntasGlobal}</span>
 
       card.innerHTML = `
         <span class="q-number">Pregunta ${qid}</span>

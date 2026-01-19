@@ -1698,8 +1698,6 @@ const totalPreguntasGlobal = Object.values(testData).reduce((acc, part) => {
     
     const partData = testData[currentPart];
     if (!partData) return;
-
-    totalPreguntas = Object.keys(partData).length;
     
     const state = loadState(currentPart);
     

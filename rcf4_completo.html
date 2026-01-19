@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RCF 4 - COMPLETO</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
+.header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
+.header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;justify-content:center}
+.tab{border:1px solid rgba(255,255,255,.15);border-radius:50%;width:32px;height:32px;padding:0;background:rgba(255,255,255,.08);cursor:pointer;color:var(--text);transition:all .2s;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#001018}
+.tab:active{background:rgba(91,192,190,.2);border-color:rgba(91,192,190,.3)}
+.container{max-width:1000px;margin:0 auto;padding:10px 8px 100px}
+.progress-bar{background:rgba(255,255,255,.1);height:3px;border-radius:999px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3a9d9a);width:0%;transition:width .3s ease}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.q-title{font-weight:600;margin-bottom:10px;line-height:1.4;font-size:14px}
+.q-number{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:6px;display:block}
+.options{display:grid;grid-template-columns:1fr;gap:6px}
+.option{background:#121a34;border:2px solid rgba(255,255,255,.08);padding:8px;border-radius:8px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:all .2s;font-size:13px;line-height:1.3}
+.option:active{background:#1a2341;border-color:rgba(91,192,190,.3)}
+.option input{margin-top:2px;cursor:pointer;flex-shrink:0}
+.option div{flex:1}
+.answer-key{display:none;margin-top:8px;padding:8px;background:rgba(91,192,190,.1);border-radius:6px;font-size:12px}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.feedback{margin-top:6px;font-size:12px;font-weight:600;padding:6px;border-radius:4px}
+.correct{border-color:rgba(33,193,122,.6)!important;background:rgba(33,193,122,.05)!important}
+.incorrect{border-color:rgba(255,93,115,.75)!important;background:rgba(255,93,115,.05)!important}
+.actions{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.99));padding:10px 8px;padding-bottom:calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);z-index:99}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;touch-action:manipulation}
+button:active{background:var(--accent);opacity:.9;transform:scale(.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+button.secondary:active{background:rgba(255,255,255,.05)}
+.score{font-weight:700;font-size:1rem}
+.score-details{font-size:11px;color:var(--text);opacity:.8;margin-top:2px}
+.footer{opacity:.8;font-size:11px;text-align:center;padding:15px;color:rgba(255,255,255,.5)}
+@media (min-width: 720px){
+  .options{grid-template-columns:1fr 1fr}
+  body{font-size:15px}
+  .card{padding:20px;margin:16px 0;border-radius:16px}
+  .q-title{font-size:15px;margin-bottom:12px}
+  .option{padding:12px;gap:10px;font-size:14px}
+  .header{padding:20px 16px}
+  .header h1{font-size:1.5rem;margin-bottom:8px}
+  .container{padding:20px 16px 120px}
+  button{padding:12px 18px;font-size:14px}
+  .tab{width:40px;height:40px;font-size:15px}
+}
+@media (max-width: 640px){
+  .actions .bar{flex-direction:column;gap:6px}
+  .score{text-align:center;width:100%;font-size:0.95rem}
+  .actions{padding:8px 6px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  button{width:100%;padding:11px 12px}
+}
+.scroll-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;touch-action:manipulation}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:active{transform:scale(.95)}
+@media (max-width:640px){
+  .scroll-top{width:36px;height:36px;bottom:16px;right:16px;font-size:18px}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>RCF 4 - COMPLETO</h1>
+    <div class="badge">136 preguntas</div>
+    <div class="tabs">
+      <button class="tab" id="tab_1" data-part="1">1</button>
+      <button class="tab" id="tab_2" data-part="2">2</button>
+      <button class="tab" id="tab_3" data-part="3">3</button>
+      <button class="tab" id="tab_4" data-part="4">4</button>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+  
+  <div class="container" id="questionsContainer">
+    <!-- Questions will be generated here -->
+  </div>
+
+  <div class="actions">
+    <div class="bar">
+      <div>
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div class="score-details" id="scoreDetails"></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="calificar()">📊 Calificar</button>
+        <button class="secondary" onclick="reiniciar()">🔄 Reiniciar</button>
+        <button class="secondary" onclick="toggleRespuestas(this)">👁️ Ver respuestas</button>
+      </div>
+    </div>
+  </div>
+<button id="scrollTopBtn" class="scroll-top">↑</button>
+<script>
+(function () {
+  // Test data organized by parts (1-4)
+  const testData = {
+  "1": {
+    "q": "¿A qué denominaríamos bloqueo entre dos estaciones colaterales abiertas?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "A establecer la relación de dependencia entre ambas, que permita expedir circulaciones de una a otra en condiciones seguras."},
+      {"l": "B", "t": "A establecer la relación de dependencia entre ambas, por medio de telefonemas, para que los Responsables de Circulación se informen de la circulación de los trenes en tiempo real, para que uno pueda expedir o permitir que se expida un tren, mientras el otro está detenido en la estación colateral."},
+      {"l": "C", "t": "A establecer un cantón para que solo puede circular un tren y este, no pueda chocar o ser alcanzado por otro tren."},
+      {"l": "D", "t": "A establecer la relación de dependencia entre ambas a través de acuerdos bilaterales, que permita expedir circulaciones de una a otra en condiciones seguras."}
+    ]},
+  "2": {
+    "q": "En cuanto a bloqueos, ¿cómo será la relación de dependencia en vías con circulación en los dos sentidos?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La relación entre estaciones será parcial."},
+      {"l": "B", "t": "La relación entre estaciones será total."},
+      {"l": "C", "t": "Depende del bloqueo."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "3": {
+    "q": "En cuanto a bloqueos, ¿cómo será la relación de dependencia en vías con un único sentido de circulación y sin señales intermedias?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La relación entre estaciones será parcial."},
+      {"l": "B", "t": "La relación entre estaciones será total."},
+      {"l": "C", "t": "Depende del bloqueo."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "4": {
+    "q": "¿Cuáles son los principios básicos de los bloqueos?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Dos trenes que circulen por la misma vía y en sentido contrario, irán separados una distancia que garantice que no se va a producir un alcance."},
+      {"l": "B", "t": "Cuando un tren esté circulando por una vía, no se expedirá otro en el mismo sentido por la misma vía desde la estación colateral."},
+      {"l": "C", "t": "Las instalaciones garantizarán la seguridad necesaria para compatibilizar las maniobras que se realicen por la banda de una estación, con la llegada de un tren por dicha banda."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "5": {
+    "q": "¿Qué instalaciones sustituyen el sistema de acuerdos bilaterales entre dos estaciones colaterales abiertas por la centralización en un puesto único del gobierno y control del tráfico?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "PLO."},
+      {"l": "B", "t": "PRO."},
+      {"l": "C", "t": "PM."},
+      {"l": "D", "t": "CTC."}
+    ]},
+  "6": {
+    "q": "El CTC:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Podrá ejecutar las mismas órdenes y recibirá las mismas comprobaciones que los Cuadros de Mando Locales de los enclavamientos."},
+      {"l": "B", "t": "No podrá ejecutar las mismas órdenes ni recibirá las mismas comprobaciones que los Cuadros de Mando Locales de los enclavamientos."},
+      {"l": "C", "t": "No podrá ejecutar las mismas órdenes, pero recibirá las mismas comprobaciones que los Cuadros de Mando Locales de los enclavamientos."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "7": {
+    "q": "Sin autorización del Responsable de Circulación del CTC, las estaciones:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Podrán tomar el Mando Local de su enclavamiento y decisiones que afecten a la circulación."},
+      {"l": "B", "t": "Podrán tomar el Mando Local de su enclavamiento, pero no decisiones que afecten a la circulación."},
+      {"l": "C", "t": "No podrán tomar el Mando Local de su enclavamiento ni decisiones que afecten a la circulación."},
+      {"l": "D", "t": "No podrán tomar el Mando Local de su enclavamiento ni decisiones que afecten a la circulación, salvo casos de emergencia."}
+    ]},
+  "8": {
+    "q": "Entre otros elementos necesarios, ¿de qué dispondrá un CTC?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Telemando de los enclavamientos eléctricos o electrónicos de las estaciones y de las agujas situadas en plena vía."},
+      {"l": "B", "t": "Comunicación con los gabinetes de circulación de las dependencias a gobernar y con los vehículos motores."},
+      {"l": "C", "t": "Las respuestas a) y b) son correctas."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "9": {
+    "q": "¿Quién podrá gobernar los enclavamientos de las estaciones?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Por el CTC mediante el Mando Local (ML)."},
+      {"l": "B", "t": "Desde los cuadros de mando de las propias estaciones mediante el Mando Centralizado (MC)."},
+      {"l": "C", "t": "Las respuestas a) y b) son correctas."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "10": {
+    "q": "¿El CTC podrá abrir una señal de salida de una estación en MC hacia una estación en ML, sin necesidad de autorización de esta última?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Sí, y también al contrario."},
+      {"l": "B", "t": "No, el CTC tiene que pedir autorización al Responsable de Circulación de la estación colateral por estar en ML."},
+      {"l": "C", "t": "Sí, pero no al contrario."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "11": {
+    "q": "¿Una estación en ML podrá abrir una señal de salida de una estación en MC?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Sí, y también al contrario."},
+      {"l": "B", "t": "Sí, previa autorización del CTC."},
+      {"l": "C", "t": "No."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "12": {
+    "q": "¿Qué son las estaciones telemandadas?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Son estaciones carentes de Responsable de Circulación presente en la misma que no intervienen permanentemente en el bloqueo."},
+      {"l": "B", "t": "Son estaciones carentes de Responsable de Circulación presente en la misma, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda o desde el CTC, mediante el ML."},
+      {"l": "C", "t": "Son estaciones carentes de Responsable de Circulación presente en la misma, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda o desde el CTC, mediante el MC."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "13": {
+    "q": "Las estaciones telemandadas:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Son estaciones carentes de Responsable de Circulación presente en la misma que no intervienen permanentemente en el bloqueo."},
+      {"l": "B", "t": "Son estaciones carentes de Responsable de Circulación presente en la misma que intervienen permanentemente en el bloqueo, pero en ellas no pueden efectuarse maniobras."},
+      {"l": "C", "t": "Son estaciones carentes de Responsable de Circulación presente en la misma que intervienen permanentemente en el bloqueo y, en caso necesario, podrán ser gobernadas en ML tras incorporarse a ellas un Responsable de Circulación."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "14": {
+    "q": "¿A quién corresponde llevar a cabo la dirección y la gestión del tráfico ferroviario en aquellas dependencias en las que se desarrollen procesos de circulación de trenes o maniobras?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "AI."},
+      {"l": "B", "t": "AI y EF."},
+      {"l": "C", "t": "EF."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "15": {
+    "q": "¿Quién llevará la dirección de la circulación y el accionamiento de las agujas, señales y demás aparatos de una estación?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación de la estación, en el caso de estaciones sin CTC, o con CTC cuando funcionen en ML."},
+      {"l": "B", "t": "El Responsable de Circulación del CTC, cuando la estación funcione en MC."},
+      {"l": "C", "t": "En una estación telemandada en MC, el Responsable de Circulación de la estación que la gobierna."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "16": {
+    "q": "¿Quién llevará la dirección de la circulación y el accionamiento de las agujas, señales y demás aparatos de los cantones situados entre dos estaciones colaterales abiertas?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación del CTC, cuando las estaciones colaterales estén en MC, o bien, una en MC y la otra en ML."},
+      {"l": "B", "t": "Los Responsables de Circulación de las estaciones colaterales, cuando ambas estén en ML."},
+      {"l": "C", "t": "Cuando las estaciones colaterales pertenezcan a CTCs distintos y estén ambas en MC, cada una estará a cargo del Responsables de Circulación del CTC correspondiente."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "17": {
+    "q": "¿El Responsable de Circulación de una estación en ML podrá delegar sus funciones en el Responsable de Circulación del CTC, o en el de otra estación que disponga de telemando sobre la primera?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "No, una vez se establece el ML de una estación no se puede devolver a MC."},
+      {"l": "B", "t": "Sí, pero solo en el caso de CTC."},
+      {"l": "C", "t": "Sí, si las circunstancias lo aconsejan."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "18": {
+    "q": "¿Quién colaborará con el Responsable de Circulación del CTC o de la estación que telemande con objeto de asegurar las maniobras en vías de circulación, la entrada o salida de vías o líneas no dependientes del CTC, comunicar la llegada o apartado de trenes y transmitir sus órdenes?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación de la estación."},
+      {"l": "B", "t": "El Auxiliar de Circulación."},
+      {"l": "C", "t": "El Maquinista."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "19": {
+    "q": "¿El Responsable de Circulación del CTC podrá ordenar a los Responsables de Circulación de las estaciones la toma del ML?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Sí, sin tener que dar ninguna explicación."},
+      {"l": "B", "t": "No, una estación telemandada no puede gobernarse mediante ML."},
+      {"l": "C", "t": "Sí, en ciertos casos, después de informarles de la situación de los trenes."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "20": {
+    "q": "Cuando cesen las causas que motivaron la toma del ML de una estación, ¿el Responsable de Circulación del CTC se hará cargo nuevamente del MC?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Sí, de manera inmediata."},
+      {"l": "B", "t": "No, una vez entregado el ML no se puede volver a gobernar mediante el MC."},
+      {"l": "C", "t": "Sí, previa información de la situación de los trenes."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "21": {
+    "q": "En los trayectos entre estaciones en ML, ¿se dará información a los Maquinistas de esta circunstancia?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Sí, puesto que esta información no aparece en su Libro de Itinerarios."},
+      {"l": "B", "t": "Sí, puesto que condiciona la circulación de los trenes."},
+      {"l": "C", "t": "No, puesto que se mantiene la circulación al amparo del bloqueo de la línea con CTC."},
+      {"l": "D", "t": "No, puesto que esta información aparece en su Libro de Itinerarios."}
+    ]},
+  "22": {
+    "q": "El Responsable de Circulación de una estación en entorno de CTC: ¿se abstendrá de tomar el ML sin orden expresa del Responsable de Circulación del CTC?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Podrá tomar el ML sin orden expresa del Responsable de Circulación del CTC."},
+      {"l": "B", "t": "Se abstendrá de tomar el ML sin orden expresa del Responsable de Circulación del CTC, incluso por emergencia."},
+      {"l": "C", "t": "Se abstendrá de tomar el ML sin orden expresa del Responsable de Circulación del CTC, salvo por emergencia."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "23": {
+    "q": "En los bloqueos automáticos, ¿cómo será la relación de dependencia en vías con circulación en los dos sentidos?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Total."},
+      {"l": "B", "t": "Parcial."},
+      {"l": "C", "t": "Ninguna es correcta."},
+      {"l": "D", "t": "Depende del bloqueo."}
+    ]},
+  "24": {
+    "q": "En los bloqueos automáticos, ¿cómo será la relación de dependencia en vías con un único sentido de circulación y sin señales intermedias?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Total."},
+      {"l": "B", "t": "Parcial."},
+      {"l": "C", "t": "Ninguna es correcta."},
+      {"l": "D", "t": "Depende del bloqueo."}
+    ]},
+  "25": {
+    "q": "En los bloqueos automáticos, ¿cómo queda garantizada la relación de dependencia entre estaciones?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Mediante petición y concesión de vía mediante telefonema."},
+      {"l": "B", "t": "Mediante petición y toma de vía mediante cuadro eléctrico-manual."},
+      {"l": "C", "t": "Por la propia naturaleza de la instalación."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "26": {
+    "q": "En bloqueo automático, para expedir o dar paso a un tren no es preciso que:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El cantón de bloqueo esté libre de trenes."},
+      {"l": "B", "t": "En BAU y BAB, se haya bloqueado el cantón de bloqueo, con los dispositivos disponibles al efecto."},
+      {"l": "C", "t": "Se haya establecido el itinerario de salida."},
+      {"l": "D", "t": "Se dé la orden de marcha con la orden de la señal de salida y la señal de marche el tren."}
+    ]},
+  "27": {
+    "q": "¿Cómo se dará la orden de marcha a un tren que detiene su marcha en una estación debido a un problema de frenado, siendo necesario aislar el freno de un vehículo remolcado, en un trayecto con bloqueo automático sin CTC?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida."},
+      {"l": "B", "t": "Con la orden de la señal de salida y la señal de paso."},
+      {"l": "C", "t": "Con la orden de la señal de salida y la señal de marche el tren."},
+      {"l": "D", "t": "Con la orden de la señal de salida y la señal de operaciones terminadas por el agente que corresponda."}
+    ]},
+  "28": {
+    "q": "Un tren circula por un trayecto de BAD sin CTC, comprendido por las estaciones A, B, C y D. Para la estación C, el tren es directo, y en una bifurcación de esa estación toma una línea de BAU con CTC. ¿Cómo se le dará orden de marcha en la estación C?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida y la señal de paso."},
+      {"l": "B", "t": "Con la orden de la señal de salida."},
+      {"l": "C", "t": "Con la señal de marche el tren y la orden de la señal de salida."},
+      {"l": "D", "t": "Con la señal de paso."}
+    ]},
+  "29": {
+    "q": "La orden de marcha a un tren directo en una estación de transición de BAU sin CTC a BAU con CTC se dará:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida y la señal de paso."},
+      {"l": "B", "t": "Con la orden de la señal de salida."},
+      {"l": "C", "t": "Con la señal de marche el tren y la orden de la señal de salida."},
+      {"l": "D", "t": "Con la señal de paso."}
+    ]},
+  "30": {
+    "q": "Cuando deban expedir un tren parado en BAU sin CT hacia un BT, la orden de marcha se dará:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida."},
+      {"l": "B", "t": "Con la orden de la señal de salida y la señal de marche tren."},
+      {"l": "C", "t": "Con la orden de la señal de salida y telefonema."},
+      {"l": "D", "t": "No se le dará la orden de marcha."}
+    ]},
+  "31": {
+    "q": "Cuando un tren directo pase de un BAU sin CTC hacia un BT, la orden de marcha se dará:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida."},
+      {"l": "B", "t": "Con la orden de la señal de salida y la señal de marche tren."},
+      {"l": "C", "t": "Con la orden de la señal de salida y señal de paso."},
+      {"l": "D", "t": "No se le dará la orden de marcha."}
+    ]},
+  "32": {
+    "q": "En un trayecto de BA sin CTC, ¿cómo se dará la orden de marcha a un tren parado porque se haya modificado su composición?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida."},
+      {"l": "B", "t": "Con la orden de la señal de salida complementada con la señal de paso."},
+      {"l": "C", "t": "Con la orden de la señal de salida complementada con la señal de marche el tren."},
+      {"l": "D", "t": "Con la orden de la señal de salida complementada con la indicación de operaciones terminadas."}
+    ]},
+  "33": {
+    "q": "En una estación de BAU sin CTC, a un tren directo se dará la orden con:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "La orden de la señal de salida y la señal de marche tren."},
+      {"l": "B", "t": "La orden de la señal de salida y la señal de paso."},
+      {"l": "C", "t": "La orden de la señal de salida."},
+      {"l": "D", "t": "La orden de la señal de paso."}
+    ]},
+  "34": {
+    "q": "En un trayecto de BAU sin CTC, a un tren saliendo de origen se dará la orden de marcha con:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "La orden de la señal de salida en vía libre o rebase autorizado."},
+      {"l": "B", "t": "La orden de la señal de salida y la señal de marche tren."},
+      {"l": "C", "t": "La orden de la señal de salida."},
+      {"l": "D", "t": "No se le dará la orden de marcha."}
+    ]}
+},
+
+  "2": {
+  "35": {
+    "q": "¿Cómo se da la orden de marcha a un tren en BA sin CTC en una estación a partir de la cual está establecida la BTV, si el tren circula por su vía y funcionan las señales?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Si el tren es directo, con la señal de paso ya que la señal de salida es inexistente."},
+      {"l": "B", "t": "Si el tren es directo, con la señal de paso y la señal de salida abierta."},
+      {"l": "C", "t": "Con la señal de salida, siempre que no ordene parada."},
+      {"l": "D", "t": "Si el tren está parado, con la señal de marche el tren."}
+    ]},
+  "36": {
+    "q": "En un trayecto de BA, ¿cómo se da la orden de marcha a un tren en una estación en la que se le ha segregado un vagón?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida."},
+      {"l": "B", "t": "Con la orden de la señal de salida y la señal de paso."},
+      {"l": "C", "t": "Con la orden de la señal de salida y la señal de marche el tren."},
+      {"l": "D", "t": "Por escrito o telefonema."}
+    ]},
+  "37": {
+    "q": "¿Cómo se dará la orden de marcha a un tren detenido en una estación de BA que vaya a circular hacia un BT?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Con la orden de la señal de salida y la señal de marche tren."},
+      {"l": "B", "t": "Con la orden de la señal de marche tren."},
+      {"l": "C", "t": "Con la orden de la señal de salida."},
+      {"l": "D", "t": "Con la orden de la señal de salida y la señal de paso."}
+    ]},
+  "38": {
+    "q": "Entre las estaciones A y B existe BA sin CTC y entre B y C existe BA con CTC. ¿Debe presentarse la señal de paso en la estación B para un tren de paso que va a circular a vía desviada?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Hay que presentarla por tratarse de una transición de bloqueo."},
+      {"l": "B", "t": "No debe presentarse, ya que en BA la orden de marcha se da con la orden de la señal de salida."},
+      {"l": "C", "t": "Si dispone de personal de circulación, hay que presentarla."},
+      {"l": "D", "t": "Hay que presentarla cuando se suprima la parada técnica."}
+    ]},
+  "39": {
+    "q": "En bloqueo automático, ¿está permitida la expedición de trenes desde vías sin señal de salida?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Solo en BAU."},
+      {"l": "B", "t": "Solo en BAB."},
+      {"l": "C", "t": "En BAU y BAB."},
+      {"l": "D", "t": "No está permitida ni en BAU ni en BAB."}
+    ]},
+  "40": {
+    "q": "La expedición de trenes en BAU y BAB sin CTC, de vías que no tengan señal de salida:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "No está permitida."},
+      {"l": "B", "t": "Se realizará dando la orden de marcha con la señal de marche el tren."},
+      {"l": "C", "t": "Se realizará dando la orden de marcha con la señal de marche el tren después de observar que alguna otra señal de salida del mismo lado ordena vía libre y estableciendo el itinerario de la vía correspondiente."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "41": {
+    "q": "En BAB sin CTC, ¿se puede expedir tren desde una vía sin señal de salida?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Sí, se realizará dando la orden de marcha con la señal de marche el tren después de observar que alguna otra señal de salida del mismo lado ordena vía libre y estableciendo el itinerario de la vía correspondiente."},
+      {"l": "B", "t": "No está permitida la expedición de trenes en este caso."},
+      {"l": "C", "t": "Sí, se realizará dando la orden de marcha con la señal de marche el tren."},
+      {"l": "D", "t": "Sí, si lo autoriza el PM."}
+    ]},
+  "42": {
+    "q": "Para expedir un tren en BAD sin CTC desde una vía sin señal de salida, es condición indispensable:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Que alguna otra señal de salida del mismo lado no ordene parada, comprobándose por observación directa."},
+      {"l": "B", "t": "Que alguna otra señal de salida del mismo lado ordene vía libre, comprobándose por observación directa."},
+      {"l": "C", "t": "En BAD no está permitida la expedición de trenes desde vías sin señal de salida."},
+      {"l": "D", "t": "Que alguna otra señal de salida del mismo lado ordene vía libre, comprobándose en los visores de los cuadros de mando."}
+    ]},
+  "43": {
+    "q": "Para expedir un tren en BAD con CTC en ML desde una vía sin señal de salida, es condición indispensable:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Que alguna otra señal de salida del mismo lado no ordene parada, comprobándose por observación directa."},
+      {"l": "B", "t": "Que alguna otra señal de salida del mismo lado ordene vía libre, comprobándose por observación directa."},
+      {"l": "C", "t": "En BAD no está permitida la expedición de trenes desde vías sin señal de salida."},
+      {"l": "D", "t": "Que alguna otra señal de salida del mismo lado ordene vía libre, comprobándose en los visores de los cuadros de mando."}
+    ]},
+  "44": {
+    "q": "Para expedir un tren en BAD con CTC desde una vía sin señal de salida, es condición indispensable:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Que alguna otra señal de salida del mismo lado ordene vía libre, comprobándose por observación directa."},
+      {"l": "B", "t": "En BAD no está permitida la expedición de trenes desde vías sin señal de salida."},
+      {"l": "C", "t": "Que una persona habilitada colabore con el Responsable de Circulación del CTC para garantizar la correcta disposición de los aparatos que no puedan ser telemandados."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "45": {
+    "q": "En condiciones normales, ¿está permitida la expedición de trenes desde vías sin señal de salida?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Solo en BAU y BAD."},
+      {"l": "B", "t": "Solo en BAD con CTC."},
+      {"l": "C", "t": "Solo en BAU."},
+      {"l": "D", "t": "En BAD."}
+    ]},
+  "46": {
+    "q": "Cuando en BAD sin CTC, se expida un tren desde una vía sin señal de salida:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "El Maquinista circulará al amparo del BT por anormalidad, sin necesidad de orden de marcha."},
+      {"l": "B", "t": "El Maquinista circulará al amparo del BT por anormalidad por lo que se le dará la señal de marche tren."},
+      {"l": "C", "t": "El Maquinista circulará al amparo del BA después de presentarle la señal de marche el tren."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "47": {
+    "q": "En BAU sin CTC, ¿se puede expedir un tren de una vía sin señal de salida?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "No."},
+      {"l": "B", "t": "Sí, comprobando que alguna otra señal de salida del mismo lado ordena vía libre."},
+      {"l": "C", "t": "Sí, basta con la señal de marche tren."},
+      {"l": "D", "t": "Sí, si lo autoriza el PM."}
+    ]},
+  "48": {
+    "q": "En BAD sin CTC, un tren sale de una estación desde una vía sin señal de salida. ¿Con qué condiciones de circulación irá el Maquinista?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Circulará hasta la estación siguiente al amparo del BA."},
+      {"l": "B", "t": "Circulará con marcha a la vista hasta la primera señal de bloqueo."},
+      {"l": "C", "t": "Circulará con marcha de maniobras hasta la primera señal de bloqueo."},
+      {"l": "D", "t": "Circulará con marcha normal."}
+    ]},
+  "49": {
+    "q": "¿Cómo actuará el Responsable de Circulación del CTC cuando deba expedir un tren desde vías sin señal de salida, si el AI ha dispuesto una persona habilitada que colabore con él?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Establecerá la parte que telemanda del itinerario de acceso a la vía general y recibirá conformidad del personal responsable del establecimiento del resto del itinerario."},
+      {"l": "B", "t": "Cursará al Maquinista el telefonema: «Marche el tren (n.º de tren) hasta (estación inmediata) con marcha a la vista hasta la señal (primera de bloqueo)»."},
+      {"l": "C", "t": "Ordenará al personal reponer los aparatos a su posición normal una vez expedido el tren."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "50": {
+    "q": "En caso de anormalidad en el funcionamiento de los bloqueos automáticos (BAU, BAD, BAB):",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "En cualquier caso, se establecerá el BT en el trayecto y vías autorizados."},
+      {"l": "B", "t": "En caso de anormalidad debe suspenderse la circulación hasta que se restablezca el bloqueo."},
+      {"l": "C", "t": "Se podrá establecer el BT en el trayecto y vías autorizados siempre que el Responsable de Circulación de la Banda de Regulación del PM lo autorice expresamente."},
+      {"l": "D", "t": "Se podrá establecer el BT en el trayecto y vías autorizados siempre que el Responsable de Circulación de la Banda de Regulación del PM o del CTC lo autorice expresamente."}
+    ]},
+  "51": {
+    "q": "Si existe anormalidad en el funcionamiento de la señal de salida en BAB sin CTC, ¿cuándo se podrá seguir circulando?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Se seguirá circulando al amparo del BT."},
+      {"l": "B", "t": "Cuando se autorice el rebase de dicha señal, mediante un BOI, con marcha a la vista hasta la señal siguiente."},
+      {"l": "C", "t": "Si funcionan los dispositivos de bloqueo, el Responsable de Circulación de la estación podrá autorizar el rebase de dicha señal, según lo dispuesto en el RCF, una vez que haya informado de esta situación a su colateral y haya recibido la conformidad de este de no expedir trenes por dicha vía hasta nuevo aviso."},
+      {"l": "D", "t": "Si funcionan los dispositivos de bloqueo, se podrá continuar la circulación al amparo del BA cuando el Responsable de Circulación haya informado de esta situación a su colateral."}
+    ]},
+  "52": {
+    "q": "En BAD sin CTC, se establecerá el bloqueo telefónico por anormalidad:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Cuando no funcionen las señales de salida."},
+      {"l": "B", "t": "Cuando no funcionen normalmente una o varias señales."},
+      {"l": "C", "t": "Cuando el Responsable de Circulación de la Banda del PM lo convenga."},
+      {"l": "D", "t": "Cuando no funcionen las señales de bloqueo o los dispositivos de bloqueo."}
+    ]},
+  "53": {
+    "q": "En BAD con CTC, se establecerá el bloqueo telefónico por anormalidad:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Cuando no funcionen las señales de salida."},
+      {"l": "B", "t": "Cuando no funcionen normalmente una o varias señales."},
+      {"l": "C", "t": "Cuando el Responsable de Circulación de la Banda del PM lo convenga."},
+      {"l": "D", "t": "Cuando no funcionen las señales de bloqueo o los dispositivos de bloqueo."}
+    ]},
+  "54": {
+    "q": "En BAU con CTC, se establecerá el bloqueo telefónico por anormalidad:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Cuando no funcionen las señales de salida."},
+      {"l": "B", "t": "Cuando no funcionen normalmente una o varias señales."},
+      {"l": "C", "t": "Cuando el Responsable de Circulación del CTC lo convenga."},
+      {"l": "D", "t": "Cuando no funcionen las señales de bloqueo o los dispositivos de bloqueo."}
+    ]},
+  "55": {
+    "q": "En BAB con CTC, se establecerá el bloqueo telefónico por anormalidad:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Cuando no funcionen las señales de salida."},
+      {"l": "B", "t": "Cuando no funcionen normalmente una o varias señales."},
+      {"l": "C", "t": "Cuando el Responsable de Circulación del CTC lo convenga."},
+      {"l": "D", "t": "Cuando no funcionen las señales de bloqueo o los dispositivos de bloqueo."}
+    ]},
+  "56": {
+    "q": "¿Cómo queda garantizada la relación de dependencia entre estaciones en el bloqueo de señalización lateral?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Mediante petición y concesión de vía mediante telefonema."},
+      {"l": "B", "t": "Mediante petición y toma de vía mediante cuadro eléctrico-manual."},
+      {"l": "C", "t": "Por la propia naturaleza de la instalación."},
+      {"l": "D", "t": "Por las indicaciones que presentan las señales que protegen los cantones y que mantienen la distancia de seguridad entre trenes."}
+    ]},
+  "57": {
+    "q": "En BSL, ¿qué indicación no pueden dar las señales avanzadas?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Pueden dar todas las indicaciones."},
+      {"l": "B", "t": "Anuncio de parada."},
+      {"l": "C", "t": "Parada."},
+      {"l": "D", "t": "Vía libre."}
+    ]},
+  "58": {
+    "q": "En BSL, ¿qué indicación no pueden dar las señales de salida?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Pueden dar todas las indicaciones."},
+      {"l": "B", "t": "Anuncio de parada."},
+      {"l": "C", "t": "Parada."},
+      {"l": "D", "t": "Vía libre."}
+    ]},
+  "59": {
+    "q": "¿Cuándo se aplica el BSL?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "En líneas de alta velocidad cuando el ATP vinculado al BCA no funcione con normalidad o tenga que circular un tren no equipado o con el equipo embarcado del ATP averiado."},
+      {"l": "B", "t": "En líneas de alta velocidad cuando el ATP vinculado al BCA funcione con normalidad, como bloqueo supletorio."},
+      {"l": "C", "t": "En líneas convencionales cuando el ATP vinculado al BCA no funcione con normalidad o tenga que circular un tren no equipado o con el equipo embarcado del ATP averiado."},
+      {"l": "D", "t": "En líneas convencionales cuando el ATP vinculado al BCA no funcione con normalidad y tengan que circular con ASFA."}
+    ]},
+  "60": {
+    "q": "Para expedir o dar paso a un tren en BSL es preciso que:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "El trayecto esté libre de trenes."},
+      {"l": "B", "t": "No existan movimientos de maniobras autorizados por la otra vía, afectando al mismo trayecto, en estaciones colaterales."},
+      {"l": "C", "t": "Se haya bloqueado el cantón de bloqueo mediante los dispositivos disponibles al efecto y se haya establecido el itinerario de salida."},
+      {"l": "D", "t": "Se dé la orden de marcha con la orden de la señal de salida y la señal de marche el tren o señal de paso, según proceda."}
+    ]},
+  "61": {
+    "q": "En BSL, en el caso de anormalidad en las señales de salida o en las señales de los PB, bifurcaciones o PCA, ¿el Responsable de Circulación podrá autorizar el rebase de las mismas una vez que el cantón de bloqueo esté libre de trenes?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Sí, con marcha a la vista hasta la siguiente señal de bloqueo."},
+      {"l": "B", "t": "Sí, con marcha a la vista hasta la siguiente estación."},
+      {"l": "C", "t": "Sí, con marcha normal."},
+      {"l": "D", "t": "No."}
+    ]},
+  "62": {
+    "q": "En caso de anormalidad en BSL, ¿cómo hará el Responsable de Circulación para comprobar que el cantón de bloqueo se encuentra libre?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Por observación directa del último tren que circuló."},
+      {"l": "B", "t": "Solicitando al Maquinista del último tren que circuló la confirmación de llegada, paso o apartado en la estación mediante la radiotelefonía."},
+      {"l": "C", "t": "Solicitando al Maquinista del último tren que circuló la confirmación de llegada, paso o apartado en la estación mediante el telefonema: «Tren (n.º de tren) llegó completo y apartado en (vía de apartado)»."},
+      {"l": "D", "t": "Con la información aportada por los contadores de ejes."}
+    ]},
+  "63": {
+    "q": "¿Cómo queda garantizada la relación de dependencia entre estaciones en BCA?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Por la existencia de instalaciones que controlan que la distancia de seguridad entre trenes se mantiene, regulando la velocidad de modo que ninguno supere la Velocidad Límite, y garantizando la existencia de un solo tren en cada cantón de bloqueo."},
+      {"l": "B", "t": "Por la existencia de instalaciones que controlan que la distancia de seguridad entre trenes se mantiene, regulando la velocidad de modo que ninguno supere la velocidad máxima, y garantizando la existencia de un solo tren en cada cantón de bloqueo."},
+      {"l": "C", "t": "Por la propia naturaleza de la instalación."},
+      {"l": "D", "t": "Por las indicaciones que presentan las señales que protegen los cantones y que mantienen la distancia de seguridad entre trenes."}
+    ]},
+  "64": {
+    "q": "El BCA está vinculado a la circulación de trenes con alguno de los sistemas de protección automática de trenes (ATP) en servicio:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "ERTMS/ETCS nivel 1 o 2."},
+      {"l": "B", "t": "ERTMS/ETCS nivel 1 o 2 y LZB."},
+      {"l": "C", "t": "ERTMS/ETCS nivel 1 o 2, LZB y EBICAB."},
+      {"l": "D", "t": "LZB."}
+    ]},
+  "65": {
+    "q": "Para expedir o dar paso a un tren en BCA, no es preciso que:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "El cantón de bloqueo esté libre de trenes."},
+      {"l": "B", "t": "Se haya bloqueado el cantón de bloqueo mediante los dispositivos disponibles al efecto."},
+      {"l": "C", "t": "Se haya establecido el itinerario de salida o paso."},
+      {"l": "D", "t": "Se dé la orden de marcha con la orden de la señal de salida."}
+    ]},
+  "66": {
+    "q": "Si se detectan irregularidades en el funcionamiento del BCA, se continuará la circulación con:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "BSL."},
+      {"l": "B", "t": "BA."},
+      {"l": "C", "t": "BT."},
+      {"l": "D", "t": "No se puede continuar la circulación."}
+    ]},
+  "67": {
+    "q": "Si el ATP con el que circule el tren provocara el frenado y detención del mismo:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "El Maquinista informará al Responsable de Circulación del CTC, que en su caso autorizará la reanudación de la marcha en las condiciones específicas de circulación que procedan hasta la señal siguiente y al amparo del BSL."},
+      {"l": "B", "t": "El Maquinista informará al Responsable de Circulación de la Banda de Regulación del PM, que en su caso autorizará la reanudación de la marcha en las condiciones específicas de circulación que procedan hasta la señal siguiente y al amparo del BSL."},
+      {"l": "C", "t": "El Maquinista informará al Responsable de Circulación de la Banda de Regulación del PM, que en su caso autorizará la reanudación de la marcha al amparo del BSL con marcha a la vista hasta la siguiente señal de bloqueo."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "68": {
+    "q": "Si tras una detención provocada por el ATP, este vuelve a funcionar:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "El Maquinista informará al Responsable de Circulación del CTC, que en su caso autorizará la reanudación de la marcha en las condiciones específicas de circulación que procedan hasta la señal siguiente y al amparo del BSL."},
+      {"l": "B", "t": "El Maquinista informará al Responsable de Circulación de la Banda de Regulación del PM, que en su caso autorizará la reanudación de la marcha en las condiciones específicas de circulación que procedan hasta la señal siguiente y al amparo del BSL."},
+      {"l": "C", "t": "El Maquinista circulará nuevamente, a partir de la señal siguiente, con este sistema y lo comunicará al Responsable de Circulación del CTC."},
+      {"l": "D", "t": "El Maquinista circulará nuevamente, a partir de la señal siguiente, con este sistema y lo comunicará al Responsable de Circulación de la Banda de Regulación del PM."}
+    ]}
+},
+
+  "3": {
+  "69": {
+    "q": "En caso de avería, el Responsable de Circulación podrá disponer que todos los trenes circulen con BSL entre dos estaciones:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "En estas condiciones, se notificará al Maquinista de cada tren la conexión del ASFA."},
+      {"l": "B", "t": "En estas condiciones, se notificará al Maquinista de cada tren la conexión del ATP vinculado al BCA."},
+      {"l": "C", "t": "En estas condiciones, se notificará al Maquinista de cada tren la desconexión del ATP vinculado al BCA."},
+      {"l": "D", "t": "Sin necesidad de notificación a los Maquinistas."}
+    ]},
+  "70": {
+    "q": "¿Cómo queda garantizada la relación de dependencia entre estaciones en BLA?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Mediante petición y concesión de vía mediante telefonema."},
+      {"l": "B", "t": "Mediante petición y toma de vía mediante cuadro eléctrico-manual."},
+      {"l": "C", "t": "Por la propia naturaleza de la instalación."},
+      {"l": "D", "t": "Por las indicaciones que presentan las señales que protegen los cantones y que mantienen la distancia de seguridad entre trenes."}
+    ]},
+  "71": {
+    "q": "Las señales intermedias en el BLA, ¿están dotadas de la letra \"P\"?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Sí."},
+      {"l": "B", "t": "Sí y algunas señales avanzadas."},
+      {"l": "C", "t": "No, las señales intermedias en BLA son absolutas."},
+      {"l": "D", "t": "No, no existen intermedias en el BLA."}
+    ]},
+  "72": {
+    "q": "En líneas de BLA con velocidades inferiores a 160 km/h, ¿podrá existir una señal de preavanzada?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Sí y podrá dar indicaciones de vía libre y vía libre condicional."},
+      {"l": "B", "t": "Sí y podrá dar indicaciones de vía libre y anuncio de parada."},
+      {"l": "C", "t": "Sí y podrá dar todas las indicaciones."},
+      {"l": "D", "t": "No."}
+    ]},
+  "73": {
+    "q": "En líneas con velocidades inferiores a 160 km/h, ¿podrá existir una señal de preavanzada?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Sí, en BT."},
+      {"l": "B", "t": "Sí, en BLA."},
+      {"l": "C", "t": "Sí, en cualquier bloqueo."},
+      {"l": "D", "t": "No."}
+    ]},
+  "74": {
+    "q": "En líneas de BLA con velocidades superiores a 160 km/h, ¿podrá existir una señal de preavanzada?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Sí y podrá dar indicaciones de vía libre y vía libre condicional."},
+      {"l": "B", "t": "Sí y podrá dar indicaciones de vía libre y anuncio de parada."},
+      {"l": "C", "t": "Sí y podrá dar todas las indicaciones."},
+      {"l": "D", "t": "No."}
+    ]},
+  "75": {
+    "q": "En líneas con velocidades superiores a 160 km/h, ¿podrá existir una señal de preavanzada?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Sí, en BT."},
+      {"l": "B", "t": "Sí, en BLA."},
+      {"l": "C", "t": "Sí, en cualquier bloqueo."},
+      {"l": "D", "t": "No."}
+    ]},
+  "76": {
+    "q": "¿Qué indicaciones no pueden presentar las señales avanzada en el BLA?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Anuncio de parada."},
+      {"l": "B", "t": "Parada."},
+      {"l": "C", "t": "Vía libre."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "77": {
+    "q": "¿Qué indicaciones no pueden presentar las señales de salida en el BLA?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Anuncio de parada."},
+      {"l": "B", "t": "Parada."},
+      {"l": "C", "t": "Vía libre."},
+      {"l": "D", "t": "Vía libre condicional."}
+    ]},
+  "78": {
+    "q": "¿Cómo actuará el Maquinista cuando se detenga accidentalmente después de haber franqueado una señal de preavanzada en un BA?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Al reanudar la marcha procederá como si la hubiese encontrado en indicación de vía libre."},
+      {"l": "B", "t": "Al reanudar la marcha procederá como si la hubiese encontrado en indicación de vía libre condicional."},
+      {"l": "C", "t": "Al reanudar la marcha procederá como si la hubiese encontrado en indicación de anuncio de parada."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "79": {
+    "q": "¿Cómo actuará el Maquinista cuando se detenga accidentalmente después de haber franqueado una señal de preavanzada en un BLA?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Cuando el Maquinista se detenga accidentalmente después de haberla franqueado, al reanudar la marcha procederá como si la hubiese encontrado en indicación de vía libre condicional."},
+      {"l": "B", "t": "Cuando el Maquinista se detenga accidentalmente después de haberla franqueado, al reanudar la marcha procederá como si la hubiese encontrado en indicación de anuncio de parada."},
+      {"l": "C", "t": "Cuando el Maquinista se detenga accidentalmente después de haberla franqueado, al reanudar la marcha procederá como si la hubiese encontrado en indicación de vía libre."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "80": {
+    "q": "Para expedir o dar paso a un tren, BLA no es preciso que:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El cantón de bloqueo esté libre de trenes. Además, que en BLAU y BLAB, se haya bloqueado el cantón de bloqueo, con los dispositivos disponibles al efecto."},
+      {"l": "B", "t": "Se haya establecido el itinerario de salida."},
+      {"l": "C", "t": "Se dé la orden de marcha con la orden de la señal de salida y la señal de marche tren y señal de paso, según proceda."},
+      {"l": "D", "t": "No está permitida la expedición de trenes desde vías sin señal de salida."}
+    ]},
+  "81": {
+    "q": "Si no funciona la señal de salida en un BLA sin CTC, ¿cómo procederá el Responsable de Circulación de la estación?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "En cualquier caso, autorizará al Maquinista el rebase de la señal con marcha normal."},
+      {"l": "B", "t": "En cualquier caso, autorizará al Maquinista el rebase de la señal con marcha a la vista."},
+      {"l": "C", "t": "Excepcionalmente, si funcionan los dispositivos de bloqueo, autorizará el rebase de la señal de salida."},
+      {"l": "D", "t": "Excepcionalmente, en BLAD, si funcionan los dispositivos de bloqueo, autorizará el rebase de la señal de salida."}
+    ]},
+  "82": {
+    "q": "En BLA, si no funciona la señal de salida en el trayecto entre una estación y la siguiente estación telemandada por la primera, ¿cómo procederá el Responsable de Circulación?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Establecerá el BT entre ambas estaciones."},
+      {"l": "B", "t": "El Responsable de Circulación de la Banda de Regulación del PM ponderará si conviene o no establecer el BT."},
+      {"l": "C", "t": "El Responsable de Circulación del CTC ponderará si conviene o no establecer el BT."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "83": {
+    "q": "En BLA, si falla la señal de salida en ámbito de CTC y se mantiene la circulación al amparo del BLA, para expedir trenes será necesario que:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El cantón de bloqueo esté libre de trenes, y autorizar el rebase de la señal de salida."},
+      {"l": "B", "t": "El Responsable de Circulación del CTC establecerá por defecto el BT."},
+      {"l": "C", "t": "El Responsable de Circulación del CTC autorice el rebase de la señal de salida con marcha a la vista."},
+      {"l": "D", "t": "El Responsable de Circulación de la estación autorice el rebase de la señal de salida con marcha a la vista."}
+    ]},
+  "84": {
+    "q": "¿Cómo queda garantizada la relación de dependencia entre estaciones en los BT?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Mediante acuerdos bilaterales entre sus Responsables de Circulación para concertar la circulación de trenes entre ambas."},
+      {"l": "B", "t": "Mediante petición y concesión de vía mediante BOI."},
+      {"l": "C", "t": "Mediante petición y toma de vía mediante cuadro eléctrico-manual."},
+      {"l": "D", "t": "Por la propia naturaleza de la instalación."}
+    ]},
+  "85": {
+    "q": "El bloqueo telefónico se aplica:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Con carácter supletorio, en las líneas carentes de sistemas automáticos de bloqueo que determine el AI."},
+      {"l": "B", "t": "Con carácter supletorio, en líneas equipadas con sistemas automáticos de bloqueo, cuando se produzca una anormalidad en su funcionamiento, o cuando así lo ordene el Responsable de Circulación de la Banda de Regulación del PM o del CTC."},
+      {"l": "C", "t": "En líneas con vías banalizadas, con carácter supletorio, cuando por necesidad de expedir trenes a contravía, lo disponga el Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "86": {
+    "q": "Para expedir o dar paso a un tren, en BT no es preciso que:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "El cantón de bloqueo esté libre de trenes."},
+      {"l": "B", "t": "Se pida y conceda la vía para el tren que se vaya a expedir."},
+      {"l": "C", "t": "Se haya establecido el itinerario de salida."},
+      {"l": "D", "t": "Se dé la orden de marcha con la señal de salida."}
+    ]},
+  "87": {
+    "q": "En BT, en estaciones carentes de señal de entrada:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación procederá al cierre de las señales de salida de la vía o vías hasta haber obtenido la concesión de vía del Responsable de Circulación colateral."},
+      {"l": "B", "t": "El Maquinista se detendrá ante la primera aguja y no la rebasará hasta que el Responsable de Circulación le autorice el rebase por telefonema."},
+      {"l": "C", "t": "El Maquinista circulará dispuesto a parar ante la señal de retroceso y no la rebasará hasta que el Responsable de Circulación le autorice el rebase por telefonema."},
+      {"l": "D", "t": "El Maquinista circulará dispuesto a parar ante la primera aguja y no la rebasará hasta recibir autorización del Responsable de Circulación de la estación por radiotelefonía."}
+    ]},
+  "88": {
+    "q": "En caso de anormalidad en el funcionamiento de un bloqueo automático (BA o BLA), ¿quién autorizará expresamente el establecimiento del BT?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Responsable de Circulación de la estación."},
+      {"l": "B", "t": "Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "C", "t": "Responsable de Circulación de la Banda de Regulación del PM o del CTC."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "89": {
+    "q": "¿El establecimiento del BT en una vía condiciona la circulación por la otra u otras donde se circule al amparo del BA o BLA?",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Sí, cuando se establece el BT en una vía afecta a toda la línea."},
+      {"l": "B", "t": "Sí, porque tanto en vía única como en doble o múltiple, el establecimiento del BT se realizará de manera simultánea para todas las vías."},
+      {"l": "C", "t": "No."},
+      {"l": "D", "t": "No se puede establecer el BT en una vía mientras se circula al amparo del BA o BLA en las otras."}
+    ]},
+  "90": {
+    "q": "Establecido el BT por anormalidad en el bloqueo automático, el Responsable de Circulación de la estación:",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "En la estación intermedia de un trayecto con BT, cuando se disponga a dar la orden de marcha al Maquinista, le notificará lo siguiente: «Circulará con BT entre ( ) y ( ) por la vía (I, II). No funciona (BA, BLA)». Dicha notificación será única para cada trayecto entre dos estaciones colaterales."},
+      {"l": "B", "t": "En la estación intermedia de un trayecto con BT, cuando se disponga a dar la orden de marcha al Maquinista, le notificará lo siguiente: «Circulará con BT entre ( ) y ( ) por la vía (I, II). No funciona (BA, BLA)». Dicha notificación podrá ser válida para un trayecto que comprenda varias estaciones."},
+      {"l": "C", "t": "En la estación de transición hacia un trayecto con BT, cuando se disponga a dar la orden de marcha al Maquinista, le notificará lo siguiente: «Circulará con BT entre ( ) y ( ) por la vía (I, II). No funciona (BA, BLA)». Dicha notificación será única para cada trayecto entre dos estaciones colaterales."},
+      {"l": "D", "t": "En la estación de transición hacia un trayecto con BT, cuando se disponga a dar la orden de marcha al Maquinista, le notificará lo siguiente: «Circulará con BT entre ( ) y ( ) por la vía (I, II). No funciona (BA, BLA)». Dicha notificación podrá ser válida para un trayecto que comprenda varias estaciones."}
+    ]},
+  "91": {
+    "q": "El Responsable de Circulación de una estación de transición hacia un trayecto en el que se ha establecido el BT por anormalidad en el bloqueo automático, notificará al Maquinista: «Circulará con BT entre ( ) y ( ) por la vía (I, II). No funciona (BA, BLA)». ¿Qué información debe añadir a dicha notificación?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Estaciones intermedias sin Responsable de Circulación, si existen, y cuando proceda: velocidades limitadas, PN con semibarreras enclavadas sin protección, etc. Si existen agujas en plena vía, la notificación se ampliará con el siguiente texto: «Irá dispuesto a efectuar parada ante la/s aguja/s del/los km/s ( ) y continuará la marcha después de verificar que está bien dispuesto el itinerario a seguir»."},
+      {"l": "B", "t": "Estaciones intermedias con Responsable de Circulación, si existen, y cuando proceda: velocidades limitadas, PN con semibarreras enclavadas sin protección, etc. Si existen agujas en plena vía, la notificación se ampliará con el siguiente texto: «Irá dispuesto a efectuar parada ante la/s aguja/s del/los km/s ( ) y continuará la marcha después de verificar que está bien dispuesto el itinerario a seguir»."},
+      {"l": "C", "t": "Estaciones intermedias sin Responsable de Circulación, si existen, y cuando proceda: velocidades limitadas, PN con semibarreras no enclavadas sin protección, etc. Si existen agujas en plena vía, la notificación se ampliará con el siguiente texto: «Irá dispuesto a efectuar parada ante la/s aguja/s del/los km/s ( ) y continuará la marcha después de verificar que está bien dispuesto el itinerario a seguir»."},
+      {"l": "D", "t": "Esta notificación se complementará con la orden de marcha."}
+    ]},
+  "92": {
+    "q": "¿Cuál será la orden de marcha en la estación de transición hacia un trayecto en el que se ha establecido el BT por anormalidad en el bloqueo automático?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La orden de la señal de salida y la señal de marche el tren."},
+      {"l": "B", "t": "La señal de marche el tren."},
+      {"l": "C", "t": "La orden de la señal de salida."},
+      {"l": "D", "t": "La orden de la señal de salida. Si el Responsable de Circulación no la puede abrir, autorizará el rebase de la señal con marcha a la vista o marcha normal, según sea BA o BLA, hasta la siguiente señal o estación."}
+    ]},
+  "93": {
+    "q": "¿Cuál será la orden de marcha en una estación intermedia abierta de un trayecto en el que se ha establecido el BT por anormalidad en el bloqueo automático?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "La orden de la señal de salida y la señal de marche el tren o señal de paso, según proceda."},
+      {"l": "B", "t": "La señal de marche el tren o la señal de paso, según proceda."},
+      {"l": "C", "t": "La orden de la señal de salida."},
+      {"l": "D", "t": "La orden de la señal de salida. Si el Responsable de Circulación no la puede abrir, autorizará el rebase de la señal con marcha a la vista o marcha normal, según sea BA o BLA, hasta la siguiente señal o estación."}
+    ]},
+  "94": {
+    "q": "Circulando en plena vía en un trayecto en el que se ha establecido el BT por anormalidad en el bloqueo automático, el Maquinista:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Considerará existentes las señales intermedias en trayectos con BA, así como las señales preavanzadas en trayectos con BLA dotados de ellas."},
+      {"l": "B", "t": "Considerará como comprobación suficiente la indicación de la señal de protección, aun cuando sea inexistente a los demás efectos. Si estuviera en indicación de parada o apagada, se detendrá ante la aguja y una vez verificado que su posición permite el paso, reanudará la marcha sin rebasar la velocidad de 10 km/h hasta que el último vehículo la haya franqueado."},
+      {"l": "C", "t": "Circulará a la velocidad de 120 km/h, respetando las velocidades máximas y las limitaciones temporales de velocidad, salvo que el Responsable de Circulación le notifique otra velocidad inferior."},
+      {"l": "D", "t": "Cuando existan señales intermedias relacionadas con el ASFA, mantendrá conectado dicho equipo en el trayecto afectado o, si dispone de ASFA Digital, seleccionará el modo BT."}
+    ]},
+  "95": {
+    "q": "¿A qué velocidad circulará el Maquinista en un trayecto en el que se ha establecido el BT por anormalidad en el bloqueo automático?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Sin exceder la velocidad máxima de su tipo de tren, respetando las velocidades máximas y las limitaciones temporales de velocidad, salvo que el Responsable de Circulación le notifique otra velocidad inferior."},
+      {"l": "B", "t": "Sin exceder la velocidad de 120 km/h, respetando las velocidades máximas y las limitaciones temporales de velocidad, salvo que el Responsable de Circulación le notifique otra velocidad inferior."},
+      {"l": "C", "t": "Sin exceder la velocidad de 120 km/h, respetando las velocidades máximas y las limitaciones temporales de velocidad, cuando el Responsable de Circulación así se lo notifique."},
+      {"l": "D", "t": "Sin exceder la velocidad de 120 km/h, respetando las velocidades máximas y las limitaciones temporales de velocidad, salvo que el Responsable de Circulación le notifique otra velocidad superior."}
+    ]},
+  "96": {
+    "q": "Establecido el BT por anormalidad en el bloqueo automático, en las estaciones el Maquinista:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Se atendrá a lo que ordene la señal avanzada. Si ordenase parada, procederá como si diera la indicación de anuncio de parada."},
+      {"l": "B", "t": "Se atendrá a lo que ordene la señal de entrada."},
+      {"l": "C", "t": "Considerará inexistentes todas las señales de salida, salvo en estaciones AC cerradas."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]},
+  "97": {
+    "q": "Establecido el BT por anormalidad en el bloqueo automático, en las estaciones el Maquinista:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Se atendrá a lo que ordene la señal avanzada. Si ordenase parada, se pondrá en comunicación con el Responsable de Circulación de la estación para que le autorice su rebase."},
+      {"l": "B", "t": "Se atendrá a lo que ordene la señal de entrada."},
+      {"l": "C", "t": "Considerará existentes todas las señales de salida, salvo en estaciones AC cerradas."},
+      {"l": "D", "t": "Considerará inexistentes todas las señales de salida, salvo en estaciones AC abiertas."}
+    ]},
+  "98": {
+    "q": "Al Maquinista de un tren directo en una estación intermedia abierta de un trayecto con BT, ¿se le dará orden de marcha?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Sí, con la señal de paso."},
+      {"l": "B", "t": "Sí, con la señal de salida."},
+      {"l": "C", "t": "No es necesaria, se circulará al amparo del BT."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "99": {
+    "q": "Cuando se circule con BT por anormalidad del bloqueo automático, para autorizar el rebase de una señal de salida en indicación de parada, se hará:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Por radiotelefonía."},
+      {"l": "B", "t": "Con el telefonema: «Autorizo al tren (n.º de tren) a rebasar la señal (de salida, o su identificación) en indicación de parada (o apagada) de la estación de ( )»."},
+      {"l": "C", "t": "Con el telefonema: «Marche el tren (n.º de tren) hasta (estación inmediata) con marcha a la vista hasta la señal (primera de bloqueo)»."},
+      {"l": "D", "t": "No se autoriza el rebase por telefonema en este caso."}
+    ]},
+  "100": {
+    "q": "En el caso de autorizar el rebase de una señal de salida que se encuentre en indicación de parada o apagada, cuando se circule con BT por anormalidad del bloqueo automático, ¿qué condiciones de marcha llevará el Maquinista?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Marcha a la vista hasta la siguiente señal de bloqueo o de entrada de la estación siguiente."},
+      {"l": "B", "t": "Marcha normal hasta la siguiente señal de bloqueo o de entrada de la estación siguiente."},
+      {"l": "C", "t": "Marcha a la vista o marcha normal hasta la siguiente señal de bloqueo o de entrada de la estación siguiente, según sea BA o BLA respectivamente."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]},
+  "101": {
+    "q": "En un trayecto con BT por anormalidad del bloqueo automático, ¿se podrá autorizar a un Maquinista el rebase de una señal intermedia de bloqueo o de protección de una bifurcación, PB o PCA?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "No, puesto que se circula al amparo del BT."},
+      {"l": "B", "t": "Solo podrá autorizarlo el Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "C", "t": "El Maquinista no se detendrá ante estas señales y las considerará inexistentes."},
+      {"l": "D", "t": "No se le autorizará el rebase, sino que el Maquinista las considerará inexistentes, salvo las señales de protección de agujas en plena vía."}
+    ]},
+  "102": {
+    "q": "Restablecido el funcionamiento del bloqueo automático, el Responsable de Circulación de la estación que deba expedir el primer tren:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Notificará al Maquinista: «Restablecido el (BA, BLA) entre ( ) y ( ) [por la vía (I, II, etc.)]»."},
+      {"l": "B", "t": "No es necesario notificar al Maquinista."},
+      {"l": "C", "t": "Solicitará autorización al Responsable de Circulación de la Banda de Regulación del PM o del CTC."},
+      {"l": "D", "t": "Ninguna es correcta."}
+    ]}
+},
+      "4": {
+{
+  "103": {
+    "q": "¿A quién se le notificará el restablecimiento del bloqueo automático?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "A todos los Maquinistas de los trenes que circulen por el trayecto."},
+      {"l": "B", "t": "Al Maquinista del primer tren que deba expedirse por dicho bloqueo."},
+      {"l": "C", "t": "Al Maquinista del primer tren que deba expedirse por dicho bloqueo, de forma verbal."},
+      {"l": "D", "t": "No es necesario notificar a los Maquinistas."}
+    ]
+  },
+  "104": {
+    "q": "¿En qué momento se considera restablecido el bloqueo automático?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "En cuanto el personal de mantenimiento dé su conformidad."},
+      {"l": "B", "t": "En cuanto se expida el primer tren al amparo del bloqueo automático."},
+      {"l": "C", "t": "En cuanto llegue a la estación colateral el primer tren expedido al amparo del bloqueo automático."},
+      {"l": "D", "t": "En cuanto el primer tren expedido al amparo del bloqueo automático haya despejado el primer cantón."}
+    ]
+  },
+  "105": {
+    "q": "¿Quién autorizará el establecimiento de la BTV en trayectos de BA o BLA?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "El Responsable de Circulación de la estación de transición."},
+      {"l": "B", "t": "El Responsable de Circulación de la Banda de Regulación del PM o del CTC."},
+      {"l": "C", "t": "El Maquinista."},
+      {"l": "D", "t": "El personal de infraestructura."}
+    ]
+  },
+  "106": {
+    "q": "El Maquinista que circule por la vía de la izquierda al amparo de la BTV:",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "Considerará inexistentes todas las señales de salida, salvo en estaciones cerradas o telemandadas desde otra estación o CTC."},
+      {"l": "B", "t": "Mantendrá conectado el sistema ASFA y circulará sin exceder la velocidad de 120 km/h, salvo que el Responsable de Circulación le notifique otra velocidad inferior."},
+      {"l": "C", "t": "Considerará inexistentes las señales intermedias de BA y las preavanzadas de BLA."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]
+  },
+  "107": {
+    "q": "Si antes de finalizar el recorrido de un trayecto en el que se ha establecido la BTV se pasara a circular por la vía normal:",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "No será necesario notificar al Maquinista."},
+      {"l": "B", "t": "Se notificará al Maquinista lo siguiente: «Circulará en sentido normal»."},
+      {"l": "C", "t": "Se notificará al Maquinista lo siguiente: «Restablecido el (BA, BLA) entre ( ) y ( ) [por la vía (I, II, etc.)]»."},
+      {"l": "D", "t": "No se puede volver a circular por la vía normal hasta que el último tren expedido haya recorrido todo el trayecto en el que se ha establecido la BTV."}
+    ]
+  },
+  "108": {
+    "q": "Establecida la BTV, el Maquinista que circule en sentido normal:",
+    "a": "A",
+    "opts": [
+      {"l": "A", "t": "Considerará inexistentes todas las señales de salida, salvo en estaciones cerradas o telemandadas desde otra estación o CTC."},
+      {"l": "B", "t": "Mantendrá conectado el sistema ASFA y circulará sin exceder la velocidad de 120 km/h, salvo que el Responsable de Circulación le notifique otra velocidad inferior."},
+      {"l": "C", "t": "Se atendrá a lo que ordene las señales."},
+      {"l": "D", "t": "Todas son correctas."}
+    ]
+  },
+  "109": {
+    "q": "¿Qué es una estación AC?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Una estación con Responsable de Circulación presente pero que no interviene en el bloqueo."},
+      {"l": "B", "t": "Una estación que puede estar abierta o cerrada a efectos de la circulación, interviniendo en el bloqueo únicamente cuando está abierta."},
+      {"l": "C", "t": "Una estación telemandada desde el CTC."},
+      {"l": "D", "t": "Una estación que solo permite el cruce de trenes."}
+    ]
+  },
+  "110": {
+    "q": "¿Quién tiene la facultad de abrir o cerrar una estación AC?",
+    "a": "C",
+    "opts": [
+      {"l": "A", "t": "El Maquinista."},
+      {"l": "B", "t": "El Responsable de Circulación de la propia estación."},
+      {"l": "C", "t": "El Responsable de Circulación de la Banda de Regulación del PM."},
+      {"l": "D", "t": "El AI mediante Consigna."}
+    ]
+  },
+  "111": {
+    "q": "¿Qué indica el cartelón con la letra «C» en el eje de una señal de entrada o de salida?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "Estación con Control de velocidad."},
+      {"l": "B", "t": "Estación que puede estar Cerrada a efectos de la circulación."},
+      {"l": "C", "t": "Estación con Cambios automáticos."},
+      {"l": "D", "t": "Estación de Cruce."}
+    ]
+  },
+  "112": {
+    "q": "Cuando una estación AC esté cerrada, ¿cómo se consideran sus señales de entrada y salida?",
+    "a": "B",
+    "opts": [
+      {"l": "A", "t": "Como señales absolutas."},
+      {"l": "B", "t": "Como señales permisivas."},
+      {"l": "C", "t": "Como inexistentes."},
+      {"l": "D", "t": "Como señales de bloqueo."}
+    ]
+  },
+  "113": {
+    "q": "¿En qué bloqueos pueden existir estaciones AC?",
+    "a": "D",
+    "opts": [
+      {"l": "A", "t": "En todos los bloqueos automáticos."},
+      {"l": "B", "t": "Solo en BAU y BAB."},
+      {"l": "C", "t": "Solo en BLAU y BLAB."},
+      {"l": "D", "t": "En bloqueos automáticos (BAU, BAB, BLAU, BLAB) y en BT."}
+    ]
+  }
+ };
+
+  let currentPart = 1;
+  let respuestasVisibles = false;
+  const LS_PREFIX = 'rcf-libro1-part-';
+
+  // Load state from localStorage
+  function loadState(part) {
+    try {
+      return JSON.parse(localStorage.getItem(LS_PREFIX + part)) || {};
+    } catch {
+      return {};
+    }
+  }
+
+  // Save state to localStorage
+  function saveState(part, state) {
+    localStorage.setItem(LS_PREFIX + part, JSON.stringify(state));
+  }
+
+  // Switch between parts
+  function switchPart(part) {
+    currentPart = part;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab_' + part).classList.add('active');
+    generarTest();
+    // window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // Generate test for current part
+  function generarTest() {
+    const container = document.getElementById('questionsContainer');
+    container.innerHTML = '';
+    
+    const partData = testData[currentPart];
+    if (!partData) return;
+    
+    const state = loadState(currentPart);
+    
+    Object.keys(partData).forEach(qid => {
+      const q = partData[qid];
+      const card = document.createElement('div');
+      card.className = 'card question';
+      card.dataset.qid = qid;
+      
+      let opcionesHTML = '';
+      q.opts.forEach(opt => {
+        const checked = state[qid] === opt.l ? 'checked' : '';
+        opcionesHTML += `
+          <label class="option">
+            <input type="radio" name="q${qid}" value="${opt.l}" ${checked} />
+            <div><b>${opt.l})</b> ${opt.t}</div>
+          </label>
+        `;
+      });
+
+      card.innerHTML = `
+        <span class="q-number">Pregunta ${qid}</span>
+        <div class="q-title">${q.q}</div>
+        <div class="options">${opcionesHTML}</div>
+        <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+        <div class="feedback"></div>
+      `;
+      
+      container.appendChild(card);
+    });
+
+    bindRadios();
+    updateProgress();
+  }
+  
+  function bindRadios() {
+    document.querySelectorAll('input[type=radio]').forEach(radio => {
+      radio.addEventListener('change', updateProgress);
+    });
+  }
+  
+    // Update progress bar
+  function updateProgress() {
+    const partData = testData[currentPart];
+    const total = Object.keys(partData).length;
+    const answered = document.querySelectorAll('input[type=radio]:checked').length;
+    const percentage = (answered / total) * 100;
+    document.getElementById('progressBar').style.width = percentage + '%';
+    
+    // Save current answers
+    const state = {};
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const selected = card.querySelector('input[type=radio]:checked');
+      if (selected) {
+        state[qid] = selected.value;
+      }
+    });
+    saveState(currentPart, state);
+  }
+
+  // Grade the test
+  window.calificar = function() {
+    const partData = testData[currentPart];
+    let correctas = 0;
+    let incorrectas = 0;
+    let sinResponder = 0;
+    const total = Object.keys(partData).length;
+    
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = partData[qid].a;
+      const seleccionada = card.querySelector('input[type=radio]:checked');
+      
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+      
+      if (seleccionada) {
+        const letra = seleccionada.value;
+        if (letra === correcta) {
+          correctas++;
+          seleccionada.closest('.option').classList.add('correct');
+          card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+          card.querySelector('.feedback').style.color = 'var(--ok)';
+        } else {
+          incorrectas++;
+          seleccionada.closest('.option').classList.add('incorrect');
+          card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+          card.querySelector('.feedback').style.color = 'var(--bad)';
+          const corr = card.querySelector(`input[value="${correcta}"]`);
+          if (corr) corr.closest('.option').classList.add('correct');
+        }
+      } else {
+        sinResponder++;
+        card.querySelector('.feedback').textContent = '⚠ Sin responder';
+        card.querySelector('.feedback').style.color = 'var(--warning)';
+      }
+    });
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const aprobado = porcentaje >= 50;
+    
+    document.getElementById('score').textContent = `${correctas} / ${total} (${porcentaje}%)`;
+    document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+    
+    document.getElementById('scoreDetails').innerHTML = `
+      ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+    `;
+    
+   // window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  // Reset the test
+  window.reiniciar = function() {
+    if (!confirm('¿Reiniciar respuestas de esta parte?')) return;
+    
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+    document.getElementById('score').textContent = '—';
+    document.getElementById('score').removeAttribute('style');
+    document.getElementById('scoreDetails').textContent = '';
+    document.getElementById('progressBar').style.width = '0%';
+    saveState(currentPart, {});
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  // Toggle answer visibility
+  window.toggleRespuestas = function(btn) {
+    respuestasVisibles = !respuestasVisibles;
+    document.body.classList.toggle('show-answers', respuestasVisibles);
+    btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+    
+    if (respuestasVisibles) {
+      const partData = testData[currentPart];
+      document.querySelectorAll('.question').forEach(card => {
+        const qid = card.dataset.qid;
+        const correcta = partData[qid].a;
+        card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      });
+    } else {
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+    }
+  };
+
+  // Initialize tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      switchPart(parseInt(tab.dataset.part));
+    });
+  });
+
+  // Initialize on load
+  window.addEventListener('load', () => {
+    document.getElementById('tab_1').classList.add('active');
+    generarTest();
+  });
+// Scroll to top button functionality
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top on click
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+})();
+</script>
+</body>
+</html>

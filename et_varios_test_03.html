@@ -297,6 +297,7 @@ const testData = {
       ]},
     "23": {
       "q": "¿Qué información transmite el siguiente cartelón? RCF Art 2.1.3.13-S",
+      img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_varios_03.23.png",
       "a": "B",
       "opts": [
         {"l": "A", "t": "El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)"},
@@ -351,6 +352,7 @@ const testData = {
       ]},
     "29": {
       "q": "¿Qué indica la siguiente señal? RCF Art 2.1.3.11; Pt 4",
+      img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_varios_03.29.png",
       "a": "A",
       "opts": [
         {"l": "A", "t": "El fin de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
@@ -378,6 +380,7 @@ const testData = {
       ]},
     "32": {
       "q": "¿Qué indica el siguiente cartelón? RCF 2.1.3.13 - F",
+      img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_varios_03.32.png",
       "a": "B",
       "opts": [
         {"l": "A", "t": "El comienzo de un grupo de PN protegidos por una señal."},
@@ -450,6 +453,7 @@ const testData = {
       ]},
     "40": {
       "q": "¿Qué simboliza el siguiente gráfico y que información transmite? RCF Art 2.1.2.10",
+      "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_varios_03.40.png",
       "a": "B",
       "opts": [
         {"l": "A", "t": "Color azul, LZB y ERTMS para alta velocidad."},
@@ -573,9 +577,18 @@ function generarTest() {
       `;
     });
 
+    const imagenHTML = q.img
+  ? `<div style="margin:10px 0;text-align:center">
+       <img src="${q.img}" alt="Imagen pregunta ${qid}"
+            style="max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.15)">
+     </div>`
+  : '';
+
+    
     card.innerHTML = `
       <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
       <div class="q-title">${q.q}</div>
+      ${imagenHTML}
       <div class="options">${opcionesHTML}</div>
       <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
       <div class="feedback"></div>

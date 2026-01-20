@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RCF VARIOS - 4</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
+.header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
+.header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:10px 8px 100px}
+.progress-bar{background:rgba(255,255,255,.1);height:3px;border-radius:999px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3a9d9a);width:0%;transition:width .3s ease}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.q-title{font-weight:600;margin-bottom:10px;line-height:1.4;font-size:14px}
+.q-number{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:6px;display:block}
+.options{display:grid;grid-template-columns:1fr;gap:6px}
+.option{background:#121a34;border:2px solid rgba(255,255,255,.08);padding:8px;border-radius:8px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:all .2s;font-size:13px;line-height:1.3}
+.option:active{background:#1a2341;border-color:rgba(91,192,190,.3)}
+.option input{margin-top:2px;cursor:pointer;flex-shrink:0}
+.option div{flex:1}
+.answer-key{display:none;margin-top:8px;padding:8px;background:rgba(91,192,190,.1);border-radius:6px;font-size:12px}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.feedback{margin-top:6px;font-size:12px;font-weight:600;padding:6px;border-radius:4px}
+.correct{border-color:rgba(33,193,122,.6)!important;background:rgba(33,193,122,.05)!important}
+.incorrect{border-color:rgba(255,93,115,.75)!important;background:rgba(255,93,115,.05)!important}
+.actions{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.99));padding:10px 8px;padding-bottom:calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);z-index:99}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;touch-action:manipulation}
+button:active{background:var(--accent);opacity:.9;transform:scale(.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+button.secondary:active{background:rgba(255,255,255,.05)}
+.score{font-weight:700;font-size:1rem}
+.score-details{font-size:11px;color:var(--text);opacity:.8;margin-top:2px}
+.footer{opacity:.8;font-size:11px;text-align:center;padding:15px;color:rgba(255,255,255,.5)}
+@media (min-width: 720px){
+  .options{grid-template-columns:1fr 1fr}
+  body{font-size:15px}
+  .card{padding:20px;margin:16px 0;border-radius:16px}
+  .q-title{font-size:15px;margin-bottom:12px}
+  .option{padding:12px;gap:10px;font-size:14px}
+  .header{padding:20px 16px}
+  .header h1{font-size:1.5rem;margin-bottom:8px}
+  .container{padding:20px 16px 120px}
+  button{padding:12px 18px;font-size:14px}
+}
+@media (max-width: 640px){
+  .actions .bar{flex-direction:column;gap:6px}
+  .score{text-align:center;width:100%;font-size:0.95rem}
+  .actions{padding:8px 6px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  button{width:100%;padding:11px 12px}
+}
+.scroll-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;touch-action:manipulation}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:active{transform:scale(.95)}
+@media (max-width:640px){
+  .scroll-top{width:36px;height:36px;bottom:16px;right:16px;font-size:18px}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>RCF VARIOS - 4</h1>
+    <div class="badge">60 preguntas</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+  
+  <div class="container" id="questionsContainer">
+    <!-- Questions will be generated here -->
+  </div>
+
+  <div class="actions">
+    <div class="bar">
+      <div>
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div class="score-details" id="scoreDetails"></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="calificar()">📊 Calificar</button>
+        <button class="secondary" onclick="reiniciar()">🔄 Reiniciar</button>
+        <button class="secondary" onclick="toggleRespuestas(this)">👁️ Ver respuestas</button>
+      </div>
+    </div>
+  </div>
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+  
+<script>
+// Test data with questions and answers
+// ????
+const testData = {
+  "1": {q: "El responsable técnico deberá garantizar la calidad y la consistencia de los trabajos realizados cuando estos sean concertados por:", a: "C", opts: [
+    {l: "A", t: "Piloto de Seguridad habilitado para concertar trabajos (PSH)"},
+    {l: "B", t: "Piloto de Seguridad (PS)"},
+    {l: "C", t: "Piloto de Seguridad habilitado para concertar trabajos y, en su caso, también por un Encargado de Trabajos."},
+    {l: "D", t: "Encargado de trabajos (ET)"}
+  ]},
+  "2": {q: "¿Quién impartirá las instrucciones a los Maquinistas para el apartado de los trenes en las estaciones?", a: "B", opts: [
+    {l: "A", t: "El RC del PM"},
+    {l: "B", t: "El ET"},
+    {l: "C", t: "El ET o el RC de la estación"},
+    {l: "D", t: "El ET o el PSH"}
+  ]},
+  "3": {q: "Los PS y Responsables Técnicos transmitirán la finalización de los trabajos y las condiciones en las que se entrega la vía y las instalaciones afectadas al ET o PSH. La comunicación se hará ….", a: "B", opts: [
+    {l: "A", t: "Por telefonema"},
+    {l: "B", t: "Verbalmente"},
+    {l: "C", t: "Por radiotelefonía"},
+    {l: "D", t: "De manera Escrita"}
+  ]},
+  "4": {q: "¿Cuál es el objetivo del RCF?", a: "B", opts: [
+    {l: "A", t: "...unificando los criterios de operación de los distintos AI en ancho convencional."},
+    {l: "B", t: "...unificando los criterios de operación de los distintos AI en los distintos anchos de la Red."},
+    {l: "C", t: "...unificando los criterios de operación de los distintos AI en ancho internacional."},
+    {l: "D", t: "...unificando los criterios de operación de los distintos AI y el responsable de circulación..."}
+  ]},
+  "5": {q: "¿Cuál de las respuestas no es un requisito que deben cumplir los vehículos a la hora de formar un tren?", a: "C", opts: [
+  {l: "A", t: "Características de frenado"},
+  {l: "B", t: "Velocidad máxima"},
+  {l: "C", t: "Inscripción en el gálibo"},
+  {l: "D", t: "Estado de mantenimiento"}
+  ]},
+  "6": {q: "ADIF debe disponer de un Sistema de Gestión de Seguridad en la circulación porque así se determina en: Libro Doc. Complementaria ET: Introducción al SGSC", a: "A", opts: [
+  {l: "A", t: "Directiva 2016/798"},
+  {l: "B", t: "Directiva 2004/49"},
+  {l: "C", t: "Reglamento 2016/2338"},
+  {l: "D", t: "Directiva 2016/796"}
+]},
+"7": {q: "¿Cuál es la corriente eléctrica suministrada a los vehículos ferroviarios en las líneas por ADIF? (Libro ET de infraestructura; Pág. 113)", a: "B", opts: [
+  {l: "A", t: "3.000 Vcc"},
+  {l: "B", t: "1.500 y 3.000 Vcc y 25.000 Vca"},
+  {l: "C", t: "25.000 Vca"},
+  {l: "D", t: "1.500 y 25.000 Vca"}
+]},
+"8": {q: "En caso de encontrarse señales distintas en un mismo lugar ¿Cuál sería la actuación por parte del Maquinista? (RCF Art 2.1.1.3)", a: "D", opts: [
+  {l: "A", t: "Se cumplimentarán todas ellas."},
+  {l: "B", t: "Ponerse en comunicación con el RC que las tenga a su cargo y solicitar instrucciones."},
+  {l: "C", t: "Realizar detención inmediata y poner en contacto con el RC de la Banda de Regulación del PM."},
+  {l: "D", t: "En caso de ordenes contradictorias o incompatibles entre sí: se cumplirá la más restrictiva."}
+]},
+"9": {q: "¿Cuál de las siguientes afirmaciones sobre el Sistema de la Seguridad en la Circulación (SGSC) es incorrecta? (Libro Doc. Complementaria ET: Introducción al SGSC)", a: "B", opts: [
+  {l: "A", t: "Es la organización y redacción de las medidas establecidas por un AI (ADIF) para garantizar la gestión en condiciones de seguridad de todas sus operaciones."},
+  {l: "B", t: "Basado en recomendaciones técnicas de AESF sobre el modelo del sistema ferroviario."},
+  {l: "C", t: "Están en constante actualización y crecimiento."},
+  {l: "D", t: "Son requisito imprescindible para la obtención de la Autorización de Seguridad."}
+]},
+"10": {q: "Control, Mando y Señalización (CMS): (RCF Art 1.1.13; Pt 10)", a: "B", opts: [
+  {l: "A", t: "Subsistema ferroviario definido por las especificaciones técnicas de la AESF, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados a transitar por la red."},
+  {l: "B", t: "Subsistema ferroviario definido por la Directiva Europea de Interoperabilidad Ferroviaria, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados a transitar por la red."},
+  {l: "C", t: "Subsistema ferroviario definido por la Directiva Europea de Interoperabilidad Ferroviaria, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes permitidos a transitar en la RFIG."},
+  {l: "D", t: "Subsistema ferroviario definido por el SGS de los AI y EF, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados transitar por la red."}
+]},
+"11": {q: "Las señales fijas (luminosas) que no estén en servicio y que no sea posible desmontar, se mantendrán apagadas, con sus focos tapados y con su cabeza girada y tapada de forma efectiva, para que no den indicaciones hacia la vía. ¿Es suficiente para considerarla fuera de servicio? (RCF Art 2.1.1.6)", a: "A", opts: [
+  {l: "A", t: "Si"},
+  {l: "B", t: "Si, y cuando no sea posible taparlos se pondrán dos listones rectangulares en forma de aspa pintados de blanco."},
+  {l: "C", t: "No, ya que además es necesario el correspondiente Aviso."},
+  {l: "D", t: "No, delante de la señal tiene que tener dos listones rectangulares pintados de blanco."}
+]},
+"12": {q: "¿En qué casos se instalarán cartelones ‘Silbar Obreros’ (Art 2.1.3.13-A) en la vía o vías contiguas cuando se tiene establecida el ILT? (RCF Art 3.3.2.4; Pt 4)", a: "D", opts: [
+  {l: "A", t: "Siempre que se trabaje en zona de peligro."},
+  {l: "B", t: "Cuando se compatibilice la circulación por la vía o vías contiguas y se trabaje en Zona de Riesgo."},
+  {l: "C", t: "Una vez concedida la autorización por el RC, no hace falta instalarlos."},
+  {l: "D", t: "Con circulaciones compatibles con los trabajos que pudieran resultar afectadas por éstos, y en ambos sentidos de circulación."}
+]},
+"13": {q: "¿Qué requiere el bloqueo en un tramo de vía entre dos estaciones colaterales abiertas? (RCF Art 4.1.1.1; Pt 1)", a: "A", opts: [
+  {l: "A", t: "Establecer una relación de dependencias entre ambas, que permita expedir circulaciones de una a otra en condiciones seguras."},
+  {l: "B", t: "Establecer una relación de dependencias entre ambas, que permita expedir circulaciones de trenes en condiciones seguras."},
+  {l: "C", t: "Establecer una relación de dependencias total, que permita expedir circulaciones de una a otra en condiciones seguras."},
+  {l: "D", t: "Establecer una relación de acuerdos bilaterales, que permita expedir circulaciones de una a otra en condiciones seguras."}
+]},
+"14": {q: "¿Dónde se debe proceder a notificar una LTV que no suponga un CSV y que no se encuentre señalizada?", a: "D", opts: [
+  {l: "A", t: "Al no ser un CSV se puede notificar en la última estación"},
+  {l: "B", t: "Donde se pueda asegurar la detección del tren."},
+  {l: "C", t: "En la estación colateral anterior al trayecto afectado."},
+  {l: "D", t: "En la estación más cercana posible al trayecto afectado donde el tren tenga parada."}
+]},
+"15": {q: "En que casos se podrá establecer un Pasos a Nivel provisional. (RCF Art 5.1.6.2; Pt 1)", a: "B", opts: [
+  {l: "A", t: "Únicamente con carácter provisional por causas justificadas y por el tiempo estrictamente necesario."},
+  {l: "B", t: "Únicamente con carácter excepcional por causas justificadas y por el tiempo estrictamente necesario."},
+  {l: "C", t: "Únicamente con carácter provisional por causas estrictamente justificadas y por el tiempo necesario."},
+  {l: "D", t: "Únicamente con carácter excepcional por causas justificadas por el tiempo indispensable."}
+]},
+"16": {q: "¿En qué documento reglamentario, elaborado por el AI, se recogen las velocidades máximas de velocidad? (Libro Doc. Comp. ET: Introducción al SGSC)", a: "C", opts: [
+  {l: "A", t: "Consigna"},
+  {l: "B", t: "Aviso"},
+  {l: "C", t: "Horario de los trenes"},
+  {l: "D", t: "Libro del Maquinista"}
+]},
+"17": {q: "Señale la respuesta correcta, respecto a las obligaciones del Maquinista en un EVB: (RCF Art 3.3.3.4; Pt 7)", a: "D", opts: [
+  {l: "A", t: "Respetará las ordenes de las señales, incluyendo las señales intermedias en líneas de BA y las de los PCA en líneas de BSL y BCA que las considerará inexistentes."},
+  {l: "B", t: "Se atendrá a las instrucciones del ET sobre los rebases de las señales diferentes de las intermedias."},
+  {l: "C", t: "Para realizar pruebas con vehículos dotados de equipo de señalización en cabina, conectará el mismo, salvo indicación en contra en la correspondiente Consigna de pruebas."},
+  {l: "D", t: "Se atendrá a las instrucciones del Encargado de trabajos o de pruebas sobre las operaciones a realizar, paradas, movimientos de avance o retroceso y condiciones de circulación en la EVB."}
+]},
+"18": {q: "¿Cuál de los siguientes vehículos no se denomina Maquinaria de vía según definición? (RCF Art 1.1.1.3; Pt 29)", a: "A", opts: [
+  {l: "A", t: "Dresina de electrificación"},
+  {l: "B", t: "Bateadora-estabilizadora"},
+  {l: "C", t: "Desguarnecedora"},
+  {l: "D", t: "Quitanieves rotativa"}
+]},
+"19": {q: "En un viaducto de una línea con BAD, se están realizando trabajos en vía I, que no afecta al gálibo ni a la electrificación de la vía II. ¿Qué velocidad máxima se notificará al Maquinista se circula en vía II? (RCF Art 3.3.1.1; Pt 3)", a: "D", opts: [
+  {l: "A", t: "160 km/h o en caso necesario, se podrá establecer una velocidad menor."},
+  {l: "B", t: "Al tratarse de trabajos en un viaducto no se permite circulación por la vía contigua, aunque éstas no afecten a su gálibo o electrificación."},
+  {l: "C", t: "160 km/h siempre que la zona de trabajos cuente con un ET o PS."},
+  {l: "D", t: "120 km/h. En caso necesario, se podrá establecer una velocidad menor."}
+]},
+"20": {q: "¿Qué se entiende por Capacidad? (Libro Doc. Comp. ET.; Legislación Ferroviaria; Pág. 25)", a: "B", opts: [
+  {l: "A", t: "Número de franjas disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la tipología del tráfico."},
+  {l: "B", t: "Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la tipología del tráfico."},
+  {l: "C", t: "Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la orografía del terreno."},
+  {l: "D", t: "Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la circulación."}
+]},
+"21": {q: "Para que una estación en ML pueda abrir una señal de salida hacia una estación en MC es necesaria la autorización previa por parte del:", a: "C", opts: [
+    {l:"A", t:"RC de la Banda de Regulación del PM"},
+    {l:"B", t:"RC de la estación colateral abierta"},
+    {l:"C", t:"RC del CTC"},
+    {l:"D", t:"No hace falta autorización previa"}
+  ]},
+  "22": {q: "¿Qué significa el acrónimo mt?", a: "C", opts: [
+    {l:"A", t:"Marche el tren"},
+    {l:"B", t:"Movimiento de tren"},
+    {l:"C", t:"Masa total"},
+    {l:"D", t:"Ninguna es correcta"}
+  ]},
+  "23": {q: "¿Qué información transmite el siguiente cartelón?", a: "B", opts: [
+    {l:"A", t:"El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)"},
+    {l:"B", t:"El punto donde empieza el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)"},
+    {l:"C", t:"El punto donde empieza el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 6 m)"},
+    {l:"D", t:"El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 6 m)"}
+  ]},
+  "24": {q: "En relación con el bloqueo, ¿Cómo deberá ser la relación de dependencia entre las dos estaciones colaterales abiertas en vías con un único sentido de circulación, sin señales intermedias?", a: "A", opts: [
+    {l:"A", t:"La relación de dependencia entre estaciones será total."},
+    {l:"B", t:"La relación de dependencia entre estaciones estará diseñada por el tipo de Bloqueo que utilizan."},
+    {l:"C", t:"La relación de dependencia entre estaciones será la indicada por el RC de la Banda de Regulación del PM o del CTC."},
+    {l:"D", t:"La relación de dependencia entre estaciones será la establecida por los RC de dichas estaciones."}
+  ]},
+  "25": {q: "Piquete de entrevías…", a: "A", opts: [
+    {l:"A", t:"Indica el punto hasta donde es compatible la circulación simultanea por ambas vías, sin que se produzcan interferencias entre ellas."},
+    {l:"B", t:"Indica el punto donde es compatible la circulación simultanea por vías contiguas, sin que se produzcan interferencias entre ellas."},
+    {l:"C", t:"Indica el punto hasta donde es compatible la circulación simultanea por las vías, sin que se produzcan interferencias entre ellas."},
+    {l:"D", t:"Indica el punto hasta donde es compatible la circulación simultanea por ambas vías, sin que interfiera los gálibos entre ellas."}
+  ]},
+  "26": {q: "El Material rodante auxiliar …", a: "D", opts: [
+    {l:"A", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo del bloqueo nominal y no degradado de las líneas por las que circule."},
+    {l:"B", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo de éste o degradado de las líneas por las que circule."},
+    {l:"C", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre en bloqueo nominal y degradado de las líneas por las que circule."},
+    {l:"D", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo del bloqueo nominal o degradado de las líneas por las que circule."}
+  ]},
+  "27": {q: "¿Cuál de estas señales son ambas interiores?", a: "D", opts: [
+    {l:"A", t:"Retroceso y protección"},
+    {l:"B", t:"Liberación y maniobra"},
+    {l:"C", t:"Intermedia y liberación"},
+    {l:"D", t:"Retroceso y maniobra"}
+  ]},
+  "28": {q: "En el escenario definido en el punto 8 del Art 3.3.2.2 (Sistema de ILT), el RC que reciba la solicitud por parte del ET o PSH, la primera actuación previa a la concesión del ILT será….", a: "B", opts: [
+    {l:"A", t:"Comprobar la liberación efectiva del cantón por los medios a su disposición."},
+    {l:"B", t:"Cursará a su colateral el telefonema L3.3 incluyendo el texto ‘Pasó por el km a las ’."},
+    {l:"C", t:"Concederá el sistema de trabajos al PSH o ET, ya que así lo recoge en el acta de trabajos."},
+    {l:"D", t:"Esperará hasta que el último vehículo del tren deje liberado el cantón donde se solicitan los trabajos."}
+  ]},
+  "29": {q: "¿Qué indica la siguiente señal?", a: "A", opts: [
+    {l:"A", t:"El fin de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
+    {l:"B", t:"El anuncio de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
+    {l:"C", t:"La proximidad de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
+    {l:"D", t:"Ninguna es correcta."}
+  ]},
+  "30": {q: "¿Cuál de las siguientes respuestas no constituye una instalación de seguridad?", a: "C", opts: [
+    {l:"A", t:"Dispositivos embarcados, por ejemplo, Vigilancia (hombre muerto)."},
+    {l:"B", t:"BAD, BCA y BSL."},
+    {l:"C", t:"Todas son instalaciones de seguridad"},
+    {l:"D", t:"Detectores de viento lateral"}
+  ]},
+  "31": {q: "De las siguientes opciones, señale la siguiente respuesta sobre la inmovilización del material rodante:", a: "D", opts: [
+    {l:"A", t:"En los cortes de material separados de la locomotora, únicamente será necesario hacer unos de los frenos de estacionamiento o de los calces cuando el tiempo de estacionamiento sea superior a 120 minutos."},
+    {l:"B", t:"Cuando se realice cortes de material en las estaciones, la EF garantizará que el corte queda inmovilizado con calces antideriva en las ruedas externas, independientemente del tiempo que el corte de material se quede inmovilizado."},
+    {l:"C", t:"Los cortes de material separados de la locomotora quedarán inmovilizados con los frenos de estacionamiento y/o mediante calces."},
+    {l:"D", t:"En los vehículos motores o de características singulares inmovilizados en una estación, en su caso la colocación de calces, se realizará en las ruedas en las que resulte más eficaz."}
+  ]},
+  "32": {q: "¿Qué indica el siguiente cartelón?", a: "B", opts: [
+    {l:"A", t:"El comienzo de un grupo de PN protegidos por una señal."},
+    {l:"B", t:"El último de un grupo de PN protegidos por una señal."},
+    {l:"C", t:"El último circuito de PN protegidos por una señal."},
+    {l:"D", t:"El comienzo de un grupo de PN protegidos por barreras o semibarreras."}
+  ]},
+  "33": {q: "¿A quién consulta el personal una duda de aplicación de las normas de circulación?", a: "C", opts: [
+    {l:"A", t:"Al personal de formación"},
+    {l:"B", t:"Al PM"},
+    {l:"C", t:"A su responsable o mando inmediato"},
+    {l:"D", t:"A cualquier agente habilitado"}
+  ]},
+  "34": {q: "¿Cuáles son las competencias vinculadas a la habilitación de Encargado de trabajos?", a: "C", opts: [
+    {l:"A", t:"Realiza las funciones correspondientes a actuaciones en entrega de vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria."},
+    {l:"B", t:"Realiza las funciones correspondientes a actuaciones en zona de peligro según se establece en la normativa ferroviaria en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que tenga en la infraestructura ferroviaria o en sus proximidades."},
+    {l:"C", t:"Realiza las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria o en sus proximidades."},
+    {l:"D", t:"Realiza las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria actual en materia de circulación, controlar y dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria o en sus proximidades."}
+  ]},
+  "35": {q: "Estaciones telemandadas.", a: "D", opts: [
+    {l:"A", t:"Son estaciones que no tiene un RC presente, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda, mediante el MC."},
+    {l:"B", t:"Son estaciones carentes de RC presente en la misma, cuyas instalaciones son gobernadas a distancia desde el CTC, mediante el MC."},
+    {l:"C", t:"Son estaciones sin un RC presente, cuyas instalaciones son gobernadas a distancia desde otra estación, o incorporarse un personal para controlarlas con MC."},
+    {l:"D", t:"Son estaciones carentes de RC presente en la misma, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda o desde el CTC, mediante el MC."}
+  ]},
+  "36": {q: "¿Cuál de estas opciones, corresponde con la protección normal de puntos interceptados?", a: "A", opts: [
+    {l:"A", t:"Consiste en la colocación de señales portátiles de parada a 1.500 m del punto de peligro y en sus proximidades."},
+    {l:"B", t:"Presentando desde la vía las señales portátiles de parada al tren o trenes que se aproximen, a la distancia de 1.500 m."},
+    {l:"C", t:"Consiste en la colocación de señales portátiles de parada en el eje de la vía a 1.500 m del punto de peligro."},
+    {l:"D", t:"Presentando con una persona las señales portátiles de parada al tren o trenes que se aproximen, a la distancia de 1.500 m."}
+  ]},
+  "37": {q: "En función del tipo de información facilitada al usuario, los sistemas de protección de un PN pueden ser:", a: "D", opts: [
+    {l:"A", t:"Pasivos (Clase P) y Activos (Clase 1, 2, 3 y 4)"},
+    {l:"B", t:"Pasivos (Clase A) y Activos (Clase con barreras y semibarreras automáticas)"},
+    {l:"C", t:"Pasivos (Clase N) y Activos (Clase A, B, C y D)"},
+    {l:"D", t:"Pasivos (Clase P) y Activos (Clase A1, A2, A3 y A4)"}
+  ]},
+  "38": {q: "Funcionalmente las eurobalizas pueden ser:", a: "B", opts: [
+    {l:"A", t:"Fijas, que transmiten los telegramas que tienen almacenado en la memoria. Y con telegramas variables."},
+    {l:"B", t:"Fijas, que transmiten un único telegrama que tiene almacenado en la memoria. Y con telegramas variables."},
+    {l:"C", t:"Fijas, que transmiten solo el telegrama que tiene recibe del codificador. Y con telegramas conmutables."},
+    {l:"D", t:"Fijas, que transmiten un único telegrama que tiene almacenado en su placa memoria. Y con telegramas diferentes."}
+  ]},
+  "39": {q: "Un tren circula por una estación con marcha de maniobra, hasta la salida. ¿Hasta cuando deberá circular el Maquinista con marcha de maniobra?", a: "A", opts: [
+    {l:"A", t:"La marcha de maniobra se mantendrá hasta rebasar las agujas de salida."},
+    {l:"B", t:"La marcha de maniobra la mantendrá hasta la señal de salida."},
+    {l:"C", t:"La marcha de maniobra se mantendrá hasta rebasar la señal de retroceso."},
+    {l:"D", t:"La marcha de maniobra la mantendrá hasta la siguiente aguja que observe."}
+  ]},
+  "40": {q: "¿Qué simboliza el siguiente gráfico y que información transmite?", a: "B", opts: [
+    {l:"A", t:"Color azul, LZB y ERTMS para alta velocidad."},
+    {l:"B", t:"Color blanco, Movimiento autorizado."},
+    {l:"C", t:"Color blanco, Rebase autorizado."},
+    {l:"D", t:"Color azul, si es a destellos, Parada Selectiva."}
+  ]},
+  "41": {q: "El transporte de estas mercancías por ferrocarril se rige por el RID en vigor, sin perjuicio de los reglamentos nacionales y de la UE vigente.", a: "C", opts: [
+    {l:"A", t:"Mercancía de alto riesgo."},
+    {l:"B", t:"Mercancías de gases y líquidos corrosivos."},
+    {l:"C", t:"Mercancías Peligrosas."},
+    {l:"D", t:"Mercancía excepcional."}
+  ]},
+  "42": {q: "Trabajos en las instalaciones de seguridad. Cuando el RC requiera realizar un itinerario para una circulación de un tren, en las instalaciones afectadas por los trabajados, solicitará la posición y comprobación de todos los elementos de la instalación al ET. ¿Esta solicitud por parte del RC y la responsabilidad de las medidas adoptadas del ET, como se realizará?", a: "A", opts: [
+    {l:"A", t:"Mediante el correspondiente telefonema por ambas partes."},
+    {l:"B", t:"Mediante la comunicación verbal por parte del RC y el telefonema por parte del ET."},
+    {l:"C", t:"Mediante el correspondiente telefonema por parte del RC y la comprobación visual del ET."},
+    {l:"D", t:"Mediante el telefonema por ambas partes, aunque también ser permite que sea verbal."}
+  ]},
+  "43": {q: "Bloqueos Automáticos. (RCF Art 4.2.1.1)", a: "D", opts: [
+  {l: "A", t: "La relación entre estaciones queda garantizada por la propia naturaleza de las instalaciones de seguridad."},
+  {l: "B", t: "La relación de dependencias entre estaciones queda garantizada por las distintas instalaciones existentes."},
+  {l: "C", t: "La relación entre estaciones queda garantizada por los diferentes tipos de tecnologías de la instalación."},
+  {l: "D", t: "La relación de dependencias entre estaciones queda garantizada por la propia naturaleza de la instalación."}
+]},
+"44": {q: "Debido a que la catenaria no es infinita, al ser compensada se le corta físicamente. Un tipo de seccionamiento es de cantón: (Libro ET de Infraestructura; Pág. 123)", a: "D", opts: [
+  {l: "A", t: "Cuya longitud máxima estará en 1.000 m. En el caso de cantones de compensación aproximados a 650 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."},
+  {l: "B", t: "Cuya longitud estará en torno a 1.200 m. En el caso de cantones de compensación igual o menor a 640 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."},
+  {l: "C", t: "Cuya longitud máxima será de 1.100 m. En el caso de cantones de compensación iguales a 620 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."},
+  {l: "D", t: "Cuya longitud máxima estará en 1.200 m. En el caso de cantones de compensación menores a 640 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."}
+]},
+"45": {q: "¿Dónde se instalarán las pantallas de proximidad? (RCF Art 2.1.3.6; Pt 1 y 7)", a: "A", opts: [
+  {l: "A", t: "Se instalarán delante de las señales avanzadas, a las distancias indicadas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando no sea visible a la distancia de 300 m."},
+  {l: "B", t: "Se instalarán delante de las señales avanzadas, a las distancias nombradas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal del PN, cuando no sea visible a la distancia de 200 m."},
+  {l: "C", t: "Se instalarán delante de las señales avanzadas, a las distancias indicadas (200m, 200m y 150m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando sea visible a la distancia de 300 m."},
+  {l: "D", t: "Se instalarán delante de las señales entrada, a las distancias indicadas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando no sea visible a la distancia de 200 m."}
+]},
+"46": {q: "El sistema Tren-Tierra es constituido por: (Libro ET de Infraestructura; Pág. 245)", a: "A", opts: [
+  {l: "A", t: "Red Móvil y Red fija."},
+  {l: "B", t: "Red portátil y Red Central"},
+  {l: "C", t: "Red Móvil y Red de Mando"},
+  {l: "D", t: "Red Principal y Red Secundaria"}
+]},
+"47": {q: "En los trayectos con declividad superior a 10 mm/m, ¿Dónde se sitúa el vehículo motor? (RCF Art 3.3.6.1)", a: "B", opts: [
+  {l: "A", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno estacionamiento en toda su composición."},
+  {l: "B", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno automático en toda la composición."},
+  {l: "C", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno automático en todos los vehículos remolcados."},
+  {l: "D", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno por aire comprimido en toda la longitud que lo compone."}
+]},
+"48": {q: "Cuando un PN automático o enclavado quede sin tensión, tenga rotas las semibarreras o apagadas las señales destellantes a la carretera, el RC de la Banda de regulación o del CTC dispondrá …. (RCF Art 5.2.6.2)", a: "C", opts: [
+  {l: "A", t: "El envío al PN de personal cualificado, con objeto de hacerse cargo de la avería."},
+  {l: "B", t: "El envío al PN de personal autorizado, con objeto de hacerse cargo del mismo."},
+  {l: "C", t: "El envío al PN de personal de habilitado, con objeto de hacerse cargo del mismo."},
+  {l: "D", t: "El envío al PN de personal como PS o ET, con el objeto de reparar el mismo."}
+]},
+"49": {q: "Declaración de la Red: (Libro Doc. Comp.; Conceptos Ferroviarios; Pág. 17)", a: "D", opts: [
+  {l: "A", t: "Se publica anualmente de forma genérica para Convencional (incluyendo RAM) y de manera excepcional una para Alta Velocidad (AV)."},
+  {l: "B", t: "Se publica anualmente de forma genérica para Convencional, otra para RAM y otra específica para Alta Velocidad (AV)."},
+  {l: "C", t: "Se publica anualmente de forma genérica para Red Convencional y RFIG y de manera específica una DR para Alta Velocidad (AV)."},
+  {l: "D", t: "Se publica anualmente de forma genérica para Convencional y RAM y de manera específica una DR para Alta Velocidad (AV)."}
+]},
+"50": {q: "Consignas CTO. (Libro Doc. Comp.; Introducción al SGSC)", a: "C", opts: [
+  {l: "A", t: "Consignas tipo C; de carácter Temporales Territoriales."},
+  {l: "B", t: "Consignas tipo C; de carácter Tráfico Territoriales."},
+  {l: "C", t: "Consignas tipo C; de carácter Transitorias Territoriales."},
+  {l: "D", t: "Consignas tipo C; de carácter Territoriales Temporales."}
+]}
+};
+
+
+  let respuestasVisibles = false;
+let totalPreguntas = Object.keys(testData).length;
+
+// Generate all questions on page load
+function generarTest() {
+  const container = document.getElementById('questionsContainer');
+  
+  Object.keys(testData).forEach(qid => {
+    const q = testData[qid];
+    const card = document.createElement('div');
+    card.className = 'card question';
+    card.dataset.qid = qid;
+    
+    let opcionesHTML = '';
+    q.opts.forEach(opt => {
+      opcionesHTML += `
+        <label class="option">
+          <input type="radio" name="q${qid}" value="${opt.l}" onchange="updateProgress()" />
+          <div><b>${opt.l})</b> ${opt.t}</div>
+        </label>
+      `;
+    });
+
+    card.innerHTML = `
+      <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
+      <div class="q-title">${q.q}</div>
+      <div class="options">${opcionesHTML}</div>
+      <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+      <div class="feedback"></div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+// Update progress bar
+function updateProgress() {
+  const respondidas = document.querySelectorAll('input[type=radio]:checked').length;
+  const porcentaje = (respondidas / totalPreguntas) * 100;
+  document.getElementById('progressBar').style.width = porcentaje + '%';
+}
+
+// Grade the test
+function calificar() {
+  let correctas = 0;
+  let incorrectas = 0;
+  let sinResponder = 0;
+  
+  document.querySelectorAll('.question').forEach(card => {
+    const qid = card.dataset.qid;
+    const correcta = testData[qid].a;
+    const seleccionada = card.querySelector('input[type=radio]:checked');
+    
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    
+    if (seleccionada) {
+      const letra = seleccionada.value;
+      if (letra === correcta) {
+        correctas++;
+        seleccionada.closest('.option').classList.add('correct');
+        card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+        card.querySelector('.feedback').style.color = 'var(--ok)';
+      } else {
+        incorrectas++;
+        seleccionada.closest('.option').classList.add('incorrect');
+        card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+        card.querySelector('.feedback').style.color = 'var(--bad)';
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      }
+    } else {
+      sinResponder++;
+      card.querySelector('.feedback').textContent = '⚠ Sin responder';
+      card.querySelector('.feedback').style.color = 'var(--warning)';
+    }
+  });
+  
+  const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+  const aprobado = porcentaje >= 50;
+  
+  document.getElementById('score').textContent = `${correctas} / ${totalPreguntas} (${porcentaje}%)`;
+  document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+  
+  document.getElementById('scoreDetails').innerHTML = `
+    ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+  `;
+  
+  // Scroll to top to see results
+ // window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Reset the test
+function reiniciar() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+  document.getElementById('score').removeAttribute('style');
+  document.getElementById('scoreDetails').textContent = '';
+  document.getElementById('progressBar').style.width = '0%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Toggle answer visibility
+function toggleRespuestas(btn) {
+  respuestasVisibles = !respuestasVisibles;
+  document.body.classList.toggle('show-answers', respuestasVisibles);
+  btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+  
+  if (respuestasVisibles) {
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = testData[qid].a;
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+      const corr = card.querySelector(`input[value="${correcta}"]`);
+      if (corr) corr.closest('.option').classList.add('correct');
+    });
+  } else {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+  }
+}
+
+// Initialize test on page load
+window.addEventListener('load', () => {
+  generarTest();
+});
+// Scroll to top button functionality
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top on click
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>
+</body>
+</html>

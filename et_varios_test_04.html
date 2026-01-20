@@ -68,7 +68,7 @@ button.secondary:active{background:rgba(255,255,255,.05)}
   <div class="header">
     <a href="index.html" class="back-btn">←</a>
     <h1>RCF VARIOS - 4</h1>
-    <div class="badge">60 preguntas</div>
+    <div class="badge">61 preguntas</div>
     <div class="progress-bar">
       <div class="progress-fill" id="progressBar"></div>
     </div>
@@ -97,306 +97,555 @@ button.secondary:active{background:rgba(255,255,255,.05)}
 // Test data with questions and answers
 // ????
 const testData = {
-  "1": {q: "El responsable técnico deberá garantizar la calidad y la consistencia de los trabajos realizados cuando estos sean concertados por:", a: "C", opts: [
-    {l: "A", t: "Piloto de Seguridad habilitado para concertar trabajos (PSH)"},
-    {l: "B", t: "Piloto de Seguridad (PS)"},
-    {l: "C", t: "Piloto de Seguridad habilitado para concertar trabajos y, en su caso, también por un Encargado de Trabajos."},
-    {l: "D", t: "Encargado de trabajos (ET)"}
-  ]},
-  "2": {q: "¿Quién impartirá las instrucciones a los Maquinistas para el apartado de los trenes en las estaciones?", a: "B", opts: [
-    {l: "A", t: "El RC del PM"},
-    {l: "B", t: "El ET"},
-    {l: "C", t: "El ET o el RC de la estación"},
-    {l: "D", t: "El ET o el PSH"}
-  ]},
-  "3": {q: "Los PS y Responsables Técnicos transmitirán la finalización de los trabajos y las condiciones en las que se entrega la vía y las instalaciones afectadas al ET o PSH. La comunicación se hará ….", a: "B", opts: [
-    {l: "A", t: "Por telefonema"},
-    {l: "B", t: "Verbalmente"},
-    {l: "C", t: "Por radiotelefonía"},
-    {l: "D", t: "De manera Escrita"}
-  ]},
-  "4": {q: "¿Cuál es el objetivo del RCF?", a: "B", opts: [
-    {l: "A", t: "...unificando los criterios de operación de los distintos AI en ancho convencional."},
-    {l: "B", t: "...unificando los criterios de operación de los distintos AI en los distintos anchos de la Red."},
-    {l: "C", t: "...unificando los criterios de operación de los distintos AI en ancho internacional."},
-    {l: "D", t: "...unificando los criterios de operación de los distintos AI y el responsable de circulación..."}
-  ]},
-  "5": {q: "¿Cuál de las respuestas no es un requisito que deben cumplir los vehículos a la hora de formar un tren?", a: "C", opts: [
-  {l: "A", t: "Características de frenado"},
-  {l: "B", t: "Velocidad máxima"},
-  {l: "C", t: "Inscripción en el gálibo"},
-  {l: "D", t: "Estado de mantenimiento"}
-  ]},
-  "6": {q: "ADIF debe disponer de un Sistema de Gestión de Seguridad en la circulación porque así se determina en: Libro Doc. Complementaria ET: Introducción al SGSC", a: "A", opts: [
-  {l: "A", t: "Directiva 2016/798"},
-  {l: "B", t: "Directiva 2004/49"},
-  {l: "C", t: "Reglamento 2016/2338"},
-  {l: "D", t: "Directiva 2016/796"}
-]},
-"7": {q: "¿Cuál es la corriente eléctrica suministrada a los vehículos ferroviarios en las líneas por ADIF? (Libro ET de infraestructura; Pág. 113)", a: "B", opts: [
-  {l: "A", t: "3.000 Vcc"},
-  {l: "B", t: "1.500 y 3.000 Vcc y 25.000 Vca"},
-  {l: "C", t: "25.000 Vca"},
-  {l: "D", t: "1.500 y 25.000 Vca"}
-]},
-"8": {q: "En caso de encontrarse señales distintas en un mismo lugar ¿Cuál sería la actuación por parte del Maquinista? (RCF Art 2.1.1.3)", a: "D", opts: [
-  {l: "A", t: "Se cumplimentarán todas ellas."},
-  {l: "B", t: "Ponerse en comunicación con el RC que las tenga a su cargo y solicitar instrucciones."},
-  {l: "C", t: "Realizar detención inmediata y poner en contacto con el RC de la Banda de Regulación del PM."},
-  {l: "D", t: "En caso de ordenes contradictorias o incompatibles entre sí: se cumplirá la más restrictiva."}
-]},
-"9": {q: "¿Cuál de las siguientes afirmaciones sobre el Sistema de la Seguridad en la Circulación (SGSC) es incorrecta? (Libro Doc. Complementaria ET: Introducción al SGSC)", a: "B", opts: [
-  {l: "A", t: "Es la organización y redacción de las medidas establecidas por un AI (ADIF) para garantizar la gestión en condiciones de seguridad de todas sus operaciones."},
-  {l: "B", t: "Basado en recomendaciones técnicas de AESF sobre el modelo del sistema ferroviario."},
-  {l: "C", t: "Están en constante actualización y crecimiento."},
-  {l: "D", t: "Son requisito imprescindible para la obtención de la Autorización de Seguridad."}
-]},
-"10": {q: "Control, Mando y Señalización (CMS): (RCF Art 1.1.13; Pt 10)", a: "B", opts: [
-  {l: "A", t: "Subsistema ferroviario definido por las especificaciones técnicas de la AESF, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados a transitar por la red."},
-  {l: "B", t: "Subsistema ferroviario definido por la Directiva Europea de Interoperabilidad Ferroviaria, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados a transitar por la red."},
-  {l: "C", t: "Subsistema ferroviario definido por la Directiva Europea de Interoperabilidad Ferroviaria, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes permitidos a transitar en la RFIG."},
-  {l: "D", t: "Subsistema ferroviario definido por el SGS de los AI y EF, constituido por todo el equipamiento necesario para garantizar la seguridad, el mando y el control de la circulación de los trenes autorizados transitar por la red."}
-]},
-"11": {q: "Las señales fijas (luminosas) que no estén en servicio y que no sea posible desmontar, se mantendrán apagadas, con sus focos tapados y con su cabeza girada y tapada de forma efectiva, para que no den indicaciones hacia la vía. ¿Es suficiente para considerarla fuera de servicio? (RCF Art 2.1.1.6)", a: "A", opts: [
-  {l: "A", t: "Si"},
-  {l: "B", t: "Si, y cuando no sea posible taparlos se pondrán dos listones rectangulares en forma de aspa pintados de blanco."},
-  {l: "C", t: "No, ya que además es necesario el correspondiente Aviso."},
-  {l: "D", t: "No, delante de la señal tiene que tener dos listones rectangulares pintados de blanco."}
-]},
-"12": {q: "¿En qué casos se instalarán cartelones ‘Silbar Obreros’ (Art 2.1.3.13-A) en la vía o vías contiguas cuando se tiene establecida el ILT? (RCF Art 3.3.2.4; Pt 4)", a: "D", opts: [
-  {l: "A", t: "Siempre que se trabaje en zona de peligro."},
-  {l: "B", t: "Cuando se compatibilice la circulación por la vía o vías contiguas y se trabaje en Zona de Riesgo."},
-  {l: "C", t: "Una vez concedida la autorización por el RC, no hace falta instalarlos."},
-  {l: "D", t: "Con circulaciones compatibles con los trabajos que pudieran resultar afectadas por éstos, y en ambos sentidos de circulación."}
-]},
-"13": {q: "¿Qué requiere el bloqueo en un tramo de vía entre dos estaciones colaterales abiertas? (RCF Art 4.1.1.1; Pt 1)", a: "A", opts: [
-  {l: "A", t: "Establecer una relación de dependencias entre ambas, que permita expedir circulaciones de una a otra en condiciones seguras."},
-  {l: "B", t: "Establecer una relación de dependencias entre ambas, que permita expedir circulaciones de trenes en condiciones seguras."},
-  {l: "C", t: "Establecer una relación de dependencias total, que permita expedir circulaciones de una a otra en condiciones seguras."},
-  {l: "D", t: "Establecer una relación de acuerdos bilaterales, que permita expedir circulaciones de una a otra en condiciones seguras."}
-]},
-"14": {q: "¿Dónde se debe proceder a notificar una LTV que no suponga un CSV y que no se encuentre señalizada?", a: "D", opts: [
-  {l: "A", t: "Al no ser un CSV se puede notificar en la última estación"},
-  {l: "B", t: "Donde se pueda asegurar la detección del tren."},
-  {l: "C", t: "En la estación colateral anterior al trayecto afectado."},
-  {l: "D", t: "En la estación más cercana posible al trayecto afectado donde el tren tenga parada."}
-]},
-"15": {q: "En que casos se podrá establecer un Pasos a Nivel provisional. (RCF Art 5.1.6.2; Pt 1)", a: "B", opts: [
-  {l: "A", t: "Únicamente con carácter provisional por causas justificadas y por el tiempo estrictamente necesario."},
-  {l: "B", t: "Únicamente con carácter excepcional por causas justificadas y por el tiempo estrictamente necesario."},
-  {l: "C", t: "Únicamente con carácter provisional por causas estrictamente justificadas y por el tiempo necesario."},
-  {l: "D", t: "Únicamente con carácter excepcional por causas justificadas por el tiempo indispensable."}
-]},
-"16": {q: "¿En qué documento reglamentario, elaborado por el AI, se recogen las velocidades máximas de velocidad? (Libro Doc. Comp. ET: Introducción al SGSC)", a: "C", opts: [
-  {l: "A", t: "Consigna"},
-  {l: "B", t: "Aviso"},
-  {l: "C", t: "Horario de los trenes"},
-  {l: "D", t: "Libro del Maquinista"}
-]},
-"17": {q: "Señale la respuesta correcta, respecto a las obligaciones del Maquinista en un EVB: (RCF Art 3.3.3.4; Pt 7)", a: "D", opts: [
-  {l: "A", t: "Respetará las ordenes de las señales, incluyendo las señales intermedias en líneas de BA y las de los PCA en líneas de BSL y BCA que las considerará inexistentes."},
-  {l: "B", t: "Se atendrá a las instrucciones del ET sobre los rebases de las señales diferentes de las intermedias."},
-  {l: "C", t: "Para realizar pruebas con vehículos dotados de equipo de señalización en cabina, conectará el mismo, salvo indicación en contra en la correspondiente Consigna de pruebas."},
-  {l: "D", t: "Se atendrá a las instrucciones del Encargado de trabajos o de pruebas sobre las operaciones a realizar, paradas, movimientos de avance o retroceso y condiciones de circulación en la EVB."}
-]},
-"18": {q: "¿Cuál de los siguientes vehículos no se denomina Maquinaria de vía según definición? (RCF Art 1.1.1.3; Pt 29)", a: "A", opts: [
-  {l: "A", t: "Dresina de electrificación"},
-  {l: "B", t: "Bateadora-estabilizadora"},
-  {l: "C", t: "Desguarnecedora"},
-  {l: "D", t: "Quitanieves rotativa"}
-]},
-"19": {q: "En un viaducto de una línea con BAD, se están realizando trabajos en vía I, que no afecta al gálibo ni a la electrificación de la vía II. ¿Qué velocidad máxima se notificará al Maquinista se circula en vía II? (RCF Art 3.3.1.1; Pt 3)", a: "D", opts: [
-  {l: "A", t: "160 km/h o en caso necesario, se podrá establecer una velocidad menor."},
-  {l: "B", t: "Al tratarse de trabajos en un viaducto no se permite circulación por la vía contigua, aunque éstas no afecten a su gálibo o electrificación."},
-  {l: "C", t: "160 km/h siempre que la zona de trabajos cuente con un ET o PS."},
-  {l: "D", t: "120 km/h. En caso necesario, se podrá establecer una velocidad menor."}
-]},
-"20": {q: "¿Qué se entiende por Capacidad? (Libro Doc. Comp. ET.; Legislación Ferroviaria; Pág. 25)", a: "B", opts: [
-  {l: "A", t: "Número de franjas disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la tipología del tráfico."},
-  {l: "B", t: "Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la tipología del tráfico."},
-  {l: "C", t: "Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la orografía del terreno."},
-  {l: "D", t: "Número de franjas horarias disponibles en un tramo de infraestructura ferroviaria, en un periodo de tiempo determinado, en función de la circulación."}
-]},
-"21": {q: "Para que una estación en ML pueda abrir una señal de salida hacia una estación en MC es necesaria la autorización previa por parte del:", a: "C", opts: [
-    {l:"A", t:"RC de la Banda de Regulación del PM"},
-    {l:"B", t:"RC de la estación colateral abierta"},
-    {l:"C", t:"RC del CTC"},
-    {l:"D", t:"No hace falta autorización previa"}
-  ]},
-  "22": {q: "¿Qué significa el acrónimo mt?", a: "C", opts: [
-    {l:"A", t:"Marche el tren"},
-    {l:"B", t:"Movimiento de tren"},
-    {l:"C", t:"Masa total"},
-    {l:"D", t:"Ninguna es correcta"}
-  ]},
-  "23": {q: "¿Qué información transmite el siguiente cartelón?", a: "B", opts: [
-    {l:"A", t:"El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)"},
-    {l:"B", t:"El punto donde empieza el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 4 m)"},
-    {l:"C", t:"El punto donde empieza el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 6 m)"},
-    {l:"D", t:"El punto donde termina el circuito eléctrico de agujas (distancia mínima al piquete de entrevías: 6 m)"}
-  ]},
-  "24": {q: "En relación con el bloqueo, ¿Cómo deberá ser la relación de dependencia entre las dos estaciones colaterales abiertas en vías con un único sentido de circulación, sin señales intermedias?", a: "A", opts: [
-    {l:"A", t:"La relación de dependencia entre estaciones será total."},
-    {l:"B", t:"La relación de dependencia entre estaciones estará diseñada por el tipo de Bloqueo que utilizan."},
-    {l:"C", t:"La relación de dependencia entre estaciones será la indicada por el RC de la Banda de Regulación del PM o del CTC."},
-    {l:"D", t:"La relación de dependencia entre estaciones será la establecida por los RC de dichas estaciones."}
-  ]},
-  "25": {q: "Piquete de entrevías…", a: "A", opts: [
-    {l:"A", t:"Indica el punto hasta donde es compatible la circulación simultanea por ambas vías, sin que se produzcan interferencias entre ellas."},
-    {l:"B", t:"Indica el punto donde es compatible la circulación simultanea por vías contiguas, sin que se produzcan interferencias entre ellas."},
-    {l:"C", t:"Indica el punto hasta donde es compatible la circulación simultanea por las vías, sin que se produzcan interferencias entre ellas."},
-    {l:"D", t:"Indica el punto hasta donde es compatible la circulación simultanea por ambas vías, sin que interfiera los gálibos entre ellas."}
-  ]},
-  "26": {q: "El Material rodante auxiliar …", a: "D", opts: [
-    {l:"A", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo del bloqueo nominal y no degradado de las líneas por las que circule."},
-    {l:"B", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo de éste o degradado de las líneas por las que circule."},
-    {l:"C", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre en bloqueo nominal y degradado de las líneas por las que circule."},
-    {l:"D", t:"Salvo en la EVB donde realice sus trabajos, se desplazará siempre al amparo del bloqueo nominal o degradado de las líneas por las que circule."}
-  ]},
-  "27": {q: "¿Cuál de estas señales son ambas interiores?", a: "D", opts: [
-    {l:"A", t:"Retroceso y protección"},
-    {l:"B", t:"Liberación y maniobra"},
-    {l:"C", t:"Intermedia y liberación"},
-    {l:"D", t:"Retroceso y maniobra"}
-  ]},
-  "28": {q: "En el escenario definido en el punto 8 del Art 3.3.2.2 (Sistema de ILT), el RC que reciba la solicitud por parte del ET o PSH, la primera actuación previa a la concesión del ILT será….", a: "B", opts: [
-    {l:"A", t:"Comprobar la liberación efectiva del cantón por los medios a su disposición."},
-    {l:"B", t:"Cursará a su colateral el telefonema L3.3 incluyendo el texto ‘Pasó por el km a las ’."},
-    {l:"C", t:"Concederá el sistema de trabajos al PSH o ET, ya que así lo recoge en el acta de trabajos."},
-    {l:"D", t:"Esperará hasta que el último vehículo del tren deje liberado el cantón donde se solicitan los trabajos."}
-  ]},
-  "29": {q: "¿Qué indica la siguiente señal?", a: "A", opts: [
-    {l:"A", t:"El fin de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
-    {l:"B", t:"El anuncio de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
-    {l:"C", t:"La proximidad de la trinchera, terraplén o zona inundable para las circulaciones de sentido contrario."},
-    {l:"D", t:"Ninguna es correcta."}
-  ]},
-  "30": {q: "¿Cuál de las siguientes respuestas no constituye una instalación de seguridad?", a: "C", opts: [
-    {l:"A", t:"Dispositivos embarcados, por ejemplo, Vigilancia (hombre muerto)."},
-    {l:"B", t:"BAD, BCA y BSL."},
-    {l:"C", t:"Todas son instalaciones de seguridad"},
-    {l:"D", t:"Detectores de viento lateral"}
-  ]},
-  "31": {q: "De las siguientes opciones, señale la siguiente respuesta sobre la inmovilización del material rodante:", a: "D", opts: [
-    {l:"A", t:"En los cortes de material separados de la locomotora, únicamente será necesario hacer unos de los frenos de estacionamiento o de los calces cuando el tiempo de estacionamiento sea superior a 120 minutos."},
-    {l:"B", t:"Cuando se realice cortes de material en las estaciones, la EF garantizará que el corte queda inmovilizado con calces antideriva en las ruedas externas, independientemente del tiempo que el corte de material se quede inmovilizado."},
-    {l:"C", t:"Los cortes de material separados de la locomotora quedarán inmovilizados con los frenos de estacionamiento y/o mediante calces."},
-    {l:"D", t:"En los vehículos motores o de características singulares inmovilizados en una estación, en su caso la colocación de calces, se realizará en las ruedas en las que resulte más eficaz."}
-  ]},
-  "32": {q: "¿Qué indica el siguiente cartelón?", a: "B", opts: [
-    {l:"A", t:"El comienzo de un grupo de PN protegidos por una señal."},
-    {l:"B", t:"El último de un grupo de PN protegidos por una señal."},
-    {l:"C", t:"El último circuito de PN protegidos por una señal."},
-    {l:"D", t:"El comienzo de un grupo de PN protegidos por barreras o semibarreras."}
-  ]},
-  "33": {q: "¿A quién consulta el personal una duda de aplicación de las normas de circulación?", a: "C", opts: [
-    {l:"A", t:"Al personal de formación"},
-    {l:"B", t:"Al PM"},
-    {l:"C", t:"A su responsable o mando inmediato"},
-    {l:"D", t:"A cualquier agente habilitado"}
-  ]},
-  "34": {q: "¿Cuáles son las competencias vinculadas a la habilitación de Encargado de trabajos?", a: "C", opts: [
-    {l:"A", t:"Realiza las funciones correspondientes a actuaciones en entrega de vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria."},
-    {l:"B", t:"Realiza las funciones correspondientes a actuaciones en zona de peligro según se establece en la normativa ferroviaria en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que tenga en la infraestructura ferroviaria o en sus proximidades."},
-    {l:"C", t:"Realiza las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación, controlar y, en su caso dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria o en sus proximidades."},
-    {l:"D", t:"Realiza las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria actual en materia de circulación, controlar y dirigir, los trabajos que se lleven a cabo en la infraestructura ferroviaria o en sus proximidades."}
-  ]},
-  "35": {q: "Estaciones telemandadas.", a: "D", opts: [
-    {l:"A", t:"Son estaciones que no tiene un RC presente, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda, mediante el MC."},
-    {l:"B", t:"Son estaciones carentes de RC presente en la misma, cuyas instalaciones son gobernadas a distancia desde el CTC, mediante el MC."},
-    {l:"C", t:"Son estaciones sin un RC presente, cuyas instalaciones son gobernadas a distancia desde otra estación, o incorporarse un personal para controlarlas con MC."},
-    {l:"D", t:"Son estaciones carentes de RC presente en la misma, cuyas instalaciones son gobernadas a distancia desde otra estación que la telemanda o desde el CTC, mediante el MC."}
-  ]},
-  "36": {q: "¿Cuál de estas opciones, corresponde con la protección normal de puntos interceptados?", a: "A", opts: [
-    {l:"A", t:"Consiste en la colocación de señales portátiles de parada a 1.500 m del punto de peligro y en sus proximidades."},
-    {l:"B", t:"Presentando desde la vía las señales portátiles de parada al tren o trenes que se aproximen, a la distancia de 1.500 m."},
-    {l:"C", t:"Consiste en la colocación de señales portátiles de parada en el eje de la vía a 1.500 m del punto de peligro."},
-    {l:"D", t:"Presentando con una persona las señales portátiles de parada al tren o trenes que se aproximen, a la distancia de 1.500 m."}
-  ]},
-  "37": {q: "En función del tipo de información facilitada al usuario, los sistemas de protección de un PN pueden ser:", a: "D", opts: [
-    {l:"A", t:"Pasivos (Clase P) y Activos (Clase 1, 2, 3 y 4)"},
-    {l:"B", t:"Pasivos (Clase A) y Activos (Clase con barreras y semibarreras automáticas)"},
-    {l:"C", t:"Pasivos (Clase N) y Activos (Clase A, B, C y D)"},
-    {l:"D", t:"Pasivos (Clase P) y Activos (Clase A1, A2, A3 y A4)"}
-  ]},
-  "38": {q: "Funcionalmente las eurobalizas pueden ser:", a: "B", opts: [
-    {l:"A", t:"Fijas, que transmiten los telegramas que tienen almacenado en la memoria. Y con telegramas variables."},
-    {l:"B", t:"Fijas, que transmiten un único telegrama que tiene almacenado en la memoria. Y con telegramas variables."},
-    {l:"C", t:"Fijas, que transmiten solo el telegrama que tiene recibe del codificador. Y con telegramas conmutables."},
-    {l:"D", t:"Fijas, que transmiten un único telegrama que tiene almacenado en su placa memoria. Y con telegramas diferentes."}
-  ]},
-  "39": {q: "Un tren circula por una estación con marcha de maniobra, hasta la salida. ¿Hasta cuando deberá circular el Maquinista con marcha de maniobra?", a: "A", opts: [
-    {l:"A", t:"La marcha de maniobra se mantendrá hasta rebasar las agujas de salida."},
-    {l:"B", t:"La marcha de maniobra la mantendrá hasta la señal de salida."},
-    {l:"C", t:"La marcha de maniobra se mantendrá hasta rebasar la señal de retroceso."},
-    {l:"D", t:"La marcha de maniobra la mantendrá hasta la siguiente aguja que observe."}
-  ]},
-  "40": {q: "¿Qué simboliza el siguiente gráfico y que información transmite?", a: "B", opts: [
-    {l:"A", t:"Color azul, LZB y ERTMS para alta velocidad."},
-    {l:"B", t:"Color blanco, Movimiento autorizado."},
-    {l:"C", t:"Color blanco, Rebase autorizado."},
-    {l:"D", t:"Color azul, si es a destellos, Parada Selectiva."}
-  ]},
-  "41": {q: "El transporte de estas mercancías por ferrocarril se rige por el RID en vigor, sin perjuicio de los reglamentos nacionales y de la UE vigente.", a: "C", opts: [
-    {l:"A", t:"Mercancía de alto riesgo."},
-    {l:"B", t:"Mercancías de gases y líquidos corrosivos."},
-    {l:"C", t:"Mercancías Peligrosas."},
-    {l:"D", t:"Mercancía excepcional."}
-  ]},
-  "42": {q: "Trabajos en las instalaciones de seguridad. Cuando el RC requiera realizar un itinerario para una circulación de un tren, en las instalaciones afectadas por los trabajados, solicitará la posición y comprobación de todos los elementos de la instalación al ET. ¿Esta solicitud por parte del RC y la responsabilidad de las medidas adoptadas del ET, como se realizará?", a: "A", opts: [
-    {l:"A", t:"Mediante el correspondiente telefonema por ambas partes."},
-    {l:"B", t:"Mediante la comunicación verbal por parte del RC y el telefonema por parte del ET."},
-    {l:"C", t:"Mediante el correspondiente telefonema por parte del RC y la comprobación visual del ET."},
-    {l:"D", t:"Mediante el telefonema por ambas partes, aunque también ser permite que sea verbal."}
-  ]},
-  "43": {q: "Bloqueos Automáticos. (RCF Art 4.2.1.1)", a: "D", opts: [
-  {l: "A", t: "La relación entre estaciones queda garantizada por la propia naturaleza de las instalaciones de seguridad."},
-  {l: "B", t: "La relación de dependencias entre estaciones queda garantizada por las distintas instalaciones existentes."},
-  {l: "C", t: "La relación entre estaciones queda garantizada por los diferentes tipos de tecnologías de la instalación."},
-  {l: "D", t: "La relación de dependencias entre estaciones queda garantizada por la propia naturaleza de la instalación."}
-]},
-"44": {q: "Debido a que la catenaria no es infinita, al ser compensada se le corta físicamente. Un tipo de seccionamiento es de cantón: (Libro ET de Infraestructura; Pág. 123)", a: "D", opts: [
-  {l: "A", t: "Cuya longitud máxima estará en 1.000 m. En el caso de cantones de compensación aproximados a 650 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."},
-  {l: "B", t: "Cuya longitud estará en torno a 1.200 m. En el caso de cantones de compensación igual o menor a 640 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."},
-  {l: "C", t: "Cuya longitud máxima será de 1.100 m. En el caso de cantones de compensación iguales a 620 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."},
-  {l: "D", t: "Cuya longitud máxima estará en 1.200 m. En el caso de cantones de compensación menores a 640 m, las compensaciones se realizarán en un solo extremo, en principio compensando en el sentido de circulación."}
-]},
-"45": {q: "¿Dónde se instalarán las pantallas de proximidad? (RCF Art 2.1.3.6; Pt 1 y 7)", a: "A", opts: [
-  {l: "A", t: "Se instalarán delante de las señales avanzadas, a las distancias indicadas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando no sea visible a la distancia de 300 m."},
-  {l: "B", t: "Se instalarán delante de las señales avanzadas, a las distancias nombradas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal del PN, cuando no sea visible a la distancia de 200 m."},
-  {l: "C", t: "Se instalarán delante de las señales avanzadas, a las distancias indicadas (200m, 200m y 150m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando sea visible a la distancia de 300 m."},
-  {l: "D", t: "Se instalarán delante de las señales entrada, a las distancias indicadas (150m, 150m y 200m). Y en el caso de Paso a Nivel, delante de la señal de protección de PN, cuando no sea visible a la distancia de 200 m."}
-]},
-"46": {q: "El sistema Tren-Tierra es constituido por: (Libro ET de Infraestructura; Pág. 245)", a: "A", opts: [
-  {l: "A", t: "Red Móvil y Red fija."},
-  {l: "B", t: "Red portátil y Red Central"},
-  {l: "C", t: "Red Móvil y Red de Mando"},
-  {l: "D", t: "Red Principal y Red Secundaria"}
-]},
-"47": {q: "En los trayectos con declividad superior a 10 mm/m, ¿Dónde se sitúa el vehículo motor? (RCF Art 3.3.6.1)", a: "B", opts: [
-  {l: "A", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno estacionamiento en toda su composición."},
-  {l: "B", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno automático en toda la composición."},
-  {l: "C", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno automático en todos los vehículos remolcados."},
-  {l: "D", t: "Se sitúa en el lado de posible deriva. Se exceptúa el caso de que el tren lleva freno por aire comprimido en toda la longitud que lo compone."}
-]},
-"48": {q: "Cuando un PN automático o enclavado quede sin tensión, tenga rotas las semibarreras o apagadas las señales destellantes a la carretera, el RC de la Banda de regulación o del CTC dispondrá …. (RCF Art 5.2.6.2)", a: "C", opts: [
-  {l: "A", t: "El envío al PN de personal cualificado, con objeto de hacerse cargo de la avería."},
-  {l: "B", t: "El envío al PN de personal autorizado, con objeto de hacerse cargo del mismo."},
-  {l: "C", t: "El envío al PN de personal de habilitado, con objeto de hacerse cargo del mismo."},
-  {l: "D", t: "El envío al PN de personal como PS o ET, con el objeto de reparar el mismo."}
-]},
-"49": {q: "Declaración de la Red: (Libro Doc. Comp.; Conceptos Ferroviarios; Pág. 17)", a: "D", opts: [
-  {l: "A", t: "Se publica anualmente de forma genérica para Convencional (incluyendo RAM) y de manera excepcional una para Alta Velocidad (AV)."},
-  {l: "B", t: "Se publica anualmente de forma genérica para Convencional, otra para RAM y otra específica para Alta Velocidad (AV)."},
-  {l: "C", t: "Se publica anualmente de forma genérica para Red Convencional y RFIG y de manera específica una DR para Alta Velocidad (AV)."},
-  {l: "D", t: "Se publica anualmente de forma genérica para Convencional y RAM y de manera específica una DR para Alta Velocidad (AV)."}
-]},
-"50": {q: "Consignas CTO. (Libro Doc. Comp.; Introducción al SGSC)", a: "C", opts: [
-  {l: "A", t: "Consignas tipo C; de carácter Temporales Territoriales."},
-  {l: "B", t: "Consignas tipo C; de carácter Tráfico Territoriales."},
-  {l: "C", t: "Consignas tipo C; de carácter Transitorias Territoriales."},
-  {l: "D", t: "Consignas tipo C; de carácter Territoriales Temporales."}
-]}
+  "1": {
+      "q": "En qué documento se encuentran definidas las dimensiones, colores, materiales y características de las señales fijas?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "En el RCF"},
+        {"l": "B", "t": "Catálogo de señales de la EF y del AI"},
+        {"l": "C", "t": "Libro oficial de señalización Ferroviaria"},
+        {"l": "D", "t": "Catálogo oficial de Señales Ferroviarias"}
+      ]},
+    "2": {
+      "q": "En las obras de tierra, ¿cómo se denomina cuando la explanación está más baja que el terreno natural?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Trinchera"},
+        {"l": "B", "t": "Terraplén"},
+        {"l": "C", "t": "Túnel"},
+        {"l": "D", "t": "Viaducto"}
+      ]},
+    "3": {
+      "q": "\"Centro específico de AI encargado de la gestión y regulación del tráfico en tiempo real\", ¿a qué dependencia nos estamos refiriendo?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "PM"},
+        {"l": "B", "t": "Estación telemandada"},
+        {"l": "C", "t": "CTC"},
+        {"l": "D", "t": "Estación"}
+      ]},
+    "4": {
+      "q": "¿Qué clase de protección tiene un Paso a Nivel protegido en régimen de consigna?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Clase B"},
+        {"l": "B", "t": "Clase C"},
+        {"l": "C", "t": "Clase A"},
+        {"l": "D", "t": "Clase D"}
+      ]},
+    "5": {
+      "q": "¿Cómo se denomina la relación de dependencia que se establece entre dos estaciones para poder expedir circulaciones de cada una de ellas hacia su colateral?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Bloqueo"},
+        {"l": "B", "t": "Enclavamiento"},
+        {"l": "C", "t": "Itinerario"},
+        {"l": "D", "t": "Acuerdos"}
+      ]},
+    "6": {
+      "q": "¿Cómo se encuentra desarrollado el SGS de Adif?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Procedimientos generales, instrucciones de aplicación, NAC, Consignas C y Avisos entre otros"},
+        {"l": "B", "t": "Procedimientos generales e instrucciones técnicas entre otros"},
+        {"l": "C", "t": "Procedimientos genéricos, especiales, operacionales e instrucciones generales entre otros"},
+        {"l": "D", "t": "Procedimientos generales, específicos, operativos e instrucciones técnicas entre otros"}
+      ]},
+    "7": {
+      "q": "¿Quién evalúa el Sistema de Gestión de Seguridad en la Circulación?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "La Dirección de Seguridad del Administrador de Infraestructura"},
+        {"l": "B", "t": "La Agencia Estatal de Seguridad Ferroviaria"},
+        {"l": "C", "t": "La Agencia Internacional de Seguridad Ferroviaria"},
+        {"l": "D", "t": "La ERA"}
+      ]},
+    "8": {
+      "q": "¿Quién tiene la responsabilidad del otorgamiento de las \"Licencias\" a las empresas ferroviarias?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "El Ministerio de Fomento"},
+        {"l": "B", "t": "El Administrador de Infraestructura por la que solicite circular"},
+        {"l": "C", "t": "La propia Empresa Ferroviaria a expensas del Ministerio de Fomento"},
+        {"l": "D", "t": "La Dirección de Seguridad del AI afectado"}
+      ]},
+    "9": {
+      "q": "¿Qué se entiende por Zona de Seguridad de los trabajos?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Espacios situados a más de 3 metros de distancia del borde exterior de la cabeza del carril por ambos lados de la vía"},
+        {"l": "B", "t": "Espacios situados a más de 2 metros de distancia del borde exterior de la cabeza del carril por ambos lados de la vía"},
+        {"l": "C", "t": "Espacios situados en la zona en la que no hay ningún riesgo para las circulaciones en ambos lados de la vía"},
+        {"l": "D", "t": "Espacios situados entre 2 y 3 metros de distancia del borde exterior de la cabeza del carril por ambos lados de la vía"}
+      ]},
+    "10": {
+      "q": "En general, el bloqueo de un tramo de vía entre dos estaciones colaterales abiertas, requiere establecer una relación de dependencia entre ambas, que permite expedir circulaciones de una a otra en condiciones seguras, ¿cómo será esta relación para el caso de vías con circulación en los dos sentidos?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "La relación de dependencia será total"},
+        {"l": "B", "t": "La relación de dependencia no existe en este caso"},
+        {"l": "C", "t": "La relación de dependencia descansa en las comunicaciones verbales entre los Responsables de Circulación"},
+        {"l": "D", "t": "La relación de dependencia será semitotal"}
+      ]},
+    "11": {
+      "q": "¡Qué sistema de bloqueo deberemos aplicar en el caso de anormalidad en líneas equipadas con BA o BLA?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "BTV"},
+        {"l": "B", "t": "BT"},
+        {"l": "C", "t": "EVB"},
+        {"l": "D", "t": "BCA"}
+      ]},
+    "12": {
+      "q": "Las siglas CMS hacen referencia a:",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Cuadro de Mando y Señalización"},
+        {"l": "B", "t": "Control de medios y Seguridad"},
+        {"l": "C", "t": "Control-Mando y Señalización"},
+        {"l": "D", "t": "Control, Mando y Seguridad"}
+      ]},
+    "13": {
+      "q": "Una señal que da indicación de \"parada\" y en el mástil tiene un cartel con la letra \"P\" ordena:",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Circular predispuesto a parar ante ella, y si nada se opone, el maquinista avanzará con marcha a la vista, sin exceder la velocidad de 40 km., hasta llegar a la señal siguiente cualquiera que sea su indicación"},
+        {"l": "B", "t": "Parar ante la señal sin rebasarla, después de la parada, y si nada se opone, el maquinista avanzará con marcha a la vista, sin exceder la velocidad de 40 km., hasta llegar a la señal siguiente cualquiera que sea su indicación"},
+        {"l": "C", "t": "Parar ante la señal sin rebasarla, solicitando el rebase, y si nada se opone, el maquinista avanzará con marcha a la vista, sin exceder la velocidad de 40 km., hasta llegar a la señal siguiente cualquiera que sea su indicación"},
+        {"l": "D", "t": "Parar ante la señal sin rebasarla, después de la parada, y si nada se opone, el maquinista avanzará con marcha a la vista, sin exceder la velocidad de 30 km., hasta llegar a la señal siguiente cualquiera que sea su indicación"}
+      ]},
+    "14": {
+      "q": "Para evitar que durante el servicio pueda estar afectada su capacidad de concentración, atención, incluso su conducta o facultades por efecto de los medicamentos, ¿qué obligación marca la NAR 1/16, Obligaciones del personal de servicio, al personal?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Leer los prospectos de los medicamentos que nos hayan recetado nuestro facultativo con el fin de valorar la compatibilidad"},
+        {"l": "B", "t": "Poner en conocimiento de nuestro mando inmediato los contenidos de los prospectos de los medicamentos recetados para que valore la conveniencia de prestar servicio."},
+        {"l": "C", "t": "Poner en conocimiento de nuestro facultativo las exigencias del puesto cuando vayan a prescribirnos un tratamiento médico, para que valore su compatibilidad"},
+        {"l": "D", "t": "Este documento no valora obligación alguna"}
+      ]},
+    "15": {
+      "q": "Las señales que regulan la circulación de trenes y maniobras son….",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Señales fijas de los trenes"},
+        {"l": "B", "t": "Señales fijas permanentes"},
+        {"l": "C", "t": "Señales fijas indicadoras"},
+        {"l": "D", "t": "Señales fijas fundamentales"}
+      ]},
+    "16": {
+      "q": "¿Qué aspecto luce en una señal que da la indicación de \"REBASE AUTORIZADO\"",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Rojo a destellos y blanco fijo"},
+        {"l": "B", "t": "Rojo fijo y blanco fijo o a destellos"},
+        {"l": "C", "t": "Rojo fijo y azul fijo"},
+        {"l": "D", "t": "Rojo fijo y blanco a destellos"}
+      ]},
+    "17": {
+      "q": "¿Cómo se actuara cuando sea necesario actuar con urgencia un caso no contemplado en las normas de circulación y relacionado con la seguridad?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Se actuara adoptando la actuación a la normativa reglamentaria en vigor"},
+        {"l": "B", "t": "Los mandos intermedios, valorarán con carácter provisional dar instrucciones directamente al personal afectado"},
+        {"l": "C", "t": "El PM dará, con carácter provisional, las instrucciones pertinentes mediante comunicación grabada o telefonema"},
+        {"l": "D", "t": "El PM dará las instrucciones pertinentes verbalmente, posteriormente lo comunicará por escrito."}
+      ]},
+    "18": {
+      "q": "La señalización por cabeza de los trenes está compuesta por…",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Alumbrado de gran intensidad y por las luces de posición"},
+        {"l": "B", "t": "Foco de gran luminosidad y luces secundarias"},
+        {"l": "C", "t": "Alumbrado principal y luces secundarias"},
+        {"l": "D", "t": "Foco de alta potencia principal y luces secundarias"}
+      ]},
+    "19": {
+      "q": "En el sistema de trabajo de Intervalo de liberación por tiempo, cuando en un mismo trayecto se realicen diversos trabajos de naturaleza diferente, ¿dispondrán de un encargado de Trabajo o Piloto de Seguridad Habilitado?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Para este tipo de trabajos deberán disponer necesariamente de un Encargado de Trabajos"},
+        {"l": "B", "t": "Dispondrán de un encargado de Trabajo o Piloto de seguridad habilitado para concertar trabajos en cada uno"},
+        {"l": "C", "t": "Para este tipo de trabajos, solo puede disponerse necesariamente de un Encargado de Trabajos para concertar trabajos en cada uno"},
+        {"l": "D", "t": "Dispondrán de un Encargado de Trabajos o piloto de seguridad habilitado para concertar trabajos que tendrá a su cargo la coordinación de todos los trabajos"}
+      ]},
+    "20": {
+      "q": "En vías dotadas de señales de salida, ¿dónde se encuentra el límite de compatibilidad operativa de circulación simultanea por ambas vías?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Siempre el piquete de salida de dichas vías"},
+        {"l": "B", "t": "Si existe piquete será este"},
+        {"l": "C", "t": "Lo marcan dichas señales"},
+        {"l": "D", "t": "El cartelón de \'Limite\'"}
+      ]},
+    "21": {
+      "q": "Un sector de vías, agujas y señales de una estación es un….",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Puesto de circulación"},
+        {"l": "B", "t": "Puesto de operación"},
+        {"l": "C", "t": "Puesto de banalización"},
+        {"l": "D", "t": "Puesto de cantonamiento"}
+      ]},
+    "22": {
+      "q": "Una señal fija fundamental con indicación de verde a destellos indica….",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Vía libre adicional"},
+        {"l": "B", "t": "Vía libre condicional"},
+        {"l": "C", "t": "Vía libre"},
+        {"l": "D", "t": "Vía libre condicionada"}
+      ]},
+    "23": {
+      "q": "¿Cuáles son los sistemas de ejecución de trabajos en la vía?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Interrupción de circulación y de liberación por tiempo"},
+        {"l": "B", "t": "Interrupción de circulación y de liberación automática"},
+        {"l": "C", "t": "Interrupción del tráfico y de liberación por tiempo"},
+        {"l": "D", "t": "Interrupción del tráfico y de liberación automática"}
+      ]},
+    "24": {
+      "q": "¿Cuál de los siguientes útiles no corresponden al tajo de trabajos?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Banderines rojos"},
+        {"l": "B", "t": "Cuando correspondan cartelones de \"Silbar obreros\""},
+        {"l": "C", "t": "Calces antiderivas cuando los trabajos se realicen en el interior de las estaciones"},
+        {"l": "D", "t": "Linternas dotadas de luces rojas y blancas"}
+      ]},
+    "25": {
+      "q": "¿Cómo se denomina a la actividad sujeta un Instrucción Específica de Trabajo realizada exclusivamente con herramientas manuales, que invadan o puedan invadir la zona de peligro o la zona de riesgo para que no afecten al funcionamiento normal de la vía, electrificación e instalaciones de seguridad y que no interrumpan la circulación de los trenes?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Trabajos compatibles con la circulación de trenes"},
+        {"l": "B", "t": "Actividades de regulación específica"},
+        {"l": "C", "t": "Trabajos de regulación excepcional"},
+        {"l": "D", "t": "Actividades de seguridad en la circulación"}
+      ]},
+    "26": {
+      "q": "¿Qué se debe hacer con una baliza asociada a una señal que está fuera de servicio?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Retirarla de la vía o fijar una chapa cubrebalizas impidan la transmisión"},
+        {"l": "B", "t": "Retirar la alimentación y fijar una chapa cubre cubrebalizas que impida la transmisión"},
+        {"l": "C", "t": "Anular o fijar una chapa cubre balizas que impida la transmisión"},
+        {"l": "D", "t": "Retirarla de la vía de modo que no interfiera la transmisión"}
+      ]},
+    "27": {
+      "q": "Cuando las normas prescriban la utilización de un impreso, las reglas, procedimientos o instrucciones que se den para su confección ¿se considerarán?...",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Recomendaciones"},
+        {"l": "B", "t": "Ejemplos con pautas de actuación"},
+        {"l": "C", "t": "Normas de circulación"},
+        {"l": "D", "t": "Ejemplos orientativos"}
+      ]},
+    "28": {
+      "q": "Cuando una señal de la indicación de \"PARADA SELECTIVA\" está luciendo…",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "En rojo fijo y Blanco a destellos"},
+        {"l": "B", "t": "Rojo fijo y blanco fijo"},
+        {"l": "C", "t": "Rojo a destellos y blanco fijo"},
+        {"l": "D", "t": "Rojo fijo y azul fijo a destellos"}
+      ]},
+    "29": {
+      "q": "¿En qué libro de Registro deberá inscribir el encargado de los trabajos la implantación de limitaciones temporales de velocidad?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Libro general de anotaciones"},
+        {"l": "B", "t": "En un papel en blanco como referencia de su transmisión"},
+        {"l": "C", "t": "Libro de bloqueo de infraestructura"},
+        {"l": "D", "t": "Libro general de telefonemas"}
+      ]},
+    "30": {
+      "q": "¿Qué respuesta se ajusta a la realidad sobre la obligatoriedad de la aplicación de las normas contempladas en el RCF?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Todo el personal de la EF, de los AI"},
+        {"l": "B", "t": "Todo el personal de las EF de los AI y de otras empresas, que intervienen, directa o indirectamente, en los procesos de circulación de trenes y maniobras"},
+        {"l": "C", "t": "Todo el personal de AI y de otras empresas constructoras que intervienen, directamente, en los procesos de circulación de trenes y maniobras"},
+        {"l": "D", "t": "Todo el personal de las de los AI de otras empresas"}
+      ]},
+    "31": {
+      "q": "Los cortes de material separados de la locomotora con suficiente freno quedan inmovilizados mediante el freno automático, ¿durante cuánto tiempo?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Un máximo de 180 minutos"},
+        {"l": "B", "t": "Siempre que se separe de la locomotora un corte de material, este se inmovilizará mediante el apriete del freno de estacionamiento"},
+        {"l": "C", "t": "Un máximo de 90 minutos"},
+        {"l": "D", "t": "Un máximo de 120 minutos"}
+      ]},
+    "32": {
+      "q": "¿Cómo se realiza la identificación de peligro de las mercancías peligrosas?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Mediante tres cifras y a veces precedido de la letra indicadora de la materia"},
+        {"l": "B", "t": "Mediante dos cifras y a veces precedido de la letra indicadora del peligro"},
+        {"l": "C", "t": "Mediante dos o tres cifras y a veces precedido de la letra X"},
+        {"l": "D", "t": "Mediante cuatro cifras y si es necesario mediante la letra X"}
+      ]},
+    "33": {
+      "q": "¿Cuál de las siguientes causas no se encuentra relacionada normalmente con los errores producidos según la naturaleza del Factor Humano?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Distracciones"},
+        {"l": "B", "t": "Condiciones y climatología"},
+        {"l": "C", "t": "Errores en la comunicación"},
+        {"l": "D", "t": "Déficit de atención"}
+      ]},
+    "34": {
+      "q": "Norma Adif Vía 7.0.1.0 afecta a…",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Líneas de ancho convencional (ancho ibérico)"},
+        {"l": "B", "t": "Líneas de ancho métrico"},
+        {"l": "C", "t": "Todos los anchos de la RFIG"},
+        {"l": "D", "t": "Líneas de ancho internacional (ancho UIC)"}
+      ]},
+    "35": {
+      "q": "Espacio alrededor de los elementos en tensión en que la presencia de un trabajador desprotegido supone un riesgo grave e inminente se denomina",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Zona de peligro o zona de trabajos sin tensión"},
+        {"l": "B", "t": "Zona de peligro o zona de trabajos en tensión"},
+        {"l": "C", "t": "Zona de peligro o zona de proximidad"},
+        {"l": "D", "t": "Zona de riesgo o zona de trabajos en tensión"}
+      ]},
+    "36": {
+      "q": "En líneas de vía doble o múltiple cuando la separación entre ambas sea inferior a 4 metros se aplicará las prestaciones correspondientes a la zona de…",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Seguridad"},
+        {"l": "B", "t": "Trabajos"},
+        {"l": "C", "t": "Peligro"},
+        {"l": "D", "t": "Riesgo"}
+      ]},
+    "37": {
+      "q": "En las zonas la zona comprendida entre la zona de peligro para los trabajos y la zona de seguridad para los trabajos se denomina…",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Zona de seguridad"},
+        {"l": "B", "t": "Zona de trabajos"},
+        {"l": "C", "t": "Zona de riesgo"},
+        {"l": "D", "t": "Zona de peligro"}
+      ]},
+    "38": {
+      "q": "¿Cómo se denomina una junta especial que permite recorridos importantes de los extremos de las barras largas (carriles) que concurren en ella absorbiendo los efectos de las variaciones de temperatura?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Aparato de alineación"},
+        {"l": "B", "t": "Aparato de compensación"},
+        {"l": "C", "t": "Aparato de nivelación"},
+        {"l": "D", "t": "Aparato de dilatación"}
+      ]},
+    "39": {
+      "q": "Normalmente, ¿a qué distancia del paso a nivel se instalan los cartelones de silbar en línea en la línea ferroviaria cuando hay un paso a nivel de clase A",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "300 metros"},
+        {"l": "B", "t": "600 metros"},
+        {"l": "C", "t": "500 metros"},
+        {"l": "D", "t": "400 metros"}
+      ]},
+    "40": {
+      "q": "¿Cuál es el ancho de vía convencional o ibérico?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "1.665"},
+        {"l": "B", "t": "1.666"},
+        {"l": "C", "t": "1.659"},
+        {"l": "D", "t": "1.668"}
+      ]},
+    "41": {
+      "q": "¿El aparato que permite el paso del material rodante por dos vías que parten de una común se denomina?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Travesía"},
+        {"l": "B", "t": "Aguja"},
+        {"l": "C", "t": "Desvío"},
+        {"l": "D", "t": "Cambio"}
+      ]},
+    "42": {
+      "q": "¿Para qué tipo de carril exacta la traviesa de hormigón bibloque tipo RS?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "UIC-45 y UIC-54"},
+        {"l": "B", "t": "UIC-45 y UIC-60"},
+        {"l": "C", "t": "UIC-54 y UIC-60"},
+        {"l": "D", "t": "UIC-45, UIC-54 y UIC-60"}
+      ]},
+    "43": {
+      "q": "¿Cuál es la velocidad máxima de paso por un desvío tipo B",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Por vía directa 140 km/h y hasta 50 km/h por desviada"},
+        {"l": "B", "t": "Por vía directa 140 km/h y hasta 30 km/h por desviada"},
+        {"l": "C", "t": "Por vía directa 160 km/h y hasta 60 km/h por desviada"},
+        {"l": "D", "t": "Por vía directa 160 km/h y hasta 50 km/h por desviada"}
+      ]},
+    "44": {
+      "q": "Los aparatos de vía pertenecen a…",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "La infraestructura"},
+        {"l": "B", "t": "La plataforma"},
+        {"l": "C", "t": "La basamenta"},
+        {"l": "D", "t": "La superestructura"}
+      ]},
+    "45": {
+      "q": "Sistema de interrupción de la circulación con Entrega de Vía Bloqueada. Es el sistema utilizado para realizar trabajos…",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "En la \"zona de gálibo de los trenes\" con herramientas maquinaria o trenes de trabajos que por su naturaleza no pueden retirarse de la misma en tiempo oportuno por la persona que los maneja"},
+        {"l": "B", "t": "En la \"zona de peligro para los trabajos\" o en la \"zona de peligro eléctrico\" con herramientas, maquinaria o tienes de trabajo que por su naturaleza no pueden retirarse de la misma en tiempo oportuno por la persona que las maneja"},
+        {"l": "C", "t": "En la \"zona de peligro para los trabajos\" o en la \"zona de riesgo para los trabajos\" con trenes de trabajos que obliguen a interrumpir la circulación"},
+        {"l": "D", "t": "En la \"zona de peligro para los trabajos\" o en la \"zona de peligro eléctrico\" exclusivamente con herramientas o maquinaria que por su naturaleza no pueden retirarse de la misma en tiempo oportuno por la persona que los maneja"}
+      ]},
+    "46": {
+      "q": "¿Cada cuántos años la petición de quién se renovará el SGS",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Se renovará previa solicitud del AI a más tardar cada 5 años"},
+        {"l": "B", "t": "Se renovará previa solicitud de la AESF a más tardar cada 10 años"},
+        {"l": "C", "t": "Se renovará previa solicitud del AI a más tardar cada 10 años"},
+        {"l": "D", "t": "Se renovará previa solicitud de la AESF a más tardar cada 5 años"}
+      ]},
+    "47": {
+      "q": "Los encargados de trabajo deben utilizar como dotación principal, los siguientes equipos de protección individual",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Gorra de protección contra el sol y botas de seguridad"},
+        {"l": "B", "t": "Gafas de protección y ropa amarilla de alta visibilidad"},
+        {"l": "C", "t": "Ropa amarilla de alta visibilidad y botas de seguridad"},
+        {"l": "D", "t": "Traje de agua amarillo de alta visibilidad y gorra"}
+      ]},
+    "48": {
+      "q": "Respecto de las señales acústicas de los trenes, ¿en qué casos se da la orden o indicación de \"ATENCIÓN\"?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Cuando el tren sea directo y no vea la señal de paso desde la aguja de entrada"},
+        {"l": "B", "t": "Al aproximarse a un cartelón que ordene silbar"},
+        {"l": "C", "t": "Cuando solicite presentación de la señal de marche el tren"},
+        {"l": "D", "t": "En maniobras por radio cuando falle la comunicación"}
+      ]},
+    "49": {
+      "q": "¿Qué es el S.A.A.T.?",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Sistema de ayuda a la aproximación de trenes"},
+        {"l": "B", "t": "Sistema de anuncio de aviso de trenes"},
+        {"l": "C", "t": "Sistema de aviso por aproximación de trenes"},
+        {"l": "D", "t": "Sistema de ayuda para aviso de trenes"}
+      ]},
+    "50": {
+      "q": "¿Cuál de los siguientes movimientos no es una maniobra?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Formar o descomponer un tren"},
+        {"l": "B", "t": "Agregar o segregar vehículos de un tren"},
+        {"l": "C", "t": "Clasificar los vehículos o cortes de material"},
+        {"l": "D", "t": "Asegurar la unión de la composición"}
+      ]},
+    "51": {
+      "q": "Los trenes el trabajo al amparo de una EVB en una línea de BEM, ¿pueden apartarse en cualquiera de las estaciones del trayecto en el que se aplica?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Sí, siempre que sea en vía desviada"},
+        {"l": "B", "t": "Solo en la estación que lo expidió"},
+        {"l": "C", "t": "Si"},
+        {"l": "D", "t": "No"}
+      ]},
+    "52": {
+      "q": "¿A quién corresponde la programación, así como la modificación en su caso, de todos los trabajos compatibles con la circulación y de las Actividades de regulación específica",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "A las Áreas técnicas afectadas por los trabajos"},
+        {"l": "B", "t": "Al PM en su grupo de gestión"},
+        {"l": "C", "t": "A los servicios de infraestructura debía"},
+        {"l": "D", "t": "A los Encargados de Trabajo afectados"}
+      ]},
+    "53": {
+      "q": "La señal de la figura indica que… Color blanco a destellos",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "El paso a nivel está protegido y ordena circular normalmente e informar inmediatamente del estado de la señal"},
+        {"l": "B", "t": "El paso a nivel está protegido y ordena circular con marcha de maniobras e informar inmediatamente del estado de la señal"},
+        {"l": "C", "t": "El paso a nivel está desprotegido ordena circular con precaución e informar inmediatamente del estado de la señal"},
+        {"l": "D", "t": "El paso a nivel está desprotegido y ordena circular con marcha a la vista e informar inmediatamente del estado de la señal"}
+      ]},
+    "54": {
+      "q": "Marque la respuesta que no corresponde a un elemento de la superestructura ferroviaria",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "balasto"},
+        {"l": "B", "t": "carriles"},
+        {"l": "C", "t": "viaducto"},
+        {"l": "D", "t": "aparatos de Vía"}
+      ]},
+    "55": {
+      "q": "¿Qué síntomas neurosensoriales se producen tras un \"golpe de calor\"",
+      "a": "C",
+      "opts": [
+        {"l": "A", "t": "Ausencia de sudoración, confusión, pérdida de conciencia y cefalea"},
+        {"l": "B", "t": "Convulsiones, pérdida de conciencia, papilas dilatadas y cefalea"},
+        {"l": "C", "t": "Confusión, convulsiones, pérdida de conciencia y papilas dilatadas"},
+        {"l": "D", "t": "Respiración rápida, convulsiones pérdida de conciencia y cefalea"}
+      ]},
+    "56": {
+      "q": "¿Cuáles de los siguientes no son elementos principales de la cultura de seguridad?",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Situaciones"},
+        {"l": "B", "t": "Psicológicos"},
+        {"l": "C", "t": "Conductuales"},
+        {"l": "D", "t": "Estructurales"}
+      ]},
+    "57": {
+      "q": "Sobre el SGS cuando decimos \"desarrollados mayoritariamente desde la DSC de Adif y son de aplicación a todas las áreas operativas con incidencia en la Seguridad en la Circulación\", estamos haciendo referencia a…",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Procedimientos específicos"},
+        {"l": "B", "t": "Procedimientos generales"},
+        {"l": "C", "t": "Procedimientos genéricos"},
+        {"l": "D", "t": "Instrucciones técnicas"}
+      ]},
+    "58": {
+      "q": "Indique el significado de los paréntesis en la redacción de un telefonema",
+      "a": "D",
+      "opts": [
+        {"l": "A", "t": "Indican obligación se debe incluir en el telefonema"},
+        {"l": "B", "t": "Indican opciones a elegir o eliminar entre las figuradas"},
+        {"l": "C", "t": "Indican opción, se puede incluir uno en el telefonema"},
+        {"l": "D", "t": "Indican opciones a elegir entre los figuradas o da indicaciones sobre su contenido"}
+      ]},
+    "59": {
+      "q": "Dentro de los requisitos mínimos para la realización de Actividades de Regulación Específica, en caso de existir más de una zona de actividad en un determinado trayecto, ¿cómo deberá ser controlado y vigilado cada Tajo de trabajo?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Cada zona por al menos un Piloto de Seguridad"},
+        {"l": "B", "t": "Cada zona por al menos un Encargado de Trabajos y un Piloto de Seguridad"},
+        {"l": "C", "t": "Por las normas establecidas por el Encargado de los Trabajos en el momento de iniciarse los trabajos"},
+        {"l": "D", "t": "No puede haber más de una zona de actividad por trayecto"}
+      ]},
+    "60": {
+      "q": "¿Cuál de las siguientes no es una señal fija fundamental?",
+      "a": "A",
+      "opts": [
+        {"l": "A", "t": "Señal de los trenes"},
+        {"l": "B", "t": "Señal de maniobra"},
+        {"l": "C", "t": "Señal interior"},
+        {"l": "D", "t": "Señal de entrada"}
+      ]},
+    "61": {
+      "q": "¿Qué clase de protección tiene un Paso a Nivel protegido por barreras o semibarreras con guardería a pie de paso?",
+      "a": "B",
+      "opts": [
+        {"l": "A", "t": "Clase D"},
+        {"l": "B", "t": "Clase E"},
+        {"l": "C", "t": "Clase B"},
+        {"l": "D", "t": "Clase A"}
+      ]}
 };
 
 

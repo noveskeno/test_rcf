@@ -165,6 +165,13 @@ body{
   position:relative;
   overflow:hidden;
 }
+
+/* Counter alignment */
+.accordion-btn .counter {
+  position: absolute;
+  right: 40px;
+  margin-left: 0 !important;
+}
 .accordion-btn::before{
   content:'';
   position:absolute;
@@ -335,8 +342,8 @@ body{
     padding:16px;
   }
   
-  /* Ocultar contadores en móviles medianos para ahorrar espacio */
-  .accordion-btn span[style*="margin-left: auto"] {
+  /* Reducir tamaño de contadores en tablets */
+  .accordion-btn .counter {
     font-size: 0.7em !important;
   }
   
@@ -360,9 +367,9 @@ body{
     padding:10px 16px;
   }
   
-  /* Ocultar completamente los contadores en móviles pequeños */
-  .accordion-btn span[style*="margin-left: auto"] {
-    display: none;
+  /* Reducir más el tamaño en móviles pequeños */
+  .accordion-btn .counter {
+    font-size: 0.65em !important;
   }
   
   .card.nested {
@@ -757,25 +764,13 @@ function updateCounters() {
     const content = button.nextElementSibling;
     if (!content) return;
     
-    // Count direct test-btn elements (without including those from nested subsections)
-    const directTests = content.querySelectorAll(':scope > .test-btn').length;
-    
-    // Count nested cards (books or subsections)
-    const nestedCards = content.querySelectorAll(':scope > .card.nested').length;
-    
     // Count all tests including those from subsections
     const allTests = content.querySelectorAll('.test-btn').length;
     
-    // Build the counter text
+    // Build the counter text - only show number of tests
     let counterText = '';
     
-    if (nestedCards > 0) {
-      // If it has nested books/subsections, show "X books • Y tests"
-      const librosText = nestedCards === 1 ? 'libro' : 'libros';
-      const testsText = allTests === 1 ? 'test' : 'tests';
-      counterText = `${nestedCards} ${librosText} • ${allTests} ${testsText}`;
-    } else if (allTests > 0) {
-      // If it only has direct tests
+    if (allTests > 0) {
       const testsText = allTests === 1 ? 'test' : 'tests';
       counterText = `${allTests} ${testsText}`;
     }

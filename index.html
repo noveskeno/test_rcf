@@ -70,7 +70,16 @@ body{
 }
 #top .title:hover{
   transform:scale(1.02);
-  box-shadow:0 6px 20px rgba(91,192,190,.2);
+  box-shadow:0 6px 20px rgba(91,192,190,.3);
+}
+
+@keyframes subtlePulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+  50% { box-shadow: 0 4px 16px rgba(91,192,190,.15); }
+}
+
+#top .title {
+  animation: subtlePulse 3s ease-in-out infinite;
 }
 .subtitle{
   margin-top:10px;
@@ -135,9 +144,9 @@ body{
 .card:nth-child(3){animation-delay:0.5s}
 .card:nth-child(4){animation-delay:0.6s}
 .card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-2px);
   box-shadow:0 12px 45px rgba(0,0,0,.5);
-  border-color:rgba(91,192,190,.2);
+  border-color:rgba(91,192,190,.3);
 }
 .accordion-btn{
   width:100%;
@@ -186,11 +195,11 @@ body{
 .accordion-content{
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.4s ease,padding 0.4s ease;
+  transition:max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   padding:0 12px;
 }
 .accordion-content.open{
-  max-height:1000px;
+  max-height:2000px;
   padding:12px;
 }
 .test-btn{
@@ -238,6 +247,56 @@ body{
   font-size:20px;
   opacity:.8;
 }
+
+/* Badge de contador en botones de test */
+.test-btn span:last-child {
+  flex: 1;
+}
+
+/* Mejorar indicador visual de nivel de anidamiento */
+.card.nested::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  opacity: 0.3;
+}
+
+.card.nested {
+  position: relative;
+}
+
+/* Estilos para elementos anidados */
+.card.nested {
+  margin: 10px 0;
+  margin-left: 20px;
+  background: rgba(21, 26, 35, 0.7);
+  border: 1px solid rgba(91, 192, 190, 0.1);
+}
+
+.card.nested:hover {
+  transform: translateY(-2px);
+  border-color: rgba(91, 192, 190, 0.25);
+}
+
+.card.nested .accordion-btn {
+  font-size: 0.95em;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #1a2332, #1f2937);
+}
+
+.card.nested .accordion-btn:hover {
+  background: linear-gradient(135deg, #1f2937, #243447);
+}
+
+.card.nested .accordion-content {
+  padding-left: 10px;
+  background: rgba(10, 14, 20, 0.3);
+}
+
 .footer{
   text-align:center;
   padding:40px 20px;
@@ -261,7 +320,9 @@ body{
   opacity:.7;
   text-decoration:underline;
 }
-@media (max-width: 640px){
+
+/* Responsive para móvil */
+@media (max-width: 768px){
   #top .title{
     font-size:1rem;
     padding:12px 20px;
@@ -273,7 +334,56 @@ body{
     font-size:1rem;
     padding:16px;
   }
+  
+  /* Ocultar contadores en móviles medianos para ahorrar espacio */
+  .accordion-btn span[style*="margin-left: auto"] {
+    font-size: 0.7em !important;
+  }
+  
+  .card.nested {
+    margin-left: 10px;
+  }
+  
+  .card.nested .accordion-btn {
+    font-size: 0.9em;
+    padding: 12px 14px;
+  }
+  
+  .card.nested .accordion-content {
+    padding-left: 5px;
+  }
 }
+
+@media (max-width: 480px){
+  #top .title{
+    font-size:0.9rem;
+    padding:10px 16px;
+  }
+  
+  /* Ocultar completamente los contadores en móviles pequeños */
+  .accordion-btn span[style*="margin-left: auto"] {
+    display: none;
+  }
+  
+  .card.nested {
+    margin-left: 5px;
+  }
+  
+  .card.nested .accordion-btn {
+    font-size: 0.85em;
+    padding: 10px 12px;
+  }
+  
+  .test-btn {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+  
+  .test-icon {
+    font-size: 18px;
+  }
+}
+
 /* Background particles effect */
 .particle{
   position:absolute;
@@ -316,14 +426,16 @@ body{
   <button class="accordion-btn" onclick="toggle(this)">
     <span>📖</span>
     <span>TOMO I</span>
+    <span class="counter" style="margin-left: auto; font-size: 0.8em; opacity: 0.6; font-weight: 400;"></span>
   </button>
   <div class="accordion-content">
     
-    <!-- RCF 1 dentro del TOMO I -->
+    <!-- RCF 1 inside TOMO I -->
     <div class="card nested">
       <button class="accordion-btn" onclick="toggle(this)">
         <span>📘</span>
         <span>LIBRO 1</span>
+        <span class="counter" style="margin-left: auto; font-size: 0.75em; opacity: 0.5; font-weight: 400;"></span>
       </button>
       <div class="accordion-content">
         <button class="test-btn" onclick="openTest('rcf1_completo.html')">
@@ -341,11 +453,12 @@ body{
       </div>
     </div>
 
-    <!-- RCF 2 dentro del TOMO I -->
+    <!-- RCF 2 inside TOMO I -->
     <div class="card nested">
       <button class="accordion-btn" onclick="toggle(this)">
         <span>📕</span>
         <span>LIBRO 2</span>
+        <span class="counter" style="margin-left: auto; font-size: 0.75em; opacity: 0.5; font-weight: 400;"></span>
       </button>
       <div class="accordion-content">
         <button class="test-btn" onclick="openTest('rcf2_completo.html')">
@@ -355,11 +468,12 @@ body{
       </div>
     </div>
 
-    <!-- RCF 3 dentro del TOMO I -->
+    <!-- RCF 3 inside TOMO I -->
     <div class="card nested">
       <button class="accordion-btn" onclick="toggle(this)">
         <span>📗</span>
         <span>LIBRO 3</span>
+        <span class="counter" style="margin-left: auto; font-size: 0.75em; opacity: 0.5; font-weight: 400;"></span>
       </button>
       <div class="accordion-content">
         <button class="test-btn" onclick="openTest('rcf3_completo.html')">
@@ -369,11 +483,12 @@ body{
       </div>
     </div>
 
-    <!-- RCF 4 dentro del TOMO I -->
+    <!-- RCF 4 inside TOMO I -->
     <div class="card nested">
       <button class="accordion-btn" onclick="toggle(this)">
-        <span>📘</span>
+        <span>📙</span>
         <span>LIBRO 4</span>
+        <span class="counter" style="margin-left: auto; font-size: 0.75em; opacity: 0.5; font-weight: 400;"></span>
       </button>
       <div class="accordion-content">
         <button class="test-btn" onclick="openTest('rcf4_completo.html')">
@@ -383,11 +498,12 @@ body{
       </div>
     </div>
 
-    <!-- RCF 5 dentro del TOMO I -->
+    <!-- RCF 5 inside TOMO I -->
     <div class="card nested">
       <button class="accordion-btn" onclick="toggle(this)">
-        <span>📕</span>
+        <span>📔</span>
         <span>LIBRO 5</span>
+        <span class="counter" style="margin-left: auto; font-size: 0.75em; opacity: 0.5; font-weight: 400;"></span>
       </button>
       <div class="accordion-content">
         <button class="test-btn" onclick="openTest('rcf5_completo.html')">
@@ -404,63 +520,75 @@ body{
   </div>
 </div>
 
-    <!-- TOMO III -->
-  <div class="card">
-    <button class="accordion-btn" onclick="toggle(this)">
-      <span>📖</span>
-      <span>TOMO III</span>
-    </button>
-    <div class="accordion-content">
-      <button class="test-btn" onclick="openTest('tomo3_conceptos_test_01.html')">
-        <span class="test-icon">🚂</span>
-        <span>A10 - CONCEPTOS FERROVIARIOS (25)</span>
-      </button>
-      <button class="test-btn" onclick="openTest('tomo3_conceptos_test_02.html')">
-        <span class="test-icon">🚂</span>
-        <span>A12 - CONCEPTOS FERROVIARIOS (25)</span>
-      </button>
-      <button class="test-btn" onclick="openTest('tomo3_legislacion_test_01.html')">
-        <span class="test-icon">⚖️</span>
-        <span>LEGISLACIÓN - 1 (15)</span>
-      </button>
-      <button class="test-btn" onclick="openTest('tomo3_legislacion_test_01.html')">
-        <span class="test-icon">⚖️</span>
-        <span>LEGISLACIÓN - 2 (23)</span>
-      </button>
-    </div>
-  </div>
-  
-  <!-- VARIOS -->
-  <div class="card">
-    <button class="accordion-btn" onclick="toggle(this)">
-      <span>📚</span>
-      <span>RCF – Varios</span>
-    </button>
-    <div class="accordion-content">
-      <button class="test-btn" onclick="openTest('et_varios_test_01.html')">
-        <span class="test-icon">🎲</span>
-        <span>VARIOS - 1 (50)</span>
-      </button>
-      <button class="test-btn" onclick="openTest('et_varios_test_02.html')">
-        <span class="test-icon">🎲</span>
-        <span>VARIOS - 2 (60)</span>
-      </button>
-      <button class="test-btn" onclick="openTest('et_varios_test_03.html')">
-        <span class="test-icon">🎲</span>
-        <span>VARIOS - 3 (50)</span>
-        <button class="test-btn" onclick="openTest('et_varios_test_04.html')">
-        <span class="test-icon">🎲</span>
-        <span>VARIOS - 4 (61)</span>
-      </button>
-      </button>
-    </div>
-  </div>
+<!-- Visual separator -->
+<div style="height: 8px;"></div>
 
-<!-- EXAMENES -->
+<!-- TOMO III -->
+<div class="card">
+  <button class="accordion-btn" onclick="toggle(this)">
+    <span>📚</span>
+    <span>TOMO III</span>
+    <span class="counter" style="margin-left: auto; font-size: 0.8em; opacity: 0.6; font-weight: 400;"></span>
+  </button>
+  <div class="accordion-content">
+    <button class="test-btn" onclick="openTest('tomo3_conceptos_test_01.html')">
+      <span class="test-icon">🚂</span>
+      <span>A10 - CONCEPTOS FERROVIARIOS (25)</span>
+    </button>
+    <button class="test-btn" onclick="openTest('tomo3_conceptos_test_02.html')">
+      <span class="test-icon">🚂</span>
+      <span>A12 - CONCEPTOS FERROVIARIOS (25)</span>
+    </button>
+    <button class="test-btn" onclick="openTest('tomo3_legislacion_test_01.html')">
+      <span class="test-icon">⚖️</span>
+      <span>LEGISLACIÓN - 1 (15)</span>
+    </button>
+    <button class="test-btn" onclick="openTest('tomo3_legislacion_test_02.html')">
+      <span class="test-icon">⚖️</span>
+      <span>LEGISLACIÓN - 2 (23)</span>
+    </button>
+  </div>
+</div>
+
+<!-- Visual separator -->
+<div style="height: 8px;"></div>
+
+<!-- VARIOS -->
+<div class="card">
+  <button class="accordion-btn" onclick="toggle(this)">
+    <span>🎲</span>
+    <span>RCF – Varios</span>
+    <span class="counter" style="margin-left: auto; font-size: 0.8em; opacity: 0.6; font-weight: 400;"></span>
+  </button>
+  <div class="accordion-content">
+    <button class="test-btn" onclick="openTest('et_varios_test_01.html')">
+      <span class="test-icon">🎲</span>
+      <span>VARIOS - 1 (50)</span>
+    </button>
+    <button class="test-btn" onclick="openTest('et_varios_test_02.html')">
+      <span class="test-icon">🎲</span>
+      <span>VARIOS - 2 (60)</span>
+    </button>
+    <button class="test-btn" onclick="openTest('et_varios_test_03.html')">
+      <span class="test-icon">🎲</span>
+      <span>VARIOS - 3 (50)</span>
+    </button>
+    <button class="test-btn" onclick="openTest('et_varios_test_04.html')">
+      <span class="test-icon">🎲</span>
+      <span>VARIOS - 4 (61)</span>
+    </button>
+  </div>
+</div>
+
+<!-- Visual separator -->
+<div style="height: 8px;"></div>
+
+<!-- EXAMS -->
 <div class="card">
   <button class="accordion-btn" onclick="toggle(this)">
     <span>🎓</span>
     <span>EXÁMENES</span>
+    <span class="counter" style="margin-left: auto; font-size: 0.8em; opacity: 0.6; font-weight: 400;"></span>
   </button>
   <div class="accordion-content">
     
@@ -470,16 +598,16 @@ body{
     </button>
 
     <button class="test-btn" onclick="openTest('et_examen_conceptos_01.html')">
-      <span class="test-icon">📋</span>
+      <span class="test-icon">🚂</span>
       <span>EXAMEN - CONCEPTOS FERROVIARIOS (42)</span>
     </button>
-    
 
-    <!-- PILOTO DE SEGURIDAD (anidado) -->
+    <!-- SAFETY PILOT (nested) -->
     <div class="card nested">
       <button class="accordion-btn" onclick="toggle(this)">
         <span>🚨</span>
         <span>PILOTO DE SEGURIDAD</span>
+        <span class="counter" style="margin-left: auto; font-size: 0.75em; opacity: 0.6; font-weight: 400;"></span>
       </button>
       <div class="accordion-content">
         <button class="test-btn" onclick="openTest('et_examen_02.html')">
@@ -522,25 +650,55 @@ body{
     <strong style="color:var(--accent)">Andrea</strong> lo puso bonito :) (está en ello)
   </div>
 </div>
+</div>
 
 <script>
-// Enhanced accordion system
+// Enhanced accordion system with nested support
 function toggle(btn) {
+  event.stopPropagation(); // Prevent event from bubbling to parent
+  
   const content = btn.nextElementSibling;
   const isOpen = content.classList.contains('open');
   
-  // Close all accordions
-  document.querySelectorAll('.accordion-content').forEach(c => {
-    c.classList.remove('open');
-  });
-  document.querySelectorAll('.accordion-btn').forEach(b => {
-    b.classList.remove('active');
-  });
+  // Get the closest parent container
+  const parentCard = btn.closest('.card');
+  const parentContent = parentCard.closest('.accordion-content');
   
-  // Open selected if it was closed
+  // Only close accordions at the same level (siblings)
+  if (parentContent) {
+    // If inside an accordion, only close siblings
+    const siblings = parentContent.querySelectorAll(':scope > .card');
+    siblings.forEach(sibling => {
+      if (sibling !== parentCard) {
+        const siblingContent = sibling.querySelector('.accordion-content');
+        const siblingBtn = sibling.querySelector('.accordion-btn');
+        if (siblingContent) siblingContent.classList.remove('open');
+        if (siblingBtn) siblingBtn.classList.remove('active');
+      }
+    });
+  } else {
+    // If top level, close other top level items
+    const container = btn.closest('.container');
+    const topLevelCards = Array.from(container.children).filter(child => 
+      child.classList.contains('card') && !child.classList.contains('nested')
+    );
+    topLevelCards.forEach(card => {
+      if (card !== parentCard) {
+        const cardContent = card.querySelector('.accordion-content');
+        const cardBtn = card.querySelector('.accordion-btn');
+        if (cardContent) cardContent.classList.remove('open');
+        if (cardBtn) cardBtn.classList.remove('active');
+      }
+    });
+  }
+  
+  // Toggle the selected accordion
   if (!isOpen) {
     content.classList.add('open');
     btn.classList.add('active');
+  } else {
+    content.classList.remove('open');
+    btn.classList.remove('active');
   }
 }
 
@@ -586,10 +744,52 @@ function countTests() {
   document.getElementById('total-categories').textContent = categoryCount;
 }
 
+// Function to count tests within each section
+function updateCounters() {
+  // Get all accordion buttons that have a counter
+  const accordionButtons = document.querySelectorAll('.accordion-btn');
+  
+  accordionButtons.forEach(button => {
+    const counter = button.querySelector('.counter');
+    if (!counter) return;
+    
+    // Get the next content container
+    const content = button.nextElementSibling;
+    if (!content) return;
+    
+    // Count direct test-btn elements (without including those from nested subsections)
+    const directTests = content.querySelectorAll(':scope > .test-btn').length;
+    
+    // Count nested cards (books or subsections)
+    const nestedCards = content.querySelectorAll(':scope > .card.nested').length;
+    
+    // Count all tests including those from subsections
+    const allTests = content.querySelectorAll('.test-btn').length;
+    
+    // Build the counter text
+    let counterText = '';
+    
+    if (nestedCards > 0) {
+      // If it has nested books/subsections, show "X books • Y tests"
+      const librosText = nestedCards === 1 ? 'libro' : 'libros';
+      const testsText = allTests === 1 ? 'test' : 'tests';
+      counterText = `${nestedCards} ${librosText} • ${allTests} ${testsText}`;
+    } else if (allTests > 0) {
+      // If it only has direct tests
+      const testsText = allTests === 1 ? 'test' : 'tests';
+      counterText = `${allTests} ${testsText}`;
+    }
+    
+    counter.textContent = counterText;
+  });
+}
+
+
 // Initialize on page load
 window.addEventListener('load', () => {
   createParticles();
   countTests();
+  updateCounters();
   
   // Fade in animation
   document.body.style.opacity = '1';

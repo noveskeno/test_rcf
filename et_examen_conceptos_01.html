@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EXAMEN - PILOTO DE SEGURIDAD 06</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
+.header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
+.header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:10px 8px 100px}
+.progress-bar{background:rgba(255,255,255,.1);height:3px;border-radius:999px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3a9d9a);width:0%;transition:width .3s ease}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.q-title{font-weight:600;margin-bottom:10px;line-height:1.4;font-size:14px}
+.q-number{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:6px;display:block}
+.options{display:grid;grid-template-columns:1fr;gap:6px}
+.option{background:#121a34;border:2px solid rgba(255,255,255,.08);padding:8px;border-radius:8px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:all .2s;font-size:13px;line-height:1.3}
+.option:active{background:#1a2341;border-color:rgba(91,192,190,.3)}
+.option input{margin-top:2px;cursor:pointer;flex-shrink:0}
+.option div{flex:1}
+.answer-key{display:none;margin-top:8px;padding:8px;background:rgba(91,192,190,.1);border-radius:6px;font-size:12px}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.feedback{margin-top:6px;font-size:12px;font-weight:600;padding:6px;border-radius:4px}
+.correct{border-color:rgba(33,193,122,.6)!important;background:rgba(33,193,122,.05)!important}
+.incorrect{border-color:rgba(255,93,115,.75)!important;background:rgba(255,93,115,.05)!important}
+.actions{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.99));padding:10px 8px;padding-bottom:calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);z-index:99}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;touch-action:manipulation}
+button:active{background:var(--accent);opacity:.9;transform:scale(.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+button.secondary:active{background:rgba(255,255,255,.05)}
+.score{font-weight:700;font-size:1rem}
+.score-details{font-size:11px;color:var(--text);opacity:.8;margin-top:2px}
+.footer{opacity:.8;font-size:11px;text-align:center;padding:15px;color:rgba(255,255,255,.5)}
+@media (min-width: 720px){
+  .options{grid-template-columns:1fr 1fr}
+  body{font-size:15px}
+  .card{padding:20px;margin:16px 0;border-radius:16px}
+  .q-title{font-size:15px;margin-bottom:12px}
+  .option{padding:12px;gap:10px;font-size:14px}
+  .header{padding:20px 16px}
+  .header h1{font-size:1.5rem;margin-bottom:8px}
+  .container{padding:20px 16px 120px}
+  button{padding:12px 18px;font-size:14px}
+}
+@media (max-width: 640px){
+  .actions .bar{flex-direction:column;gap:6px}
+  .score{text-align:center;width:100%;font-size:0.95rem}
+  .actions{padding:8px 6px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  button{width:100%;padding:11px 12px}
+}
+.scroll-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;touch-action:manipulation}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:active{transform:scale(.95)}
+@media (max-width:640px){
+  .scroll-top{width:36px;height:36px;bottom:16px;right:16px;font-size:18px}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>EXAMEN - PILOTO DE SEGURIDAD 06</h1>
+    <div class="badge">44 preguntas</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+  
+  <div class="container" id="questionsContainer">
+    <!-- Questions will be generated here -->
+  </div>
+
+  <div class="actions">
+    <div class="bar">
+      <div>
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div class="score-details" id="scoreDetails"></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="calificar()">📊 Calificar</button>
+        <button class="secondary" onclick="reiniciar()">🔄 Reiniciar</button>
+        <button class="secondary" onclick="toggleRespuestas(this)">👁️ Ver respuestas</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+
+<script>
+// Test data with questions and answers
+const testData = {
+  "1": {q: "¿Cuál es el objeto del Reglamento?", a: "D", opts: [
+    {l: "A", t: "El objeto de este Reglamento es establecer reglas operativas generales para que la circulación de los trenes se realice de forma segura, eficiente y puntual."},
+    {l: "B", t: "El objeto de este Reglamento es establecer reglas operativas generales para que la circulación de las maniobras se realice de forma segura, eficiente y puntual."},
+    {l: "C", t: "El objeto de este Reglamento es establecer reglas operativas generales para que la circulación de los trenes y de las maniobras se realice de forma segura y eficiente."},
+    {l: "D", t: "El objeto de este Reglamento es establecer reglas operativas generales para que la circulación de los trenes y de las maniobras se realice de forma segura, eficiente y puntual."}
+  ]},
+  "2": {q: "¿Cuál es el objetivo del Rcf?", a: "B", opts: [
+    {l: "A", t: "...unificando los criterios de operación de los distintos AT en ancho convencional."},
+    {l: "B", t: "...unificando los criterios de operación de los distintos anchos de la Red."},
+    {l: "C", t: "...unificando los criterios de operación de los distintos AT en ancho Internacional."},
+    {l: "D", t: "...unificando los criterios de operación de los distintos AT y el responsable de circulación..."}
+  ]},
+  "3": {q: "¿Cómo llamamos al grupo de vías paralelas cuyo origen es común?", a: "C", opts: [
+    {l: "A", t: "Vías de clasificación."},
+    {l: "B", t: "Vías de servicio."},
+    {l: "C", t: "Haz de vías."},
+    {l: "D", t: "Vías de formación."}
+  ]},
+  "4": {q: "¿Cómo se llama la de máquina de vía, que mediante vibraciones y su propio peso, asienta la vía compactándola?", a: "D", opts: [
+    {l: "A", t: "La Bateadora pesada."},
+    {l: "B", t: "La Desguarnecedora."},
+    {l: "C", t: "La Bateadora-niveladora."},
+    {l: "D", t: "La Estabilizadora."}
+  ]},
+  "5": {q: "¿Cuál de los siguientes vehículos autopropulsados, no es una máquina de vía?", a: "D", opts: [
+    {l: "A", t: "Quitanieves."},
+    {l: "B", t: "Niveladora."},
+    {l: "C", t: "Perfiladora."},
+    {l: "D", t: "Dresina."}
+  ]},
+  "6": {q: "El contenedor, es:", a: "C", opts: [
+    {l: "A", t: "Una unidad móvil ferroviaria sin propulsión propia y que está destinado al transporte de mercancías."},
+    {l: "B", t: "Un vagón provisto de cubierta"},
+    {l: "C", t: "Un depósito de dimensiones y capacidad normalizadas para el transporte de mercancías."},
+    {l: "D", t: "Un vagón intermedio de seguridad que está destinado a absorber parte de la fuerza de choque en caso de alcance."}
+  ]},
+  "7": {q: "A efectos de la Ley 39/2003, de 17 de noviembre, del sector ferroviario, se entenderá por infraestructura ferroviaria la totalidad de los elementos que formen parte de:", a: "D", opts: [
+    {l: "A", t: "Las vías principales, las vías de servicio y las vías situadas dentro de los depósitos."},
+    {l: "B", t: "Las vías principales, las vías de servicio y las vías situadas dentro de los depósitos o garajes de máquinas de tracción."},
+    {l: "C", t: "Las vías situadas dentro de los talleres de reparación de material rodante, las vías de servicio y las vías principales."},
+    {l: "D", t: "Los ramales de desviación para particulares, las vías de servicio y las vías principales."}
+  ]},
+  "8": {q: "En las líneas ferroviarias que formen parte de la red ferroviaria de interés general, a efectos de la Ley 39/2003, de 17 de noviembre, del sector ferroviario y en sus disposiciones de desarrollo, en el suelo clasificado como urbano consolidado en el planteamiento urbanístico y por las distancias para la protección de la infraestructura, contadas desde las aristas exteriores de la explanación, la \"zona de dominio público\" nunca puede ser inferior a:", a: "C", opts: [
+    {l: "A", t: "Ocho metros."},
+    {l: "B", t: "Cinco metros."},
+    {l: "C", t: "Dos metros."},
+    {l: "D", t: "Setenta metros."}
+  ]},
+  "9": {q: "Con carácter general, la zona de protección de las líneas ferroviarias consisten en dos líneas paralelas situadas a:", a: "D", opts: [
+    {l: "A", t: "50 metros de las aristas exteriores de la explanación."},
+    {l: "B", t: "20 metros de las aristas exteriores de la explanación."},
+    {l: "C", t: "8 metros de las aristas exteriores de la explanación."},
+    {l: "D", t: "70 metros de las aristas exteriores de la explanación."}
+  ]},
+  "10": {q: "Que habilitación faculta a su titular para realizar las funciones correspondientes a actuaciones en vía bloqueada según se establece en la normativa ferroviaria vigente en materia de seguridad en la circulación.", a: "D", opts: [
+    {l: "A", t: "La de Jefe de Circulación."},
+    {l: "B", t: "La de Personal de Infraestructura."},
+    {l: "C", t: "La de Operador de Maquinaria de Infraestructura."},
+    {l: "D", t: "La de Encargado de trabajos."}
+  ]},
+  "11": {q: "Sobre el terreno natural, ¿cómo llamamos la acción de allanar un terreno, desmontarlo y terraplenarlo para darle el perfil requerido?", a: "C", opts: [
+    {l: "A", t: "Trazado."},
+    {l: "B", t: "Plataforma."},
+    {l: "C", t: "Explanación."},
+    {l: "D", t: "Capa."}
+  ]},
+  "12": {q: "La capa anticontaminante, es:", a: "C", opts: [
+    {l: "A", t: "La mezcla de balasto con productos naturales que protegen la plataforma."},
+    {l: "B", t: "La mezcla de balasto con productos naturales que protege la plataforma contra la erosión y evacuan las aguas pluviales de lluvia."},
+    {l: "C", t: "Una capa formada por arena, que se dispone en las plataformas de baja calidad, y en la que se asienta la Capa de cimentación."},
+    {l: "D", t: "Un material granular pétreo sobre el que se asientan las traviesas."}
+  ]},
+  "13": {q: "La mezcla de balasto con productos naturales que protege la plataforma contra la erosión y la helada, evacua las aguas pluviales, mejora el reparto de las cargas y evita la contaminación del balasto, es:", a: "D", opts: [
+    {l: "A", t: "La capa anticontaminante."},
+    {l: "B", t: "La explanación."},
+    {l: "C", t: "La banqueta."},
+    {l: "D", t: "El subbalasto."}
+  ]},
+  "14": {q: "¿Cuándo se dice que un balasto está colmatado?", a: "D", opts: [
+    {l: "A", t: "Cuando tiene piedra partida de naturaleza silícea."},
+    {l: "B", t: "Cuando tiene elementos pétreos resistentes de diferentes tamaños."},
+    {l: "C", t: "Cuando su nivel sobrepasa la parte superior de la traviesa."},
+    {l: "D", t: "Cuando está con abundancia de finos e impurezas."}
+  ]},
+  "15": {q: "La capa de balasto extendida bajo las traviesas que envuelve sus extremos y caras laterales, es:", a: "C", opts: [
+    {l: "A", t: "La plataforma."},
+    {l: "B", t: "La palomilla."},
+    {l: "C", t: "La banqueta."},
+    {l: "D", t: "La infraestructura."}
+  ]},
+  "16": {q: "¿Cómo se denomina a la incidencia que se presenta en una traviesa que esté colgada del carril a través de sus sujeciones sin reposar sobre el balasto y con el que impacta al paso de los trenes?", a: "B", opts: [
+    {l: "A", t: "Durmiente flojo."},
+    {l: "B", t: "Traviesa bailarina."},
+    {l: "C", t: "Traviesa colgada."},
+    {l: "D", t: "Traviesa bailadora."}
+  ]},
+  "17": {q: "El desgaste de carril que consiste en la formación de un reborde de unos 5 mm de grosor que sobresale por la parte exterior de la cabeza del carril, es:", a: "C", opts: [
+    {l: "A", t: "El acuchillado."},
+    {l: "B", t: "El desgaste lateral."},
+    {l: "C", t: "La deformación plástica."},
+    {l: "D", t: "El juego pestaña - carril."}
+  ]},
+  "18": {q: "El deterioro que sufren los carriles debido a las temperaturas elevadas, es:", a: "A", opts: [
+    {l: "A", t: "La deformación de la vía."},
+    {l: "B", t: "La dilatación de la vía."},
+    {l: "C", t: "La liberación de tensiones."},
+    {l: "D", t: "El pandeo de la vía."}
+  ]},
+  "19": {q: "El ancho de la vía, es:", a: "B", opts: [
+    {l: "A", t: "La mínima distancia entre las caras exteriores de las cabezas de sus carriles, medida a 20 mm por debajo del plano de rodadura."},
+    {l: "B", t: "La mínima distancia entre las caras activas de las cabezas de sus carriles, medida a 15 mm por debajo del plano de rodadura."},
+    {l: "C", t: "La mínima distancia entre las caras exteriores de las cabezas de sus carriles, medida a 15 mm por debajo del plano de rodadura."},
+    {l: "D", t: "La máxima distancia entre las caras activas de las cabezas de sus carriles, medida a 15 mm por debajo del plano de rodadura."}
+  ]},
+  "20": {q: "El conjunto de piezas de diferentes materiales, con el que se unen, embridan y aislan los extremos de dos carriles para impedir el paso de la corriente eléctrica en los circuitos de vía, es:", a: "A", opts: [
+    {l: "A", t: "Una junta aislante."},
+    {l: "B", t: "Una junta al aire."},
+    {l: "C", t: "Una junta apoyada."},
+    {l: "D", t: "Una junta aislante encolada."}
+  ]},
+  "21": {q: "¿Cómo se llama a la sujeción traviesa - carril que aparece en el dibujo de la pregunta?", a: "C", opts: [
+    {l: "A", t: "Sujeción rígida."},
+    {l: "B", t: "Sujeción indirecta."},
+    {l: "C", t: "Sujeción directa."},
+    {l: "D", t: "Sujeción deslizante."}
+  ]},
+  "22": {q: "¿Cómo se llama a la sujeción traviesa - carril que aparece en el dibujo?", a: "B", opts: [
+    {l: "A", t: "Sujeción rígida."},
+    {l: "B", t: "Sujeción elástica."},
+    {l: "C", t: "Sujeción directa."},
+    {l: "D", t: "Sujeción deslizante."}
+  ]},
+  "23": {q: "¿Cómo se llama a la sujeción traviesa - carril que aparece en el dibujo", a: "B", opts: [
+    {l: "A", t: "Sujeción rígida."},
+    {l: "B", t: "Sujeción indirecta."},
+    {l: "C", t: "Sujeción directa."},
+    {l: "D", t: "Sujeción deslizante."}
+  ]},
+  "24": {q: "¿Cómo se llama a la sujeción traviesa - carril que aparece en el dibujo", a: "A", opts: [
+    {l: "A", t: "Sujeción rígida."},
+    {l: "B", t: "Sujeción indirecta."},
+    {l: "C", t: "Sujeción directa."},
+    {l: "D", t: "Sujeción deslizante."}
+  ]},
+  "25": {q: "¿Cómo se llama a la sujeción traviesa - carril que aparece en el dibujo de la pregunta?", a: "D", opts: [
+    {l: "A", t: "Sujeción antideslizante."},
+    {l: "B", t: "Sujeción indirecta."},
+    {l: "C", t: "Sujeción directa."},
+    {l: "D", t: "Sujeción deslizante."}
+  ]},
+  "26": {q: "¿Cómo se llama a la sujeción traviesa - carril que aparece en el dibujo de la pregunta?", a: "A", opts: [
+    {l: "A", t: "Sujeción antideslizante."},
+    {l: "B", t: "Sujeción rígida."},
+    {l: "C", t: "Sujeción directa."},
+    {l: "D", t: "Sujeción deslizante."}
+  ]},
+  "27": {q: "¿Cuáles son los componentes básicos del trazado ferroviario?", a: "C", opts: [
+    {l: "A", t: "La constitución geológica del terreno."},
+    {l: "B", t: "Las condiciones orográficas."},
+    {l: "C", t: "La planta y el perfil longitudinal."},
+    {l: "D", t: "El perfil longitudinal y el plano de rodadura."}
+  ]},
+  "28": {q: "Como se denomina en una vía, a la representación gráfica de rampas, pendientes, horizontales, sus cotas, distancias, así como las obras que acompañan y figurando también el perfil en planta.", a: "C", opts: [
+    {l: "A", t: "Infraestructura."},
+    {l: "B", t: "Superestructura."},
+    {l: "C", t: "Perfil longitudinal."},
+    {l: "D", t: "Obras de tierra."}
+  ]},
+  "29": {q: "En las instalaciones fijas la infraestructura, es:", a: "C", opts: [
+    {l: "A", t: "La construcción sobre el balasto."},
+    {l: "B", t: "La construcción sobre el nivel del suelo."},
+    {l: "C", t: "El conjunto de instalaciones necesarias para asegurar y garantizar el funcionamiento de un modo de transporte."},
+    {l: "D", t: "El conjunto de instalaciones necesarias que aseguran el trazado ferroviario."}
+  ]},
+  "30": {q: "¿Qué es el vano de un puente?", a: "D", opts: [
+    {l: "A", t: "Cada uno de los espacios de un puente que soporta las cargas dinámicas y las transmite a los estribos."},
+    {l: "B", t: "Cada uno de los espacios de un puente que soporta las cargas dinámicas."},
+    {l: "C", t: "Cada uno de los espacios de un puente comprendido entre dos apoyos."},
+    {l: "D", t: "Cada uno de los espacios de un puente comprendido entre dos apoyos consecutivos."}
+  ]},
+  "31": {q: "En el conjunto de elementos de apoyo de un puente, el apoyo extremo de un tablero, una bóveda o un arco, es:", a: "C", opts: [
+    {l: "A", t: "El vano."},
+    {l: "B", t: "La pila."},
+    {l: "C", t: "El estribo."},
+    {l: "D", t: "La zapata."}
+  ]},
+  "32": {q: "En el conjunto de elementos de apoyo de un puente, el apoyo intermedio que ha de enviar los esfuerzos que recibe de los elementos portantes a la cimentación, es:", a: "B", opts: [
+    {l: "A", t: "La viga."},
+    {l: "B", t: "La pila."},
+    {l: "C", t: "El estribo."},
+    {l: "D", t: "La zapata."}
+  ]},
+  "33": {q: "En el dibujo que aparece en la pregunta, ¿dónde se encuentra el estribo?", a: "D", opts: [
+    {l: "A", t: ""},
+    {l: "B", t: ""},
+    {l: "C", t: ""},
+    {l: "D", t: ""}
+  ]},
+  "34": {q: "En el plano de un puente, el elemento que soporta directamente las cargas dinámicas, es:", a: "A", opts: [
+    {l: "A", t: "El Tablero."},
+    {l: "B", t: "La Viga."},
+    {l: "C", t: "La Pila"},
+    {l: "D", t: "El Apoyo."}
+  ]},
+  "35": {q: "El túnel artificial, es:", a: "C", opts: [
+    {l: "A", t: "Un paso subterráneo artificial abierto para establecer una comunicación a través de un monte."},
+    {l: "B", t: "Una obra de fábrica cuya misión es la de permitir la continuidad física y geométrica de la vía férrea."},
+    {l: "C", t: "El recubrimiento que se hace de la vía para su protección por cualquier tipo de desprendimientos, aislamientos, etc."},
+    {l: "D", t: "Un paso subterráneo abierto para establecer una comunicación a través de un monte o por debajo de un río."}
+  ]},
+  "36": {q: "Entre las partes más importantes que podemos encontrar en un túnel, la bóveda, es:", a: "D", opts: [
+    {l: "A", t: "La losa cóncava de hormigón que mantiene la separación de los hastiales."},
+    {l: "B", t: "Un conducto prefabricado en la instalación de cables subterráneos o de superficie."},
+    {l: "C", t: "Cada una de las Dovelas inmediatas a la Clave."},
+    {l: "D", t: "Una obra de fábrica curvada que sirve para cubrir el espacio comprendido entre dos muros o varios pilares."}
+  ]},
+  "37": {q: "Entre las partes más importantes que podemos encontrar en un túnel, la piedra labrada en forma de cuña para formar bóvedas, se llama:", a: "B", opts: [
+    {l: "A", t: "Contraclave."},
+    {l: "B", t: "Dovela."},
+    {l: "C", t: "Contrabóveda."},
+    {l: "D", t: "Hastial."}
+  ]},
+  "38": {q: "La losa cóncava de hormigón que mantiene la separación de los hastiales en la parte inferior de un túnel, se llama:", a: "C", opts: [
+    {l: "A", t: "Contraclave."},
+    {l: "B", t: "Dovela."},
+    {l: "C", t: "Contrabóveda."},
+    {l: "D", t: "Clave"}
+  ]},
+  "39": {q: "El muro que además de su propio peso soporta cargas laterales, se llama:", a: "B", opts: [
+    {l: "A", t: "Muro de sostenimiento."},
+    {l: "B", t: "Muro de contención."},
+    {l: "C", t: "Muro de revestimiento."},
+    {l: "D", t: "Pantalla drenante."}
+  ]},
+  "40": {q: "A la construcción empleada para drenar un terreno en el que la altura y la longitud predominan sobre el espesor, la llamamos:", a: "A", opts: [
+    {l: "A", t: "Pantalla drenante."},
+    {l: "B", t: "El Alcantarillado."},
+    {l: "C", t: "Los Caños."},
+    {l: "D", t: "Las Cunetas."}
+  ]},
+  "41": {q: "¿Cómo se llaman los elementos de desagüe en las obras de fábrica, formados por tubos de sección circular de diámetro inferior a dos metros?", a: "D", opts: [
+    {l: "A", t: "Los Pontones."},
+    {l: "B", t: "Las Tajeas."},
+    {l: "C", t: "Las Alcantarillas."},
+    {l: "D", t: "Los Caños."}
+  ]},
+  "42": {q: "La zanja abierta en el terreno, revestida o sin revestir, para recoger el agua de lluvia, es:", a: "C", opts: [
+    {l: "A", t: "La Alcantarilla."},
+    {l: "B", t: "La Tajea."},
+    {l: "C", t: "La Cuneta."},
+    {l: "D", t: "La Contracuneta."}
+  ]}
+};
+
+let respuestasVisibles = false;
+let totalPreguntas = Object.keys(testData).length;
+
+// Generate all questions on page load
+function generarTest() {
+  const container = document.getElementById('questionsContainer');
+  
+  Object.keys(testData).forEach(qid => {
+    const q = testData[qid];
+    const card = document.createElement('div');
+    card.className = 'card question';
+    card.dataset.qid = qid;
+    
+    let opcionesHTML = '';
+    q.opts.forEach(opt => {
+      opcionesHTML += `
+        <label class="option">
+          <input type="radio" name="q${qid}" value="${opt.l}" onchange="updateProgress()" />
+          <div><b>${opt.l})</b> ${opt.t}</div>
+        </label>
+      `;
+    });
+
+    const imagenHTML = q.img
+  ? `<div style="margin:10px 0;text-align:center">
+       <img src="${q.img}" alt="Imagen pregunta ${qid}"
+            style="max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.15)">
+     </div>`
+  : '';
+
+    card.innerHTML = `
+      <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
+      <div class="q-title">${q.q}</div>
+      ${imagenHTML}
+      <div class="options">${opcionesHTML}</div>
+      <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+      <div class="feedback"></div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+// Update progress bar
+function updateProgress() {
+  const respondidas = document.querySelectorAll('input[type=radio]:checked').length;
+  const porcentaje = (respondidas / totalPreguntas) * 100;
+  document.getElementById('progressBar').style.width = porcentaje + '%';
+}
+
+// Grade the test
+function calificar() {
+  let correctas = 0;
+  let incorrectas = 0;
+  let sinResponder = 0;
+  
+  document.querySelectorAll('.question').forEach(card => {
+    const qid = card.dataset.qid;
+    const correcta = testData[qid].a;
+    const seleccionada = card.querySelector('input[type=radio]:checked');
+    
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    
+    if (seleccionada) {
+      const letra = seleccionada.value;
+      if (letra === correcta) {
+        correctas++;
+        seleccionada.closest('.option').classList.add('correct');
+        card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+        card.querySelector('.feedback').style.color = 'var(--ok)';
+      } else {
+        incorrectas++;
+        seleccionada.closest('.option').classList.add('incorrect');
+        card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+        card.querySelector('.feedback').style.color = 'var(--bad)';
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      }
+    } else {
+      sinResponder++;
+      card.querySelector('.feedback').textContent = '⚠ Sin responder';
+      card.querySelector('.feedback').style.color = 'var(--warning)';
+    }
+  });
+  
+  const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+  const aprobado = porcentaje >= 50;
+  
+  document.getElementById('score').textContent = `${correctas} / ${totalPreguntas} (${porcentaje}%)`;
+  document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+  
+  document.getElementById('scoreDetails').innerHTML = `
+    ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+  `;
+  
+  // Scroll to top to see results
+  // window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Reset the test
+function reiniciar() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+  document.getElementById('score').removeAttribute('style');
+  document.getElementById('scoreDetails').textContent = '';
+  document.getElementById('progressBar').style.width = '0%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Toggle answer visibility
+function toggleRespuestas(btn) {
+  respuestasVisibles = !respuestasVisibles;
+  document.body.classList.toggle('show-answers', respuestasVisibles);
+  btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+  
+  if (respuestasVisibles) {
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = testData[qid].a;
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+      const corr = card.querySelector(`input[value="${correcta}"]`);
+      if (corr) corr.closest('.option').classList.add('correct');
+    });
+  } else {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+  }
+}
+
+// Initialize test on page load
+window.addEventListener('load', () => {
+  generarTest();
+});
+
+  // Scroll to top button functionality
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top on click
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TOMO III - LEGISLACIÓN 1</title>
+<title>TOMO III - LEGISLACIÓN 2</title>
 <style>
 :root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
 *{box-sizing:border-box}
@@ -67,8 +67,8 @@ button.secondary:active{background:rgba(255,255,255,.05)}
 <body>
   <div class="header">
     <a href="index.html" class="back-btn">←</a>
-    <h1>TOMO III - LEGISLACIÓN 1</h1>
-    <div class="badge">25 preguntas</div>
+    <h1>TOMO III - LEGISLACIÓN 2</h1>
+    <div class="badge">23 preguntas</div>
     <div class="progress-bar">
       <div class="progress-fill" id="progressBar"></div>
     </div>
@@ -97,141 +97,147 @@ button.secondary:active{background:rgba(255,255,255,.05)}
 <script>
 // Test data with questions and answers
 const testData = {
-  "1": {
-      "q": "Según la Directiva 2004/49/CE (Seguridad de los ferrocarriles comunitarios), ¿qué funciones corresponden al Ministerio de Fomento?",
-      "a": "C",
-      "opts": [
-        {"l": "A", "t": "Prestar servicios de transporte de viajeros o de mercancías por ferrocarril."},
-        {"l": "B", "t": "La administración de las infraestructuras ferroviarias tanto propias como las del Estado."},
-        {"l": "C", "t": "Planificación estratégica, ordenación general y regulación del sistema y entrega de licencias."},
-        {"l": "D", "t": "Prestar servicios adicionales, complementarios y auxiliares, fijar las tarifas y cobrarlas."}
-      ]},
-    "2": {
-      "q": "Según la Directiva 2004/49/CE (Seguridad de los ferrocarriles comunitarios), ¿qué se entiende por licencia ferroviaria?",
-      "a": "D",
-      "opts": [
-        {"l": "A", "t": "Entidad cuya actividad principal consiste en prestar servicios de transporte de viajeros o de mercancías por ferrocarril."},
-        {"l": "B", "t": "Única e intransmisible y específica de las actividades que puede realizar la empresa."},
-        {"l": "C", "t": "Aquella que específica las actividades que puede realizar la empresa."},
-        {"l": "D", "t": "Única e intransmisible, específica de las actividades que puede realizar la empresa y otorgada por la autoridad nacional de seguridad ferroviaria."}
-      ]},
-    "3": {
-      "q": "Un accidente, ¿puede ser un suceso repentino, no deseado ni intencionado a la vez?",
-      "a": "B",
-      "opts": [
-        {"l": "A", "t": "Los accidentes son intencionados siempre."},
-        {"l": "B", "t": "Sí."},
-        {"l": "C", "t": "Un accidente puede ser solamente repentino."},
-        {"l": "D", "t": "Los accidentes suelen ser siempre intencionados."}
-      ]},
-    "4": {
-      "q": "Según el RD 810/2007 (Reglamento sobre la seguridad en la circulación de la RFIG), son competencias de la AESF, entre otras…",
-      "a": "A",
-      "opts": [
-        {"l": "A", "t": "Otorgar las autorizaciones de puesta en servicio de los subsistemas, supervisar el cumplimiento de los requisitos esenciales de interoperabilidad y aprobar los métodos de seguridad (MS) y los objetivos de seguridad (OS)."},
-        {"l": "B", "t": "Dirigir los trabajos en la infraestructura ferroviaria o en sus proximidades, controlando a los pilotos de seguridad."},
-        {"l": "C", "t": "Vigilancia de la infraestructura y protección de los trabajos, así como la vigilancia de los PN."},
-        {"l": "D", "t": "Investigación de accidentes ferroviarios."}
-      ]},
-    "5": {
-      "q": "En la Orden FOM 2872/2010 de 5 de noviembre, ¿se determinan las condiciones para la obtención de los títulos habilitantes del personal ferroviario relacionado con la seguridad en la circulación?",
-      "a": "C",
-      "opts": [
-        {"l": "A", "t": "No."},
-        {"l": "B", "t": "Sí."},
-        {"l": "C", "t": "Sí, y además el régimen de los centros homologados de formación y de los de reconocimiento médico de dicho personal."},
-        {"l": "D", "t": "Varía anualmente."}
-      ]},
-    "6": {
-      "q": "Entre las definiciones del RD 810/2007, ¿cuál es la diferencia entre accidente e incidente?",
-      "a": "A",
-      "opts": [
-        {"l": "A", "t": "Accidente: suceso repentino, no intencionado ni deseado, de consecuencias perjudiciales. Incidente: no llega a tener consecuencias perjudiciales pero sí afecta a la seguridad de la circulación."},
-        {"l": "B", "t": "Accidente: suceso de consecuencias perjudiciales, intencionado o no. Incidente: no llega a tener consecuencias perjudiciales."},
-        {"l": "C", "t": "Accidente: al menos una víctima mortal o cinco o más heridos graves o grandes daños. Incidente: suceso por error, sin consecuencias."},
-        {"l": "D", "t": "El incidente puede ser grave y el accidente no."}
-      ]},
-    "7": {
-      "q": "¿En qué documento figuran los criterios de requisitos, obtención, validez, suspensión y renovación de todas las habilitaciones ferroviarias?",
-      "a": "B",
-      "opts": [
-        {"l": "A", "t": "Ley 38/2015 del Sector Ferroviario."},
-        {"l": "B", "t": "Orden FOM 2872/2010 de 5 de noviembre."},
-        {"l": "C", "t": "RD 810/2007 (Reglamento sobre la seguridad en la circulación de la RFIG)."},
-        {"l": "D", "t": "Directiva 2004/49/CE."}
-      ]},
-    "8": {
-      "q": "¿Qué órgano ejecutivo de la UE elabora propuestas de nueva legislación y aplica las decisiones del Parlamento Europeo y del Consejo?",
-      "a": "C",
-      "opts": [
-        {"l": "A", "t": "MCS."},
-        {"l": "B", "t": "Agencia Estatal de Seguridad Ferroviaria (AESF)."},
-        {"l": "C", "t": "Comisión Europea."},
-        {"l": "D", "t": "Agencia Ferroviaria Europea (ERA)."}
-      ]},
-    "9": {
-      "q": "¿Cuál es un objeto de la Orden FOM 2872/2010 de 5 de noviembre?",
-      "a": "A",
-      "opts": [
-        {"l": "A", "t": "Regular las competencias profesionales vinculadas a la actividad ferroviaria."},
-        {"l": "B", "t": "Establecer condiciones y procedimientos para la obtención de las autorizaciones de seguridad."},
-        {"l": "C", "t": "Regular las condiciones de investigación de accidentes ferroviarios."},
-        {"l": "D", "t": "Ninguna de las anteriores."}
-      ]},
-    "10": {
-      "q": "Según la Directiva 2004/49/CE, ¿qué se entiende por capacidad?",
-      "a": "A",
-      "opts": [
-        {"l": "A", "t": "Número de franjas horarias disponibles en un tramo de infraestructura en un periodo determinado, según la tipología del tráfico."},
-        {"l": "B", "t": "Niveles mínimos de seguridad exigidos a las partes del sistema ferroviario, expresados en criterios de aceptación de riesgo."},
-        {"l": "C", "t": "Organización y medidas de un administrador o EF para gestionar con seguridad sus operaciones."},
-        {"l": "D", "t": "Esta Directiva no contempla tal definición."}
-      ]},
-    "11": {
-      "q": "Señala la respuesta incorrecta sobre los requisitos para obtener la licencia de empresa ferroviaria:",
-      "a": "B",
-      "opts": [
-        {"l": "A", "t": "Capacidad financiera para hacer frente a sus obligaciones."},
-        {"l": "B", "t": "Revestir la forma de sociedad limitada."},
-        {"l": "C", "t": "Tener cubiertas las responsabilidades civiles."},
-        {"l": "D", "t": "Garantizar la competencia profesional de su personal."}
-      ]},
-    "12": {
-      "q": "¿A qué personal afecta la Orden FOM 2872/2010 de 5 de noviembre?",
-      "a": "A",
-      "opts": [
-        {"l": "A", "t": "Personal de circulación, infraestructura, operaciones de tren, conducción y personal responsable de control de mantenimiento de material rodante."},
-        {"l": "B", "t": "Personal responsable de control de mantenimiento de material rodante."},
-        {"l": "C", "t": "Personal de circulación y de infraestructura."},
-        {"l": "D", "t": "Personal de operaciones de tren y de conducción."}
-      ]},
-    "13": {
-      "q": "¿Qué organismo investiga los accidentes e incidentes de la RFIG?",
-      "a": "C",
-      "opts": [
-        {"l": "A", "t": "AESF"},
-        {"l": "B", "t": "CNIAF"},
-        {"l": "C", "t": "CIAF"},
-        {"l": "D", "t": "Guardia Civil"}
-      ]},
-    "14": {
-      "q": "¿Qué título habilita para el desplazamiento, manejo y guiado del material rodante auxiliar para trabajos en infraestructura (maquinaria de vía, vehículos de socorro, vehículos automóviles adaptados)?",
-      "a": "C",
-      "opts": [
-        {"l": "A", "t": "Operador de maquinaria de vía."},
-        {"l": "B", "t": "Operador de vehículos de maniobra."},
-        {"l": "C", "t": "Operador de maquinaria de infraestructura."},
-        {"l": "D", "t": "Operador de maquinaria de vía y de maniobras."}
-      ]},
-    "15": {
-      "q": "Según la disposición final primera del RD 623/2004, los índices máximos de alcoholemia para maquinistas y personal relacionado con la seguridad en la circulación son:",
-      "a": "B",
-      "opts": [
-        {"l": "A", "t": "0,10 mg/l en sangre y 0,05 g/l en aire espirado."},
-        {"l": "B", "t": "0,10 g/l en sangre y 0,05 mg/l en aire espirado."},
-        {"l": "C", "t": "0,05 g/l en sangre y 0,10 mg/l en aire espirado."},
-        {"l": "D", "t": "0,05 mg/l en sangre y 0,10 g/l en aire espirado."}
-      ]}
+  "1": {q: "La instalación de una señal fija se dará a conocer mediante:", a: "B", opts: [
+    {l: "A", t: "Consigna A"},
+    {l: "B", t: "Aviso"},
+    {l: "C", t: "Consigna C"},
+    {l: "D", t: "ICL"}
+  ]},
+  "2": {q: "En Europa si hablamos de un MCS para analizar, evaluar y valorar el riesgo nos referimos a:", a: "C", opts: [
+    {l: "A", t: "Reglamento 2010/1169"},
+    {l: "B", t: "Directiva 2004/49"},
+    {l: "C", t: "Reglamento 2013/402"},
+    {l: "D", t: "Reglamento 2015/995"}
+  ]},
+  "3": {q: "¿Qué documento fija criterios para la asignación de funciones y responsabilidades?", a: "B", opts: [
+    {l: "A", t: "Manual del SGSC"},
+    {l: "B", t: "Directriz para la política y la gestión de la SC ferroviaria"},
+    {l: "C", t: "PG Procedimiento General de asignación de funciones de SC"},
+    {l: "D", t: "PO Procedimiento Operativo de asignación de funciones de SC"}
+  ]},
+  "4": {q: "La licencia de conducción es otorgada por:", a: "B", opts: [
+    {l: "A", t: "Ministerio de Transportes"},
+    {l: "B", t: "AESF"},
+    {l: "C", t: "Dirección Corporativa de Seguridad en la Circulación"},
+    {l: "D", t: "Por la empresa ferroviaria que emplee al Maquinista"}
+  ]},
+  "5": {q: "Adif desarrolla su actividad mediante una gestión de procesos:", a: "C", opts: [
+    {l: "A", t: "Construcción, Mantenimiento y Explotación"},
+    {l: "B", t: "Generales, Específicos y Operativos"},
+    {l: "C", t: "Estratégicos, Clave y Soporte"},
+    {l: "D", t: "Ninguna respuesta es correcta"}
+  ]},
+  "6": {q: "El Anexo II del RD 664/2015 contiene", a: "A", opts: [
+    {l: "A", t: "Criterios para la elaboración de los SGS"},
+    {l: "B", t: "El Reglamento de Circulación Ferroviaria"},
+    {l: "C", t: "Los Apéndices, Anexos y Esp. Transitorias del RCF"},
+    {l: "D", t: "NAR, Consignas y demás documentación complementaria el RCF"}
+  ]},
+  "7": {q: "La responsabilidad de la explotación segura del sistema ferroviario y del control de riesgos asociado corresponde a:", a: "A", opts: [
+    {l: "A", t: "Los AI y EF"},
+    {l: "B", t: "Ministerio de Transportes"},
+    {l: "C", t: "Los AI y EF"},
+    {l: "D", t: "Agencia Estatal de Seguridad Ferroviaria"},
+    {l: "E", t: "Dirección Corporativa de Seguridad en la Circulación"}
+  ]},
+  "8": {q: "¿Quién deberá contar con un autorización de seguridad?", a: "C", opts: [
+    {l: "A", t: "Las empresas auxiliares ferroviarias"},
+    {l: "B", t: "Las empresas ferroviarias"},
+    {l: "C", t: "Los administradores de infraestructuras"},
+    {l: "D", t: "Las empresas ferroviarias y los administradores de infraestructura"}
+  ]},
+  "9": {q: "La habilitación de AOT con maniobras faculta a la realización de las labores de:", a: "B", opts: [
+    {l: "A", t: "Auxiliar de Circulación"},
+    {l: "B", t: "Auxiliar de Cabina"},
+    {l: "C", t: "Operador de Vehículo de Maniobras"},
+    {l: "D", t: "Ninguna otra habilitación"}
+  ]},
+  "10": {q: "El ICL Mensual se publica...", a: "A", opts: [
+    {l: "A", t: "... mensualmente el día laborable más próximo al 20 de cada mes."},
+    {l: "B", t: "... mensualmente el día laborable más próximo al 20 de cada mes."},
+    {l: "C", t: "... el último viernes de cada mes."},
+    {l: "D", t: "...el último viernes de cada mes excepto si es festivo que pasaría a jueves"},
+    {l: "E", t: "... Ninguna respuesta es correcta."}
+  ]},
+  "11": {q: "¿Qué documento establece las condiciones y requisitos de funcionamiento de los centros homologados de formación?", a: "A", opts: [
+    {l: "A", t: "Orden FOM 2872/2010"},
+    {l: "B", t: "Orden FOM 2872/2010"},
+    {l: "C", t: "RD 810/2007"},
+    {l: "D", t: "Ley 38/2015 del Sector Ferroviario"},
+    {l: "E", t: "Reglamento UE 1169/2010"}
+  ]},
+  "12": {q: "El 'Libro Blanco del Transporte' se publicó en el año:", a: "C", opts: [
+    {l: "A", t: "1995"},
+    {l: "B", t: "1998"},
+    {l: "C", t: "2001"},
+    {l: "D", t: "2004"}
+  ]},
+  "13": {q: "La elaboración de la 'Declaración de Red' es competencia de:", a: "B", opts: [
+    {l: "A", t: "Ministerio de Transportes"},
+    {l: "B", t: "Adif"},
+    {l: "C", t: "AESF"},
+    {l: "D", t: "Empresas ferroviarias"}
+  ]},
+  "14": {q: "La habilitación de 'Operador de Maquinaria de Maniobras' corresponde al grupo de:", a: "D", opts: [
+    {l: "A", t: "Circulación"},
+    {l: "B", t: "Infraestructura"},
+    {l: "C", t: "Operaciones del tren"},
+    {l: "D", t: "Ninguna respuesta es correcta"}
+  ]},
+  "15": {q: "Señala la respuesta incorrecta. Forma parte del 'Horario de los trenes'", a: "C", opts: [
+    {l: "A", t: "Documento de limitaciones temporales de velocidad máxima"},
+    {l: "B", t: "Información de circulación de las líneas"},
+    {l: "C", t: "Fecha de circulación de los trenes"},
+    {l: "D", t: "Directorio de esquemas de estaciones y líneas"}
+  ]},
+  "16": {q: "El 'Horario de los trenes' es elaborado por:", a: "B", opts: [
+    {l: "A", t: "Dirección Corporativa de Seguridad en la Circulación"},
+    {l: "B", t: "Planificación y Gestión de Red"},
+    {l: "C", t: "Subdirección de Operaciones"},
+    {l: "D", t: "Área de Gestión de Planificación de Horarios"}
+  ]},
+  "17": {q: "¿Mediante qué documento se realiza la supervisión de la gestión de la seguridad de un AI en la fase de explotación?", a: "B", opts: [
+    {l: "A", t: "Reglamento 2018/762"},
+    {l: "B", t: "Reglamento 2018/761"},
+    {l: "C", t: "Directiva 2016/798"},
+    {l: "D", t: "Ley 38/2015 del Sector Ferroviario"}
+  ]},
+  "18": {q: "El RCF establece las reglas operativas generales para que la circulación de trenes y maniobras se realice de forma:", a: "A", opts: [
+    {l: "A", t: "Segura, eficiente y puntual"},
+    {l: "B", t: "Segura, puntual y regular"},
+    {l: "C", t: "Segura, eficiente y puntual"},
+    {l: "D", t: "Segura, puntual y eficiente"}
+  ]},
+  "19": {q: "El área responsable de la aprobación de una Consigna A es:", a: "B", opts: [
+    {l: "A", t: "DG de Circulación y Gestión de Capacidad"},
+    {l: "B", t: "DG de Conservación y Mantenimiento"},
+    {l: "C", t: "DG de Seguridad, Procesos y sistemas Corporativos"},
+    {l: "D", t: "Subdirección Territorial de Circulación"}
+  ]},
+  "20": {q: "Describen las características, el funcionamiento y la utilización de toda clase de instalaciones de seguridad:", a: "C", opts: [
+    {l: "A", t: "Consigna B"},
+    {l: "B", t: "Consigna C"},
+    {l: "C", t: "Consigna A"},
+    {l: "D", t: "Consigna IS"}
+  ]},
+  "21": {q: "¿En qué documento figuran las estaciones con más de 3 mm/m de declividad?", a: "C", opts: [
+    {l: "A", t: "Cuadro de Velocidades Máximas"},
+    {l: "B", t: "Libro de pendientes y rampas de la RFIG"},
+    {l: "C", t: "Información de Circulación de las Líneas"},
+    {l: "D", t: "Consigna B"}
+  ]},
+  "22": {q: "Las fechas de entrada en vigor de documentos se hará por:", a: "B", opts: [
+    {l: "A", t: "Consigna AO"},
+    {l: "B", t: "Aviso"},
+    {l: "C", t: "Horario de los trenes"},
+    {l: "D", t: "NAR"}
+  ]},
+  "23": {q: "Si hablamos de los niveles de seguridad que deben alcanzar las diversas partes del sistema ferroviario nos referimos a:", a: "D", opts: [
+    {l: "A", t: "MCS - Métodos comunes de seguridad"},
+    {l: "B", t: "ICS - Indicadores comunes de seguridad"},
+    {l: "C", t: "SGS - Sistema de Gestión de Seguridad"},
+    {l: "D", t: "OCS - Objetivos comunes de seguridad"}
+  ]}
 };
 
 let respuestasVisibles = false;

@@ -100,7 +100,9 @@ button.secondary:active{background:rgba(255,255,255,.05)}
 <script>
 // Test data with questions and answers
 const testData = {
-  "1": {q: "Esta inscripción en un vagón define:", a: "C", opts: [
+  "1": {q: "Esta inscripción en un vagón define:",
+        "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.1.png",
+        a: "C", opts: [
     {l: "A", t: "Su longitud entre topes."},
     {l: "B", t: "La distancia entre ejes o pivotes."},
     {l: "C", t: "La longitud del piso."},
@@ -136,7 +138,9 @@ const testData = {
     {l: "C", t: "1967."},
     {l: "D", t: "1969."}
   ]},
-  "7": {q: "La construcción de la imagen se corresponde a:", a: "B", opts: [
+  "7": {q: "La construcción de la imagen se corresponde a:",
+        "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.7.png",
+        a: "B", opts: [
     {l: "A", t: "Muro de contención."},
     {l: "B", t: "Muro de sostenimiento."},
     {l: "C", t: "Muro de relleno."},
@@ -154,7 +158,9 @@ const testData = {
     {l: "C", t: "Alineación."},
     {l: "D", t: "Nivelación."}
   ]},
-  "10": {q: "La distancia entre ejes o pivotes de un vehículo ferroviario se denomina:", a: "A", opts: [
+  "10": {q: "La distancia entre ejes o pivotes de un vehículo ferroviario se denomina:",
+         "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.10.png",
+         a: "A", opts: [
     {l: "A", t: "Empate."},
     {l: "B", t: "Garrote."},
     {l: "C", t: "Alabeo."},
@@ -202,19 +208,25 @@ const testData = {
     {l: "C", t: "Bloqueo."},
     {l: "D", t: "Enclavamiento."}
   ]},
-  "18": {q: "Esta figura se corresponde a:", a: "B", opts: [
+  "18": {q: "Esta figura se corresponde a:",
+         "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.18.png",
+         a: "B", opts: [
     {l: "A", t: "Travesía sin unión"},
     {l: "B", t: "Travesía de unión sencilla"},
     {l: "C", t: "Travesía de unión doble"},
     {l: "D", t: "Bretelle"}
   ]},
-  "19": {q: "Si vemos esta inscripción en el costado de un vagón nos indica:", a: "C", opts: [
+  "19": {q: "Si vemos esta inscripción en el costado de un vagón nos indica:",
+         "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.19.png",
+         a: "C", opts: [
     {l: "A", t: "La tara y el valor del freno de estacionamiento."},
     {l: "B", t: "La carga máxima y el valor del freno de estacionamiento."},
     {l: "C", t: "La tara y el valor del freno de estacionamiento accionable desde el suelo."},
     {l: "D", t: "La tara y el valor del freno de estacionamiento accionable desde la plataforma."}
   ]},
-  "20": {q: "El vagón de la imagen es:", a: "C", opts: [
+  "20": {q: "El vagón de la imagen es:",
+         "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.20.png",
+         a: "C", opts: [
     {l: "A", t: "JJ5"},
     {l: "B", t: "JPD1"},
     {l: "C", t: "JJ2"},
@@ -226,7 +238,9 @@ const testData = {
     {l: "C", t: "1825."},
     {l: "D", t: "1829."}
   ]},
-  "22": {q: "Este símbolo se corresponde a:", a: "A", opts: [
+  "22": {q: "Este símbolo se corresponde a:",
+         "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/tomo3_conceptos_test_02.22.png",
+         a: "A", opts: [
     {l: "A", t: "Baliza ASFA previa de señal."},
     {l: "B", t: "Pedal eléctrico."},
     {l: "C", t: "Baliza ASFA de pie de señal."},
@@ -275,9 +289,17 @@ function generarTest() {
       `;
     });
 
+    const imagenHTML = q.img
+  ? `<div style="margin:10px 0;text-align:center">
+       <img src="${q.img}" alt="Imagen pregunta ${qid}"
+            style="max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.15)">
+     </div>`
+  : '';
+
     card.innerHTML = `
       <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
       <div class="q-title">${q.q}</div>
+      ${imagenHTML}
       <div class="options">${opcionesHTML}</div>
       <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
       <div class="feedback"></div>

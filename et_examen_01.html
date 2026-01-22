@@ -147,6 +147,7 @@ const testData = {
     ]},
   "6": {
     "q": "Las características de la Red Ferroviaria de Interés General, incluyendo la situación de las principales estaciones y nudos ferroviarios, distancias kilométricas entre estaciones, diferentes tipos de vía (vía única y doble vía, electrificada o sin electrificar) y tipos de bloqueo, se publican anualmente en:",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_01.6.png",
     "a": "A",
     "opts": [
       {"l": "A", "t": "La Declaración de la Red"},
@@ -210,6 +211,7 @@ const testData = {
     ]},
   "13": {
     "q": "La señal de la figura",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_01.13.png",
     "a": "A",
     "opts": [
       {"l": "A", "t": "Ordena no exceder la velocidad indicada (en km/h), al pasar por la señal de limitación temporal de velocidad máxima a la que anuncia. Su posición marca el punto en el que se debe iniciar el frenado del tren para poder cumplir la orden de la señal de limitación temporal de velocidad máxima."},
@@ -345,6 +347,7 @@ const testData = {
     ]},
   "28": {
     "q": "Las indicaciones de la figura inferior se corresponde con:",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_01.28.png",
     "a": "A",
     "opts": [
       {"l": "A", "t": "Un paso a nivel protegido con visibilidad inferior a 300m"},
@@ -363,6 +366,7 @@ const testData = {
     ]},
   "30": {
     "q": "Estas señales se colocan en aquellos puntos singulares de especial riesgo que determine el AI. Qué afirmación es correcta.",
+    "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/et_examen_01.30.png",
     "a": "B",
     "opts": [
       {"l": "A", "t": "Las señales anteriores solamente son válidas en periodo de lluvia y nieve abundantes, cuando un ET que se encuentre en la zona y cargo de la señal, notifique al maquinista la existencia de peligro."},
@@ -549,9 +553,17 @@ function generarTest() {
       `;
     });
 
+    const imagenHTML = q.img
+  ? `<div style="margin:10px 0;text-align:center">
+       <img src="${q.img}" alt="Imagen pregunta ${qid}"
+            style="max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.15)">
+     </div>`
+  : '';
+
     card.innerHTML = `
       <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
       <div class="q-title">${q.q}</div>
+      ${imagenHTML}
       <div class="options">${opcionesHTML}</div>
       <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
       <div class="feedback"></div>

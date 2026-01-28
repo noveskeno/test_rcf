@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PARCIAL - ENERO 2026</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--accent:#5bc0be;--ok:#21c17a;--bad:#ff5d73;--text:#f5f7ff;--warning:#ffc107}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,system-ui,-apple-system,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,var(--bg),#0f1a3a);color:var(--text);min-height:100vh;font-size:14px}
+.header{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:rgba(11,19,43,.98);backdrop-filter:blur(10px);z-index:100;position:relative}
+.header h1{margin:0 0 6px 0;font-size:1.2rem;font-weight:700}
+.back-btn{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50%;color:var(--text);text-decoration:none;font-size:18px;transition:all .2s;line-height:1;display:flex;align-items:center;justify-content:center}
+.back-btn:active{background:rgba(255,255,255,.15);transform:translateY(-50%) scale(.95)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;margin-top:4px}
+.container{max-width:1000px;margin:0 auto;padding:10px 8px 200px}
+.progress-bar{background:rgba(255,255,255,.1);height:3px;border-radius:999px;margin:8px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3a9d9a);width:0%;transition:width .3s ease}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.q-title{font-weight:600;margin-bottom:10px;line-height:1.4;font-size:14px}
+.q-number{color:var(--accent);font-size:11px;font-weight:700;margin-bottom:6px;display:block}
+.options{display:grid;grid-template-columns:1fr;gap:6px}
+.option{background:#121a34;border:2px solid rgba(255,255,255,.08);padding:8px;border-radius:8px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:all .2s;font-size:13px;line-height:1.3}
+.option:active{background:#1a2341;border-color:rgba(91,192,190,.3)}
+.option input{margin-top:2px;cursor:pointer;flex-shrink:0}
+.option div{flex:1}
+.answer-key{display:none;margin-top:8px;padding:8px;background:rgba(91,192,190,.1);border-radius:6px;font-size:12px}
+.answer-key b{color:var(--accent)}
+.show-answers .answer-key{display:block}
+.feedback{margin-top:6px;font-size:12px;font-weight:600;padding:6px;border-radius:4px}
+.correct{border-color:rgba(33,193,122,.6)!important;background:rgba(33,193,122,.05)!important}
+.incorrect{border-color:rgba(255,93,115,.75)!important;background:rgba(255,93,115,.05)!important}
+.actions{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(15,26,58,0),rgba(15,26,58,.99));padding:10px 8px;padding-bottom:calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);z-index:99}
+.actions .bar{max-width:1000px;margin:0 auto;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+button{background:var(--accent);border:none;color:#001018;font-weight:700;padding:10px 14px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;touch-action:manipulation}
+button:active{background:var(--accent);opacity:.9;transform:scale(.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--text)}
+button.secondary:active{background:rgba(255,255,255,.05)}
+.score{font-weight:700;font-size:1rem}
+.score-details{font-size:11px;color:var(--text);opacity:.8;margin-top:2px}
+.footer{opacity:.8;font-size:11px;text-align:center;padding:15px;color:rgba(255,255,255,.5)}
+@media (min-width: 720px){
+  .options{grid-template-columns:1fr 1fr}
+  body{font-size:15px}
+  .card{padding:20px;margin:16px 0;border-radius:16px}
+  .q-title{font-size:15px;margin-bottom:12px}
+  .option{padding:12px;gap:10px;font-size:14px}
+  .header{padding:20px 16px}
+  .header h1{font-size:1.5rem;margin-bottom:8px}
+  .container{padding:20px 16px 160px}
+  button{padding:12px 18px;font-size:14px}
+}
+@media (max-width: 640px){
+  .actions .bar{flex-direction:column;gap:6px}
+  .score{text-align:center;width:100%;font-size:0.95rem}
+  .actions{padding:8px 6px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+  button{padding:11px 12px}
+  .btn-group{display:flex;gap:6px;width:100%}
+  .btn-group button{flex:1}
+}
+.scroll-top{position:fixed;bottom:20px;right:20px;width:40px;height:40px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:99;opacity:0;visibility:hidden;transition:all .3s;touch-action:manipulation}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:active{transform:scale(.95)}
+@media (max-width:640px){
+  .scroll-top{width:36px;height:36px;bottom:16px;right:16px;font-size:18px}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>PARCIAL - ENERO 2026</h1>
+    <div class="badge">45 preguntas + 2</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+  
+  <div class="container" id="questionsContainer">
+    <!-- Questions will be generated here -->
+  </div>
+
+  <div class="actions">
+    <div class="bar">
+      <div>
+        <div class="score">Puntuación: <span id="score">—</span></div>
+        <div class="score-details" id="scoreDetails"></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;width:100%">
+        <button onclick="calificar()" style="width:100%">📊 Calificar</button>
+        <div class="btn-group">
+          <button class="secondary" onclick="reiniciar()">🔄 Reiniciar</button>
+          <button class="secondary" onclick="toggleRespuestas(this)">👁️ Ver</button>
+        </div>
+      </div>
+  </div>
+  <button id="scrollTopBtn" class="scroll-top">↑</button>
+  
+<script>
+// Test data with questions and answers
+const testData = {
+  "1": {q: "En 1995 se produce la liberalización del mercado de transporte, a raíz de esto. ¿Qué documentos son incorporados a nuestro derecho interno?", a: "C", opts: [
+    {l: "A", t: "Reglamentos 95/18/UE y 95/19/UE."},
+    {l: "B", t: "1 Reglamento 95/18 UE y una Directiva 96/22 CE."},
+    {l: "C", t: "Directivas 95/18/CE y 95/19/CE."},
+    {l: "D", t: "Ley de Ordenación del Transporte Terrestre LOTT y la Ley 39/1996 Ley del Sector Ferroviario."}
+  ]},
+  "2": {q: "La entidad pública empresarial 'ADIF' podrá construir las infraestructuras ferroviarias con cargo a sus propios recursos o a recursos ajenos, de acuerdo con lo que determine:", a: "B", opts: [
+    {l: "A", t: "Gobierno de España."},
+    {l: "B", t: "Ministerio de Transportes."},
+    {l: "C", t: "Agencia Estatal de Seguridad Ferroviaria."},
+    {l: "D", t: "Gobierno de España y la Unión Europea."}
+  ]},
+  "3": {q: "¿Cuáles son las principales actividades de Adif?", a: "C", opts: [
+    {l: "A", t: "Mantenimiento, conservación y gestión de las líneas existentes. Gestión del tráfico y asignación de surcos. Construcción de nuevas líneas. I+D."},
+    {l: "B", t: "Mantenimiento y gestión de las líneas existentes. Gestión del tráfico y asignación de Capacidad. Mantenimiento de nuevas líneas. I+D."},
+    {l: "C", t: "Mantenimiento y gestión de las líneas existentes. Gestión del tráfico y asignación de Construcción de nuevas líneas. I+D."},
+    {l: "D", t: "Mantenimiento y conservación de las líneas existentes. Gestión del tráfico y asignación de Capacidad. Construcción de nuevas líneas. I+D."}
+  ]},
+  "4": {q: "La Red gestionada por ADIF está compuesta por líneas principalmente de tráfico mixto, entendiéndose por tal...", a: "D", opts: [
+    {l: "A", t: "... Ancho de vía 1668 mm y 1435 mm."},
+    {l: "B", t: "... Alta velocidad y Red Convencional."},
+    {l: "C", t: "... Cercanías, Media Distancia y Largo recorrido."},
+    {l: "D", t: "... Mercancías y viajeros."}
+  ]},
+  "5": {q: "El trazado en planta de la infraestructura ferroviaria está compuesto por una sucesión de alineaciones rectas y circulares, unidas entre sí mediante...", a: "A", opts: [
+    {l: "A", t: "... Curvas de transición."},
+    {l: "B", t: "... Las limitaciones que se imponen al radio de las curvas y a las pendientes y los gálibos."},
+    {l: "C", t: "... El trazado en planta y trazado en alzado."},
+    {l: "D", t: "... Una base sólida sobre la cual asentar el camino de rodadura a partir de un conjunto de obras de tierra y fábrica."}
+  ]},
+  "6": {q: "¿Cuánto puede medir de ancho un Pontón?", a: "B", opts: [
+    {l: "A", t: "Más de 6 m. y hasta 10 m. y su uso puede ser como camino de acceso."},
+    {l: "B", t: "Menos de 10 m. y su uso puede ser como camino de acceso."},
+    {l: "C", t: "Entre 6 m. y 10 m. y su uso puede ser como camino de acceso."},
+    {l: "D", t: "Entre 6´5 m. y 10 m. y su uso puede ser como camino de acceso."}
+  ]},
+  "7": {q: "¿Cuál de los siguientes muros son más flexibles?", a: "D", opts: [
+    {l: "A", t: "Los proyectados."},
+    {l: "B", t: "De contención."},
+    {l: "C", t: "De sostenimiento."},
+    {l: "D", t: "De revestimiento."}
+  ]},
+  "8": {q: "¿Cómo se denomina al edificio que aloja equipos interiores de los sistemas de energía, señalización, comunicaciones, vigilancia y monitorización, etc.", a: "B", opts: [
+    {l: "A", t: "Edificio auxiliar."},
+    {l: "B", t: "Edificio Técnico."},
+    {l: "C", t: "Caseta de enclavamientos."},
+    {l: "D", t: "Caseta de Relés y enclavamientos."}
+  ]},
+  "9": {q: "¿Qué aparato de vía representa el siguiente dibujo?", a: "C", opts: [
+    {l: "A", t: "Desvío."},
+    {l: "B", t: "Bretelle."},
+    {l: "C", t: "Escape."},
+    {l: "D", t: "Haz de vía."}
+  ]},
+  "10": {q: "¿Qué es una aguja aérea?", a: "D", opts: [
+    {l: "A", t: "Aparato montado en el hilo de contacto que independiza eléctricamente una vía o grupo de vías de una misma estación sin necesidad de cortar tensión en toda ella."},
+    {l: "B", t: "Dispositivo que se realiza entre las dos catenarias o más de un desvío, cruzamiento o escape para permitir el paso de las circulaciones de una vía a otra, sin discontinuidad en la alimentación eléctrica."},
+    {l: "C", t: "Dispositivo montado en el hilo de contacto que independiza eléctricamente una vía o grupo de vías de un conjunto de estaciones sin necesidad de cortar tensión en toda ella."},
+    {l: "D", t: "Instalación que se realiza entre las dos catenarias de un desvío, cruzamiento o discontinuidad en la alimentación eléctrica."}
+  ]},
+  "11": {q: "¿Qué garantiza la señalización en las estaciones?", a: "D", opts: [
+    {l: "A", t: "Garantiza las compatibilidades en los trayectos."},
+    {l: "B", t: "Evita las compatibilidades de movimientos de trenes y maniobras."},
+    {l: "C", t: "Las incompatibilidades entre las señales de dos estaciones colaterales, así como los trayectos afectados."},
+    {l: "D", t: "La correcta disposición de los itinerarios, evitando los incompatibles."}
+  ]},
+  "12": {q: "Las señales son la interfaz de información más básico entre:", a: "C", opts: [
+    {l: "A", t: "Los responsables de Circulación y los maquinistas."},
+    {l: "B", t: "El personal de infraestructura, Responsables de Circulación y maquinistas."},
+    {l: "C", t: "Todo el personal que interviene en procesos de circulación y está debidamente habilitado."},
+    {l: "D", t: "Los enclavamientos y bloqueos y el Maquinista."}
+  ]},
+  "13": {q: "¿Qué se supervisa con el sistema de protección ASFA?", a: "B", opts: [
+    {l: "A", t: "Se supervisa la velocidad del tren mediante la vigilancia continua de este, de modo que en el caso que exceda los valores establecidos, el sistema activa el freno de emergencia hasta que la velocidad se sitúa por debajo de los valores de supervisión."},
+    {l: "B", t: "Se supervisa la velocidad del tren a partir de la puntual información de las señales fijas, que recibe por medio de balizas."},
+    {l: "C", t: "Prescinde de la señalización luminosa para emplear las balizas y comunicación vía radio entre su lugar. El maquinista verá en su puesto, la velocidad a la que debe ir y si debe parar al llegar a la próxima sección."},
+    {l: "D", t: "Los equipos a instalar se superponen a la señalización luminosa actual. El sistema prevé la inclusión de una baliza que transmite al tren el aspecto en el que se encuentra la señal siguiente."}
+  ]},
+  "14": {q: "¿Cuándo deberán efectuarse los recorridos de Vigilancia a pie?", a: "C", opts: [
+    {l: "A", t: "Deben efectuarse procurando que coincidan con los meses de mayo y noviembre, en los casos en los que se realicen."},
+    {l: "B", t: "Deben efectuarse procurando que exista la dotación de personal adecuada y en cualquier época del año, en los casos en los que se realicen."},
+    {l: "C", t: "Deben efectuarse procurando que coincidan con los periodos anuales de inicio de calor o de frío (finales de primavera y otoño respectivamente), en los casos en los que se realicen."},
+    {l: "D", t: "Si las inspecciones las realiza el coche de control geométrico, los recorridos de vigilancia a pie pueden ser realizadas en febrero y agosto."}
+  ]},
+  "15": {q: "¿Qué es Mantenimiento Preventivo?", a: "B", opts: [
+    {l: "A", t: "Cualquier actividad de mantenimiento requerida para corregir un fallo que ha ocurrido o está ocurriendo."},
+    {l: "B", t: "Estrategia de mantenimiento de equipos basada en la inspección, revisión, sustitución o nueva fabricación de un elemento en períodos programados (basados en: tiempo, kilómetros, número de ciclos de operación...) de acuerdo a su condición en un momento dado."},
+    {l: "C", t: "Plan de conservación de las bases de mantenimiento basada en la observación, de un elemento en períodos programados (basados en: tiempo, kilómetros, número de ciclos de operación...) de acuerdo a su condición en un momento dado."},
+    {l: "D", t: "Conjunto de medidas cíclicas, programables según el estado de los instalados en vía (carriles traviesas y aparatos)."}
+  ]},
+  "16": {q: "¿Qué vehículo autopropulsado está destinado al servicio de la red?", a: "A", opts: [
+    {l: "A", t: "Vagoneta."},
+    {l: "B", t: "Bateadora."},
+    {l: "C", t: "Estabilizadora."},
+    {l: "D", t: "Perfiladora."}
+  ]},
+  "17": {q: "De acuerdo con la Ley 38/2015, del Sector Ferroviario, para ejercer las funciones de administración de la RFIG los administradores de infraestructuras ferroviarias deberán disponer de:", a: "C", opts: [
+    {l: "A", t: "Certificado de seguridad."},
+    {l: "B", t: "Procedimiento de seguridad"},
+    {l: "C", t: "Autorización de seguridad."},
+    {l: "D", t: "Licencia de seguridad."}
+  ]},
+  "18": {q: "¿Cuál de los siguientes comportamientos no será sancionable?", a: "B", opts: [
+    {l: "A", t: "Negligencias que se producen conscientemente."},
+    {l: "B", t: "Transgresiones no deliberadas"},
+    {l: "C", t: "Actos de dolo, vandalismo y sabotaje."},
+    {l: "D", t: "No reportar sucesos de seguridad detectados que, por motivos previsibles o evidentes, puedan entrañar un riesgo para las operaciones o las personas."}
+  ]},
+  "19": {q: "SGS. ¿Qué documentos dependen de los procedimientos operativos, que definen en más detalle actividades muy concretas?", a: "D", opts: [
+    {l: "A", t: "Procedimiento General."},
+    {l: "B", t: "Procedimientos Específicos."},
+    {l: "C", t: "Instrucciones Técnicas."},
+    {l: "D", t: "Documentación reglamentaria de seguridad."}
+  ]},
+  "20": {q: "¿Qué documento publica el AI para garantizar la continuidad de la circulación en caso de alteración temporal del funcionamiento normal de la infraestructura?", a: "D", opts: [
+    {l: "A", t: "CG ATO."},
+    {l: "B", t: "CG CO."},
+    {l: "C", t: "CG TE."},
+    {l: "D", t: "CG CTO."}
+  ]},
+  "21": {q: "¿Cuál es la finalidad del documento Horario de los trenes?", a: "B", opts: [
+    {l: "A", t: "Proporcionar a ADIF y Renfe la mayor información disponible para que éstas puedan elaborar los documentos de su competencia."},
+    {l: "B", t: "Proporcionar a las empresas ferroviarias la mayor información disponible para que éstas puedan elaborar los documentos de su competencia."},
+    {l: "C", t: "Documento interno elaborado por ADIF, para que todo el personal propio tenga conocimientos de normas de circulación."},
+    {l: "D", t: "Documento interno elaborado por ADIF, para que todo el personal con habilitación de seguridad en vigor tenga conocimientos de normas de circulación."}
+  ]},
+  "22": {q: "¿En qué documento perteneciente al Horario de los trenes se da a conocer las Bandas de Mantenimiento?", a: "A", opts: [
+    {l: "A", t: "Cuadro de Velocidades Máximas."},
+    {l: "B", t: "información de Circulación de Líneas."},
+    {l: "C", t: "Documento de Limitaciones Temporales de Velocidad Máxima."},
+    {l: "D", t: "Directorio de Esquemas de Estaciones y Líneas."}
+  ]},
+  "23": {q: "¿Cada cuánto tiempo se actualiza el DLTV en Red Convencional?", a: "D", opts: [
+    {l: "A", t: "Mensualmente."},
+    {l: "B", t: "Diariamente."},
+    {l: "C", t: "Semanalmente."},
+    {l: "D", t: "Cada Hora."}
+  ]},
+  "24": {q: "¿En qué documento se puede consultar la Relación de Pasos a Nivel agrupados por línea y tramo de los puntos de regulación colaterales?", a: "C", opts: [
+    {l: "A", t: "Consigna AO."},
+    {l: "B", t: "Consigna ATO."},
+    {l: "C", t: "ICL Anual."},
+    {l: "D", t: "ICL Mensual."}
+  ]},
+  "25": {q: "¿Qué documento regula, entre otros aspectos, la definición de las responsabilidades y obligaciones de su personal de servicio vinculado con la seguridad?", a: "A", opts: [
+    {l: "A", t: "Ley del Sector Ferroviario 38/2015."},
+    {l: "B", t: "Ley del Sector Ferroviario 39/2003."},
+    {l: "C", t: "Norma Adif de Reglamentación (NAR)."},
+    {l: "D", t: "RD 664/2015."}
+  ]},
+  "26": {q: "Paso a nivel activo: es el que protege a los usuarios del paso o les avisa de la aproximación del tren, mediante la activación de dispositivos físicos situados en el paso, que le informan de cuando no es seguro cruzar éste. Dichos dispositivos pueden ser:", a: "B", opts: [
+    {l: "A", t: "Pasivo y activo."},
+    {l: "B", t: "Aviso y Protección."},
+    {l: "C", t: "Plena vía y enclavados."},
+    {l: "D", t: "Sin barreras y con barreras."}
+  ]},
+  "27": {q: "¿Cómo se clasifican los Pasos a Nivel?", a: "C", opts: [
+    {l: "A", t: "Pasivos y Activos."},
+    {l: "B", t: "P, A1, A2, A3, A4."},
+    {l: "C", t: "Según su titularidad, su vida útil y su uso específico."},
+    {l: "D", t: "De plena vía y de estaciones."}
+  ]},
+  "28": {q: "Pasos a Nivel. Los sistemas de protección activos se componen de elementos instalados en el lado de la carretera o camino y en el lado de la vía, ¿Cuál es una función básica?", a: "D", opts: [
+    {l: "A", t: "Autocomprobación del sistema y gestión de las alarmas causadas por averías o fallos en su funcionamiento."},
+    {l: "B", t: "Aviso al usuario en caso de sucesión de trenes."},
+    {l: "C", t: "Operación manual en mando local."},
+    {l: "D", t: "Indicación al Maquinista del estado de protección o desprotección del PN, antes de llegar a éste."}
+  ]},
+  "29": {q: "¿Qué clase de Paso a Nivel ofrece protección por el lado de la vía?", a: "A", opts: [
+    {l: "A", t: "A4."},
+    {l: "B", t: "A3."},
+    {l: "C", t: "A2."},
+    {l: "D", t: "A1."}
+  ]},
+  "30": {q: "¿Cuál de los siguientes bloqueos debe ser obligatoriamente con CTC?", a: "B", opts: [
+    {l: "A", t: "BLA."},
+    {l: "B", t: "BSL."},
+    {l: "C", t: "BA."},
+    {l: "D", t: "BT."}
+  ]},
+  "31": {q: "Como norma general el ¿...? se asegura por medio de las señales que protegen los cantones y por el sentido de la circulación de los trenes. Señale la respuesta correcta.", a: "C", opts: [
+    {l: "A", t: "BT."},
+    {l: "B", t: "BEM."},
+    {l: "C", t: "BA."},
+    {l: "D", t: "BCA."}
+  ]},
+  "32": {q: "Las señales avanzadas no presentarán parada y las señales de salida no presentarán anuncio de parada. ¿A qué tipo de bloqueo corresponde dicha característica?", a: "C", opts: [
+    {l: "A", t: "BAB."},
+    {l: "B", t: "BAD."},
+    {l: "C", t: "BLA."},
+    {l: "D", t: "BSL."}
+  ]},
+  "33": {q: "¿En qué año pasa RENFE a ser una 'sociedad estatal' con personalidad jurídica propia e independiente del estado y adscrita al ministerio de Obras Públicas, Transportes y Medio Ambiente?", a: "D", opts: [
+    {l: "A", t: "2005."},
+    {l: "B", t: "2006."},
+    {l: "C", t: "2015."},
+    {l: "D", t: "1994."}
+  ]},
+  "34": {q: "Normativa Ferroviaria Europea, de las siguientes afirmaciones, ¿Cuál corresponde a una directiva?", a: "C", opts: [
+    {l: "A", t: "Se aplican directamente por los Estados Miembros y de manera uniforme."},
+    {l: "B", t: "Es obligatorio su cumplimiento en todos sus elementos."},
+    {l: "C", t: "Son de obligada transposición al ordenamiento jurídico de cada uno de los Estados miembros."},
+    {l: "D", t: "Aplicables desde la fecha de entrada en vigor."}
+  ]},
+  "35": {q: "En sus inicios, ¿cuál fue el pilar fundamental en el que se basaba la política europea en materia de ferrocarriles?", a: "A", opts: [
+    {l: "A", t: "Seguridad."},
+    {l: "B", t: "Interoperabilidad."},
+    {l: "C", t: "Libre comercio."},
+    {l: "D", t: "Marco común legislativo."}
+  ]},
+  "36": {q: "Son niveles de seguridad que deben alcanzar al menos las diversas partes del sistema ferroviario y en todo su conjunto expresadas en criterio de aceptación de los riesgos que existen en dicho sistema.", a: "C", opts: [
+    {l: "A", t: "MCS."},
+    {l: "B", t: "ICS."},
+    {l: "C", t: "OCS."},
+    {l: "D", t: "INS."}
+  ]},
+  "37": {q: "¿Cuál es una característica básica de ADIF?", a: "B", opts: [
+    {l: "A", t: "Construcción y renovación de las infraestructuras ferroviarias"},
+    {l: "B", t: "Es una entidad pública empresarial adscrita al Ministerio de Transportes."},
+    {l: "C", t: "Gestión de la circulación y los sistemas de seguridad y control."},
+    {l: "D", t: "Prestar servicios adicionales, complementarios y auxiliares, fijar las tarifas y cobrarlas."}
+  ]},
+  "38": {q: "¿Quién adjudica capacidad?", a: "D", opts: [
+    {l: "A", t: "AESF."},
+    {l: "B", t: "ADIF."},
+    {l: "C", t: "EF."},
+    {l: "D", t: "AI."}
+  ]},
+  "39": {q: "¿Qué documento define el concepto de Red Ferroviaria de Interés General, sobre la que el Estado ejerce competencias plenas?", a: "A", opts: [
+    {l: "A", t: "Ley 38/2015 del Sector Ferroviario."},
+    {l: "B", t: "Real Decreto 810/2007, Reglamento de Seguridad Ferroviaria."},
+    {l: "C", t: "LSF 39/2003."},
+    {l: "D", t: "Real Decreto 623/2014."}
+  ]},
+  "40": {q: "¿Qué es considerá Accidente Grave?", a: "A", opts: [
+    {l: "A", t: "Suceso repentino, no deseado ni intencionado, o una cadena de sucesos de ese tipo, de consecuencias perjudiciales."},
+    {l: "B", t: "Cualquier colisión o descarrilamiento de trenes con el resultado de al menos dos víctimas no mortales o de cuatro o más heridos graves o grandes daños al material rodante, a la infraestructura o al medio ambiente."},
+    {l: "C", t: "Cualquier colisión o descarrilamiento de trenes con el resultado de al menos una víctima mortal o de cinco o más heridos graves o grandes daños al material rodante, a la infraestructura o al medio ambiente."},
+    {l: "D", t: "Cualquier suceso, distinto de un accidente o un accidente, que afecte o pueda afectar a la seguridad de las operaciones ferroviarias."}
+  ]},
+  "41": {q: "En todo caso, para la conducción de vehículos ferroviarios auxiliares por tramos de línea no exclusivos para trabajos de infraestructura, se exigirá al titular de esta habilitación estar en posesión de la licencia de conducción regulada en esta orden y del certificado correspondiente. ¿De qué habilitación se trata?", a: "A", opts: [
+    {l: "A", t: "AOT."},
+    {l: "B", t: "OMI."},
+    {l: "C", t: "Maquinista."},
+    {l: "D", t: "ET."}
+  ]},
+  "42": {q: "A efectos de la Consigna C 64/16, se considerará el PPR como un medio de comunicación con funcionalidad para:", a: "B", opts: [
+    {l: "A", t: "Encargado de trabajos y Responsable de Circulación."},
+    {l: "B", t: "Responsable de Circulación y Maquinista."},
+    {l: "C", t: "Encargado de trabajos, Piloto de Seguridad, Responsable de Circulación y Maquinista."},
+    {l: "D", t: "Maquinista."}
+  ]},
+  "43": {q: "A efectos de la Consigna C 64/16, cuando un PPR se utilice en sustitución de un PMR ¿Qué se registrará en el PPR?", a: "B", opts: [
+    {l: "A", t: "El número de radiotelefonía publica que tenga asignado, el ET, PS y RC."},
+    {l: "B", t: "El número de circulación que tenía el PMR al que sustituye."},
+    {l: "C", t: "La Banda de Regulación, más el número de radiotelefonía publica que tenga asignado, el ET, PS, RC y Maquinista."},
+    {l: "D", t: "El Nº UIC de los vehículos."}
+  ]},
+  "44": {q: "Simbología. ¿Qué representa el siguiente símbolo?", a: "D", opts: [
+    {l: "A", t: "Baliza ASFA de pie de señal en sentido de izquierda a derecha."},
+    {l: "B", t: "Baliza ASFA previa de señal o de final de topera en sentido de izquierda a derecha."},
+    {l: "C", t: "Baliza ASFA de pie de señalen sentido de derecha a Izquierda."},
+    {l: "D", t: "Baliza ASFA previa de señal o de final de topera en sentido de derecha a izquierda."}
+  ]},
+  "45": {q: "Simbología. ¿Qué representa el siguiente símbolo?", a: "C", opts: [
+    {l: "A", t: "Paso inferior."},
+    {l: "B", t: "Paso a nivel."},
+    {l: "C", t: "Paso superior."},
+    {l: "D", t: "Cruce entre andenes."}
+  ]},
+  "R1": {q: "¿Qué es ADIF?", a: "A", opts: [
+    {l: "A", t: "Entidad pública empresarial."},
+    {l: "B", t: "Ente público dependiente del estado."},
+    {l: "C", t: "Ente público dependiente del estado y Comunidades Autónomas."},
+    {l: "D", t: "Entidad Laboral Empresarial."}
+  ]},
+  "R2": {q: "Son vehículos autopropulsados utilizados en la construcción, rehabilitación o mantenimiento de la vía, que mediante vibraciones y su propio peso asienta la vía compactándola.", a: "A", opts: [
+    {l: "A", t: "Estabilizadora."},
+    {l: "B", t: "Perfiladora."},
+    {l: "C", t: "Bateadora."},
+    {l: "D", t: "Desguarnecedora."}
+  ]}
+};
+
+
+  let respuestasVisibles = false;
+let totalPreguntas = Object.keys(testData).length;
+
+// Generate all questions on page load
+function generarTest() {
+  const container = document.getElementById('questionsContainer');
+  
+  Object.keys(testData).forEach(qid => {
+    const q = testData[qid];
+    const card = document.createElement('div');
+    card.className = 'card question';
+    card.dataset.qid = qid;
+    
+    let opcionesHTML = '';
+    q.opts.forEach(opt => {
+      opcionesHTML += `
+        <label class="option">
+          <input type="radio" name="q${qid}" value="${opt.l}" onchange="updateProgress()" />
+          <div><b>${opt.l})</b> ${opt.t}</div>
+        </label>
+      `;
+    });
+
+    const imagenHTML = q.img
+  ? `<div style="margin:10px 0;text-align:center">
+       <img src="${q.img}" alt="Imagen pregunta ${qid}"
+            style="max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.15)">
+     </div>`
+  : '';
+
+    card.innerHTML = `
+      <span class="q-number">Pregunta ${qid} de ${totalPreguntas}</span>
+      <div class="q-title">${q.q}</div>
+      ${imagenHTML}
+      <div class="options">${opcionesHTML}</div>
+      <div class="answer-key">✓ Respuesta correcta: <b>${q.a}</b></div>
+      <div class="feedback"></div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+// Update progress bar
+function updateProgress() {
+  const respondidas = document.querySelectorAll('input[type=radio]:checked').length;
+  const porcentaje = (respondidas / totalPreguntas) * 100;
+  document.getElementById('progressBar').style.width = porcentaje + '%';
+}
+
+// Grade the test
+function calificar() {
+  let correctas = 0;
+  let incorrectas = 0;
+  let sinResponder = 0;
+  
+  document.querySelectorAll('.question').forEach(card => {
+    const qid = card.dataset.qid;
+    const correcta = testData[qid].a;
+    const seleccionada = card.querySelector('input[type=radio]:checked');
+    
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+    
+    if (seleccionada) {
+      const letra = seleccionada.value;
+      if (letra === correcta) {
+        correctas++;
+        seleccionada.closest('.option').classList.add('correct');
+        card.querySelector('.feedback').textContent = '✔ ¡Correcto!';
+        card.querySelector('.feedback').style.color = 'var(--ok)';
+      } else {
+        incorrectas++;
+        seleccionada.closest('.option').classList.add('incorrect');
+        card.querySelector('.feedback').innerHTML = `✖ Incorrecto · La correcta es: <b>${correcta}</b>`;
+        card.querySelector('.feedback').style.color = 'var(--bad)';
+        const corr = card.querySelector(`input[value="${correcta}"]`);
+        if (corr) corr.closest('.option').classList.add('correct');
+      }
+    } else {
+      sinResponder++;
+      card.querySelector('.feedback').textContent = '⚠ Sin responder';
+      card.querySelector('.feedback').style.color = 'var(--warning)';
+    }
+  });
+  
+  const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+  const aprobado = porcentaje >= 50;
+  
+  document.getElementById('score').textContent = `${correctas} / ${totalPreguntas} (${porcentaje}%)`;
+  document.getElementById('score').style.color = aprobado ? 'var(--ok)' : 'var(--bad)';
+  
+  document.getElementById('scoreDetails').innerHTML = `
+    ✔ ${correctas} correctas · ✖ ${incorrectas} incorrectas · ⚠ ${sinResponder} sin responder
+  `;
+  
+  // Scroll to top to see results
+ // window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Reset the test
+function reiniciar() {
+  document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.feedback').forEach(f => {f.textContent=''; f.removeAttribute('style')});
+  document.getElementById('score').textContent = '—';
+  document.getElementById('score').removeAttribute('style');
+  document.getElementById('scoreDetails').textContent = '';
+  document.getElementById('progressBar').style.width = '0%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Toggle answer visibility
+function toggleRespuestas(btn) {
+  respuestasVisibles = !respuestasVisibles;
+  document.body.classList.toggle('show-answers', respuestasVisibles);
+  btn.textContent = respuestasVisibles ? '🙈 Ocultar respuestas' : '👁️ Ver respuestas';
+  
+  if (respuestasVisibles) {
+    document.querySelectorAll('.question').forEach(card => {
+      const qid = card.dataset.qid;
+      const correcta = testData[qid].a;
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+      const corr = card.querySelector(`input[value="${correcta}"]`);
+      if (corr) corr.closest('.option').classList.add('correct');
+    });
+  } else {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct'));
+  }
+}
+
+// Initialize test on page load
+window.addEventListener('load', () => {
+  generarTest();
+});
+// Scroll to top button functionality
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+// Smooth scroll to top on click
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>
+</body>
+</html>

@@ -219,13 +219,13 @@ button.secondary:active{background:rgba(255,255,255,.05)}
       {l: "C", t: "Circular normalmente si nada se opone."},
       {l: "D", t: "Ninguna es correcta."}
     ]},
-    "19": {q: "¿Qué ordena la señal de vía libre condicional?", a: "A", opts: [
+    "19": {q: "¿Qué le ordena al Maquinista la señal de vía libre condicional?", a: "A", opts: [
       {l: "A", t: "A un tren tipo 160 circular normalmente si nada se opone."},
       {l: "B", t: "A un tren tipo 180A circular normalmente."},
       {l: "C", t: "A trenes >160 no exceder 160."},
       {l: "D", t: "A trenes >180 no exceder 180."}
     ]},
-    "20": {q: "¿La señal de la figura ordena no exceder de 160 km/h al pasar por la señal siguiente?",
+    "20": {q: "¿La señal de la figura ordena al Maquinista no exceder de 160 km/h al pasar por la señal siguiente?",
            "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/rcf2_completo_01.20.png",
            a: "D", opts: [
       {l: "A", t: "Sí."},
@@ -234,16 +234,16 @@ button.secondary:active{background:rgba(255,255,255,.05)}
       {l: "D", t: "Sí, salvo que la señal siguiente ordene Vía Libre."}
     ]},
     "21": {q: "¿Qué ordena el anuncio de precaución?", a: "C", opts: [
-      {l: "A", t: "No exceder 30 km/h al paso por agujas."},
-      {l: "B", t: "No exceder 40 km/h al paso por agujas."},
-      {l: "C", t: "No exceder 30 km/h al paso por las agujas situadas tras la señal siguiente."},
-      {l: "D", t: "No exceder 40 km/h tras la señal siguiente."}
+      {l: "A", t: "No exceder la velocidad de 30 km/h, o la que indique el número de la pantalla, al paso por las agujas situadas a continuación."},
+      {l: "B", t: "No exceder la velocidad de 40 km/h, o la que indique el número de  la pantalla, al paso por las agujas situadas a continuación."},
+      {l: "C", t: "No exceder la velocidad de 30 km/h, o la que indique el número de la pantalla, al paso por las agujas situadas a continuación de la señal siguiente (no contabilizándose a estos efectos las señales de retroceso)."},
+      {l: "D", t: "No exceder la velocidad de 40 km/h, o la que indique el número de la pantalla, al paso por las agujas situadas a continuación de la señal siguiente."}
     ]},
     "22": {q: "¿Cómo puede ser la pantalla de una señal de anuncio de precaución?", a: "A", opts: [
-      {l: "A", t: "Fija o variable, situada bajo la cabeza de la señal (o encima en señales bajas)."},
-      {l: "B", t: "Solo fija y encima."},
-      {l: "C", t: "Solo variable y encima."},
-      {l: "D", t: "Fija o variable y encima siempre."}
+      {l: "A", t: "La información de la pantalla podrá ser fija o variable (luminosa) y estará situada bajo la cabeza de la señal, excepto en el caso de señales bajas, que podrá situarse encima de éstas."},
+      {l: "B", t: "La información de la pantalla podrá ser fija (luminosa) y estará situada encima la cabeza de la señal, excepto en el caso de señales altas, que podrá situarse encima de éstas."},
+      {l: "C", t: "La información de la pantalla podrá ser fija, o variable (luminosa) y estará situada encima la cabeza de la señal, excepto en el caso de señales bajas, que podrá situarse debajo de éstas."},
+      {l: "D", t: "La información de la pantalla podrá ser fija, o variable y estará situada encima la cabeza de la señal, excepto en el caso de señales bajas, que podrá situarse debajo de éstas."}
     ]},
     "23": {q: "¿Qué indica una señal avanzada?", a: "B", opts: [
       {l: "A", t: "La situación de la señal principal precedente."},
@@ -251,21 +251,21 @@ button.secondary:active{background:rgba(255,255,255,.05)}
       {l: "C", t: "La situación de la señal de salida."},
       {l: "D", t: "La situación de la señal de entrada."}
     ]},
-    "24": {q: "¿Dónde se sitúa una señal avanzada?",
+    "24": {q: "Anuncio de precaución ordena al Maquinista",
            "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/rcf2_completo_01.24.png",
            a: "C", opts: [
-      {l: "A", t: "En la entrada de una estación."},
-      {l: "B", t: "Junto a la señal principal."},
-      {l: "C", t: "Antes de la señal principal, a la distancia reglamentaria."},
-      {l: "D", t: "Después de la señal principal."}
+      {l: "A", t: "No exceder de 30 km/h, o la que indique el número en pantalla, al pasar por las agujas situadas a continuación de la señal siguiente."},
+      {l: "B", t: "No exceder de 30 km/h, o la que indique el número en pantalla, al pasar por la señal siguiente."},
+      {l: "C", t: "No exceder de 30 km/h, o la que indique el número en pantalla, al pasar por la señal siguiente, excepto si esta señal indique 'vía libre'."},
+      {l: "D", t: "No exceder de 30 km/h, o la que indique el número en pantalla, si se circula por vía desviada."}
     ]},
-    "25": {q: "¿Qué ordena la señal de preanuncio de parada?", a: "B", opts: [
-      {l: "A", t: "Reducir velocidad a 30 km/h."},
-      {l: "B", t: "Anuncia que la siguiente señal ordena parada."},
-      {l: "C", t: "Detención inmediata."},
-      {l: "D", t: "Marcha a la vista."}
+    "25": {q: "¿Qué indica al Maquinista la señal de preanuncio de parada?", a: "B", opts: [
+      {l: "A", t: "No exceder la velocidad en km/h que indique el número de la pantalla, al pasar por la señal siguiente."},
+      {l: "B", t: "No exceder la velocidad en km/h que indique el número de la pantalla, al pasar por la señal siguiente, salvo que ésta última ordene vía libre."},
+      {l: "C", t: "No exceder la velocidad en km/h que indique el número de la pantalla, al pasar por la señal siguiente, salvo que ésta última ordene vía libre condicional o preanuncio de parada."},
+      {l: "D", t: "Esta señal no indica, ordena."}
     ]},
-    "26": {q: "¿Qué ordena la señal de anuncio de parada?", a: "C", opts: [
+    "26": {q: "¿Qué ordena al Maquinista la señal de anuncio de parada?", a: "C", opts: [
       {l: "A", t: "Parada inmediata."},
       {l: "B", t: "Marcha a la vista."},
       {l: "C", t: "Parar ante la siguiente señal."},
@@ -277,13 +277,13 @@ button.secondary:active{background:rgba(255,255,255,.05)}
       {l: "C", t: "Ordena marcha a la vista."},
       {l: "D", t: "Indica vía ocupada."}
     ]},
-    "28": {q: "¿Qué ordena una señal de rebase autorizado?",
+    "28": {q: "La señal de la figura es:",
            "img": "https://raw.githubusercontent.com/noveskeno/test_rcf/main/data/images/rcf2_completo_01.28.png",
            a: "D", opts: [
-      {l: "A", t: "Circular normalmente."},
-      {l: "B", t: "Marcha a la vista hasta la siguiente señal."},
-      {l: "C", t: "Parar y continuar con marcha a la vista."},
-      {l: "D", t: "Permite rebasar una señal que ordena parada en determinadas condiciones."}
+      {l: "A", t: "Anuncio de parada."},
+      {l: "B", t: "Anuncio de precaución."},
+      {l: "C", t: "Preanuncio de parada."},
+      {l: "D", t: "Anuncio de parada inmediato."}
     ]},
     "29": {q: "¿En qué casos se utiliza la señal de rebase autorizado?", a: "C", opts: [
       {l: "A", t: "Cuando la vía esté libre."},
